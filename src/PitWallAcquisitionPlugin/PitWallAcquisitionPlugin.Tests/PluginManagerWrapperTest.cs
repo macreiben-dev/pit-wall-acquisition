@@ -32,7 +32,7 @@ namespace PitWallAcquisitionPlugin.Tests
         }
 
         [Fact]
-        public void Should_map_is_sessionTimeLeft()
+        public void Should_map_SessionTimeLeft()
         {
             _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.SessionTimeLeft")
                 .Returns("01:02:03.00000");
@@ -43,7 +43,7 @@ namespace PitWallAcquisitionPlugin.Tests
         }
 
         [Fact]
-        public void Should_map_is_sessionTimeLeflastLa()
+        public void Should_map_LastLapTime()
         {
             _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.LastLapTime")
                 .Returns("02:02:03.00000");
@@ -85,6 +85,18 @@ namespace PitWallAcquisitionPlugin.Tests
             var target = GetTarget();
 
             Check.That(target.TyreWearRearLeft).IsEqualTo(82.7055884649544);
+        }
+
+
+        [Fact]
+        public void Should_map_tyreWearRearRight()
+        {
+            _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreWearRearRight")
+                .Returns(82.9955884649544);
+
+            var target = GetTarget();
+
+            Check.That(target.TyreWearRearRight).IsEqualTo(82.9955884649544);
         }
     }
 }

@@ -34,6 +34,8 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 
         public double? TyreWearRearLeft => ToDouble("DataCorePlugin.GameData.TyreWearRearLeft", _pluginManager);
 
+        public double? TyreWearRearRight => ToDouble("DataCorePlugin.GameData.TyreWearRearRight", _pluginManager);
+
         // TODO pilot name is hard coded for the moment. It will be set from sh GUI
         public string DriverName => "Pilot1";
 
