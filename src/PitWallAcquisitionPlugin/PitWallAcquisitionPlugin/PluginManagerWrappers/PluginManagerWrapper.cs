@@ -21,61 +21,21 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
         // ==================================================
 
         public bool IsGameRunning =>
-            ToBoolean("DataCorePlugin.GameRunning", _pluginManager);
+          PluginManagerFieldConverter.ToBoolean("DataCorePlugin.GameRunning", _pluginManager);
 
-        public string SessionTimeLeft =>
-            ToString("DataCorePlugin.GameData.SessionTimeLeft", _pluginManager);
+        public string SessionTimeLeft => PluginManagerFieldConverter.ToString("DataCorePlugin.GameData.SessionTimeLeft", _pluginManager);
 
-        public string LastLaptime => ToString("DataCorePlugin.GameData.LastLapTime", _pluginManager);
+        public string LastLaptime => PluginManagerFieldConverter.ToString("DataCorePlugin.GameData.LastLapTime", _pluginManager);
 
-        public double? TyreWearFrontLeft => ToDouble("DataCorePlugin.GameData.TyreWearFrontLeft", _pluginManager);
+        public double? TyreWearFrontLeft => PluginManagerFieldConverter.ToDouble("DataCorePlugin.GameData.TyreWearFrontLeft", _pluginManager);
 
-        public double? TyreWearFrontRight => ToDouble("DataCorePlugin.GameData.TyreWearFrontRight", _pluginManager);
+        public double? TyreWearFrontRight => PluginManagerFieldConverter.ToDouble("DataCorePlugin.GameData.TyreWearFrontRight", _pluginManager);
 
-        public double? TyreWearRearLeft => ToDouble("DataCorePlugin.GameData.TyreWearRearLeft", _pluginManager);
+        public double? TyreWearRearLeft => PluginManagerFieldConverter.ToDouble("DataCorePlugin.GameData.TyreWearRearLeft", _pluginManager);
 
-        public double? TyreWearRearRight => ToDouble("DataCorePlugin.GameData.TyreWearRearRight", _pluginManager);
+        public double? TyreWearRearRight => PluginManagerFieldConverter.ToDouble("DataCorePlugin.GameData.TyreWearRearRight", _pluginManager);
 
         // TODO pilot name is hard coded for the moment. It will be set from sh GUI
         public string DriverName => "Pilot1";
-
-
-        // ==================================================
-
-        private double? ToDouble(string key, IPluginManagerAdapter pluginManager)
-        {
-            var data = pluginManager.GetPropertyValue(key);
-
-            if (data == null)
-            {
-                return null;
-            }
-
-            return Convert.ToDouble(data);
-        }
-
-        private string ToString(string key, IPluginManagerAdapter pluginManager)
-        {
-            var data = pluginManager.GetPropertyValue(key);
-
-            if (data == null)
-            {
-                return null;
-            }
-
-            return data.ToString();
-        }
-
-        private bool ToBoolean(string key, IPluginManagerAdapter pluginManager)
-        {
-            var data = pluginManager.GetPropertyValue(key);
-
-            if (data == null)
-            {
-                return false;
-            }
-
-            return Convert.ToBoolean(data);
-        }
     }
 }

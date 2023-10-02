@@ -4,7 +4,7 @@ using NSubstitute;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
 using Xunit;
 
-namespace PitWallAcquisitionPlugin.Tests
+namespace PitWallAcquisitionPlugin.Tests.PluginManagerWrappers
 {
     public class PluginManagerWrapperTest
     {
@@ -86,7 +86,6 @@ namespace PitWallAcquisitionPlugin.Tests
 
             Check.That(target.TyreWearRearLeft).IsEqualTo(82.7055884649544);
         }
-
 
         [Fact]
         public void Should_map_tyreWearRearRight()
