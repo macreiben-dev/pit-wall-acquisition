@@ -16,8 +16,6 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
             _pluginManager = pluginManager;
         }
 
-        // ==================================================
-
         public bool IsGameRunning =>
           PluginManagerFieldConverter.ToBoolean("DataCorePlugin.GameRunning", _pluginManager);
 
