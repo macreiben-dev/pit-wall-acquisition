@@ -115,7 +115,14 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
         public void AddRearRightTyreWear(double? tyreWearValue)
         {
-            throw new NotImplementedException();
+            if (!tyreWearValue.HasValue)
+            {
+                return;
+            }
+
+            _rearLeftTyreWear = tyreWearValue;
+
+            SetDirty();
         }
         private void SetDirty()
         {
