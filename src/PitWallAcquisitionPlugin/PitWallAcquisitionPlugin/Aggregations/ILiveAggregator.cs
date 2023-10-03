@@ -32,7 +32,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <para>Format is xxx.xxxxxxxxxxxxx</para>
         /// </summary>
         /// <param name="tyreWearValue"></param>
-        void AddFrontLeftTyreWear(double tyreWearValue);
+        void AddFrontLeftTyreWear(double? tyreWearValue);
 
         /// <summary>
         /// <para>The front right tyre wear.</para>
@@ -40,7 +40,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <para>Format is xxx.xxxxxxxxxxxxx</para>
         /// </summary>
         /// <param name="tyreWearValue"></param>
-        void AddFrontRightTyreWear(double tyreWearValue);
+        void AddFrontRightTyreWear(double? tyreWearValue);
 
         /// <summary>
         /// <para>The rear left tyre wear.</para>
@@ -48,7 +48,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <para>Format is xxx.xxxxxxxxxxxxx</para>
         /// </summary>
         /// <param name="tyreWearValue"></param>
-        void AddRearLeftTyreWear(double tyreWearValue);
+        void AddRearLeftTyreWear(double? tyreWearValue);
 
         /// <summary>
         /// <para>The rear right tyre wear.</para>
@@ -56,7 +56,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <para>Format is xxx.xxxxxxxxxxxxx</para>
         /// </summary>
         /// <param name="tyreWearValue"></param>
-        void AddRearRightTyreWear(double tyreWearValue);
+        void AddRearRightTyreWear(double? tyreWearValue);
 
         void Clear();
 
