@@ -182,12 +182,60 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
             // ASSERT
             Check.That(actual.Tyres.FrontLeftWear).IsNull();
-            Check.That(target.IsDirty).IsTrue();
+            Check.That(target.IsDirty).IsFalse();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
 
         // ===== Tyre wear front left  ___EOF___
+
+        // ===== Tyre wear front right
+
+        [Fact]
+        public void Should_add_frontRightTyreWear()
+        {
+            // ARRANGE
+            double original = 85.000000001;
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddFrontRightTyreWear(original);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(actual.Tyres.FrontRightWear).IsEqualTo(85.000000001);
+            Check.That(target.IsDirty).IsTrue();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+        [Fact]
+        public void Should_notAdd_frontRightTyreWear_WHEN_null()
+        {
+            // ARRANGE
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddFrontRightTyreWear(null);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(actual.Tyres.FrontRightWear).IsNull();
+            Check.That(target.IsDirty).IsFalse();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+        // ===== Tyre wear front right ___EOF___
 
         // ===== Clear
 
