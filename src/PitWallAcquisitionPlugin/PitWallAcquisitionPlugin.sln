@@ -5,7 +5,12 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PitWallAcquisitionPlugin", "PitWallAcquisitionPlugin\PitWallAcquisitionPlugin.csproj", "{09B534AD-3A60-4424-B0FF-52BD57758227}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PitWallAcquisitionPlugin.Tests", "PitWallAcquisitionPlugin.Tests\PitWallAcquisitionPlugin.Tests.csproj", "{BFD50212-58D5-42FE-93A0-FE0CEC0E5135}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PitWallAcquisitionPlugin.Tests", "PitWallAcquisitionPlugin.Tests\PitWallAcquisitionPlugin.Tests.csproj", "{BFD50212-58D5-42FE-93A0-FE0CEC0E5135}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BFC92D62-3ADB-4298-873A-1E7501A8FCA7}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\README.md = ..\..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
