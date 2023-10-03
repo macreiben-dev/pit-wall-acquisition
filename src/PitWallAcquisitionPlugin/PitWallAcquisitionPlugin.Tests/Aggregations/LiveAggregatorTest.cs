@@ -354,7 +354,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
         // ===== Tyre wear rear right
 
         [Fact]
-        public void GIVEN_rearLeftTyreWear_isNotNull_THEN_data_rearLeftTyreWear_isNotNull()
+        public void GIVEN_rearRightTyreWear_isNotNull_THEN_data_rearRightTyreWear_isNotNull()
         {
             // ARRANGE
             double original = 85.000000001;
@@ -364,7 +364,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             // ACT
             Stopwatch watch = Stopwatch.StartNew();
 
-            target.AddRearLeftTyreWear(original);
+            target.AddRearRightTyreWear(original);
 
             watch.Stop();
 
@@ -378,7 +378,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
         }
 
         [Fact]
-        public void GIVEN_rearLeftTyreWear_isNull_WHEN_tyreWear_isNull()
+        public void GIVEN_rearRightTyreWear_isNull_WHEN_tyreWear_isNull()
         {
             // ARRANGE
             var target = GetTarget();
@@ -386,7 +386,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             // ACT
             Stopwatch watch = Stopwatch.StartNew();
 
-            target.AddRearLeftTyreWear(null);
+            target.AddRearRightTyreWear(null);
 
             watch.Stop();
 
@@ -400,7 +400,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
         }
 
         [Fact]
-        public void GIVEN_rearLeftTyreValue_isNull_THEN_isDirty_isFalse()
+        public void GIVEN_rearRightTyreValue_isNull_THEN_isDirty_isFalse()
         {
             // ARRANGE
             var target = GetTarget();
@@ -408,7 +408,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             // ACT
             Stopwatch watch = Stopwatch.StartNew();
 
-            target.AddRearLeftTyreWear(null);
+            target.AddRearRightTyreWear(null);
 
             watch.Stop();
 
