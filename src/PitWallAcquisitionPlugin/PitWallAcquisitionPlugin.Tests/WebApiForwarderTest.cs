@@ -1,6 +1,4 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using NFluent;
-using Xunit;
+﻿using NFluent;
 
 namespace PitWallAcquisitionPlugin.Tests
 {

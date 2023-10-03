@@ -1,4 +1,4 @@
-﻿namespace FuelAssistantMobile.DataGathering.SimhubPlugin.PluginManagerWrappers
+﻿namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 {
     public interface IPluginManagerAdapter
     {

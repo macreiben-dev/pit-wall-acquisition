@@ -1,6 +1,7 @@
-﻿using SimHub.Plugins;
+﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
+using SimHub.Plugins;
 
-namespace FuelAssistantMobile.DataGathering.SimhubPlugin.PluginManagerWrappers
+namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 {
     public interface IPluginRecordFactory
     {

@@ -1,12 +1,10 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.PluginManagerWrappers;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using GameReaderCommon;
 using PitWallAcquisitionPlugin.Aggregations;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
 using SimHub.Plugins;
-using System.Timers;
 
 namespace PitWallAcquisitionPlugin
 {

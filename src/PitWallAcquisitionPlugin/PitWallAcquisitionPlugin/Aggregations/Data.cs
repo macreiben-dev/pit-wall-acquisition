@@ -1,6 +1,4 @@
-﻿using SimHub.Plugins.OutputPlugins.GraphicalDash.Models.BuiltIn.Enums;
-
-namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
+﻿namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
 {
     public sealed class Data : IData
     {

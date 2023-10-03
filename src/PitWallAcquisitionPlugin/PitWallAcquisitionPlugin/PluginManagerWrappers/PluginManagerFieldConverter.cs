@@ -1,5 +1,4 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.PluginManagerWrappers;
-using System;
+﻿using System;
 
 namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 {

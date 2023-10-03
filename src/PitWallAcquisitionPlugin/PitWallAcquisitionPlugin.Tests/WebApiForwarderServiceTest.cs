@@ -5,9 +5,6 @@ using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.Aggregations;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace PitWallAcquisitionPlugin.Tests
 {

@@ -1,6 +1,6 @@
 ﻿using SimHub.Plugins;
 
-namespace FuelAssistantMobile.DataGathering.SimhubPlugin.PluginManagerWrappers
+namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 {
     public sealed class PluginManagerAdapter : IPluginManagerAdapter
     {

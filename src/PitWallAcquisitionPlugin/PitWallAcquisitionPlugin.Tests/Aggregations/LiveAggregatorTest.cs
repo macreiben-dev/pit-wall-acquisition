@@ -1,7 +1,6 @@
 ﻿using NFluent;
 using PitWallAcquisitionPlugin.Aggregations;
 using System.Diagnostics;
-using Xunit;
 
 namespace PitWallAcquisitionPlugin.Tests.Aggregations
 {

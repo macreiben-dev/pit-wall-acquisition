@@ -1,5 +1,4 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.PluginManagerWrappers;
-using NFluent;
+﻿using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
 
