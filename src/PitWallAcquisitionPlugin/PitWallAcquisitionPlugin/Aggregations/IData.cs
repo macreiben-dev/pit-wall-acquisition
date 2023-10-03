@@ -2,7 +2,7 @@
 {
     public interface IData
     {
-        int? LaptimeMilliseconds { get; }
+        double? LaptimeSeconds { get; }
         string PilotName { get; }
         string SessionTimeLeft { get; }
         ITyres Tyres { get; }

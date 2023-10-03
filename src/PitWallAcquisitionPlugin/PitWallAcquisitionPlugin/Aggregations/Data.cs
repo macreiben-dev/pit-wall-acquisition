@@ -9,7 +9,7 @@
 
         public string PilotName { get; set; }
 
-        public int? LaptimeMilliseconds { get; set; }
+        public double? LaptimeSeconds { get; set; }
 
         public ITyres Tyres { get; set; }
 
