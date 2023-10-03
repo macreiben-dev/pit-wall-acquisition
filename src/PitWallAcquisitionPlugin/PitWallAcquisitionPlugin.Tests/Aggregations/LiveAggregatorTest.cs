@@ -12,6 +12,14 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
         }
 
         [Fact]
+        public void Should_notBe_dirty_by_default()
+        {
+            var aggregator = GetTarget();
+
+            Check.That(aggregator.IsDirty).IsFalse();
+        }
+
+        [Fact]
         public void Should_trim_sessionLeft()
         {
             // ARRANGE
@@ -77,8 +85,104 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             var actual = target.AsData();
              
             // ASSERT
-            Check.That(actual.LaptimeMilliseconds).IsEqualTo(120.0);
+            Check.That(actual.LaptimeMilliseconds).IsEqualTo(122000);
             Check.That(target.IsDirty).IsTrue();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void Should_notAdd_lapTimeMilliseconds_WHEN_null()
+        {
+            // ARRANGE
+            string original = null;
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddLaptime(original);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(actual.LaptimeMilliseconds).IsNull();
+            Check.That(target.IsDirty).IsFalse();
+        }
+
+        [Fact]
+        public void Should_notAdd_lapTimeMilliseconds_WHEN_empty()
+        {
+            // ARRANGE
+            string original = "";
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddLaptime(original);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(actual.LaptimeMilliseconds).IsNull();
+            Check.That(target.IsDirty).IsFalse();
+        }
+
+        [Fact]
+        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_laptime_is_null()
+        {
+            // ARRANGE
+            string original = "00:02:02.000";
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddLaptime(original);
+
+            target.Clear();
+
+            var actual = target.AsData();
+
+            watch.Stop();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+            Check.That(actual.LaptimeMilliseconds).IsNull();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_sessionTimeLeft_is_null()
+        {
+            // ARRANGE
+            string original = "00:02:02.000";
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddLaptime(original);
+
+            target.Clear();
+
+            var actual = target.AsData();
+
+            watch.Stop();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+            Check.That(actual.SessionTimeLeft).IsNull();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }

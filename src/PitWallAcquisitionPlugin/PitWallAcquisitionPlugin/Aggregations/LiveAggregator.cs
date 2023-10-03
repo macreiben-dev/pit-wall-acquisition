@@ -1,5 +1,6 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations;
 using System;
+using System.Globalization;
 
 namespace PitWallAcquisitionPlugin.Aggregations
 {
@@ -8,7 +9,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         private string _sessionTimeLeft = string.Empty;
         private bool _dirty = false;
         private string _pilotName;
-        private double _laptimeMilliseconds;
+        private double? _laptimeMilliseconds;
 
         public bool IsDirty => _dirty;
 
@@ -37,12 +38,24 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
         public void AddLaptime(string original)
         {
-            throw new NotImplementedException("Should add add laptime here.");
+            if (string.IsNullOrEmpty(original))
+            {
+                return;
+            }
+
+            var duration = TimeSpan.Parse(original, CultureInfo.InvariantCulture);
+
+            _laptimeMilliseconds = duration.TotalMilliseconds;
+
+            SetDirty();
         }
+
         public void Clear()
         {
             SetClean();
-            _sessionTimeLeft = string.Empty.ToString();
+
+            _sessionTimeLeft = null;
+            _laptimeMilliseconds = null;
         }
 
         public IData AsData()
@@ -53,16 +66,6 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 PilotName = _pilotName,
                 LaptimeMilliseconds = _laptimeMilliseconds
             };
-        }
-
-        private void SetDirty()
-        {
-            _dirty = true;
-        }
-
-        private void SetClean()
-        {
-            _dirty = true;
         }
 
         public void AddFrontLeftTyreWear(double tyreWearValue)
@@ -84,5 +87,15 @@ namespace PitWallAcquisitionPlugin.Aggregations
         {
             throw new NotImplementedException();
         }
+        private void SetDirty()
+        {
+            _dirty = true;
+        }
+
+        private void SetClean()
+        {
+            _dirty = false;
+        }
+
     }
 }
