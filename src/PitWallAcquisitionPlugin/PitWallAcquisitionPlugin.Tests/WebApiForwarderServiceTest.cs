@@ -60,7 +60,7 @@ namespace PitWallAcquisitionPlugin.Tests
             target.Stop();
 
             _dataRepository.Received().SendAsync(
-                Arg.Is<object>(c => ((Data)((DataVessel)c).data).SessionTimeLeft == "00:00:01"));
+                Arg.Is<object>(c => ((IData)c).SessionTimeLeft == "00:00:01"));
         }
 
         [Fact]

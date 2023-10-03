@@ -125,10 +125,7 @@ namespace PitWallAcquisitionPlugin
             }
 
             // Replace the following lines with your own logic to get the data you want to send
-            var dataToSend = new DataVessel
-            {
-                data = _liveAggregator.AsData()
-            };
+            var dataToSend = _liveAggregator.AsData();
 
             try
             {
@@ -162,11 +159,17 @@ namespace PitWallAcquisitionPlugin
             }
         }
 
-        private void UpdateAggregator(IPluginRecordRepository racingDataRepository)
+        private void UpdateAggregator(
+            IPluginRecordRepository racingDataRepository)
         {
             _liveAggregator.AddSessionTimeLeft(racingDataRepository.SessionTimeLeft);
 
             _liveAggregator.AddLaptime(racingDataRepository.LastLaptime);
+
+            _liveAggregator.AddFrontLeftTyreWear(racingDataRepository.TyreWearFrontLeft);
+            _liveAggregator.AddFrontRightTyreWear(racingDataRepository.TyreWearFrontRight);
+            _liveAggregator.AddRearLeftTyreWear(racingDataRepository.TyreWearRearLeft);
+            _liveAggregator.AddRearRightTyreWear(racingDataRepository.TyreWearRearRight);
         }
 
         private bool ShouldStopTimer()
