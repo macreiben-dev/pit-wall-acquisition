@@ -71,7 +71,7 @@
     <Compile Include="PluginManagerWrappers\PluginManagerAdapter.cs" />
     <Compile Include="PluginManagerWrappers\PluginManagerFieldConverter.cs" />
     <Compile Include="PluginManagerWrappers\PluginManagerWrapper.cs" />
-    <Compile Include="PluginManagerWrappers\PluginRecordFactory.cs" />
+    <Compile Include="PluginManagerWrappers\PluginRecordRepositoryFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorWhenSendDataException.cs" />
     <Compile Include="Repositories\FamRemoteRepository.cs" />

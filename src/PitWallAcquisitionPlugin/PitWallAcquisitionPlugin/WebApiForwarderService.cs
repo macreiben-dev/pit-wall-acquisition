@@ -1,13 +1,13 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
+﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
+using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using PitWallAcquisitionPlugin.Aggregations;
 using System.Timers;
 
-namespace FuelAssistantMobile.DataGathering.SimhubPlugin
+namespace PitWallAcquisitionPlugin
 {
     public sealed class WebApiForwarderService
     {
-        private const int Frequency = 10; // 10Hz
         private int _internalErrorCount = 0;
         private bool _notifiedStop = false;
         private bool _firstLaunch = false;
