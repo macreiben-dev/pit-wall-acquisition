@@ -164,10 +164,9 @@ namespace PitWallAcquisitionPlugin
 
         private void UpdateAggregator(IPluginRecordRepository racingDataRepository)
         {
-            var gameDataSessionTimeLeft = racingDataRepository.SessionTimeLeft;
+            _liveAggregator.AddSessionTimeLeft(racingDataRepository.SessionTimeLeft);
 
-            _liveAggregator.AddSessionTimeLeft(gameDataSessionTimeLeft);
-
+            _liveAggregator.AddLaptime(racingDataRepository.LastLaptime);
         }
 
         private bool ShouldStopTimer()
