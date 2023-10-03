@@ -9,7 +9,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         private string _sessionTimeLeft = string.Empty;
         private bool _dirty = false;
         private string _pilotName = "MacReibenFromPlugin";
-        private int? _laptimeMilliseconds;
+        private int? _laptimeSeconds;
         private double? _frontLeftTyreWear;
         private double? _frontRightTyreWear;
         private double? _rearLeftTyreWear;
@@ -49,7 +49,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
             var duration = TimeSpan.Parse(original, CultureInfo.InvariantCulture);
 
-            _laptimeMilliseconds = (int)duration.TotalMilliseconds;
+            _laptimeSeconds = (int)duration.TotalMilliseconds / 1000;
 
             SetDirty();
         }
@@ -59,7 +59,13 @@ namespace PitWallAcquisitionPlugin.Aggregations
             SetClean();
 
             _sessionTimeLeft = null;
-            _laptimeMilliseconds = null;
+            _laptimeSeconds = null;
+
+            _frontLeftTyreWear = null;
+            _frontRightTyreWear = null;
+
+            _rearLeftTyreWear = null;
+            _rearRightTyreWear = null;
         }
 
         public IData AsData()
@@ -68,7 +74,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
             {
                 SessionTimeLeft = _sessionTimeLeft,
                 PilotName = _pilotName,
-                LaptimeMilliseconds = _laptimeMilliseconds,
+                LaptimeSeconds = _laptimeSeconds,
                 Tyres = new Tyres()
                 {
                     FrontLeftWear = _frontLeftTyreWear,

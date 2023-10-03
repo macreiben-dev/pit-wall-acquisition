@@ -87,7 +87,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             var actual = target.AsData();
              
             // ASSERT
-            Check.That(actual.LaptimeMilliseconds).IsEqualTo(122000);
+            Check.That(actual.LaptimeSeconds).IsEqualTo(122.0);
             Check.That(target.IsDirty).IsTrue();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
@@ -111,7 +111,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             var actual = target.AsData();
 
             // ASSERT
-            Check.That(actual.LaptimeMilliseconds).IsNull();
+            Check.That(actual.LaptimeSeconds).IsNull();
             Check.That(target.IsDirty).IsFalse();
         }
 
@@ -133,7 +133,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             var actual = target.AsData();
 
             // ASSERT
-            Check.That(actual.LaptimeMilliseconds).IsNull();
+            Check.That(actual.LaptimeSeconds).IsNull();
             Check.That(target.IsDirty).IsFalse();
         }
 
@@ -446,7 +446,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
-            Check.That(actual.LaptimeMilliseconds).IsNull();
+            Check.That(actual.LaptimeSeconds).IsNull();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
@@ -473,6 +473,111 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
             Check.That(actual.SessionTimeLeft).IsNull();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+
+        [Fact]
+        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresFrontLeft_is_null()
+        {
+            // ARRANGE
+            double original = 10.0;
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddFrontLeftTyreWear(original);
+
+            target.Clear();
+
+            var actual = target.AsData();
+
+            watch.Stop();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+            Check.That(actual.Tyres.FrontLeftWear).IsNull();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresFrontRight_is_null()
+        {
+            // ARRANGE
+            double original = 10.0;
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddFrontRightTyreWear(original);
+
+            target.Clear();
+
+            var actual = target.AsData();
+
+            watch.Stop();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+            Check.That(actual.Tyres.FrontRightWear).IsNull();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresRearLeft_is_null()
+        {
+            // ARRANGE
+            double original = 10.0;
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddRearLeftTyreWear(original);
+
+            target.Clear();
+
+            var actual = target.AsData();
+
+            watch.Stop();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+            Check.That(actual.Tyres.ReartLeftWear).IsNull();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresRearRight_is_null()
+        {
+            // ARRANGE
+            double original = 10.0;
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddRearRightTyreWear(original);
+
+            target.Clear();
+
+            var actual = target.AsData();
+
+            watch.Stop();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+            Check.That(actual.Tyres.RearRightWear).IsNull();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
