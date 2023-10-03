@@ -280,6 +280,77 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
         // ===== Tyre wear front right ___EOF___
 
+        // ===== Tyre wear rear left
+
+        [Fact]
+        public void GIVEN_rearLeftTyreWear_isNotNull_THEN_data_rearLeftTyreWear_isNotNull()
+        {
+            // ARRANGE
+            double original = 85.000000001;
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddRearLeftTyreWear(original);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(actual.Tyres.ReartLeftWear).IsEqualTo(85.000000001);
+            Check.That(target.IsDirty).IsTrue();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void GIVEN_rearLeftTyreWear_isNull_WHEN_tyreWear_isNull()
+        {
+            // ARRANGE
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddRearLeftTyreWear(null);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(actual.Tyres.ReartLeftWear).IsNull();
+            Check.That(target.IsDirty).IsFalse();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void GIVEN_rearLeftTyreValue_isNull_THEN_isDirty_isFalse()
+        {
+            // ARRANGE
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddRearLeftTyreWear(null);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        // ===== Tyre wear rear left  ___EOF___
+
         // ===== Clear
 
         [Fact]

@@ -12,6 +12,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         private double? _laptimeMilliseconds;
         private double? _frontLeftTyreWear;
         private double? _frontRightTyreWear;
+        private double? _rearLeftTyreWear;
 
         public bool IsDirty => _dirty;
 
@@ -70,7 +71,8 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 Tyres = new Tyres()
                 {
                     FrontLeftWear = _frontLeftTyreWear,
-                    FrontRightWear = _frontRightTyreWear
+                    FrontRightWear = _frontRightTyreWear,
+                    ReartLeftWear = _rearLeftTyreWear
                 }
             };
         }
@@ -101,7 +103,14 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
         public void AddRearLeftTyreWear(double? tyreWearValue)
         {
-            throw new NotImplementedException();
+            if (!tyreWearValue.HasValue)
+            {
+                return;
+            }
+
+            _rearLeftTyreWear = tyreWearValue;
+
+            SetDirty();
         }
 
         public void AddRearRightTyreWear(double? tyreWearValue)
