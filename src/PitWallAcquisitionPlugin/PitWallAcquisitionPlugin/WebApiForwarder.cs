@@ -13,7 +13,7 @@ namespace PitWallAcquisitionPlugin
     [PluginName("Fam Data Plugin")]
     public sealed partial class WebApiForwarder : IDataPlugin
     {
-        private readonly IPluginRecordFactory _pluginRecordFactory;
+        private readonly IPluginRecordRepositoryFactory _pluginRecordFactory;
         private readonly ILogger _logger;
         private readonly WebApiForwarderService _webApiForwarderService;
 
@@ -22,7 +22,7 @@ namespace PitWallAcquisitionPlugin
                   new SimhubLogger(),
                   new LiveAggregator(),
                   new FamRemoteRepository(),
-                  new PluginRecordFactory())
+                  new PluginRecordRepositoryFactory())
         {
 
         }
@@ -31,7 +31,7 @@ namespace PitWallAcquisitionPlugin
             ILogger logger,
             ILiveAggregator aggregator,
             IStagingDataRepository dataRepository,
-            IPluginRecordFactory pluginRecordFactory)
+            IPluginRecordRepositoryFactory pluginRecordFactory)
         {
             _logger = logger;
 
