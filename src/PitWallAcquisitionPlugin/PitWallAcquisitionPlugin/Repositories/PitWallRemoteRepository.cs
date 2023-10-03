@@ -3,15 +3,20 @@ using System.Net;
 using System.Text;
 using System;
 using System.Threading.Tasks;
+using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 
-namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories
+namespace PitWallAcquisitionPlugin.Repositories
 {
-    public sealed class FamRemoteRepository : IStagingDataRepository
+    public sealed class PitWallRemoteRepository : IStagingDataRepository
     {
-        private const string WebApiUrl = "https://localhost:32786/Inbound";
-        private HttpClient _httpClient;
+        /**
+         * Idea: use configuration from simhub to define this one.
+         * 
+         * */
+        private const string WebApiUrl = "http://localhost:32773/api/Telemetry";
+        private readonly HttpClient _httpClient;
 
-        public FamRemoteRepository()
+        public PitWallRemoteRepository()
         {
             _httpClient = new HttpClient();
         }

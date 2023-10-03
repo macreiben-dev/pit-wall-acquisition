@@ -74,7 +74,7 @@
     <Compile Include="PluginManagerWrappers\PluginRecordRepositoryFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorWhenSendDataException.cs" />
-    <Compile Include="Repositories\FamRemoteRepository.cs" />
+    <Compile Include="Repositories\PitWallRemoteRepository.cs" />
     <Compile Include="Repositories\IStagingDataRepository.cs" />
     <Compile Include="Repositories\StatusCodeNotOkException.cs" />
     <Compile Include="WebApiForwarder.cs" />

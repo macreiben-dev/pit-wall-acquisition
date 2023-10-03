@@ -4,6 +4,7 @@ using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using GameReaderCommon;
 using PitWallAcquisitionPlugin.Aggregations;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
+using PitWallAcquisitionPlugin.Repositories;
 using SimHub.Plugins;
 
 namespace PitWallAcquisitionPlugin
@@ -21,7 +22,7 @@ namespace PitWallAcquisitionPlugin
             : this(
                   new SimhubLogger(),
                   new LiveAggregator(),
-                  new FamRemoteRepository(),
+                  new PitWallRemoteRepository(),
                   new PluginRecordRepositoryFactory())
         {
 
