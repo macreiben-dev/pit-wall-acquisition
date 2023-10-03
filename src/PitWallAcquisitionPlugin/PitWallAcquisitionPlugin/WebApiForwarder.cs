@@ -10,7 +10,7 @@ namespace PitWallAcquisitionPlugin
 {
     [PluginDescription("Broadcast data to a remote API to work on race strategy.")]
     [PluginAuthor("Christian \"MacReiben\" Finel")]
-    [PluginName("Fam Data Plugin")]
+    [PluginName("PitWallAcquisitionPlugin Data Plugin")]
     public sealed partial class WebApiForwarder : IDataPlugin
     {
         private readonly IPluginRecordRepositoryFactory _pluginRecordFactory;
