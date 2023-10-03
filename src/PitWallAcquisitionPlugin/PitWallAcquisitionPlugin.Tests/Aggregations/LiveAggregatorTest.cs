@@ -371,7 +371,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             var actual = target.AsData();
 
             // ASSERT
-            Check.That(actual.Tyres.ReartLeftWear).IsEqualTo(85.000000001);
+            Check.That(actual.Tyres.RearRightWear).IsEqualTo(85.000000001);
             Check.That(target.IsDirty).IsTrue();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
