@@ -124,6 +124,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
             SetDirty();
         }
+
         private void SetDirty()
         {
             _dirty = true;
