@@ -142,7 +142,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
         // ===== Tyre wear front left
 
         [Fact]
-        public void Should_addfrontLeftTyreWear()
+        public void GIVEN_frontLeftTyreWear_isNotNull_THEN_data_frontLeftTyreWear_isNotNull()
         {
             // ARRANGE
             double original = 85.000000001;
@@ -166,7 +166,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
         }
 
         [Fact]
-        public void Should_notAdd_lapFrontLeftTyreWear_WHEN_null()
+        public void GIVEN_frontLeftTyreWear_isNull_WHEN_tyreWear_isNull()
         {
             // ARRANGE
             var target = GetTarget();
@@ -187,12 +187,33 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
 
+        [Fact]
+        public void GIVEN_frontLeftTyreValue_isNull_THEN_isDirty_isFalse()
+        {
+            // ARRANGE
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddFrontLeftTyreWear(null);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
         // ===== Tyre wear front left  ___EOF___
 
         // ===== Tyre wear front right
 
         [Fact]
-        public void Should_add_frontRightTyreWear()
+        public void GIVEN_frontRightTyreWear_isNotNull_THEN_data_frontRightTyreWear_isNotNull()
         {
             // ARRANGE
             double original = 85.000000001;
@@ -214,8 +235,9 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
+
         [Fact]
-        public void Should_notAdd_frontRightTyreWear_WHEN_null()
+        public void GIVEN_frontRightTyreWear_isNull_THEN_data_frontRightTyreWear_isNull()
         {
             // ARRANGE
             var target = GetTarget();
@@ -231,10 +253,31 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
             // ASSERT
             Check.That(actual.Tyres.FrontRightWear).IsNull();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void GIVEN_frontRightTyreWearValue_is_null_THEN_isDirty_isFalse()
+        {
+            // ARRANGE
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddFrontRightTyreWear(null);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
             Check.That(target.IsDirty).IsFalse();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
+
         // ===== Tyre wear front right ___EOF___
 
         // ===== Clear

@@ -93,6 +93,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
             {
                 return;
             }
+
             _frontRightTyreWear = tyreWearValue;
 
             SetDirty();
