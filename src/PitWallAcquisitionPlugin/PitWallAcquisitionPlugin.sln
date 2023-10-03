@@ -9,8 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PitWallAcquisitionPlugin.Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BFC92D62-3ADB-4298-873A-1E7501A8FCA7}"
 	ProjectSection(SolutionItems) = preProject
+		DeployToSimhub.ps1 = DeployToSimhub.ps1
 		..\..\README.md = ..\..\README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PitWallAcquisitionPlugin.IntegrationTests", "PitWallAcquisitionPlugin.IntegrationTests\PitWallAcquisitionPlugin.IntegrationTests.csproj", "{4FE83259-5855-427E-A157-D1CD3F8767E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +29,10 @@ Global
 		{BFD50212-58D5-42FE-93A0-FE0CEC0E5135}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFD50212-58D5-42FE-93A0-FE0CEC0E5135}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFD50212-58D5-42FE-93A0-FE0CEC0E5135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FE83259-5855-427E-A157-D1CD3F8767E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FE83259-5855-427E-A157-D1CD3F8767E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FE83259-5855-427E-A157-D1CD3F8767E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FE83259-5855-427E-A157-D1CD3F8767E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

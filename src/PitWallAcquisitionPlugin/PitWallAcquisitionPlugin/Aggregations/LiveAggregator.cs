@@ -8,11 +8,12 @@ namespace PitWallAcquisitionPlugin.Aggregations
     {
         private string _sessionTimeLeft = string.Empty;
         private bool _dirty = false;
-        private string _pilotName;
-        private double? _laptimeMilliseconds;
+        private string _pilotName = "MacReibenFromPlugin";
+        private int? _laptimeMilliseconds;
         private double? _frontLeftTyreWear;
         private double? _frontRightTyreWear;
         private double? _rearLeftTyreWear;
+        private double? _rearRightTyreWear;
 
         public bool IsDirty => _dirty;
 
@@ -48,7 +49,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
             var duration = TimeSpan.Parse(original, CultureInfo.InvariantCulture);
 
-            _laptimeMilliseconds = duration.TotalMilliseconds;
+            _laptimeMilliseconds = (int)duration.TotalMilliseconds;
 
             SetDirty();
         }
@@ -72,14 +73,15 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 {
                     FrontLeftWear = _frontLeftTyreWear,
                     FrontRightWear = _frontRightTyreWear,
-                    ReartLeftWear = _rearLeftTyreWear
+                    ReartLeftWear = _rearLeftTyreWear,
+                    RearRightWear = _rearRightTyreWear,
                 }
             };
         }
 
         public void AddFrontLeftTyreWear(double? tyreWearValue)
         {
-            if(!tyreWearValue.HasValue)
+            if (!tyreWearValue.HasValue)
             {
                 return;
             }
@@ -120,7 +122,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 return;
             }
 
-            _rearLeftTyreWear = tyreWearValue;
+            _rearRightTyreWear = tyreWearValue;
 
             SetDirty();
         }

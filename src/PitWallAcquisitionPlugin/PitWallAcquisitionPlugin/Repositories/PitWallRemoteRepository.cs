@@ -26,7 +26,10 @@ namespace PitWallAcquisitionPlugin.Repositories
             // Convert the data to JSON
 
             string jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(dataToSend);
-            StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            StringContent content = new StringContent(
+                jsonData, 
+                Encoding.UTF8, 
+                "application/json");
 
             try
             {
