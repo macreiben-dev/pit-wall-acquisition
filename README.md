@@ -18,6 +18,10 @@ This class is a wrapper around Simhub plugin manager to allow mapping testing an
 
 This class is a technical implmentation that uses the two above classes to send data to the target API.
 
+### WebApiForwarder
+
+The adapter to integrate the plugin to simhub.
+
 ## How to add new telemetry fields ?
 
 - Update PluginManagerWrapper and IPluginRecordRepository to expose the field from simhub plugin manager
