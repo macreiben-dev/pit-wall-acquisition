@@ -159,7 +159,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             var actual = target.AsData();
 
             // ASSERT
-            Check.That(actual.Tyres.FrontLeftWear).IsEqualTo(85.000000001);
+            Check.That(actual.TyresWear.FrontLeftWear).IsEqualTo(85.000000001);
             Check.That(target.IsDirty).IsTrue();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
@@ -181,7 +181,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             var actual = target.AsData();
 
             // ASSERT
-            Check.That(actual.Tyres.FrontLeftWear).IsNull();
+            Check.That(actual.TyresWear.FrontLeftWear).IsNull();
             Check.That(target.IsDirty).IsFalse();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
@@ -230,7 +230,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             var actual = target.AsData();
 
             // ASSERT
-            Check.That(actual.Tyres.FrontRightWear).IsEqualTo(85.000000001);
+            Check.That(actual.TyresWear.FrontRightWear).IsEqualTo(85.000000001);
             Check.That(target.IsDirty).IsTrue();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
@@ -252,7 +252,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             var actual = target.AsData();
 
             // ASSERT
-            Check.That(actual.Tyres.FrontRightWear).IsNull();
+            Check.That(actual.TyresWear.FrontRightWear).IsNull();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
@@ -300,7 +300,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             var actual = target.AsData();
 
             // ASSERT
-            Check.That(actual.Tyres.ReartLeftWear).IsEqualTo(85.000000001);
+            Check.That(actual.TyresWear.ReartLeftWear).IsEqualTo(85.000000001);
             Check.That(target.IsDirty).IsTrue();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
@@ -322,7 +322,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             var actual = target.AsData();
 
             // ASSERT
-            Check.That(actual.Tyres.ReartLeftWear).IsNull();
+            Check.That(actual.TyresWear.ReartLeftWear).IsNull();
             Check.That(target.IsDirty).IsFalse();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
@@ -371,7 +371,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             var actual = target.AsData();
 
             // ASSERT
-            Check.That(actual.Tyres.RearRightWear).IsEqualTo(85.000000001);
+            Check.That(actual.TyresWear.RearRightWear).IsEqualTo(85.000000001);
             Check.That(target.IsDirty).IsTrue();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
@@ -393,7 +393,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             var actual = target.AsData();
 
             // ASSERT
-            Check.That(actual.Tyres.ReartLeftWear).IsNull();
+            Check.That(actual.TyresWear.ReartLeftWear).IsNull();
             Check.That(target.IsDirty).IsFalse();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
@@ -499,7 +499,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
-            Check.That(actual.Tyres.FrontLeftWear).IsNull();
+            Check.That(actual.TyresWear.FrontLeftWear).IsNull();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
@@ -525,7 +525,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
-            Check.That(actual.Tyres.FrontRightWear).IsNull();
+            Check.That(actual.TyresWear.FrontRightWear).IsNull();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
@@ -551,7 +551,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
-            Check.That(actual.Tyres.ReartLeftWear).IsNull();
+            Check.That(actual.TyresWear.ReartLeftWear).IsNull();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
@@ -577,7 +577,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
-            Check.That(actual.Tyres.RearRightWear).IsNull();
+            Check.That(actual.TyresWear.RearRightWear).IsNull();
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }

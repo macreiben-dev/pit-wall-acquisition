@@ -31,6 +31,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 SetDirty();
             }
         }
+        
         public void AddPilotName(string original)
         {
             if (original.ToString() != _pilotName)
@@ -76,7 +77,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 SessionTimeLeft = _sessionTimeLeft,
                 PilotName = _pilotName,
                 LaptimeSeconds = _laptimeSeconds,
-                Tyres = new Tyres()
+                TyresWear = new Tyres()
                 {
                     FrontLeftWear = _frontLeftTyreWear,
                     FrontRightWear = _frontRightTyreWear,

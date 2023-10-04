@@ -4,14 +4,14 @@
     {
         public Data()
         {
-            Tyres = new Tyres();
+            TyresWear = new Tyres();
         }
 
         public string PilotName { get; set; }
 
         public double? LaptimeSeconds { get; set; }
 
-        public ITyres Tyres { get; set; }
+        public ITyres TyresWear { get; set; }
 
         public string SessionTimeLeft { get; set; } = string.Empty;
     }
