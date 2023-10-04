@@ -18,6 +18,8 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
         private double? _frontLeftTyreTemp;
         private double? _frontRightTyreTemp;
+        private double? _rearLeftTyreTemp;
+        private double? _rearRightTyreTemp;
 
         public bool IsDirty => _dirty;
 
@@ -91,6 +93,8 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 {
                     FrontLeftTemp = _frontLeftTyreTemp,
                     FrontRightTemp = _frontRightTyreTemp,
+                    RearLeftTemp = _rearLeftTyreTemp,
+                    RearRightTemp = _rearRightTyreTemp
                 }
             };
         }
@@ -169,6 +173,30 @@ namespace PitWallAcquisitionPlugin.Aggregations
             }
 
             _frontRightTyreTemp = tyreTempValue;
+
+            SetDirty();
+        }
+
+        public void AddRearLeftTyreTemperature(double? tyreTempValue)
+        {
+            if (!tyreTempValue.HasValue)
+            {
+                return;
+            }
+
+            _rearLeftTyreTemp = tyreTempValue;
+
+            SetDirty();
+        }
+
+        public void AddRearRightTyreTemperature(double? tyreTempValue)
+        {
+            if (!tyreTempValue.HasValue)
+            {
+                return;
+            }
+
+            _rearRightTyreTemp = tyreTempValue;
 
             SetDirty();
         }
