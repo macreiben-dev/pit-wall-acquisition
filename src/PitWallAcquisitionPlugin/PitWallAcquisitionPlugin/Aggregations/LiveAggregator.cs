@@ -16,6 +16,11 @@ namespace PitWallAcquisitionPlugin.Aggregations
         private double? _rearLeftTyreWear;
         private double? _rearRightTyreWear;
 
+        private double? _frontLeftTyreTemp;
+        private double? _frontRightTyreTemp;
+        private double? _rearLeftTyreTemp;
+        private double? _rearRightTyreTemp;
+
         public bool IsDirty => _dirty;
 
         public void AddSessionTimeLeft(string sessionTimeLeft)
@@ -31,7 +36,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 SetDirty();
             }
         }
-        
+
         public void AddPilotName(string original)
         {
             if (original.ToString() != _pilotName)
@@ -83,9 +88,21 @@ namespace PitWallAcquisitionPlugin.Aggregations
                     FrontRightWear = _frontRightTyreWear,
                     ReartLeftWear = _rearLeftTyreWear,
                     RearRightWear = _rearRightTyreWear,
+                },
+                TyresTemperatures = new TyresTemperatures()
+                {
+                    /**
+                     * Idea: add the inner/middle/outer temperature.
+                     * */
+                    FrontLeftTemp = _frontLeftTyreTemp,
+                    FrontRightTemp = _frontRightTyreTemp,
+                    RearLeftTemp = _rearLeftTyreTemp,
+                    RearRightTemp = _rearRightTyreTemp
                 }
             };
         }
+
+        #region tyre wear
 
         public void AddFrontLeftTyreWear(double? tyreWearValue)
         {
@@ -134,6 +151,60 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
             SetDirty();
         }
+
+        #endregion tyre wear
+
+        #region tyre temperature
+
+        public void AddFrontLeftTyreTemperature(double? tyreTempValue)
+        {
+            if (!tyreTempValue.HasValue)
+            {
+                return;
+            }
+
+            _frontLeftTyreTemp = tyreTempValue;
+
+            SetDirty();
+        }
+
+        public void AddFrontRightTyreTemperature(double? tyreTempValue)
+        {
+            if (!tyreTempValue.HasValue)
+            {
+                return;
+            }
+
+            _frontRightTyreTemp = tyreTempValue;
+
+            SetDirty();
+        }
+
+        public void AddRearLeftTyreTemperature(double? tyreTempValue)
+        {
+            if (!tyreTempValue.HasValue)
+            {
+                return;
+            }
+
+            _rearLeftTyreTemp = tyreTempValue;
+
+            SetDirty();
+        }
+
+        public void AddRearRightTyreTemperature(double? tyreTempValue)
+        {
+            if (!tyreTempValue.HasValue)
+            {
+                return;
+            }
+
+            _rearRightTyreTemp = tyreTempValue;
+
+            SetDirty();
+        }
+
+        #endregion tyre temp
 
         private void SetDirty()
         {

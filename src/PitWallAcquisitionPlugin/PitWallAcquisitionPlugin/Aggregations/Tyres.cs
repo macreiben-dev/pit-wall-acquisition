@@ -1,6 +1,6 @@
 ﻿namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
 {
-    public sealed class Tyres : ITyres
+    public sealed class Tyres : ITyresWear
     {
         public double? FrontLeftWear { get; set; }
 

@@ -58,6 +58,42 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <param name="tyreWearValue"></param>
         void AddRearRightTyreWear(double? tyreWearValue);
 
+        // ====================================================
+
+        /// <summary>
+        /// <para>Front left tyre temp.</para> 
+        /// 
+        /// <para>Format is xxx.xxxxxxxxxxxxx</para>
+        /// </summary>
+        /// <param name="tyreTempValue"></param>
+        void AddFrontLeftTyreTemperature(double? tyreTempValue);
+
+        /// <summary>
+        /// <para>Front right tyre temp.</para> 
+        /// 
+        /// <para>Format is xxx.xxxxxxxxxxxxx</para>
+        /// </summary>
+        /// <param name="tyreTempValue"></param>
+        void AddFrontRightTyreTemperature(double? tyreTempValue);
+
+        /// <summary>
+        /// <para>Rear left tyre temp.</para> 
+        /// 
+        /// <para>Format is xxx.xxxxxxxxxxxxx</para>
+        /// </summary>
+        /// <param name="tyreTempValue"></param>
+        void AddRearLeftTyreTemperature(double? tyreTempValue);
+
+        /// <summary>
+        /// <para>Rear right tyre temp.</para> 
+        /// 
+        /// <para>Format is xxx.xxxxxxxxxxxxx</para>
+        /// </summary>
+        /// <param name="tyreTempValue"></param>
+        void AddRearRightTyreTemperature(double? tyreTempValue);
+
+        // ====================================================
+
         void Clear();
 
         /// <summary>

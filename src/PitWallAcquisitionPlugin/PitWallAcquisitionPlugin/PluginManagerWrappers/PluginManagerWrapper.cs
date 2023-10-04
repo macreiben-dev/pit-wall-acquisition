@@ -8,13 +8,46 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
     public sealed class PluginManagerWrapper : IPluginRecordRepository
     {
         private readonly IPluginManagerAdapter _pluginManager;
-        private readonly bool _isGameRunning;
-        private readonly string _sessionTimeLeft;
 
         public PluginManagerWrapper(IPluginManagerAdapter pluginManager)
         {
             _pluginManager = pluginManager;
+
+            TyreFrontLeftTemperature = new TyreTemperature(
+                "DataCorePlugin.GameData.TyreTemperatureFrontLeftInner",
+                "DataCorePlugin.GameData.TyreTemperatureFrontLeftMiddle",
+                "DataCorePlugin.GameData.TyreTemperatureFrontLeftOuter",
+                "DataCorePlugin.GameData.TyreTemperatureFrontLeft",
+                _pluginManager);
+
+            TyreFrontRightTemperature = new TyreTemperature(
+                "DataCorePlugin.GameData.TyreTemperatureFrontRightInner",
+                "DataCorePlugin.GameData.TyreTemperatureFrontRightMiddle",
+                "DataCorePlugin.GameData.TyreTemperatureFrontRightOuter",
+                "DataCorePlugin.GameData.TyreTemperatureFrontRight",
+                _pluginManager);
+
+            TyreRearLeftTemperature = new TyreTemperature(
+                "DataCorePlugin.GameData.TyreTemperatureRearLeftInner",
+                "DataCorePlugin.GameData.TyreTemperatureRearLeftMiddle",
+                "DataCorePlugin.GameData.TyreTemperatureRearLeftOuter",
+                "DataCorePlugin.GameData.TyreTemperatureRearLeft",
+                _pluginManager);
+
+            TyreRearRightTemperature = new TyreTemperature(
+                "DataCorePlugin.GameData.TyreTemperatureRearRightInner",
+                "DataCorePlugin.GameData.TyreTemperatureRearRightMiddle",
+                "DataCorePlugin.GameData.TyreTemperatureRearRightOuter",
+                "DataCorePlugin.GameData.TyreTemperatureRearRight",
+                _pluginManager);
         }
+        public ITyreTemperature TyreFrontLeftTemperature { get; private set; }
+
+        public ITyreTemperature TyreFrontRightTemperature { get; private set; }
+
+        public ITyreTemperature TyreRearLeftTemperature { get; private set; }
+
+        public ITyreTemperature TyreRearRightTemperature { get; private set; }
 
         public bool IsGameRunning =>
           PluginManagerFieldConverter.ToBoolean("DataCorePlugin.GameRunning", _pluginManager);

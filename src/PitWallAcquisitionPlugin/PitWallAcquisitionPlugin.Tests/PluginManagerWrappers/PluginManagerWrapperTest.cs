@@ -73,7 +73,6 @@ namespace PitWallAcquisitionPlugin.Tests.PluginManagerWrappers
             Check.That(target.TyreWearFrontRight).IsEqualTo(82.7055884649506);
         }
 
-
         [Fact]
         public void Should_map_tyreWearRearLeft()
         {
@@ -94,6 +93,286 @@ namespace PitWallAcquisitionPlugin.Tests.PluginManagerWrappers
             var target = GetTarget();
 
             Check.That(target.TyreWearRearRight).IsEqualTo(82.9955884649544);
+        }
+
+        public class TyreFrontLeftTemperaturesTest
+        {
+            private const double Inner = 10.0;
+            private const double Middle = 11.0;
+            private const double Outer = 11.0;
+            private const double Average = 11.0;
+
+            private readonly IPluginManagerAdapter _pluginManagerAdapter;
+            private double? _targetInner;
+            private readonly double? _targetMiddle;
+            private readonly double? _targetOuter;
+            private readonly double? _targetAverage;
+
+            public TyreFrontLeftTemperaturesTest()
+            {
+                _pluginManagerAdapter = Substitute.For<IPluginManagerAdapter>();
+
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureFrontLeftInner").Returns(Inner);
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureFrontLeftMiddle").Returns(Middle);
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureFrontLeftOuter").Returns(Outer);
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureFrontLeft").Returns(Average);
+
+                var target = GetTarget();
+
+                var tyreTemperature = target.TyreFrontLeftTemperature;
+
+                _targetInner = tyreTemperature.Inner;
+                _targetMiddle = tyreTemperature.Middle;
+                _targetOuter = tyreTemperature.Outer;
+                _targetAverage = tyreTemperature.Average;
+            }
+
+            private PluginManagerWrapper GetTarget()
+            {
+                return new PluginManagerWrapper(_pluginManagerAdapter);
+            }
+
+            [Fact]
+            public void Should_map_inner_frontLeft_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetInner).IsEqualTo(Inner);
+            }
+
+            [Fact]
+            public void Should_map_inner_frontRight_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetMiddle).IsEqualTo(Middle);
+            }
+
+            [Fact]
+            public void Should_map_outer_frontRight_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetOuter).IsEqualTo(Outer);
+            }
+
+            [Fact]
+            public void Should_map_average_frontRight_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetAverage).IsEqualTo(Average);
+            }
+        }
+
+        public class TyreFrontRightTemperaturesTest
+        {
+            private const double Inner = 10.0;
+            private const double Middle = 11.0;
+            private const double Outer = 11.0;
+            private const double Average = 11.0;
+
+            private readonly IPluginManagerAdapter _pluginManagerAdapter;
+            private readonly double? _targetInner;
+            private readonly double? _targetMiddle;
+            private readonly double? _targetOuter;
+            private readonly double? _targetAverage;
+
+            public TyreFrontRightTemperaturesTest()
+            {
+                _pluginManagerAdapter = Substitute.For<IPluginManagerAdapter>();
+
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureFrontRightInner").Returns(Inner);
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureFrontRightMiddle").Returns(Middle);
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureFrontRightOuter").Returns(Outer);
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureFrontRight").Returns(Average);
+
+                var target = GetTarget();
+
+                var tyreTemperature = target.TyreFrontRightTemperature;
+
+                _targetInner = tyreTemperature.Inner;
+                _targetMiddle = tyreTemperature.Middle;
+                _targetOuter = tyreTemperature.Outer;
+                _targetAverage = tyreTemperature.Average;
+            }
+
+            private PluginManagerWrapper GetTarget()
+            {
+                return new PluginManagerWrapper(_pluginManagerAdapter);
+            }
+
+            [Fact]
+            public void Should_map_inner_frontLeft_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetInner).IsEqualTo(Inner);
+            }
+
+            [Fact]
+            public void Should_map_inner_frontRight_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetMiddle).IsEqualTo(Middle);
+            }
+
+            [Fact]
+            public void Should_map_outer_frontRight_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetOuter).IsEqualTo(Outer);
+            }
+
+            [Fact]
+            public void Should_map_average_frontRight_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetAverage).IsEqualTo(Average);
+            }
+        }
+
+        public class TyreRearLeftTemperaturesTest
+        {
+            private const double Inner = 10.0;
+            private const double Middle = 11.0;
+            private const double Outer = 11.0;
+            private const double Average = 11.0;
+
+            private readonly IPluginManagerAdapter _pluginManagerAdapter;
+            private readonly double? _targetInner;
+            private readonly double? _targetMiddle;
+            private readonly double? _targetOuter;
+            private readonly double? _targetAverage;
+
+            public TyreRearLeftTemperaturesTest()
+            {
+                _pluginManagerAdapter = Substitute.For<IPluginManagerAdapter>();
+
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureRearLeftInner").Returns(Inner);
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureRearLeftMiddle").Returns(Middle);
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureRearLeftOuter").Returns(Outer);
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureRearLeft").Returns(Average);
+
+                var target = GetTarget();
+
+                var tyreTemperature = target.TyreRearLeftTemperature;
+
+                _targetInner = tyreTemperature.Inner;
+                _targetMiddle = tyreTemperature.Middle;
+                _targetOuter = tyreTemperature.Outer;
+                _targetAverage = tyreTemperature.Average;
+            }
+
+            private PluginManagerWrapper GetTarget()
+            {
+                return new PluginManagerWrapper(_pluginManagerAdapter);
+            }
+
+            [Fact]
+            public void Should_map_inner_frontLeft_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetInner).IsEqualTo(Inner);
+            }
+
+            [Fact]
+            public void Should_map_inner_frontRight_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetMiddle).IsEqualTo(Middle);
+            }
+
+            [Fact]
+            public void Should_map_outer_frontRight_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetOuter).IsEqualTo(Outer);
+            }
+
+            [Fact]
+            public void Should_map_average_frontRight_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetAverage).IsEqualTo(Average);
+            }
+        }
+
+        public class TyreRearRightTemperaturesTest
+        {
+            private const double Inner = 10.0;
+            private const double Middle = 11.0;
+            private const double Outer = 11.0;
+            private const double Average = 11.0;
+
+            private readonly IPluginManagerAdapter _pluginManagerAdapter;
+            private readonly double? _targetInner;
+            private readonly double? _targetMiddle;
+            private readonly double? _targetOuter;
+            private readonly double? _targetAverage;
+
+            public TyreRearRightTemperaturesTest()
+            {
+                _pluginManagerAdapter = Substitute.For<IPluginManagerAdapter>();
+
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureRearRightInner").Returns(Inner);
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureRearRightMiddle").Returns(Middle);
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureRearRightOuter").Returns(Outer);
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.TyreTemperatureRearRight").Returns(Average);
+
+                var target = GetTarget();
+
+                var tyreTemperature = target.TyreRearRightTemperature;
+
+                _targetInner = tyreTemperature.Inner;
+                _targetMiddle = tyreTemperature.Middle;
+                _targetOuter = tyreTemperature.Outer;
+                _targetAverage = tyreTemperature.Average;
+            }
+
+            private PluginManagerWrapper GetTarget()
+            {
+                return new PluginManagerWrapper(_pluginManagerAdapter);
+            }
+
+            [Fact]
+            public void Should_map_inner_frontLeft_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetInner).IsEqualTo(Inner);
+            }
+
+            [Fact]
+            public void Should_map_inner_frontRight_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetMiddle).IsEqualTo(Middle);
+            }
+
+            [Fact]
+            public void Should_map_outer_frontRight_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetOuter).IsEqualTo(Outer);
+            }
+
+            [Fact]
+            public void Should_map_average_frontRight_temperatures()
+            {
+                var target = GetTarget();
+
+                Check.That(_targetAverage).IsEqualTo(Average);
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
 {
-    public interface ITyres
+    public interface ITyresWear
     {
         double? FrontLeftWear { get; }
         double? FrontRightWear { get; }
