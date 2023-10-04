@@ -158,8 +158,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
             _frontLeftTyreTemp = tyreTempValue;
 
-            if (_frontLeftTyreTemp.HasValue)
-                SetDirty();
+            SetDirty();
         }
 
         public void AddFrontRightTyreTemperature(double? tyreTempValue)
@@ -171,8 +170,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
             _frontRightTyreTemp = tyreTempValue;
 
-            if (_frontRightTyreTemp.HasValue)
-                SetDirty();
+            SetDirty();
         }
 
         #endregion tyre temp
