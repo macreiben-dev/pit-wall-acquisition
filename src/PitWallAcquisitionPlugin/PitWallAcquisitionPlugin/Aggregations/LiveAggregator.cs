@@ -16,6 +16,9 @@ namespace PitWallAcquisitionPlugin.Aggregations
         private double? _rearLeftTyreWear;
         private double? _rearRightTyreWear;
 
+        private double? _frontLeftTyreTemp;
+        private double? _frontRightTyreTemp;
+
         public bool IsDirty => _dirty;
 
         public void AddSessionTimeLeft(string sessionTimeLeft)
@@ -31,7 +34,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 SetDirty();
             }
         }
-        
+
         public void AddPilotName(string original)
         {
             if (original.ToString() != _pilotName)
@@ -83,9 +86,16 @@ namespace PitWallAcquisitionPlugin.Aggregations
                     FrontRightWear = _frontRightTyreWear,
                     ReartLeftWear = _rearLeftTyreWear,
                     RearRightWear = _rearRightTyreWear,
+                },
+                TyresTemperatures = new TyresTemperatures()
+                {
+                    FrontLeftTemp = _frontLeftTyreTemp,
+                    FrontRightTemp = _frontRightTyreTemp,
                 }
             };
         }
+
+        #region tyre wear
 
         public void AddFrontLeftTyreWear(double? tyreWearValue)
         {
@@ -134,6 +144,38 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
             SetDirty();
         }
+
+        #endregion tyre wear
+
+        #region tyre temperature
+
+        public void AddFrontLeftTyreTemperature(double? tyreTempValue)
+        {
+            if (!tyreTempValue.HasValue)
+            {
+                return;
+            }
+
+            _frontLeftTyreTemp = tyreTempValue;
+
+            if (_frontLeftTyreTemp.HasValue)
+                SetDirty();
+        }
+
+        public void AddFrontRightTyreTemperature(double? tyreTempValue)
+        {
+            if (!tyreTempValue.HasValue)
+            {
+                return;
+            }
+
+            _frontRightTyreTemp = tyreTempValue;
+
+            if (_frontRightTyreTemp.HasValue)
+                SetDirty();
+        }
+
+        #endregion tyre temp
 
         private void SetDirty()
         {

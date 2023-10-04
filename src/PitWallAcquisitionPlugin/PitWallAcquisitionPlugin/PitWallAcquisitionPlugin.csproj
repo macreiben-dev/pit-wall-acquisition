@@ -59,9 +59,12 @@
     <Compile Include="Aggregations\Data.cs" />
     <Compile Include="Aggregations\IData.cs" />
     <Compile Include="Aggregations\ILiveAggregator.cs" />
-    <Compile Include="Aggregations\ITyres.cs" />
+    <Compile Include="Aggregations\ITyresTemperatures.cs" />
+    <Compile Include="Aggregations\ITyresWear.cs" />
     <Compile Include="Aggregations\LiveAggregator.cs" />
+    <Compile Include="Aggregations\TelemetryDoubleValue.cs" />
     <Compile Include="Aggregations\Tyres.cs" />
+    <Compile Include="Aggregations\TyresTemperatures.cs" />
     <Compile Include="DataVessel.cs" />
     <Compile Include="IPluginRecordRepository.cs" />
     <Compile Include="Logging\ILogger.cs" />

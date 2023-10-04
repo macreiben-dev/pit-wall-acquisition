@@ -422,6 +422,151 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
         // ===== Tyre wear rear right  ___EOF___
 
+        #region tyre temp
+
+        // ===== Tyre temperature front left
+
+        [Fact]
+        public void GIVEN_frontLeftTyreTemp_isNotNull_THEN_data_frontLeftTyreTemp_isNotNull()
+        {
+            // ARRANGE
+            double original = 85.000000001;
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddFrontLeftTyreTemperature(original);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(actual.TyresTemperatures.FrontLeftTemp).IsEqualTo(85.000000001);
+            Check.That(target.IsDirty).IsTrue();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void GIVEN_frontLeftTyreTemp_isNull_WHEN_frontLeftTyreTemp_isNull()
+        {
+            // ARRANGE
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddFrontLeftTyreTemperature(null);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(actual.TyresTemperatures.FrontLeftTemp).IsNull();
+            Check.That(target.IsDirty).IsFalse();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void GIVEN_frontLeftTyreTempValue_isNull_THEN_isDirty_isFalse()
+        {
+            // ARRANGE
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddFrontLeftTyreTemperature(null);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        // ===== Tyre temperature front left ___EOF___
+
+        // ===== Tyre temperature front right
+
+        [Fact]
+        public void GIVEN_frontRighTyreTemp_isNotNull_THEN_data_frontRightTyreTemp_isNotNull()
+        {
+            // ARRANGE
+            double original = 85.000000001;
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddFrontRightTyreTemperature(original);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(actual.TyresTemperatures.FrontRightTemp).IsEqualTo(85.000000001);
+            Check.That(target.IsDirty).IsTrue();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void GIVEN_frontRightTyreTemp_isNull_WHEN_frontRightTyreTemp_isNull()
+        {
+            // ARRANGE
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddFrontRightTyreTemperature(null);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(actual.TyresTemperatures.FrontLeftTemp).IsNull();
+            Check.That(target.IsDirty).IsFalse();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void GIVEN_frontRightTyreTempValue_isNull_THEN_isDirty_isFalse()
+        {
+            // ARRANGE
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddFrontRightTyreTemperature(null);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        // ===== Tyre temperature front right ___EOF___
+
+        #endregion tyre temp
 
         // ===== Clear
 
@@ -476,7 +621,6 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
-
 
         [Fact]
         public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresFrontLeft_is_null()
@@ -581,5 +725,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
+
+
     }
 }
