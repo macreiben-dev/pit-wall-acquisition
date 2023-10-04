@@ -170,6 +170,14 @@ namespace PitWallAcquisitionPlugin
             _liveAggregator.AddFrontRightTyreWear(racingDataRepository.TyreWearFrontRight);
             _liveAggregator.AddRearLeftTyreWear(racingDataRepository.TyreWearRearLeft);
             _liveAggregator.AddRearRightTyreWear(racingDataRepository.TyreWearRearRight);
+
+            _liveAggregator.AddFrontLeftTyreTemperature(racingDataRepository.TyreFrontLeftTemperature.Average);
+
+            _liveAggregator.AddFrontRightTyreTemperature(racingDataRepository.TyreFrontRightTemperature.Average);
+
+            _liveAggregator.AddRearLeftTyreTemperature(racingDataRepository.TyreRearLeftTemperature.Average);
+
+            _liveAggregator.AddRearRightTyreTemperature(racingDataRepository.TyreRearRightTemperature.Average);
         }
 
         private bool ShouldStopTimer()

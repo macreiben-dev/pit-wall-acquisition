@@ -70,6 +70,7 @@
     <Compile Include="Logging\SimhubLogger.cs" />
     <Compile Include="PluginManagerWrappers\IPluginManagerAdapter.cs" />
     <Compile Include="PluginManagerWrappers\IPluginRecordRepositoryFactory.cs" />
+    <Compile Include="PluginManagerWrappers\ITyreTemperature.cs" />
     <Compile Include="PluginManagerWrappers\PluginManagerAdapter.cs" />
     <Compile Include="PluginManagerWrappers\PluginManagerFieldConverter.cs" />
     <Compile Include="PluginManagerWrappers\PluginManagerWrapper.cs" />

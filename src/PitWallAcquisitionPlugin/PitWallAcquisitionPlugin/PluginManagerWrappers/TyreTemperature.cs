@@ -1,6 +1,7 @@
 ﻿namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 {
-    public sealed class TyreTemperature
+
+    public sealed class TyreTemperature : ITyreTemperature
     {
         private readonly string innerKey;
         private readonly string middleKey;
@@ -9,17 +10,17 @@
         private readonly IPluginManagerAdapter pluginManager;
 
         public TyreTemperature(
-            string innerKey, 
-            string middleKey, 
-            string outerKey, 
-            string average, 
+            string innerKey,
+            string middleKey,
+            string outerKey,
+            string average,
             IPluginManagerAdapter pluginManager)
         {
             this.innerKey = innerKey;
             this.middleKey = middleKey;
             this.outerKey = outerKey;
             this.averageKey = average;
-            
+
             this.pluginManager = pluginManager;
         }
 

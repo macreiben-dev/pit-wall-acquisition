@@ -1,4 +1,6 @@
-﻿namespace FuelAssistantMobile.DataGathering.SimhubPlugin
+﻿using PitWallAcquisitionPlugin.PluginManagerWrappers;
+
+namespace FuelAssistantMobile.DataGathering.SimhubPlugin
 {
     /// <summary>
     /// The wrapper around the plugin manager. This is the primary source of data.
@@ -48,5 +50,13 @@
         /// The driver name
         /// </summary>
         string DriverName { get; }
+
+        ITyreTemperature TyreFrontLeftTemperature { get; }
+
+        ITyreTemperature TyreFrontRightTemperature { get; }
+
+        ITyreTemperature TyreRearLeftTemperature { get; }
+
+        ITyreTemperature TyreRearRightTemperature { get; }
     }
 }

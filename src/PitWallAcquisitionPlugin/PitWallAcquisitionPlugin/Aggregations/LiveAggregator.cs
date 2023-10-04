@@ -91,6 +91,9 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 },
                 TyresTemperatures = new TyresTemperatures()
                 {
+                    /**
+                     * Idea: add the inner/middle/outer temperature.
+                     * */
                     FrontLeftTemp = _frontLeftTyreTemp,
                     FrontRightTemp = _frontRightTyreTemp,
                     RearLeftTemp = _rearLeftTyreTemp,

@@ -41,13 +41,13 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
                 "DataCorePlugin.GameData.TyreTemperatureRearRight",
                 _pluginManager);
         }
-        public TyreTemperature TyreFrontLeftTemperature { get; }
+        public ITyreTemperature TyreFrontLeftTemperature { get; private set; }
 
-        public TyreTemperature TyreFrontRightTemperature { get; }
+        public ITyreTemperature TyreFrontRightTemperature { get; private set; }
 
-        public TyreTemperature TyreRearLeftTemperature { get; }
+        public ITyreTemperature TyreRearLeftTemperature { get; private set; }
 
-        public TyreTemperature TyreRearRightTemperature { get; }
+        public ITyreTemperature TyreRearRightTemperature { get; private set; }
 
         public bool IsGameRunning =>
           PluginManagerFieldConverter.ToBoolean("DataCorePlugin.GameRunning", _pluginManager);
