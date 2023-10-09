@@ -23,7 +23,5 @@ namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
         public ITyresTemperatures TyresTemperatures { get; set; }
 
         public string SessionTimeLeft { get; set; } = string.Empty;
-
-        public Version Version => _version;
     }
 }
