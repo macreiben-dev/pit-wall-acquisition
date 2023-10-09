@@ -5,14 +5,16 @@ using GameReaderCommon;
 using PitWallAcquisitionPlugin.Aggregations;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
 using PitWallAcquisitionPlugin.Repositories;
+using PitWallAcquisitionPlugin.UI.Views;
 using SimHub.Plugins;
+using System.Windows.Controls;
 
 namespace PitWallAcquisitionPlugin
 {
     [PluginDescription("Broadcast data to a remote API to work on race strategy.")]
     [PluginAuthor("Christian \"MacReiben\" Finel")]
-    [PluginName("PitWallAcquisitionPlugin Data Plugin")]
-    public sealed partial class WebApiForwarder : IDataPlugin
+    [PluginName("Pitwall Acquisition Plugin")]
+    public sealed partial class WebApiForwarder : IDataPlugin, IWPFSettings
     {
         private readonly IPluginRecordRepositoryFactory _pluginRecordFactory;
         private readonly ILogger _logger;
@@ -77,6 +79,11 @@ namespace PitWallAcquisitionPlugin
             _webApiForwarderService.Start();
 
             _logger.Info("Starting Fam Data Gathering plugin DONE!");
+        }
+
+        public Control GetWPFSettingsControl(PluginManager pluginManager)
+        {
+            return new PluginSettings();
         }
 
         // ===========================================================
