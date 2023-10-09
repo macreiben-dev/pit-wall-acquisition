@@ -4,11 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PitWallAcquisitionPlugin.UI.Views"
-             xmlns:styles="clr-namespace:SimHub.Plugins.Styles;assembly=SimHub.Plugins" 
+             xmlns:styles="clr-namespace:SimHub.Plugins.Styles;assembly=SimHub.Plugins"
+             xmlns:converters="clr-namespace:PitWallAcquisitionPlugin.UI.Views"
              xmlns:ui="clr-namespace:SimHub.Plugins.UI;assembly=SimHub.Plugins" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+
+        <converters:ValidationConverter x:Key="ValidationConverter"/>
 
         <Style TargetType="TextBlock" x:Key="TextBlock_Label">
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -25,7 +28,24 @@
 
         <Style TargetType="TextBox" x:Key="TextBox_Form">
             <Setter Property="Margin" Value="5,5,5,5"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                        Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                Path=Validation.Errors,
+                                Converter={StaticResource ValidationConverter}}"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
+
+
+        <ControlTemplate x:Key="ValidationTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="Red" BorderThickness="2">
+                    <AdornedElementPlaceholder/>
+                </Border>
+            </StackPanel>
+        </ControlTemplate>
 
     </UserControl.Resources>
 
@@ -52,6 +72,9 @@
                     Grid.Row="0"
                     Text="Pilot name:"/>
                 <TextBox Style="{StaticResource TextBox_Form}"
+                    Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                    Text="{Binding Path=PilotName, ValidatesOnDataErrors=True,
+                        UpdateSourceTrigger=PropertyChanged}"
                     Grid.Column="1"
                     Grid.Row="0"/>
             </Grid>

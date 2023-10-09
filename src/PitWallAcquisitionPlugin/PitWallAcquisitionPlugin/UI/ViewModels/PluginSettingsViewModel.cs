@@ -5,6 +5,7 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
     public class PluginSettingsViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
+        private const string PILOTNAME_MUST_BE_SET = "Pilot name must be set.";
         private string _pilotName;
 
         public string PilotName
@@ -19,11 +20,24 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
 
         #region Observability
 
-        public string this[string columnName]
+        public string this[string propertyName]
         {
             get
             {
-                throw new NotImplementedException();
+                SimHub.Logging.Current.Info($"DataErrorInfo called [{propertyName}]");
+
+                switch (propertyName)
+                {
+                    case nameof(PilotName):
+                        if (string.IsNullOrEmpty(PilotName) || 
+                            string.IsNullOrWhiteSpace(PilotName))
+                        {
+                            return PILOTNAME_MUST_BE_SET;
+                        }
+                        break;
+                }
+
+                return null;
             }
         }
 
@@ -33,6 +47,8 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
 
         private void NotifyPropertyChanged(string propertyName)
         {
+            SimHub.Logging.Current.Info($"Property changed [{propertyName}]");
+
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));

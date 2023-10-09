@@ -1,6 +1,10 @@
 ﻿<SolutionConfiguration>
   <Settings>
     <AllowParallelTestExecution>True</AllowParallelTestExecution>
+    <MetricsExclusionList>
+      <Value>PitWallAcquisitionPlugin.IntegrationTests\PitWallAcquisitionPlugin.IntegrationTests.csproj</Value>
+      <Value>PitWallAcquisitionPlugin.Tests\PitWallAcquisitionPlugin.Tests.csproj</Value>
+    </MetricsExclusionList>
     <SolutionConfigured>True</SolutionConfigured>
   </Settings>
 </SolutionConfiguration>
