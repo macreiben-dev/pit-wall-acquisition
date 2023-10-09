@@ -20,6 +20,11 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
             aggregater.AddRearLeftTyreWear(52.0);
             aggregater.AddRearRightTyreWear(53.0);
 
+            aggregater.AddFrontLeftTyreTemperature(45.0);
+            aggregater.AddFrontRightTyreTemperature(46.0);
+            aggregater.AddRearRightTyreTemperature(47.0);
+            aggregater.AddRearRightTyreTemperature(48.0);
+
             var data = aggregater.AsData();
 
             Check.ThatCode(() => target.SendAsync(data)).DoesNotThrow();
