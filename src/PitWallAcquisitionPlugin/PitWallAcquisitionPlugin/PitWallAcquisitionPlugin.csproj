@@ -105,8 +105,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>cd $(SolutionDir)
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>cd $(SolutionDir)
 
-powershell .\DeployToSimhub.ps1 -ArtifactOutputPath .\PitWallAcquisitionPlugin\bin\Debug\ -SimhubInstallationDirectory 'C:\Program Files (x86)\SimHub\'</PreBuildEvent>
+powershell .\DeployToSimhub.ps1 -ArtifactOutputPath .\PitWallAcquisitionPlugin\bin\Debug\ -SimhubInstallationDirectory 'C:\Program Files (x86)\SimHub\'</PostBuildEvent>
   </PropertyGroup>
 </Project>
