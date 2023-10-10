@@ -8,9 +8,12 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
         private const string PILOTNAME_MUST_BE_SET = "Pilot name must be set.";
         private const string VALIDATION_APIADDRESS_MUST_BE_SET = "API address must be set.";
         private const string VALIDATION_APIADDRESS_URI_FORMAT = "API URI format is invalid. Should look like http://domain.ext or http://domain.ext";
+        private const string VALIDATION_PERSONALKEY_LENGTH_INVALID = "Personal key length should be at least 10 character long.";
+        private const string VALIDATION_PERSONALKEY_FORMAT_INVALID = "Personal should be made of alphanumerical character and \"-\", \"_\", \"@\".";
 
         private string _pilotName;
         private string _apiAddress;
+        private string _personalKey;
 
         public string PilotName
         {
@@ -29,6 +32,16 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             {
                 _apiAddress = value;
                 NotifyPropertyChanged(nameof(ApiAddress));
+            }
+        }
+
+        public string PersonalKey
+        {
+            get => _personalKey;
+            set
+            {
+                _personalKey = value;
+                NotifyPropertyChanged(nameof(PersonalKey));
             }
         }
 
@@ -54,20 +67,32 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                             return VALIDATION_APIADDRESS_MUST_BE_SET;
                         }
 
-                        Uri convetedUri = null;
-
                         var isFormatValid = Uri.TryCreate(
-                            ApiAddress, 
-                            UriKind.Absolute,        
-                            out convetedUri)
+                            ApiAddress,
+                            UriKind.Absolute,
+                            out Uri convetedUri)
                             && convetedUri != null && (
-                                convetedUri.Scheme == Uri.UriSchemeHttp 
+                                convetedUri.Scheme == Uri.UriSchemeHttp
                                 || convetedUri.Scheme == Uri.UriSchemeHttps);
 
                         if (!isFormatValid)
                         {
                             return VALIDATION_APIADDRESS_URI_FORMAT;
                         }
+                        break;
+                    case nameof(PersonalKey):
+                        if (string.IsNullOrEmpty(PersonalKey) ||
+                           string.IsNullOrWhiteSpace(PersonalKey))
+                        {
+                            return VALIDATION_PERSONALKEY_FORMAT_INVALID;
+                        }
+
+                        if (PersonalKey.Length < 10)
+                        {
+                            return VALIDATION_PERSONALKEY_LENGTH_INVALID;
+                        }
+                       
+
                         break;
                 }
 

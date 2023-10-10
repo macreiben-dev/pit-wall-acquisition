@@ -25,19 +25,18 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Margin" Value="5,5,5,5"/>
         </Style>
-
+        
         <Style TargetType="TextBox" x:Key="TextBox_Form">
             <Setter Property="Margin" Value="5,5,5,5"/>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="true">
                     <Setter Property="ToolTip"
                         Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-                                Path=Validation.Errors,
-                                Converter={StaticResource ValidationConverter}}"/>
+                            Path=Validation.Errors,
+                            Converter={StaticResource ValidationConverter}}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
-
 
         <ControlTemplate x:Key="ValidationTemplate">
             <StackPanel Orientation="Horizontal">
@@ -73,9 +72,11 @@
                     Grid.Column="0" 
                     Grid.Row="0"
                     Text="Pilot name:"/>
-                <TextBox Style="{StaticResource TextBox_Form}"
+                <TextBox 
+                    Style="{StaticResource TextBox_Form}"
                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
-                    Text="{Binding Path=PilotName, ValidatesOnDataErrors=True,
+                    Text="{Binding Path=PilotName, 
+                        ValidatesOnDataErrors=True,
                         UpdateSourceTrigger=PropertyChanged}"
                     Grid.Column="1"
                     Grid.Row="0"/>
@@ -107,6 +108,10 @@
                     Grid.Row="0"
                     Text="Pit API address"/>
                 <TextBox Style="{StaticResource TextBox_Form}"
+                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                     Text="{Binding Path=ApiAddress, 
+                        ValidatesOnDataErrors=True,
+                        UpdateSourceTrigger=PropertyChanged}"
                     Grid.Column="1"
                     Grid.Row="0"/>
 
@@ -119,6 +124,10 @@
                     Grid.Row="1"
                     Text="Personal key"/>
                 <TextBox Style="{StaticResource TextBox_Form}"
+                    Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                     Text="{Binding Path=PersonalKey, 
+                        ValidatesOnDataErrors=True,
+                        UpdateSourceTrigger=PropertyChanged}"
                     Grid.Column="1"
                     Grid.Row="1"/>
 

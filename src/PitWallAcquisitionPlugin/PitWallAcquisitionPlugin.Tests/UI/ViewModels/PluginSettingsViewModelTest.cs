@@ -49,6 +49,8 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(target["PilotName"]).IsEqualTo("Pilot name must be set.");
         }
 
+        #region Api Address
+
         [Fact]
         public void GIVEN_ApiAddress_isSet_THEN_notifyPropertychanged_ApiAdress()
         {
@@ -115,5 +117,70 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(actual).IsEqualTo(
                 "API URI format is invalid. Should look like http://domain.ext or http://domain.ext");
         }
+
+        #endregion Api Address
+
+        #region Personal key
+
+        [Fact]
+        public void GIVEN_personalKey_isSet_THEN_personalKey_hasExpectedValue()
+        {
+            var target = new PluginSettingsViewModel();
+
+            target.PersonalKey = "some_key";
+
+            Check.That(target.PersonalKey).IsEqualTo("some_key");
+        }
+
+        [Theory]
+        [InlineData("1")]
+        [InlineData("12")]
+        [InlineData("123")]
+        [InlineData("1234")]
+        [InlineData("12345")]
+        [InlineData("123456")]
+        [InlineData("1234567")]
+        [InlineData("12345678")]
+        [InlineData("123456789")]
+        public void GIVEN_personalKey_isLessThan_10character_THEN_fail(string input)
+        {
+            var target = new PluginSettingsViewModel();
+
+            target.PersonalKey = input;
+
+            Check.That(target["PersonalKey"]).IsEqualTo("Personal key length should be at least 10 character long.");
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("     ")]
+        public void GIVEN_personalKey_isNullOrEmptyOrWhiteSpace_THEN_fail(string input)
+        {
+            var target = new PluginSettingsViewModel();
+
+            target.PersonalKey = input;
+
+            Check.That(target["PersonalKey"])
+                .IsEqualTo("Personal should be made of alphanumerical character and \"-\", \"_\", \"@\".");
+        }
+
+        [Fact]
+        public void GIVEN_personalKey_isSet_THEN_notifyPropertychanged_personalKey()
+        {
+            var target = new PluginSettingsViewModel();
+
+            using var monitored = target.Monitor();
+
+            target.PersonalKey = "some_name";
+
+            monitored.Should().Raise("PropertyChanged")
+                .WithSender(target)
+                .WithArgs<PropertyChangedEventArgs>(
+                    e => e.PropertyName == "PersonalKey");
+        }
+
+        #endregion Personal key
     }
 }
