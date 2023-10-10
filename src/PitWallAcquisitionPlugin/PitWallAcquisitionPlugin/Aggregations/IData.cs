@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
+﻿namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
 {
     public interface IData
     {

@@ -1,0 +1,119 @@
+﻿using System;
+using System.ComponentModel;
+
+namespace PitWallAcquisitionPlugin.UI.ViewModels
+{
+    public class PluginSettingsViewModel : INotifyPropertyChanged, IDataErrorInfo
+    {
+        private const string PILOTNAME_MUST_BE_SET = "Pilot name must be set.";
+        private const string VALIDATION_APIADDRESS_MUST_BE_SET = "API address must be set.";
+        private const string VALIDATION_APIADDRESS_URI_FORMAT = "API URI format is invalid. Should look like http://domain.ext or http://domain.ext";
+        private const string VALIDATION_PERSONALKEY_LENGTH_INVALID = "Personal key length should be at least 10 character long.";
+        private const string VALIDATION_PERSONALKEY_FORMAT_INVALID = "Personal should be made of alphanumerical character and \"-\", \"_\", \"@\".";
+
+        private string _pilotName;
+        private string _apiAddress;
+        private string _personalKey;
+
+        public string PilotName
+        {
+            get => _pilotName;
+            set
+            {
+                _pilotName = value;
+                NotifyPropertyChanged(nameof(PilotName));
+            }
+        }
+
+        public string ApiAddress
+        {
+            get => _apiAddress;
+            set
+            {
+                _apiAddress = value;
+                NotifyPropertyChanged(nameof(ApiAddress));
+            }
+        }
+
+        public string PersonalKey
+        {
+            get => _personalKey;
+            set
+            {
+                _personalKey = value;
+                NotifyPropertyChanged(nameof(PersonalKey));
+            }
+        }
+
+        #region Observability
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                switch (propertyName)
+                {
+                    case nameof(PilotName):
+                        if (string.IsNullOrEmpty(PilotName) ||
+                            string.IsNullOrWhiteSpace(PilotName))
+                        {
+                            return PILOTNAME_MUST_BE_SET;
+                        }
+                        break;
+                    case nameof(ApiAddress):
+                        if (string.IsNullOrEmpty(ApiAddress) ||
+                            string.IsNullOrWhiteSpace(ApiAddress))
+                        {
+                            return VALIDATION_APIADDRESS_MUST_BE_SET;
+                        }
+
+                        var isFormatValid = Uri.TryCreate(
+                            ApiAddress,
+                            UriKind.Absolute,
+                            out Uri convetedUri)
+                            && convetedUri != null && (
+                                convetedUri.Scheme == Uri.UriSchemeHttp
+                                || convetedUri.Scheme == Uri.UriSchemeHttps);
+
+                        if (!isFormatValid)
+                        {
+                            return VALIDATION_APIADDRESS_URI_FORMAT;
+                        }
+                        break;
+                    case nameof(PersonalKey):
+                        if (string.IsNullOrEmpty(PersonalKey) ||
+                           string.IsNullOrWhiteSpace(PersonalKey))
+                        {
+                            return VALIDATION_PERSONALKEY_FORMAT_INVALID;
+                        }
+
+                        if (PersonalKey.Length < 10)
+                        {
+                            return VALIDATION_PERSONALKEY_LENGTH_INVALID;
+                        }
+                       
+
+                        break;
+                }
+
+                return null;
+            }
+        }
+
+        public string Error => throw new NotImplementedException();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            SimHub.Logging.Current.Info($"Property changed [{propertyName}]");
+
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion Observability
+    }
+}
