@@ -162,6 +162,15 @@ namespace PitWallAcquisitionPlugin
         private void UpdateAggregator(
             IPluginRecordRepository racingDataRepository)
         {
+            /**
+             * Idea: we have one side where we read from plugin manager, and another 
+             * in which we map the retrieved data to the aggregator.
+             * 
+             * I don't like big dictionary cause I like control. But I might have to
+             * centralize the definition of the copy from plugin manager to racing data repo.
+             * 
+             * */
+
             _liveAggregator.AddSessionTimeLeft(racingDataRepository.SessionTimeLeft);
 
             _liveAggregator.AddLaptime(racingDataRepository.LastLaptime);
