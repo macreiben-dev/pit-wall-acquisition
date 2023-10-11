@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:PitWallAcquisitionPlugin.UI.Views"
              xmlns:styles="clr-namespace:SimHub.Plugins.Styles;assembly=SimHub.Plugins"
              xmlns:converters="clr-namespace:PitWallAcquisitionPlugin.UI.Views"
-             xmlns:ui="clr-namespace:SimHub.Plugins.UI;assembly=SimHub.Plugins" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
