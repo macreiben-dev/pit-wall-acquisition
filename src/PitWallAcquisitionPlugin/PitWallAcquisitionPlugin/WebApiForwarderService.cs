@@ -6,7 +6,7 @@ using System.Timers;
 
 namespace PitWallAcquisitionPlugin
 {
-    public sealed class WebApiForwarderService
+    public sealed class WebApiForwarderService : IWebApiForwarderService
     {
         private int _internalErrorCount = 0;
         private bool _notifiedStop = false;
