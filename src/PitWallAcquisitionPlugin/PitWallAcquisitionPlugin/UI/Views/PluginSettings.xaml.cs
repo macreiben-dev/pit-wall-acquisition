@@ -8,13 +8,14 @@ namespace PitWallAcquisitionPlugin.UI.Views
     /// </summary>
     public partial class PluginSettings : UserControl
     {
-        public PluginSettings()
+        private readonly PluginSettingsViewModel viewModel;
+
+        public PluginSettings(PluginSettingsViewModel viewModel)
         {
             InitializeComponent();
 
             this.Loaded += PluginSettings_Loaded;
-
-           
+            this.viewModel = viewModel;
         }
 
         private void PluginSettings_Loaded(object sender, System.Windows.RoutedEventArgs e)
@@ -28,7 +29,7 @@ namespace PitWallAcquisitionPlugin.UI.Views
              * Idea: consider using an ioc engine to create what needs to be created. 
              * Eventualy pass reference on plugin to add a Start/Stop button also.
              * */
-            DataContext = new PluginSettingsViewModel();
+            DataContext = viewModel;
         }
     }
 }

@@ -3,7 +3,9 @@ using System.ComponentModel;
 
 namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
-    public class PluginSettingsViewModel : INotifyPropertyChanged, IDataErrorInfo
+    public class PluginSettingsViewModel :
+        INotifyPropertyChanged, 
+        IDataErrorInfo
     {
         private const string PILOTNAME_MUST_BE_SET = "Pilot name must be set.";
         private const string VALIDATION_APIADDRESS_MUST_BE_SET = "API address must be set.";
@@ -11,36 +13,39 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
         private const string VALIDATION_PERSONALKEY_LENGTH_INVALID = "Personal key length should be at least 10 character long.";
         private const string VALIDATION_PERSONALKEY_FORMAT_INVALID = "Personal should be made of alphanumerical character and \"-\", \"_\", \"@\".";
 
-        private string _pilotName;
-        private string _apiAddress;
-        private string _personalKey;
+        private IPitWallConfiguration _configuration;
+
+        public PluginSettingsViewModel(IPitWallConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         public string PilotName
         {
-            get => _pilotName;
+            get => _configuration.PilotName;
             set
             {
-                _pilotName = value;
+                _configuration.PilotName = value;
                 NotifyPropertyChanged(nameof(PilotName));
             }
         }
 
         public string ApiAddress
         {
-            get => _apiAddress;
+            get => _configuration.ApiAddress;
             set
             {
-                _apiAddress = value;
+                _configuration.ApiAddress = value;
                 NotifyPropertyChanged(nameof(ApiAddress));
             }
         }
 
         public string PersonalKey
         {
-            get => _personalKey;
+            get => _configuration.PersonalKey;
             set
             {
-                _personalKey = value;
+                _configuration.PersonalKey = value;
                 NotifyPropertyChanged(nameof(PersonalKey));
             }
         }
@@ -91,7 +96,6 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                         {
                             return VALIDATION_PERSONALKEY_LENGTH_INVALID;
                         }
-                       
 
                         break;
                 }
@@ -106,7 +110,7 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
 
         private void NotifyPropertyChanged(string propertyName)
         {
-            SimHub.Logging.Current.Info($"Property changed [{propertyName}]");
+            SimHub.Logging.Current.Debug($"Property changed [{propertyName}]");
 
             if (PropertyChanged != null)
             {

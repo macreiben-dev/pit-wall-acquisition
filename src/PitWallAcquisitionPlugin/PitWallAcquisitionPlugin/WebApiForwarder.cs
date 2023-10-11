@@ -1,10 +1,12 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
+﻿using Autofac;
+using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using GameReaderCommon;
 using PitWallAcquisitionPlugin.Aggregations;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
 using PitWallAcquisitionPlugin.Repositories;
+using PitWallAcquisitionPlugin.UI.ViewModels;
 using PitWallAcquisitionPlugin.UI.Views;
 using SimHub.Plugins;
 using System.Windows.Controls;
@@ -17,35 +19,73 @@ namespace PitWallAcquisitionPlugin
     public sealed partial class WebApiForwarder : IDataPlugin, IWPFSettings
     {
         private readonly IPluginRecordRepositoryFactory _pluginRecordFactory;
+        private readonly IContainer _builder;
         private readonly ILogger _logger;
-        private readonly WebApiForwarderService _webApiForwarderService;
+        private readonly IWebApiForwarderService _webApiForwarderService;
 
         public WebApiForwarder()
             : this(
-                  new SimhubLogger(),
-                  new LiveAggregator(),
-                  new PitWallRemoteRepository(),
-                  new PluginRecordRepositoryFactory())
+                new SimhubLogger(),
+                new PluginRecordRepositoryFactory())
         {
 
         }
 
         public WebApiForwarder(
             ILogger logger,
-            ILiveAggregator aggregator,
-            IStagingDataRepository dataRepository,
             IPluginRecordRepositoryFactory pluginRecordFactory)
         {
-            _logger = logger;
-
-            _pluginRecordFactory = pluginRecordFactory;
-
-            _webApiForwarderService = new WebApiForwarderService(
-                aggregator,
-                dataRepository,
+            IContainer builder = CreateBuilder(
                 logger,
-                10,
-                5000);
+                this);
+
+            _builder = builder;
+
+            _logger = _builder.Resolve<ILogger>();
+
+            _pluginRecordFactory = _builder.Resolve<IPluginRecordRepositoryFactory>();
+
+            _webApiForwarderService = _builder.Resolve<IWebApiForwarderService>();
+        }
+
+        private static IContainer CreateBuilder(
+            ILogger logger,
+            IDataPlugin plugin)
+        {
+            var containerBuilder = new ContainerBuilder();
+
+            containerBuilder.RegisterInstance(plugin).As<IPlugin>();
+
+            containerBuilder.RegisterInstance(logger);
+            
+            containerBuilder.RegisterType<LiveAggregator>()
+                .As<ILiveAggregator>()
+                .SingleInstance();
+
+            containerBuilder.RegisterType<PitWallRemoteRepository>()
+                .As<IStagingDataRepository>()
+                .SingleInstance();
+
+            containerBuilder.RegisterType<PluginRecordRepositoryFactory>()
+                .As<IPluginRecordRepositoryFactory>()
+                .SingleInstance();
+
+            containerBuilder.RegisterType<WebApiForwarderService>()
+                .As<IWebApiForwarderService>()
+                .WithParameter("postToApiTimerHz", 10)
+                .WithParameter("autoReactivateTimer", 5000)
+                .SingleInstance();
+
+            containerBuilder.RegisterType<PluginSettingsViewModel>()
+                .SingleInstance();
+
+            containerBuilder.RegisterType<SimhubPluginConfigurationRepository>()
+                .As<IPitWallConfiguration>()
+                .SingleInstance();
+
+            var builder = containerBuilder.Build();
+
+            return builder;
         }
 
         // ===========================================================
@@ -59,6 +99,10 @@ namespace PitWallAcquisitionPlugin
             // THOUGHT: add call to service here to grab the data we want from plugin manager
             IPluginRecordRepository pluginRecordRepository
                 = _pluginRecordFactory.GetInstance(pluginManager);
+
+            /**
+             * Idea: use ioc framework to host plugin manager
+             * */
 
             _webApiForwarderService.HandleDataUpdate(pluginRecordRepository);
         }
@@ -76,6 +120,10 @@ namespace PitWallAcquisitionPlugin
         {
             _logger.Info("Starting Fam Data Gathering plugin ...");
 
+            /**
+             * Idea: use ioc framework to split classes when too big.
+             * */
+
             _webApiForwarderService.Start();
 
             _logger.Info("Starting Fam Data Gathering plugin DONE!");
@@ -83,7 +131,7 @@ namespace PitWallAcquisitionPlugin
 
         public Control GetWPFSettingsControl(PluginManager pluginManager)
         {
-            return new PluginSettings();
+            return new PluginSettings(_builder.Resolve<PluginSettingsViewModel>());
         }
 
         // ===========================================================

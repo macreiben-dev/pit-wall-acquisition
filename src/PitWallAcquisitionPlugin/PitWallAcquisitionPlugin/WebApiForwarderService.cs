@@ -6,14 +6,14 @@ using System.Timers;
 
 namespace PitWallAcquisitionPlugin
 {
-    public sealed class WebApiForwarderService
+    public sealed class WebApiForwarderService : IWebApiForwarderService
     {
         private int _internalErrorCount = 0;
         private bool _notifiedStop = false;
         private bool _firstLaunch = false;
 
-        private Timer _postTimer;
-        private Timer _autoReactivate;
+        private readonly Timer _postTimer;
+        private readonly Timer _autoReactivate;
 
         private readonly IStagingDataRepository _dataRepository;
         private readonly ILiveAggregator _liveAggregator;
@@ -162,6 +162,15 @@ namespace PitWallAcquisitionPlugin
         private void UpdateAggregator(
             IPluginRecordRepository racingDataRepository)
         {
+            /**
+             * Idea: we have one side where we read from plugin manager, and another 
+             * in which we map the retrieved data to the aggregator.
+             * 
+             * I don't like big dictionary cause I like control. But I might have to
+             * centralize the definition of the copy from plugin manager to racing data repo.
+             * 
+             * */
+
             _liveAggregator.AddSessionTimeLeft(racingDataRepository.SessionTimeLeft);
 
             _liveAggregator.AddLaptime(racingDataRepository.LastLaptime);
