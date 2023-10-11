@@ -6,6 +6,7 @@ using GameReaderCommon;
 using PitWallAcquisitionPlugin.Aggregations;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
 using PitWallAcquisitionPlugin.Repositories;
+using PitWallAcquisitionPlugin.UI.ViewModels;
 using PitWallAcquisitionPlugin.UI.Views;
 using SimHub.Plugins;
 using System.Windows.Controls;
@@ -18,44 +19,64 @@ namespace PitWallAcquisitionPlugin
     public sealed partial class WebApiForwarder : IDataPlugin, IWPFSettings
     {
         private readonly IPluginRecordRepositoryFactory _pluginRecordFactory;
+        private readonly IContainer _builder;
         private readonly ILogger _logger;
         private readonly IWebApiForwarderService _webApiForwarderService;
 
         public WebApiForwarder()
             : this(
-                  new SimhubLogger(),
-                  new LiveAggregator(),
-                  new PitWallRemoteRepository(),
-                  new PluginRecordRepositoryFactory())
+                new SimhubLogger(),
+                new PluginRecordRepositoryFactory())
         {
 
         }
 
         public WebApiForwarder(
             ILogger logger,
-            ILiveAggregator aggregator,
-            IStagingDataRepository dataRepository,
             IPluginRecordRepositoryFactory pluginRecordFactory)
+        {
+            IContainer builder = CreateBuilder(
+                logger);
+
+            _builder = builder;
+
+            _logger = _builder.Resolve<ILogger>();
+
+            _pluginRecordFactory = _builder.Resolve<IPluginRecordRepositoryFactory>();
+
+            _webApiForwarderService = _builder.Resolve<IWebApiForwarderService>();
+        }
+
+        private static IContainer CreateBuilder(
+            ILogger logger)
         {
             var containerBuilder = new ContainerBuilder();
 
             containerBuilder.RegisterInstance(logger);
-            containerBuilder.RegisterInstance(aggregator).SingleInstance();
-            containerBuilder.RegisterInstance(dataRepository).SingleInstance();
-            containerBuilder.RegisterInstance(pluginRecordFactory).SingleInstance();
+            
+            containerBuilder.RegisterType<LiveAggregator>()
+                .As<ILiveAggregator>()
+                .SingleInstance();
+
+            containerBuilder.RegisterType<PitWallRemoteRepository>()
+                .As<IStagingDataRepository>()
+                .SingleInstance();
+
+            containerBuilder.RegisterType<PluginRecordRepositoryFactory>()
+                .As<IPluginRecordRepositoryFactory>()
+                .SingleInstance();
+
             containerBuilder.RegisterType<WebApiForwarderService>()
                 .As<IWebApiForwarderService>()
                 .WithParameter("postToApiTimerHz", 10)
                 .WithParameter("autoReactivateTimer", 5000)
                 .SingleInstance();
 
-            var builder = containerBuilder.Build(); 
+            containerBuilder.RegisterType<PluginSettingsViewModel>()
+                .SingleInstance();
 
-            _logger = builder.Resolve<ILogger>();
-
-            _pluginRecordFactory = builder.Resolve<IPluginRecordRepositoryFactory>();
-            
-            _webApiForwarderService = builder.Resolve<IWebApiForwarderService>();
+            var builder = containerBuilder.Build();
+            return builder;
         }
 
         // ===========================================================
@@ -101,7 +122,7 @@ namespace PitWallAcquisitionPlugin
 
         public Control GetWPFSettingsControl(PluginManager pluginManager)
         {
-            return new PluginSettings();
+            return new PluginSettings(_builder.Resolve<PluginSettingsViewModel>());
         }
 
         // ===========================================================

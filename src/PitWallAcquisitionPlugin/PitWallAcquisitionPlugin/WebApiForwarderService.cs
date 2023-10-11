@@ -12,8 +12,8 @@ namespace PitWallAcquisitionPlugin
         private bool _notifiedStop = false;
         private bool _firstLaunch = false;
 
-        private Timer _postTimer;
-        private Timer _autoReactivate;
+        private readonly Timer _postTimer;
+        private readonly Timer _autoReactivate;
 
         private readonly IStagingDataRepository _dataRepository;
         private readonly ILiveAggregator _liveAggregator;
