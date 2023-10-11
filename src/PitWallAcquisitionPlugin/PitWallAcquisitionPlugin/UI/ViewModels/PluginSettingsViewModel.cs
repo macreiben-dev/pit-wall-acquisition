@@ -28,30 +28,27 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             get => _configuration.PilotName;
             set
             {
-                _pilotName = value;
-
                 _configuration.PilotName = value;
-
                 NotifyPropertyChanged(nameof(PilotName));
             }
         }
 
         public string ApiAddress
         {
-            get => _apiAddress;
+            get => _configuration.ApiAddress;
             set
             {
-                _apiAddress = value;
+                _configuration.ApiAddress = value;
                 NotifyPropertyChanged(nameof(ApiAddress));
             }
         }
 
         public string PersonalKey
         {
-            get => _personalKey;
+            get => _configuration.PersonalKey;
             set
             {
-                _personalKey = value;
+                _configuration.PersonalKey = value;
                 NotifyPropertyChanged(nameof(PersonalKey));
             }
         }
@@ -102,7 +99,6 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                         {
                             return VALIDATION_PERSONALKEY_LENGTH_INVALID;
                         }
-
 
                         break;
                 }
