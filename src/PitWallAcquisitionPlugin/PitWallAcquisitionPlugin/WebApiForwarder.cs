@@ -36,7 +36,8 @@ namespace PitWallAcquisitionPlugin
             IPluginRecordRepositoryFactory pluginRecordFactory)
         {
             IContainer builder = CreateBuilder(
-                logger);
+                logger,
+                this);
 
             _builder = builder;
 
@@ -48,9 +49,12 @@ namespace PitWallAcquisitionPlugin
         }
 
         private static IContainer CreateBuilder(
-            ILogger logger)
+            ILogger logger,
+            IDataPlugin plugin)
         {
             var containerBuilder = new ContainerBuilder();
+
+            containerBuilder.RegisterInstance(plugin).As<IPlugin>();
 
             containerBuilder.RegisterInstance(logger);
             
@@ -75,7 +79,12 @@ namespace PitWallAcquisitionPlugin
             containerBuilder.RegisterType<PluginSettingsViewModel>()
                 .SingleInstance();
 
+            containerBuilder.RegisterType<SimhubPluginConfigurationRepository>()
+                .As<IPitWallConfiguration>()
+                .SingleInstance();
+
             var builder = containerBuilder.Build();
+
             return builder;
         }
 
