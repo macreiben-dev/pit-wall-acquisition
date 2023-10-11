@@ -13,9 +13,6 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
         private const string VALIDATION_PERSONALKEY_LENGTH_INVALID = "Personal key length should be at least 10 character long.";
         private const string VALIDATION_PERSONALKEY_FORMAT_INVALID = "Personal should be made of alphanumerical character and \"-\", \"_\", \"@\".";
 
-        private string _pilotName;
-        private string _apiAddress;
-        private string _personalKey;
         private IPitWallConfiguration _configuration;
 
         public PluginSettingsViewModel(IPitWallConfiguration configuration)
