@@ -93,7 +93,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         [InlineData("      ")]
         public void GIVEN_ApiAddress_isNotSet_THEN_dataErrorInfo_returns_notSet(string input)
         {
-            PluginSettingsViewModel target = GetTarget();
+            var target = GetTarget();
 
             target.ApiAddress = input;
 
@@ -103,7 +103,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         [Fact]
         public void GIVEN_apiAddress_uri_isValid_THEN_error_isNull()
         {
-            PluginSettingsViewModel target = GetTarget();
+            var target = GetTarget();
 
             target.ApiAddress = VALID_API_ADDRESS;
 
@@ -118,7 +118,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         [InlineData("http://test=test2.ext")]
         public void GIVEN_apiAddress_uri_isNotValid_THEN_error_isSet(string input)
         {
-            PluginSettingsViewModel target = GetTarget();
+            var target = GetTarget();
 
             target.ApiAddress = input;
 
@@ -135,7 +135,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         [Fact]
         public void GIVEN_personalKey_isSet_THEN_personalKey_hasExpectedValue()
         {
-            PluginSettingsViewModel target = GetTarget();
+            var target = GetTarget();
 
             target.PersonalKey = "some_key";
 
@@ -154,7 +154,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         [InlineData("123456789")]
         public void GIVEN_personalKey_isLessThan_10character_THEN_fail(string input)
         {
-            PluginSettingsViewModel target = GetTarget();
+            var target = GetTarget();
 
             target.PersonalKey = input;
 
@@ -168,7 +168,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         [InlineData("     ")]
         public void GIVEN_personalKey_isNullOrEmptyOrWhiteSpace_THEN_fail(string input)
         {
-            PluginSettingsViewModel target = GetTarget();
+            var target = GetTarget();
 
             target.PersonalKey = input;
 
@@ -179,7 +179,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         [Fact]
         public void GIVEN_personalKey_isSet_THEN_notifyPropertychanged_personalKey()
         {
-            PluginSettingsViewModel target = GetTarget();
+            var target = GetTarget();
 
             using var monitored = target.Monitor();
 
