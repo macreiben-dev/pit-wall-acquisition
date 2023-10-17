@@ -2,6 +2,7 @@
 using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.Repositories;
+using Xunit;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.Commands
 {
@@ -22,7 +23,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.Commands
         private IsApiAvailableCommand GetTarget()
         {
             return new IsApiAvailableCommand(
-                _viewModel, 
+                _viewModel,
                 _apiAvailabilityRepo);
         }
 
@@ -80,12 +81,13 @@ namespace PitWallAcquisitionPlugin.Tests.UI.Commands
         {
             var target = GetTarget();
 
-            using var monitored = target.Monitor();
+            using (var monitored = target.Monitor())
+            {
+                target.RaiseCanExecuteChanged();
 
-            target.RaiseCanExecuteChanged();
-
-            monitored.Should().Raise("CanExecuteChanged")
-               .WithSender(target);
+                monitored.Should().Raise("CanExecuteChanged")
+                   .WithSender(target);
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using NFluent;
 using FluentAssertions;
 using System.ComponentModel;
+using Xunit;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 {
@@ -10,7 +11,8 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         private const string VALID_API_ADDRESS = "http://api.address.net";
         private FakePitWallConfiguration _pitWallConfiguration;
 
-        public PluginSettingsViewModelTest() {
+        public PluginSettingsViewModelTest()
+        {
 
             _pitWallConfiguration = new FakePitWallConfiguration();
         }
@@ -25,14 +27,15 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         {
             PluginSettingsViewModel target = GetTarget();
 
-            using var monitored = target.Monitor();
+            using (var monitored = target.Monitor())
+            {
+                target.PilotName = "some_name";
 
-            target.PilotName = "some_name";
-
-            monitored.Should().Raise("PropertyChanged")
-                .WithSender(target)
-                .WithArgs<PropertyChangedEventArgs>(
-                    e => e.PropertyName == "PilotName");
+                monitored.Should().Raise("PropertyChanged")
+                    .WithSender(target)
+                    .WithArgs<PropertyChangedEventArgs>(
+                        e => e.PropertyName == "PilotName");
+            }
         }
 
         [Fact]
@@ -66,14 +69,15 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         {
             PluginSettingsViewModel target = GetTarget();
 
-            using var monitored = target.Monitor();
+            using (var monitored = target.Monitor())
+            {
+                target.ApiAddress = VALID_API_ADDRESS;
 
-            target.ApiAddress = VALID_API_ADDRESS;
-
-            monitored.Should().Raise("PropertyChanged")
-                .WithSender(target)
-                .WithArgs<PropertyChangedEventArgs>(
-                    e => e.PropertyName == "ApiAddress");
+                monitored.Should().Raise("PropertyChanged")
+                    .WithSender(target)
+                    .WithArgs<PropertyChangedEventArgs>(
+                        e => e.PropertyName == "ApiAddress");
+            }
         }
 
         [Fact]
@@ -181,14 +185,16 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         {
             var target = GetTarget();
 
-            using var monitored = target.Monitor();
+            using (var monitored = target.Monitor())
+            {
 
-            target.PersonalKey = "some_name";
+                target.PersonalKey = "some_name";
 
-            monitored.Should().Raise("PropertyChanged")
-                .WithSender(target)
-                .WithArgs<PropertyChangedEventArgs>(
-                    e => e.PropertyName == "PersonalKey");
+                monitored.Should().Raise("PropertyChanged")
+                    .WithSender(target)
+                    .WithArgs<PropertyChangedEventArgs>(
+                        e => e.PropertyName == "PersonalKey");
+            }
         }
 
         #endregion Personal key

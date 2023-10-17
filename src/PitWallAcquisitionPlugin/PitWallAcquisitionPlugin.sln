@@ -5,8 +5,6 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PitWallAcquisitionPlugin", "PitWallAcquisitionPlugin\PitWallAcquisitionPlugin.csproj", "{09B534AD-3A60-4424-B0FF-52BD57758227}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PitWallAcquisitionPlugin.Tests", "PitWallAcquisitionPlugin.Tests\PitWallAcquisitionPlugin.Tests.csproj", "{BFD50212-58D5-42FE-93A0-FE0CEC0E5135}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BFC92D62-3ADB-4298-873A-1E7501A8FCA7}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\azure-pipelines.yml = ..\..\azure-pipelines.yml
@@ -15,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PitWallAcquisitionPlugin.IntegrationTests", "PitWallAcquisitionPlugin.IntegrationTests\PitWallAcquisitionPlugin.IntegrationTests.csproj", "{4FE83259-5855-427E-A157-D1CD3F8767E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PitWallAcquisitionPlugin.RunTime48.Tests", "PitWallAcquisitionPlugin.RunTime48.Tests\PitWallAcquisitionPlugin.RunTime48.Tests.csproj", "{2C9EB657-8310-4B8E-A2CB-0BA38C8E67B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,14 +26,14 @@ Global
 		{09B534AD-3A60-4424-B0FF-52BD57758227}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09B534AD-3A60-4424-B0FF-52BD57758227}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09B534AD-3A60-4424-B0FF-52BD57758227}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BFD50212-58D5-42FE-93A0-FE0CEC0E5135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFD50212-58D5-42FE-93A0-FE0CEC0E5135}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFD50212-58D5-42FE-93A0-FE0CEC0E5135}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFD50212-58D5-42FE-93A0-FE0CEC0E5135}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4FE83259-5855-427E-A157-D1CD3F8767E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4FE83259-5855-427E-A157-D1CD3F8767E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FE83259-5855-427E-A157-D1CD3F8767E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FE83259-5855-427E-A157-D1CD3F8767E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C9EB657-8310-4B8E-A2CB-0BA38C8E67B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C9EB657-8310-4B8E-A2CB-0BA38C8E67B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C9EB657-8310-4B8E-A2CB-0BA38C8E67B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C9EB657-8310-4B8E-A2CB-0BA38C8E67B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
