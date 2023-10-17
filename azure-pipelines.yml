@@ -34,9 +34,3 @@ steps:
     testAssemblyVer2: | 
       **\*Tests.dll
       !**\*IntegrationTests.dll
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
