@@ -1,6 +1,7 @@
 ﻿using NFluent;
+using Xunit;
 
-namespace PitWallAcquisitionPlugin.Tests
+namespace PitWallAcquisitionPlugin.RunTime48.Tests
 {
     public class WebApiForwarderTest
     {

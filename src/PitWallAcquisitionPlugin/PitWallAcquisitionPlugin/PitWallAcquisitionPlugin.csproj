@@ -114,11 +114,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorWhenSendDataException.cs" />
     <Compile Include="Repositories\IConfigurationRepository.cs" />
+    <Compile Include="Repositories\IPitWallApiStatusRepository.cs" />
+    <Compile Include="Repositories\PitWallApiStatusRepository.cs" />
     <Compile Include="Repositories\PitWallRemoteRepository.cs" />
     <Compile Include="Repositories\IStagingDataRepository.cs" />
     <Compile Include="Repositories\StatusCodeNotOkException.cs" />
+    <Compile Include="UI\ViewModels\IDisplayAvailability.cs" />
+    <Compile Include="UI\ViewModels\IIsApiAvailableCommand.cs" />
     <Compile Include="UI\ViewModels\IPitWallConfiguration.cs" />
+    <Compile Include="UI\ViewModels\IsApiAvailableCommand.cs" />
     <Compile Include="UI\ViewModels\PluginSettingsViewModel.cs" />
+    <Compile Include="UI\ViewModels\SettingsValidators.cs" />
     <Compile Include="UI\Views\PluginSettings.xaml.cs">
       <DependentUpon>PluginSettings.xaml</DependentUpon>
     </Compile>
@@ -145,6 +151,6 @@
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)
 
-powershell .\DeployToSimhub.ps1 -ArtifactOutputPath .\PitWallAcquisitionPlugin\bin\Debug\ -SimhubInstallationDirectory 'C:\Program Files (x86)\SimHub\'</PostBuildEvent>
+powershell .\DeployToSimhub.ps1 -ArtifactOutputPath .\PitWallAcquisitionPlugin\bin\Debug\ -SimhubInstallationDirectory 'C:\Program Files (x86)\SimHub\' '$(ConfigurationName)'</PostBuildEvent>
   </PropertyGroup>
 </Project>

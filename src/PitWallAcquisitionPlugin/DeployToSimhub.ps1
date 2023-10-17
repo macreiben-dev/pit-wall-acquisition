@@ -1,6 +1,12 @@
 param(
   [Parameter(Mandatory)] [string] $ArtifactOutputPath,
-  [Parameter(Mandatory)] [string] $SimhubInstallationDirectory)
+  [Parameter(Mandatory)] [string] $SimhubInstallationDirectory,
+  [Parameter(Mandatory)] [string] $ConfigurationName)
+
+if($ConfigurationName -eq "Release") {
+	Write-Host "No copy to SimhHub installation."
+	exit 0
+}
 
 $isSimhubInstallationDirectoryValid = Test-Path $SimhubInstallationDirectory
 

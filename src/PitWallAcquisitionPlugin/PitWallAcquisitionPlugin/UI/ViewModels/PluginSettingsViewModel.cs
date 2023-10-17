@@ -71,14 +71,7 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                         {
                             return VALIDATION_APIADDRESS_MUST_BE_SET;
                         }
-
-                        var isFormatValid = Uri.TryCreate(
-                            ApiAddress,
-                            UriKind.Absolute,
-                            out Uri convetedUri)
-                            && convetedUri != null && (
-                                convetedUri.Scheme == Uri.UriSchemeHttp
-                                || convetedUri.Scheme == Uri.UriSchemeHttps);
+                        bool isFormatValid = SettingsValidators.IsUriValid(ApiAddress);
 
                         if (!isFormatValid)
                         {

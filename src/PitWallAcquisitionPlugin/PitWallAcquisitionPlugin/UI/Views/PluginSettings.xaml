@@ -134,7 +134,8 @@
 
                 <styles:SHButtonPrimary 
                     Grid.Column="0"
-                    Grid.Row="2" >
+                    Grid.Row="2" 
+                    IsEnabled="False">
                     Generate
                 </styles:SHButtonPrimary>
             </Grid>

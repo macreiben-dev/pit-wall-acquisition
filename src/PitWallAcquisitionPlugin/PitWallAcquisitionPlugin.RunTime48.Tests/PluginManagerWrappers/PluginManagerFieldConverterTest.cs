@@ -1,6 +1,7 @@
 ﻿using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
+using Xunit;
 
 namespace PitWallAcquisitionPlugin.Tests.PluginManagerWrappers
 {
