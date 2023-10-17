@@ -32,5 +32,5 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     testAssemblyVer2: | 
-      **\Tests.dll
+      **\*Tests.dll
       !**\*IntegrationTests.dll
