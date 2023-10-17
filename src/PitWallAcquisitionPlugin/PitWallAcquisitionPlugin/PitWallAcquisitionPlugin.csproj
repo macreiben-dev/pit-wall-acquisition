@@ -151,12 +151,6 @@
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)
 
-powershell .\DeployToSimhub.ps1 -ArtifactOutputPath .\PitWallAcquisitionPlugin\bin\Debug\ -SimhubInstallationDirectory 'C:\Program Files (x86)\SimHub\'</PostBuildEvent>
+powershell .\DeployToSimhub.ps1 -ArtifactOutputPath .\PitWallAcquisitionPlugin\bin\Debug\ -SimhubInstallationDirectory 'C:\Program Files (x86)\SimHub\' '$(ConfigurationName)'</PostBuildEvent>
   </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-	    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
-	    <PreLinkEventUseInBuild>false</PreLinkEventUseInBuild>
-	    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
-    </PropertyGroup>
 </Project>
