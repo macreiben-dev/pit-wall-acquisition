@@ -13,7 +13,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  publishDir: 'src\PitWallAcquisitionPlugin\PitWallAcquisitionPlugin\bin\Release\'
+  publishDir: 'src\PitWallAcquisitionPlugin\PitWallAcquisitionPlugin\bin\$(buildConfiguration)\'
 
 steps:
 - task: NuGetToolInstaller@1
