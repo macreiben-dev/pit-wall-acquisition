@@ -1,4 +1,4 @@
-# pit-wall-acquisition
+# Pit Wall Acquisition Plugin
 
 This plugin is to be used with simhub to forward data to a WebApi.
 
