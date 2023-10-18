@@ -22,7 +22,13 @@ This class is a technical implmentation that uses the two above classes to send 
 
 The adapter to integrate the plugin to simhub.
 
-## How to add new telemetry fields ?
+## Coding
+
+### How to add new telemetry fields in code ?
 
 - Update PluginManagerWrapper and IPluginRecordRepository to expose the field from simhub plugin manager
 - Update LiveAggregator add the new performance counter to liveAggregator.
+
+### Limitations
+
+- Autofac should not be updated because it has a dependencies in commong with Simhub.
