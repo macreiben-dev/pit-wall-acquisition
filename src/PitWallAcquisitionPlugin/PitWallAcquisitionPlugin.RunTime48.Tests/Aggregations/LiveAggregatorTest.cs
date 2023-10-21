@@ -699,8 +699,6 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
             watch.Stop();
 
-            var actual = target.AsData();
-
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
 
@@ -730,6 +728,27 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             Check.That(actual.SimerKey).IsEqualTo("somekey");
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void GIVEN_simerKey_isNotNull_THEN_isDirty_isFalse()
+        {
+            // ARRANGE
+            string original = "somekey";
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddSimerKey(original);
+
+            watch.Stop();
+
+            var actual = target.IsDirty;
+
+            // ASSERT
+            Check.That(actual).IsFalse();
         }
 
         #endregion tyre temp

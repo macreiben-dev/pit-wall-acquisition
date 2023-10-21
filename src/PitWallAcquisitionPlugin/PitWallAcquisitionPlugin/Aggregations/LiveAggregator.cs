@@ -208,6 +208,11 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
         #endregion tyre temp
 
+        public void AddSimerKey(string original)
+        {
+            _simerKey = original;
+        }
+
         private void SetDirty()
         {
             _dirty = true;
@@ -218,9 +223,5 @@ namespace PitWallAcquisitionPlugin.Aggregations
             _dirty = false;
         }
 
-        public void AddSimerKey(string original)
-        {
-            _simerKey = original;
-        }
     }
 }
