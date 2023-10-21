@@ -32,3 +32,8 @@ The adapter to integrate the plugin to simhub.
 ### Limitations
 
 - Autofac should not be updated because it has a dependencies in commong with Simhub.
+## Appendices
+
+### Azure Resources
+
+- https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/vstest-v2?view=azure-pipelines
