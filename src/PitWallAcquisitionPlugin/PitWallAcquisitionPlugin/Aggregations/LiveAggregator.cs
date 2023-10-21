@@ -20,6 +20,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         private double? _frontRightTyreTemp;
         private double? _rearLeftTyreTemp;
         private double? _rearRightTyreTemp;
+        private string _simerKey;
 
         public bool IsDirty => _dirty;
 
@@ -98,7 +99,8 @@ namespace PitWallAcquisitionPlugin.Aggregations
                     FrontRightTemp = _frontRightTyreTemp,
                     RearLeftTemp = _rearLeftTyreTemp,
                     RearRightTemp = _rearRightTyreTemp
-                }
+                },
+                SimerKey = _simerKey
             };
         }
 
@@ -216,5 +218,9 @@ namespace PitWallAcquisitionPlugin.Aggregations
             _dirty = false;
         }
 
+        public void AddSimerKey(string original)
+        {
+            _simerKey = original;
+        }
     }
 }

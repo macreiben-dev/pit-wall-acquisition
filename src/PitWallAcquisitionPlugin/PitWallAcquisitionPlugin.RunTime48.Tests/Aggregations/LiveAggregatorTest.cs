@@ -709,6 +709,29 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
         // ===== Tyre temperature rear right ___EOF___
 
+        [Fact]
+        public void GIVEN_simerKey_isNotNull_THEN_data_simerKey_isNotNull()
+        {
+            // ARRANGE
+            string original = "somekey";
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.AddSimerKey(original);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(actual.SimerKey).IsEqualTo("somekey");
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
         #endregion tyre temp
 
         // ===== Clear
