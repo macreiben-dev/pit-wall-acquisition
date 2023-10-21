@@ -3,6 +3,8 @@ using NFluent;
 using FluentAssertions;
 using System.ComponentModel;
 using Xunit;
+using NSubstitute;
+using PitWallAcquisitionPlugin.Aggregations;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 {
@@ -10,16 +12,19 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
     {
         private const string VALID_API_ADDRESS = "http://api.address.net";
         private FakePitWallConfiguration _pitWallConfiguration;
+        private ILiveAggregator _aggregator;
 
         public PluginSettingsViewModelTest()
         {
 
             _pitWallConfiguration = new FakePitWallConfiguration();
+
+            _aggregator = new LiveAggregator(); // oustide in here.
         }
 
         private PluginSettingsViewModel GetTarget()
         {
-            return new PluginSettingsViewModel(_pitWallConfiguration);
+            return new PluginSettingsViewModel(_pitWallConfiguration, _aggregator);
         }
 
         [Fact]
@@ -195,6 +200,42 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                     .WithArgs<PropertyChangedEventArgs>(
                         e => e.PropertyName == "PersonalKey");
             }
+        }
+
+        [Fact]
+        public void GIVEN_personalKey_isSet_AND_noError_THEN_updateAggregator()
+        {
+            string personalKey = "some_valid_key_ok";
+
+            // ACT
+            var target = GetTarget();
+
+            target.PersonalKey = personalKey;
+
+            var actual = _aggregator.AsData();
+
+            // ASSERT
+            Check.That(actual.SimerKey).IsEqualTo(personalKey);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("     ")]
+        public void GIVEN_personalKey_isSet_AND_error_THEN_doNotUpdateUpdate_aggregator(string input)
+        {
+            string personalKey = input;
+
+            // ACT
+            var target = GetTarget();
+
+            target.PersonalKey = personalKey;
+
+            var actual = _aggregator.AsData();
+
+            // ASSERT
+            Check.That(actual.SimerKey).IsNull();
         }
 
         #endregion Personal key

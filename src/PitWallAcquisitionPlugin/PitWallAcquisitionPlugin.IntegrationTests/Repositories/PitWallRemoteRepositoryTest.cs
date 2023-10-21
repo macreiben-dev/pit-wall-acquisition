@@ -25,6 +25,8 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
             aggregater.AddRearRightTyreTemperature(47.0);
             aggregater.AddRearRightTyreTemperature(48.0);
 
+            aggregater.AddSimerKey("ven1_rocky_2023");
+
             var data = aggregater.AsData();
 
             Check.ThatCode(() => target.SendAsync(data)).DoesNotThrow();
