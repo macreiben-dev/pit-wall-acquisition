@@ -8,7 +8,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
     {
         private string _sessionTimeLeft = string.Empty;
         private bool _dirty = false;
-        private string _pilotName = "MacReibenFromPlugin";
+        private string _pilotName = null;
 
         private double? _laptimeSeconds;
         private double? _frontLeftTyreWear;

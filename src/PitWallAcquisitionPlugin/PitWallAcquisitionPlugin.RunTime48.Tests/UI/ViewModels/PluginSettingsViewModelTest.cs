@@ -67,6 +67,40 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(target["PilotName"]).IsEqualTo("Pilot name must be set.");
         }
 
+        [Fact]
+        public void GIVEN_pilotName_isSet_AND_noError_THEN_updateAggregator()
+        {
+            string personalKey = "some_valid_key_ok";
+
+            // ACT
+            var target = GetTarget();
+
+            target.PilotName = personalKey;
+
+            var actual = _aggregator.AsData();
+
+            // ASSERT
+            Check.That(actual.PilotName).IsEqualTo(personalKey);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData(" ")]
+        [InlineData("      ")]
+        public void GIVEN_pilotName_isSet_AND_error_THEN_doNotUpdateUpdate_aggregator(string input)
+        {
+            // ACT
+            var target = GetTarget();
+
+            target.PilotName = input;
+
+            var actual = _aggregator.AsData();
+
+            // ASSERT
+            Check.That(actual.PilotName).IsNull();
+        }
+
         #region Api Address
 
         [Fact]

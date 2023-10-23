@@ -31,6 +31,12 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             {
                 _configuration.PilotName = value;
                 NotifyPropertyChanged(nameof(PilotName));
+
+
+                if (string.IsNullOrEmpty(this[nameof(PilotName)]))
+                {
+                    _aggregator.AddPilotName(value);
+                }
             }
         }
 
