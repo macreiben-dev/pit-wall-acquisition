@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace PitWallAcquisitionPlugin.Repositories
+﻿namespace PitWallAcquisitionPlugin.Repositories
 {
     public interface IPitWallApiStatusRepository
     {

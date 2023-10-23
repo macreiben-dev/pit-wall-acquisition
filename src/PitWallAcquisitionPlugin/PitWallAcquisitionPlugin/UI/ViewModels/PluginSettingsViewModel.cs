@@ -1,5 +1,4 @@
-﻿using GameReaderCommon;
-using PitWallAcquisitionPlugin.Aggregations;
+﻿using PitWallAcquisitionPlugin.Aggregations;
 using System;
 using System.ComponentModel;
 

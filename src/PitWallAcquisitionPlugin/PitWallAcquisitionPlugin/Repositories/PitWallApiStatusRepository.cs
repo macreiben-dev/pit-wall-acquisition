@@ -1,8 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace PitWallAcquisitionPlugin.Repositories
+﻿namespace PitWallAcquisitionPlugin.Repositories
 {
     public sealed class PitWallApiStatusRepository 
     {

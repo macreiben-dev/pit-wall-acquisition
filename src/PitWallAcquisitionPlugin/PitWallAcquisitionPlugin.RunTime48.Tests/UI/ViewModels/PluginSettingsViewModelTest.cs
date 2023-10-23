@@ -3,7 +3,6 @@ using NFluent;
 using FluentAssertions;
 using System.ComponentModel;
 using Xunit;
-using NSubstitute;
 using PitWallAcquisitionPlugin.Aggregations;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
