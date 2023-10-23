@@ -12,7 +12,8 @@ namespace PitWallAcquisitionPlugin.HealthChecks.Repositories
 
             client.BaseAddress = new Uri(originalApiAddress);
 
-            var response = await client.GetAsync("/healthcheck");
+            var response = await client.GetAsync(
+                "/api/healthcheck");
 
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }

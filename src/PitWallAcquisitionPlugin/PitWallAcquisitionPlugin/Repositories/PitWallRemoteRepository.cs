@@ -13,8 +13,8 @@ namespace PitWallAcquisitionPlugin.Repositories
          * Idea: use configuration from simhub to define this one.
          * 
          * */
-        //private const string WebApiUrl = "http://localhost:32773/api/Telemetry";
-        private const string WebApiUrl = "http://172.201.106.76:32773/api/Telemetry";
+        private const string WebApiUrl = "http://localhost:32773/api/Telemetry";
+        //private const string WebApiUrl = "http://172.201.106.76:32773/api/Telemetry";
 
         private readonly HttpClient _httpClient;
 

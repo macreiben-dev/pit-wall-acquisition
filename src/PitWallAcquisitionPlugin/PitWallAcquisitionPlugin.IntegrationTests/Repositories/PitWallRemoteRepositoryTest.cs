@@ -25,7 +25,7 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
             aggregater.AddRearRightTyreTemperature(47.0);
             aggregater.AddRearRightTyreTemperature(48.0);
 
-            aggregater.AddSimerKey("ven1_rocky_2023");
+            aggregater.AddSimerKey("some_key");
             aggregater.AddPilotName("PilotFromIntegrationTests");
 
             var data = aggregater.AsData();

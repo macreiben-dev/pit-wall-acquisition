@@ -1,4 +1,5 @@
-﻿using PitWallAcquisitionPlugin.HealthChecks.Repositories;
+﻿using NFluent;
+using PitWallAcquisitionPlugin.HealthChecks.Repositories;
 
 namespace PitWallAcquisitionPlugin.IntegrationTests.HealthChecks
 {
@@ -10,9 +11,13 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.HealthChecks
         }
 
         [Fact]
-        public void GIVEN_apiAddress_isValid_THEN_returnTrue()
+        public async void GIVEN_apiAddress_isValid_THEN_returnTrue()
         {
+            var target = GetTarget();
 
+            var actual =  await target.Check("http://localhost:32773");
+
+            Check.That(actual).IsTrue();
         }
     }
 }
