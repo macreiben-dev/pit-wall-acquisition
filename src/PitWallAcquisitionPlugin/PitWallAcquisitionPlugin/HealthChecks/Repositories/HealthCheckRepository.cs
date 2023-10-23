@@ -6,16 +6,18 @@ namespace PitWallAcquisitionPlugin.HealthChecks.Repositories
 {
     public class HealthCheckRepository : IHealthCheckRepository
     {
-        public async Task<bool> Check(string originalApiAddress)
+        private const string RequestUri = "/api/healthcheck";
+
+        public async Task<bool> Check(string apiAddress)
         {
             HttpClient client = new HttpClient();
 
-            client.BaseAddress = new Uri(originalApiAddress);
+            client.BaseAddress = new Uri(apiAddress);
 
             try { 
 
             var response = await client.GetAsync(
-                "/api/healthcheck");
+                RequestUri);
 
                 return response.StatusCode == System.Net.HttpStatusCode.OK;
             }
