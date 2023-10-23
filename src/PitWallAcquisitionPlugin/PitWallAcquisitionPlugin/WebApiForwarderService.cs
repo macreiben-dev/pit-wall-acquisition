@@ -129,6 +129,15 @@ namespace PitWallAcquisitionPlugin
 
             try
             {
+                // -- PATCH
+                if (string.IsNullOrEmpty(dataToSend.PilotName)
+                    || string.IsNullOrEmpty(dataToSend.SimerKey)
+                    )
+                {
+                    _logger.Error($"Mandatory configuration missing, PilotName is [{dataToSend.PilotName}] - SimerKey is [{dataToSend.SimerKey}]");
+
+                    return;
+                }
                 await _dataRepository.SendAsync(dataToSend);
             }
             catch (ErrorWhenSendDataException ex)

@@ -1,10 +1,12 @@
-﻿using System;
+﻿using GameReaderCommon;
+using PitWallAcquisitionPlugin.Aggregations;
+using System;
 using System.ComponentModel;
 
 namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
     public class PluginSettingsViewModel :
-        INotifyPropertyChanged, 
+        INotifyPropertyChanged,
         IDataErrorInfo
     {
         private const string PILOTNAME_MUST_BE_SET = "Pilot name must be set.";
@@ -13,11 +15,13 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
         private const string VALIDATION_PERSONALKEY_LENGTH_INVALID = "Personal key length should be at least 10 character long.";
         private const string VALIDATION_PERSONALKEY_FORMAT_INVALID = "Personal should be made of alphanumerical character and \"-\", \"_\", \"@\".";
 
-        private IPitWallConfiguration _configuration;
+        private readonly IPitWallConfiguration _configuration;
+        private readonly ILiveAggregator _aggregator;
 
-        public PluginSettingsViewModel(IPitWallConfiguration configuration)
+        public PluginSettingsViewModel(IPitWallConfiguration configuration, ILiveAggregator aggregator)
         {
             _configuration = configuration;
+            _aggregator = aggregator;
         }
 
         public string PilotName
@@ -27,6 +31,12 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             {
                 _configuration.PilotName = value;
                 NotifyPropertyChanged(nameof(PilotName));
+
+
+                if (string.IsNullOrEmpty(this[nameof(PilotName)]))
+                {
+                    _aggregator.AddPilotName(value);
+                }
             }
         }
 
@@ -47,6 +57,11 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             {
                 _configuration.PersonalKey = value;
                 NotifyPropertyChanged(nameof(PersonalKey));
+
+                if (string.IsNullOrEmpty(this[nameof(PersonalKey)]))
+                {
+                    _aggregator.AddSimerKey(value);
+                }
             }
         }
 

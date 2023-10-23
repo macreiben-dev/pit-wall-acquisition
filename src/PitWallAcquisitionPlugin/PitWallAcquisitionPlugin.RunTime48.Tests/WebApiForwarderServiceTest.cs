@@ -40,6 +40,8 @@ namespace PitWallAcquisitionPlugin.Tests
         {
             Data original = new Data()
             {
+                PilotName = "SomePilot",
+                SimerKey = "somekey",
                 SessionTimeLeft = "00:00:01"
             };
 

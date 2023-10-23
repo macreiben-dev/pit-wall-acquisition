@@ -76,7 +76,7 @@
                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                     Text="{Binding Path=PilotName, 
                         ValidatesOnDataErrors=True,
-                        UpdateSourceTrigger=PropertyChanged}"
+                        UpdateSourceTrigger=LostFocus}"
                     Grid.Column="1"
                     Grid.Row="0"/>
 
@@ -110,7 +110,7 @@
                      Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                      Text="{Binding Path=ApiAddress, 
                         ValidatesOnDataErrors=True,
-                        UpdateSourceTrigger=PropertyChanged}"
+                        UpdateSourceTrigger=LostFocus}"
                     Grid.Column="1"
                     Grid.Row="0"/>
 
@@ -126,7 +126,7 @@
                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                      Text="{Binding Path=PersonalKey, 
                         ValidatesOnDataErrors=True,
-                        UpdateSourceTrigger=PropertyChanged}"
+                        UpdateSourceTrigger=LostFocus}"
                     Grid.Column="1"
                     Grid.Row="1"/>
 
