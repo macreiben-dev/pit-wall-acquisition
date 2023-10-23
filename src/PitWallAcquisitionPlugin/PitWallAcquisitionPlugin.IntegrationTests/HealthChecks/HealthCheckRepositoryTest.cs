@@ -19,5 +19,15 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.HealthChecks
 
             Check.That(actual).IsTrue();
         }
+
+        [Fact]
+        public async void GIVEN_apiAddress_isNotReachable_THEN_returnFalse()
+        {
+            var target = GetTarget();
+
+            var actual = await target.Check("http://localhostttt:32773");
+
+            Check.That(actual).IsFalse();
+        }
     }
 }

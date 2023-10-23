@@ -12,10 +12,17 @@ namespace PitWallAcquisitionPlugin.HealthChecks.Repositories
 
             client.BaseAddress = new Uri(originalApiAddress);
 
+            try { 
+
             var response = await client.GetAsync(
                 "/api/healthcheck");
 
-            return response.StatusCode == System.Net.HttpStatusCode.OK;
+                return response.StatusCode == System.Net.HttpStatusCode.OK;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
