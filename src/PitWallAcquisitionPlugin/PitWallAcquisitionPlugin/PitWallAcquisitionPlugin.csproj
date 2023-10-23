@@ -99,6 +99,8 @@
     <Compile Include="Aggregations\Tyres.cs" />
     <Compile Include="Aggregations\TyresTemperatures.cs" />
     <Compile Include="DataVessel.cs" />
+    <Compile Include="HealthChecks\HealthCheckService.cs" />
+    <Compile Include="HealthChecks\Repositories\IHealthCheckRepository.cs" />
     <Compile Include="IPluginRecordRepository.cs" />
     <Compile Include="IWebApiForwarderService.cs" />
     <Compile Include="Logging\ILogger.cs" />
