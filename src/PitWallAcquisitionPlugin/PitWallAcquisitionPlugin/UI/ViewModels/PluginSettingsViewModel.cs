@@ -38,7 +38,7 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
         public IIsApiAvailableCommand IsApiAvailableCommand { get; }
 
 
-        public string IsApiAvailable // UNTESTED
+        public string IsApiAvailable 
         {
             get => _isApiAvailable;
             set
@@ -70,6 +70,7 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             set
             {
                 _configuration.ApiAddress = value;
+
                 NotifyPropertyChanged(nameof(ApiAddress));
 
                 RaiseCommandChanged(); // UNTESTED
@@ -89,6 +90,12 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                 _configuration.PersonalKey = value;
                 NotifyPropertyChanged(nameof(PersonalKey));
 
+                /**
+                 * Idea: This should be replaced by a configuration repository
+                 * that is used accross the application. A view model is too
+                 * specialised to change liveaggregator state directly.
+                 * 
+                 * */
                 if (string.IsNullOrEmpty(this[nameof(PersonalKey)]))
                 {
                     _aggregator.AddSimerKey(value);

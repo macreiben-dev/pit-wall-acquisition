@@ -281,5 +281,39 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         }
 
         #endregion Personal key
+
+        #region IsApiAvailable 
+
+        [Theory]
+        [InlineData("data1")]
+        [InlineData("data2")]
+        [InlineData("data3")]
+        public void GIVEN_isApiAvailable_IsSet_THEN_property_has_exepectedValue(string input)
+        {
+            var target = GetTarget();
+
+            target.IsApiAvailable = input;
+
+            Check.That(target.IsApiAvailable).IsEqualTo(input);
+        }
+
+        [Fact]
+        public void GIVEN_isApiAvailable_isSet_THEN_notifyPropertychanged_isApiAvailable()
+        {
+            var target = GetTarget();
+
+            using (var monitored = target.Monitor())
+            {
+
+                target.IsApiAvailable = "some_name";
+
+                monitored.Should().Raise("PropertyChanged")
+                    .WithSender(target)
+                    .WithArgs<PropertyChangedEventArgs>(
+                        e => e.PropertyName == "IsApiAvailable");
+            }
+        }
+
+        #endregion IsApiAvailable 
     }
 }
