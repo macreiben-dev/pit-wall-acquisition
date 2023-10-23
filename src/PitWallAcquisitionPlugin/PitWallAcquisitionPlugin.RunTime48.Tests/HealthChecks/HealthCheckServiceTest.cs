@@ -21,7 +21,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.HealthChecks
         }
 
         [Fact]
-        public void GIVEN_apiAddressIsValid_THEN_return_true()
+        public async void GIVEN_apiAddressIsValid_THEN_return_true()
         {
             var originalApiAddress = "http://localhost:32773";
             _repo.Check(originalApiAddress)
@@ -29,13 +29,13 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.HealthChecks
 
             var target = new HealthCheckService(_repo);
 
-            bool actual = target.Check(originalApiAddress);
+            bool actual = await target.Check(originalApiAddress);
 
             Check.That(actual).IsTrue();
         }
 
         [Fact]
-        public void GIVEN_apiAddressIsValid_AND_apiNotResponding_THEN_return_false()
+        public async void GIVEN_apiAddressIsValid_AND_apiNotResponding_THEN_return_false()
         {
             var originalApiAddress = "http://localhost:32773";
             _repo.Check(originalApiAddress)
@@ -43,30 +43,30 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.HealthChecks
 
             var target = new HealthCheckService(_repo);
 
-            bool actual = target.Check(originalApiAddress);
+            bool actual = await target.Check(originalApiAddress);
 
             Check.That(actual).IsFalse();
         }
 
         [Fact]
-        public void GIVEN_apiIsGiven_AND_apiAddressIsInvalid_THEN_return_false()
+        public async void GIVEN_apiIsGiven_AND_apiAddressIsInvalid_THEN_return_false()
         {
             var originalApiAddress = "htttttp://localhost!32773";
             _repo.Check(originalApiAddress)
                 .Returns(true);
             HealthCheckService target = GetTarget();
 
-            bool actual = target.Check(originalApiAddress);
+            bool actual = await target.Check(originalApiAddress);
 
             Check.That(actual).IsFalse();
         }
 
         [Fact]
-        public void GIVEN_apiIsNull_THEN_return_false()
+        public async void GIVEN_apiIsNull_THEN_return_false()
         {
             HealthCheckService target = GetTarget();
 
-            bool actual = target.Check(null);
+            bool actual = await target.Check(null);
 
             Check.That(actual).IsFalse();
         }

@@ -1,5 +1,6 @@
 ﻿using PitWallAcquisitionPlugin.HealthChecks.Repositories;
 using PitWallAcquisitionPlugin.UI.ViewModels;
+using System.Threading.Tasks;
 
 namespace PitWallAcquisitionPlugin.HealthChecks
 {
@@ -12,14 +13,14 @@ namespace PitWallAcquisitionPlugin.HealthChecks
             this.repo = repo;
         }
 
-        public bool Check(string originalApiAddress)
+        public async Task<bool> Check(string originalApiAddress)
         {
             if (!SettingsValidators.IsUriValid(originalApiAddress))
             {
                 return false;
             }
 
-            return repo.Check(originalApiAddress);
+            return await repo.Check(originalApiAddress);
         }
     }
 }

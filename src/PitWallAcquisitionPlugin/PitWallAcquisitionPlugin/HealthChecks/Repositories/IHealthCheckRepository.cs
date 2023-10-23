@@ -1,7 +1,9 @@
-﻿namespace PitWallAcquisitionPlugin.HealthChecks.Repositories
+﻿using System.Threading.Tasks;
+
+namespace PitWallAcquisitionPlugin.HealthChecks.Repositories
 {
     public interface IHealthCheckRepository
     {
-        bool Check(string originalApiAddress);
+        Task<bool> Check(string apiAddress);
     }
 }

@@ -100,6 +100,7 @@
     <Compile Include="Aggregations\TyresTemperatures.cs" />
     <Compile Include="DataVessel.cs" />
     <Compile Include="HealthChecks\HealthCheckService.cs" />
+    <Compile Include="HealthChecks\Repositories\HealthCheckRepository.cs" />
     <Compile Include="HealthChecks\Repositories\IHealthCheckRepository.cs" />
     <Compile Include="IPluginRecordRepository.cs" />
     <Compile Include="IWebApiForwarderService.cs" />
