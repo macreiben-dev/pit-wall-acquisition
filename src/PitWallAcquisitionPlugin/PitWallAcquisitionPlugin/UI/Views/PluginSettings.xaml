@@ -131,13 +131,6 @@
                     Grid.Row="1"/>
 
                 <!-- Personal key ___EOF___ -->
-
-                <styles:SHButtonPrimary 
-                    Grid.Column="0"
-                    Grid.Row="2" 
-                    IsEnabled="False">
-                    Generate
-                </styles:SHButtonPrimary>
             </Grid>
         </styles:SHSection>
 
@@ -158,7 +151,9 @@
 
                 <styles:SHButtonPrimary 
                     Grid.Column="0"
-                    Grid.Row="1" >
+                    Grid.Row="1" 
+					Command="{Binding Path=IsApiAvailableCommand}"
+                    CommandParameter="{Binding Path=ApiAddress}">
                     Test Connectivity
                 </styles:SHButtonPrimary>
 
@@ -168,7 +163,7 @@
 
                 <TextBlock Style="{StaticResource TextBlock_Status}"
                     Grid.Column="2"
-                    Text="--"/>
+                    Text="{Binding Path=IsApiAvailable}"/>
             </Grid>
 
         </styles:SHSection>

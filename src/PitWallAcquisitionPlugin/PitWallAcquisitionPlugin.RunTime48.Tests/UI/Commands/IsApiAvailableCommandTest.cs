@@ -1,7 +1,8 @@
 ﻿using FluentAssertions;
 using NFluent;
 using NSubstitute;
-using PitWallAcquisitionPlugin.Repositories;
+using PitWallAcquisitionPlugin.HealthChecks;
+using System.Threading;
 using Xunit;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.Commands
@@ -10,12 +11,14 @@ namespace PitWallAcquisitionPlugin.Tests.UI.Commands
     {
         private const string VALID_API_ADDRESS = "http://locallhost:32773";
         private const string INVALID_API_ADDRESS = "httttttp://locallhost:32773";
-        private IPitWallApiStatusRepository _apiAvailabilityRepo;
+        private const string OK = "OK";
+        private const string KO = "KO";
+        private IHealthCheckService _apiAvailabilityRepo;
         private IDisplayAvailability _viewModel;
 
         public IsApiAvailableCommandTest()
         {
-            _apiAvailabilityRepo = Substitute.For<IPitWallApiStatusRepository>();
+            _apiAvailabilityRepo = Substitute.For<IHealthCheckService>();
 
             _viewModel = new FakeDisplayAvailability();
         }
@@ -51,29 +54,33 @@ namespace PitWallAcquisitionPlugin.Tests.UI.Commands
         }
 
         [Fact]
-        public void GIVEN_apiAddress_isSet_AND_valid_THEN_execute_checkAvailability_AND_set_isAvailable_toTrue()
+        public void GIVEN_apiAddress_isSet_AND_valid_THEN_execute_checkAvailability_AND_set_isAvailable_to_OK()
         {
-            _apiAvailabilityRepo.IsAvailable(VALID_API_ADDRESS)
+            _apiAvailabilityRepo.Check(VALID_API_ADDRESS)
                 .Returns(true);
 
             var target = GetTarget();
 
             target.Execute(VALID_API_ADDRESS);
+            WaitForWorkerToComplete();
 
-            Check.That(_viewModel.IsApiAvailable).IsTrue();
+            Check.That(_viewModel.IsApiAvailable).IsEqualTo(OK);
         }
 
+
         [Fact]
-        public void GIVEN_apiAddress_isSet_AND_invalid_THEN_execute_checkAvailability_AND_set_isAvailable_toFalse()
+        public void GIVEN_apiAddress_isSet_AND_invalid_THEN_execute_checkAvailability_AND_set_isAvailable_to_KO()
         {
-            _apiAvailabilityRepo.IsAvailable(VALID_API_ADDRESS)
+            _apiAvailabilityRepo.Check(VALID_API_ADDRESS)
                 .Returns(true);
 
             var target = GetTarget();
 
             target.Execute(INVALID_API_ADDRESS);
 
-            Check.That(_viewModel.IsApiAvailable).IsFalse();
+            WaitForWorkerToComplete();
+
+            Check.That(_viewModel.IsApiAvailable).IsEqualTo(KO);
         }
 
         [Fact]
@@ -88,6 +95,11 @@ namespace PitWallAcquisitionPlugin.Tests.UI.Commands
                 monitored.Should().Raise("CanExecuteChanged")
                    .WithSender(target);
             }
+        }
+
+        private static void WaitForWorkerToComplete()
+        {
+            Thread.Sleep(5);
         }
     }
 }

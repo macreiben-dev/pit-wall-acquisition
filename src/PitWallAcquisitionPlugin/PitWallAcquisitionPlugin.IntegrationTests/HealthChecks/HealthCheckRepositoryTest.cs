@@ -1,4 +1,6 @@
-﻿using NFluent;
+﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
+using NFluent;
+using NSubstitute;
 using PitWallAcquisitionPlugin.HealthChecks.Repositories;
 
 namespace PitWallAcquisitionPlugin.IntegrationTests.HealthChecks
@@ -7,7 +9,7 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.HealthChecks
     {
         private HealthCheckRepository GetTarget()
         {
-            return new HealthCheckRepository();
+            return new HealthCheckRepository(Substitute.For<ILogger>());
         }
 
         [Fact]

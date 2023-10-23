@@ -1,6 +1,9 @@
-﻿using PitWallAcquisitionPlugin.Repositories;
+﻿using PitWallAcquisitionPlugin.HealthChecks;
 using PitWallAcquisitionPlugin.UI.ViewModels;
+using SimHub.Plugins.OutputPlugins.GraphicalDash;
 using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.Commands
 {
@@ -8,11 +11,11 @@ namespace PitWallAcquisitionPlugin.Tests.UI.Commands
     public sealed class IsApiAvailableCommand : IIsApiAvailableCommand
     {
         private readonly IDisplayAvailability viewModel;
-        private readonly IPitWallApiStatusRepository statusRepo;
+        private readonly IHealthCheckService statusRepo;
 
         public IsApiAvailableCommand(
             IDisplayAvailability viewModel,
-            IPitWallApiStatusRepository statusRepo)
+            IHealthCheckService statusRepo)
         {
             this.viewModel = viewModel;
             this.statusRepo = statusRepo;
@@ -32,11 +35,35 @@ namespace PitWallAcquisitionPlugin.Tests.UI.Commands
 
         public void Execute(object parameter)
         {
-            var isAvailable = statusRepo.IsAvailable(parameter.ToString());
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
 
-            viewModel.IsApiAvailable = isAvailable;
+            worker.DoWork += (o, e) =>
+            {
+                var isAvailable = statusRepo.Check(parameter.ToString());
+
+                worker.ReportProgress(50);
+
+                var status = isAvailable.GetAwaiter().GetResult();
+
+                e.Result = status;
+            };
+
+            worker.ProgressChanged += (o, e) =>
+            {
+                viewModel.IsApiAvailable = $"{e.ProgressPercentage} %";
+            };
+
+            worker.RunWorkerCompleted += (o, e) =>
+            {
+                bool actual = (bool) e.Result;
+
+                viewModel.IsApiAvailable = actual ? "OK" : "KO";
+            };
+
+            worker.RunWorkerAsync();
         }
-
+        
         public void RaiseCanExecuteChanged()
         {
             if (CanExecuteChanged != null)

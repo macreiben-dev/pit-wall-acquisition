@@ -4,6 +4,9 @@ using FluentAssertions;
 using System.ComponentModel;
 using Xunit;
 using PitWallAcquisitionPlugin.Aggregations;
+using NSubstitute;
+using PitWallAcquisitionPlugin.HealthChecks.Repositories;
+using PitWallAcquisitionPlugin.Tests.UI.Commands;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 {
@@ -12,6 +15,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         private const string VALID_API_ADDRESS = "http://api.address.net";
         private FakePitWallConfiguration _pitWallConfiguration;
         private ILiveAggregator _aggregator;
+        private IPluginSettingsCommandFactory _isApiAvailableCommand;
 
         public PluginSettingsViewModelTest()
         {
@@ -19,11 +23,16 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             _pitWallConfiguration = new FakePitWallConfiguration();
 
             _aggregator = new LiveAggregator(); // oustide in here.
+
+            _isApiAvailableCommand = Substitute.For<IPluginSettingsCommandFactory>();
         }
 
         private PluginSettingsViewModel GetTarget()
         {
-            return new PluginSettingsViewModel(_pitWallConfiguration, _aggregator);
+            return new PluginSettingsViewModel(
+                _pitWallConfiguration, 
+                _aggregator, 
+                _isApiAvailableCommand);
         }
 
         [Fact]
