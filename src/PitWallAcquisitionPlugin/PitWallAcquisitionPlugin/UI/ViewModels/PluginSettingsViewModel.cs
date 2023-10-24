@@ -56,7 +56,7 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                 _configuration.PilotName = value;
                 NotifyPropertyChanged(nameof(PilotName));
 
-
+                // HOOK@ConfigurationUpdate : Pilot name configuration update
                 if (string.IsNullOrEmpty(this[nameof(PilotName)]))
                 {
                     _aggregator.AddPilotName(value);
@@ -73,7 +73,7 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
 
                 NotifyPropertyChanged(nameof(ApiAddress));
 
-                RaiseCommandChanged(); // UNTESTED
+                RaiseCommandChanged();
             }
         }
 
@@ -95,13 +95,16 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                  * that is used accross the application. A view model is too
                  * specialised to change liveaggregator state directly.
                  * 
+                 * Idea : personal key is not personal, find another name when
+                 * configuration lifecycle will be reworked.
                  * */
+                // HOOK@ConfigurationUpdate : personal key configuration update
                 if (string.IsNullOrEmpty(this[nameof(PersonalKey)]))
                 {
-                    _aggregator.AddSimerKey(value);
+                    _aggregator.SetSimerKey(value);
                 }
 
-                RaiseCommandChanged(); // UNTESTED
+                RaiseCommandChanged();
             }
         }
 
