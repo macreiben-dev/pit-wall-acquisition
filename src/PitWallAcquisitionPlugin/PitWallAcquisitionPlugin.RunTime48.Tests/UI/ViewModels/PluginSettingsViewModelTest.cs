@@ -36,6 +36,18 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                 _isApiAvailableCommand);
         }
 
+        public PluginSettingsViewModel GetTargetWithPersonalKey(string personalKey)
+        {
+            return new PluginSettingsViewModel(
+                new FakePitWallConfiguration()
+                {
+                    PilotName = "SomePilotName",
+                    PersonalKey = personalKey
+                },
+                _aggregator,
+                _isApiAvailableCommand);
+        }
+
         private PluginSettingsViewModel GetTargetWithRealCommand()
         {
             return new PluginSettingsViewModel(
@@ -292,10 +304,8 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 
             target.PersonalKey = personalKey;
 
-            var actual = _aggregator.AsData();
-
             // ASSERT
-            Check.That(actual.SimerKey).IsEqualTo(personalKey);
+            Check.That(_pitWallConfiguration.PersonalKey).IsEqualTo(personalKey);
         }
 
         [Theory]
@@ -308,7 +318,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             string personalKey = input;
 
             // ACT
-            var target = GetTarget();
+            var target = GetTargetWithPersonalKey("somekey");
 
             target.PersonalKey = personalKey;
 
