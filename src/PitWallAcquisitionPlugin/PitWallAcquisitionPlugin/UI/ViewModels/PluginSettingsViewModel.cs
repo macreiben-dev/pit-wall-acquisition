@@ -1,13 +1,15 @@
-﻿using GameReaderCommon;
-using PitWallAcquisitionPlugin.Aggregations;
+﻿using PitWallAcquisitionPlugin.Aggregations;
+using PitWallAcquisitionPlugin.Tests.UI.Commands;
 using System;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
     public class PluginSettingsViewModel :
         INotifyPropertyChanged,
-        IDataErrorInfo
+        IDataErrorInfo,
+        IDisplayAvailability
     {
         private const string PILOTNAME_MUST_BE_SET = "Pilot name must be set.";
         private const string VALIDATION_APIADDRESS_MUST_BE_SET = "API address must be set.";
@@ -17,11 +19,33 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
 
         private readonly IPitWallConfiguration _configuration;
         private readonly ILiveAggregator _aggregator;
+        private readonly IPluginSettingsCommandFactory _cmdFactory;
 
-        public PluginSettingsViewModel(IPitWallConfiguration configuration, ILiveAggregator aggregator)
+        private string _isApiAvailable;
+
+        public PluginSettingsViewModel(
+            IPitWallConfiguration configuration, 
+            ILiveAggregator aggregator, 
+            IPluginSettingsCommandFactory cmdFactory)
         {
             _configuration = configuration;
             _aggregator = aggregator;
+            _cmdFactory = cmdFactory;
+
+            IsApiAvailableCommand = _cmdFactory.GetInstance(this);
+        }
+
+        public IIsApiAvailableCommand IsApiAvailableCommand { get; }
+
+
+        public string IsApiAvailable 
+        {
+            get => _isApiAvailable;
+            set
+            {
+                _isApiAvailable = value;
+                NotifyPropertyChanged(nameof(IsApiAvailable));
+            }
         }
 
         public string PilotName
@@ -32,10 +56,10 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                 _configuration.PilotName = value;
                 NotifyPropertyChanged(nameof(PilotName));
 
-
+                // HOOK@ConfigurationUpdate : Pilot name configuration update
                 if (string.IsNullOrEmpty(this[nameof(PilotName)]))
                 {
-                    _aggregator.AddPilotName(value);
+                    _configuration.PilotName = value;
                 }
             }
         }
@@ -46,8 +70,16 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             set
             {
                 _configuration.ApiAddress = value;
+
                 NotifyPropertyChanged(nameof(ApiAddress));
+
+                RaiseCommandChanged();
             }
+        }
+
+        private void RaiseCommandChanged()
+        {
+            IsApiAvailableCommand.RaiseCanExecuteChanged();
         }
 
         public string PersonalKey
@@ -58,10 +90,21 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                 _configuration.PersonalKey = value;
                 NotifyPropertyChanged(nameof(PersonalKey));
 
+                /**
+                 * Idea: This should be replaced by a configuration repository
+                 * that is used accross the application. A view model is too
+                 * specialised to change liveaggregator state directly.
+                 * 
+                 * Idea : personal key is not personal, find another name when
+                 * configuration lifecycle will be reworked.
+                 * */
+                // HOOK@ConfigurationUpdate : personal key configuration update
                 if (string.IsNullOrEmpty(this[nameof(PersonalKey)]))
                 {
-                    _aggregator.AddSimerKey(value);
+                    _aggregator.SetSimerKey(value);
                 }
+
+                RaiseCommandChanged();
             }
         }
 

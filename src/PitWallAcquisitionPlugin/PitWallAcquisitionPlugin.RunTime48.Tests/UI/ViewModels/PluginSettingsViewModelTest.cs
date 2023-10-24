@@ -3,8 +3,9 @@ using NFluent;
 using FluentAssertions;
 using System.ComponentModel;
 using Xunit;
-using NSubstitute;
 using PitWallAcquisitionPlugin.Aggregations;
+using NSubstitute;
+using PitWallAcquisitionPlugin.HealthChecks;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 {
@@ -13,18 +14,34 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         private const string VALID_API_ADDRESS = "http://api.address.net";
         private FakePitWallConfiguration _pitWallConfiguration;
         private ILiveAggregator _aggregator;
+        private IPluginSettingsCommandFactory _isApiAvailableCommand;
 
         public PluginSettingsViewModelTest()
         {
+            _pitWallConfiguration = new FakePitWallConfiguration()
+            {
+                PilotName = "SomePilot1"
+            };
 
-            _pitWallConfiguration = new FakePitWallConfiguration();
+            _aggregator = new LiveAggregator(_pitWallConfiguration);
 
-            _aggregator = new LiveAggregator(); // oustide in here.
+            _isApiAvailableCommand = Substitute.For<IPluginSettingsCommandFactory>();
         }
 
         private PluginSettingsViewModel GetTarget()
         {
-            return new PluginSettingsViewModel(_pitWallConfiguration, _aggregator);
+            return new PluginSettingsViewModel(
+                _pitWallConfiguration,
+                _aggregator,
+                _isApiAvailableCommand);
+        }
+
+        private PluginSettingsViewModel GetTargetWithRealCommand()
+        {
+            return new PluginSettingsViewModel(
+                _pitWallConfiguration,
+                _aggregator,
+                new PluginSettingsCommandFactory(Substitute.For<IHealthCheckService>()));
         }
 
         [Fact]
@@ -98,7 +115,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             var actual = _aggregator.AsData();
 
             // ASSERT
-            Check.That(actual.PilotName).IsNull();
+            Check.That(actual.PilotName).IsEqualTo(input);
         }
 
         #region Api Address
@@ -118,6 +135,20 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                         e => e.PropertyName == "ApiAddress");
             }
         }
+
+        [Fact]
+        public void GIVEN_ApiAddress_isSet_THEN_raise_isApiAvailableCanExecutechanged()
+        {
+            PluginSettingsViewModel target = GetTargetWithRealCommand();
+
+            using (var monitored = target.IsApiAvailableCommand.Monitor())
+            {
+                target.ApiAddress = VALID_API_ADDRESS;
+
+                monitored.Should().Raise("CanExecuteChanged");
+            }
+        }
+
 
         [Fact]
         public void GIVEN_ApiAddress_isSet_THEN_ApiAddress_hasExpectedValue()
@@ -237,6 +268,19 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         }
 
         [Fact]
+        public void GIVEN_personalKey_isSet_THEN_raise_isApiAvailableCanExecutechanged()
+        {
+            PluginSettingsViewModel target = GetTargetWithRealCommand();
+
+            using (var monitored = target.IsApiAvailableCommand.Monitor())
+            {
+                target.PersonalKey = "some_name";
+
+                monitored.Should().Raise("CanExecuteChanged");
+            }
+        }
+
+        [Fact]
         public void GIVEN_personalKey_isSet_AND_noError_THEN_updateAggregator()
         {
             string personalKey = "some_valid_key_ok";
@@ -273,5 +317,39 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         }
 
         #endregion Personal key
+
+        #region IsApiAvailable 
+
+        [Theory]
+        [InlineData("data1")]
+        [InlineData("data2")]
+        [InlineData("data3")]
+        public void GIVEN_isApiAvailable_IsSet_THEN_property_has_exepectedValue(string input)
+        {
+            var target = GetTarget();
+
+            target.IsApiAvailable = input;
+
+            Check.That(target.IsApiAvailable).IsEqualTo(input);
+        }
+
+        [Fact]
+        public void GIVEN_isApiAvailable_isSet_THEN_notifyPropertychanged_isApiAvailable()
+        {
+            var target = GetTarget();
+
+            using (var monitored = target.Monitor())
+            {
+
+                target.IsApiAvailable = "some_name";
+
+                monitored.Should().Raise("PropertyChanged")
+                    .WithSender(target)
+                    .WithArgs<PropertyChangedEventArgs>(
+                        e => e.PropertyName == "IsApiAvailable");
+            }
+        }
+
+        #endregion IsApiAvailable 
     }
 }

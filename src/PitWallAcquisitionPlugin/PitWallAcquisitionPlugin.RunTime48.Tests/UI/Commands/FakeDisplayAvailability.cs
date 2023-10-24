@@ -2,7 +2,7 @@
 {
     public class FakeDisplayAvailability : IDisplayAvailability
     {
-        public bool IsApiAvailable
+        public string IsApiAvailable
         {
             get; 
             set;

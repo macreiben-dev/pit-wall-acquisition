@@ -4,8 +4,11 @@ using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using GameReaderCommon;
 using PitWallAcquisitionPlugin.Aggregations;
+using PitWallAcquisitionPlugin.HealthChecks;
+using PitWallAcquisitionPlugin.HealthChecks.Repositories;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
 using PitWallAcquisitionPlugin.Repositories;
+using PitWallAcquisitionPlugin.Tests.UI.Commands;
 using PitWallAcquisitionPlugin.UI.ViewModels;
 using PitWallAcquisitionPlugin.UI.Views;
 using SimHub.Plugins;
@@ -57,7 +60,7 @@ namespace PitWallAcquisitionPlugin
             containerBuilder.RegisterInstance(plugin).As<IPlugin>();
 
             containerBuilder.RegisterInstance(logger);
-            
+
             containerBuilder.RegisterType<LiveAggregator>()
                 .As<ILiveAggregator>()
                 .SingleInstance();
@@ -66,17 +69,29 @@ namespace PitWallAcquisitionPlugin
                 .As<IStagingDataRepository>()
                 .SingleInstance();
 
+            containerBuilder.RegisterType<HealthCheckService>()
+                .As<IHealthCheckService>();
+
+            containerBuilder.RegisterType<HealthCheckRepository>()
+                .As<IHealthCheckRepository>()
+                .SingleInstance();
+
             containerBuilder.RegisterType<PluginRecordRepositoryFactory>()
                 .As<IPluginRecordRepositoryFactory>()
                 .SingleInstance();
 
             containerBuilder.RegisterType<WebApiForwarderService>()
                 .As<IWebApiForwarderService>()
-                .WithParameter("postToApiTimerHz", 10)
+                .WithParameter("postToApiTimerHz", 1)
                 .WithParameter("autoReactivateTimer", 5000)
                 .SingleInstance();
 
+            containerBuilder.RegisterType<PluginSettingsCommandFactory>()
+                .As<IPluginSettingsCommandFactory>();
+
             containerBuilder.RegisterType<PluginSettingsViewModel>()
+                .As<PluginSettingsViewModel>()
+                .As<IDisplayAvailability>()
                 .SingleInstance();
 
             containerBuilder.RegisterType<SimhubPluginConfigurationRepository>()

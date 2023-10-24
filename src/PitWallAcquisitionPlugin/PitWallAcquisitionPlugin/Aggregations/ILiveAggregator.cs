@@ -13,12 +13,6 @@ namespace PitWallAcquisitionPlugin.Aggregations
         void AddSessionTimeLeft(string sessionTimeLeft);
 
         /// <summary>
-        /// Adds the pilot name to api
-        /// </summary>
-        /// <param name="original"></param>
-        void AddPilotName(string original);
-
-        /// <summary>
         /// <para>Add laptime as string to be parsed.</para>
         /// 
         /// <para>Format is <i>HH:MM:SS.sssssss</i></para>
@@ -98,7 +92,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// Adds the simerkey to be allowed to post data to API.
         /// </summary>
         /// <param name="key"></param>
-        void AddSimerKey(string key);
+        void SetSimerKey(string key);
 
         void Clear();
 

@@ -2,6 +2,6 @@
 {
     public interface IDisplayAvailability
     {
-        bool IsApiAvailable { get; set; }
+        string IsApiAvailable { get; set; }
     }
 }

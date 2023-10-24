@@ -7,13 +7,21 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
 
         public static bool IsUriValid(string apiAddress)
         {
-            return Uri.TryCreate(
-                apiAddress,
-                UriKind.Absolute,
-                out Uri convetedUri)
+            Uri convetedUri;
+            return CanCreateUri(apiAddress, out convetedUri)
                 && convetedUri != null && (
                     convetedUri.Scheme == Uri.UriSchemeHttp
                     || convetedUri.Scheme == Uri.UriSchemeHttps);
+        }
+
+        private static bool CanCreateUri(
+            string apiAddress, 
+            out Uri convetedUri)
+        {
+            return Uri.TryCreate(
+                            apiAddress,
+                            UriKind.Absolute,
+                            out convetedUri);
         }
     }
 }
