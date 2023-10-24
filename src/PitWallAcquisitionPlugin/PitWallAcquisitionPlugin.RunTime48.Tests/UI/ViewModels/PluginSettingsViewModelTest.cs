@@ -5,9 +5,6 @@ using System.ComponentModel;
 using Xunit;
 using PitWallAcquisitionPlugin.Aggregations;
 using NSubstitute;
-using PitWallAcquisitionPlugin.HealthChecks.Repositories;
-using PitWallAcquisitionPlugin.Tests.UI.Commands;
-using System;
 using PitWallAcquisitionPlugin.HealthChecks;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
