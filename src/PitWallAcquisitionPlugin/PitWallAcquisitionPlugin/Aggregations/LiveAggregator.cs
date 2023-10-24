@@ -24,6 +24,10 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
         public bool IsDirty => _dirty;
 
+        /**
+         * Idea: naming is awful. It suggests it is a builder but it's not.
+         * */
+
         public void AddSessionTimeLeft(string sessionTimeLeft)
         {
             string trimmedSessionTimeLeft = sessionTimeLeft
@@ -208,7 +212,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
         #endregion tyre temp
 
-        public void AddSimerKey(string original)
+        public void SetSimerKey(string original)
         {
             _simerKey = original;
         }
