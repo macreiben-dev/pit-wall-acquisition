@@ -41,7 +41,9 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             return new PluginSettingsViewModel(
                 _pitWallConfiguration,
                 _aggregator,
-                new PluginSettingsCommandFactory(Substitute.For<IHealthCheckService>()));
+                new PluginSettingsCommandFactory(
+                    Substitute.For<IHealthCheckService>(),
+                    Substitute.For<IPitWallConfiguration>()));
         }
 
         [Fact]

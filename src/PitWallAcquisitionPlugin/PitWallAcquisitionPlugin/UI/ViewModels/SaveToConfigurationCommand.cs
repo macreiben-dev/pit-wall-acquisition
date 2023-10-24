@@ -4,20 +4,32 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
     public sealed class SaveToConfigurationCommand : ISaveToConfigurationCommand
     {
+        private IPitWallConfiguration _configuration;
+
         public event EventHandler CanExecuteChanged;
+
+        public SaveToConfigurationCommand(IPitWallConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         public bool CanExecute(object parameter)
         {
             var config = parameter as IUserDefinedConfiguration;
 
-            return false;
+            return config != null;
         }
 
         public void Execute(object parameter)
         {
+            if (!CanExecute(parameter))
+            {
+                return;
+            }
+
             var config = parameter as IUserDefinedConfiguration;
 
-
+            _configuration.PilotName = config.PilotName;
         }
     }
 }

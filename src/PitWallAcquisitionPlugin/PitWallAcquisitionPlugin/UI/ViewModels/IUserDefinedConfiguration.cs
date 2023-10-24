@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
-    internal interface IUserDefinedConfiguration
+    public interface IUserDefinedConfiguration
     {
         string PilotName
         {
