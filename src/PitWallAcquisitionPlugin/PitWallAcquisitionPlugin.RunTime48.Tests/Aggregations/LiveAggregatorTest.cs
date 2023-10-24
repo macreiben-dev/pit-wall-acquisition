@@ -718,7 +718,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             // ACT
             Stopwatch watch = Stopwatch.StartNew();
 
-            target.AddSimerKey(original);
+            target.SetSimerKey(original);
 
             watch.Stop();
 
@@ -741,7 +741,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             // ACT
             Stopwatch watch = Stopwatch.StartNew();
 
-            target.AddSimerKey(original);
+            target.SetSimerKey(original);
 
             watch.Stop();
 
