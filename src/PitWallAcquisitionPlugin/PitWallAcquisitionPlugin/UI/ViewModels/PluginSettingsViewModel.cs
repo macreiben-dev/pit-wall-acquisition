@@ -80,9 +80,24 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             }
         }
 
-        private void RaiseCommandChanged()
+        public void RaiseCommandChanged()
         {
             IsApiAvailableCommand.RaiseCanExecuteChanged();
+            SaveToConfigurationCommand.RaiseCanExecuteChanged();
+        }
+
+        public void SyncGUI()
+        {
+            var propNames = new[] { nameof(ApiAddress),
+            nameof(PilotName), nameof(PersonalKey)};
+
+            foreach (var prop in propNames)
+            {
+                NotifyPropertyChanged(prop);
+
+            }
+
+            RaiseCommandChanged();
         }
 
         public string PersonalKey
@@ -92,20 +107,6 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             {
                 _configuration.PersonalKey = value;
                 NotifyPropertyChanged(nameof(PersonalKey));
-
-                /**
-                 * Idea: This should be replaced by a configuration repository
-                 * that is used accross the application. A view model is too
-                 * specialised to change liveaggregator state directly.
-                 * 
-                 * Idea : personal key is not personal, find another name when
-                 * configuration lifecycle will be reworked.
-                 * */
-                // HOOK@ConfigurationUpdate : personal key configuration update
-                if (string.IsNullOrEmpty(this[nameof(PersonalKey)]))
-                {
-                    _aggregator.SetSimerKey(value);
-                }
 
                 RaiseCommandChanged();
             }
