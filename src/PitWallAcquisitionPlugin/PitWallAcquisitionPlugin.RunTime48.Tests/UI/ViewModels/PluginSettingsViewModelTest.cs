@@ -7,6 +7,8 @@ using PitWallAcquisitionPlugin.Aggregations;
 using NSubstitute;
 using PitWallAcquisitionPlugin.HealthChecks.Repositories;
 using PitWallAcquisitionPlugin.Tests.UI.Commands;
+using System;
+using PitWallAcquisitionPlugin.HealthChecks;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 {
@@ -33,6 +35,14 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                 _pitWallConfiguration, 
                 _aggregator, 
                 _isApiAvailableCommand);
+        }
+
+        private PluginSettingsViewModel GetTargetWithRealCommand()
+        {
+            return new PluginSettingsViewModel(
+                _pitWallConfiguration,
+                _aggregator,
+                new PluginSettingsCommandFactory(Substitute.For<IHealthCheckService>()));
         }
 
         [Fact]
@@ -126,6 +136,20 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                         e => e.PropertyName == "ApiAddress");
             }
         }
+
+        [Fact]
+        public void GIVEN_ApiAddress_isSet_THEN_raise_isApiAvailableCanExecutechanged()
+        {
+            PluginSettingsViewModel target = GetTargetWithRealCommand();
+
+            using (var monitored = target.IsApiAvailableCommand.Monitor())
+            {
+                target.ApiAddress = VALID_API_ADDRESS;
+
+                monitored.Should().Raise("CanExecuteChanged");
+            }
+        }
+
 
         [Fact]
         public void GIVEN_ApiAddress_isSet_THEN_ApiAddress_hasExpectedValue()
@@ -241,6 +265,19 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                     .WithSender(target)
                     .WithArgs<PropertyChangedEventArgs>(
                         e => e.PropertyName == "PersonalKey");
+            }
+        }
+
+        [Fact]
+        public void GIVEN_personalKey_isSet_THEN_raise_isApiAvailableCanExecutechanged()
+        {
+            PluginSettingsViewModel target = GetTargetWithRealCommand();
+
+            using (var monitored = target.IsApiAvailableCommand.Monitor())
+            {
+                target.PersonalKey = "some_name";
+
+                monitored.Should().Raise("CanExecuteChanged");
             }
         }
 
