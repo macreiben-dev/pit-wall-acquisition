@@ -122,13 +122,16 @@
     <Compile Include="Repositories\PitWallRemoteRepository.cs" />
     <Compile Include="Repositories\IStagingDataRepository.cs" />
     <Compile Include="Repositories\StatusCodeNotOkException.cs" />
+    <Compile Include="UI\Commands\ISaveToConfigurationCommand.cs" />
+    <Compile Include="UI\ViewModels\IUserDefinedConfiguration.cs" />
     <Compile Include="UI\ViewModels\PluginSettingsCommandFactory.cs" />
     <Compile Include="UI\ViewModels\IDisplayAvailability.cs" />
-    <Compile Include="UI\ViewModels\IIsApiAvailableCommand.cs" />
+    <Compile Include="UI\Commands\IIsApiAvailableCommand.cs" />
     <Compile Include="UI\ViewModels\IPitWallConfiguration.cs" />
     <Compile Include="UI\ViewModels\IPluginSettingsCommandFactory.cs" />
-    <Compile Include="UI\ViewModels\IsApiAvailableCommand.cs" />
+    <Compile Include="UI\Commands\IsApiAvailableCommand.cs" />
     <Compile Include="UI\ViewModels\PluginSettingsViewModel.cs" />
+    <Compile Include="UI\Commands\SaveToConfigurationCommand.cs" />
     <Compile Include="UI\ViewModels\SettingsValidators.cs" />
     <Compile Include="UI\Views\PluginSettings.xaml.cs">
       <DependentUpon>PluginSettings.xaml</DependentUpon>
