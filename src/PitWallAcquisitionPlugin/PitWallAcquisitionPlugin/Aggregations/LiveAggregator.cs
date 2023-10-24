@@ -100,7 +100,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
                     RearLeftTemp = _rearLeftTyreTemp,
                     RearRightTemp = _rearRightTyreTemp
                 },
-                SimerKey = _simerKey
+                SimerKey = _configuration.PersonalKey
             };
         }
 
@@ -207,11 +207,6 @@ namespace PitWallAcquisitionPlugin.Aggregations
         }
 
         #endregion tyre temp
-
-        public void SetSimerKey(string original)
-        {
-            _simerKey = original;
-        }
 
         private void SetDirty()
         {

@@ -88,12 +88,6 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
         // ====================================================
 
-        /// <summary>
-        /// Adds the simerkey to be allowed to post data to API.
-        /// </summary>
-        /// <param name="key"></param>
-        void SetSimerKey(string key);
-
         void Clear();
 
         /// <summary>
