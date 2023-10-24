@@ -119,7 +119,6 @@
     <Compile Include="Repositories\ErrorWhenSendDataException.cs" />
     <Compile Include="Repositories\IConfigurationRepository.cs" />
     <Compile Include="Repositories\IPitWallApiStatusRepository.cs" />
-    <Compile Include="Repositories\PitWallApiStatusRepository.cs" />
     <Compile Include="Repositories\PitWallRemoteRepository.cs" />
     <Compile Include="Repositories\IStagingDataRepository.cs" />
     <Compile Include="Repositories\StatusCodeNotOkException.cs" />
