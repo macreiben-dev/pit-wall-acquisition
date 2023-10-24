@@ -322,6 +322,14 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 
         #region IsApiAvailable 
 
+        [Fact]
+        public void GIVEN_class_is_instanciated_THEN_isApiAvailable_isNotNull()
+        {
+            var target = GetTargetWithRealCommand();
+
+            Check.That(target.IsApiAvailableCommand).IsNotNull();
+        }
+
         [Theory]
         [InlineData("data1")]
         [InlineData("data2")]
@@ -353,5 +361,17 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         }
 
         #endregion IsApiAvailable 
+
+        #region SaveConfig
+
+        [Fact]
+        public void GIVEN_class_is_instanciated_THEN_saveConfigurationCommandIsSet()
+        {
+            var target = GetTargetWithRealCommand();
+
+            Check.That(target.SaveToConfigurationCommand).IsNotNull();
+        }
+
+        #endregion SaveConfig
     }
 }
