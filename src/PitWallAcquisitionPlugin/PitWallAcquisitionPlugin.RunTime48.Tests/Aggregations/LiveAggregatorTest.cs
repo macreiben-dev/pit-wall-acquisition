@@ -1,5 +1,6 @@
 ﻿using NFluent;
 using PitWallAcquisitionPlugin.Aggregations;
+using PitWallAcquisitionPlugin.Tests.UI.ViewModels;
 using System.Diagnostics;
 using Xunit;
 
@@ -7,9 +8,16 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 {
     public class LiveAggregatorTest
     {
+        private FakePitWallConfiguration _configuration;
+
+        public LiveAggregatorTest() {
+
+            _configuration = new FakePitWallConfiguration();
+        }
+
         private LiveAggregator GetTarget()
         {
-            return new LiveAggregator();
+            return new LiveAggregator(_configuration);
         }
 
         [Fact]
@@ -52,10 +60,10 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
             var target = GetTarget();
 
+            _configuration.PilotName = original;
+
             // ACT
             Stopwatch watch = Stopwatch.StartNew();
-
-            target.AddPilotName(original);
 
             watch.Stop();
 
@@ -63,8 +71,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
             // ASSERT
             Check.That(actual.PilotName).IsEqualTo("PilotName01");
-            Check.That(target.IsDirty).IsTrue();
-
+            
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
 

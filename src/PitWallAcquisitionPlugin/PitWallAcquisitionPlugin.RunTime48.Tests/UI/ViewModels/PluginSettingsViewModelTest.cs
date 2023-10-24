@@ -18,10 +18,12 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 
         public PluginSettingsViewModelTest()
         {
+            _pitWallConfiguration = new FakePitWallConfiguration()
+            {
+                PilotName = "SomePilot1"
+            };
 
-            _pitWallConfiguration = new FakePitWallConfiguration();
-
-            _aggregator = new LiveAggregator(); // oustide in here.
+            _aggregator = new LiveAggregator(_pitWallConfiguration);
 
             _isApiAvailableCommand = Substitute.For<IPluginSettingsCommandFactory>();
         }
@@ -29,8 +31,8 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         private PluginSettingsViewModel GetTarget()
         {
             return new PluginSettingsViewModel(
-                _pitWallConfiguration, 
-                _aggregator, 
+                _pitWallConfiguration,
+                _aggregator,
                 _isApiAvailableCommand);
         }
 
@@ -113,7 +115,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             var actual = _aggregator.AsData();
 
             // ASSERT
-            Check.That(actual.PilotName).IsNull();
+            Check.That(actual.PilotName).IsEqualTo(input);
         }
 
         #region Api Address

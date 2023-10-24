@@ -9,14 +9,16 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
         [Fact]
         public void Should_contact_api()
         {
-            PitWallRemoteRepository target = new PitWallRemoteRepository(new FakePitWallConfiguration()
+            FakePitWallConfiguration configuration = new FakePitWallConfiguration()
             {
                 ApiAddress = "http://localhost:32773",
                 PersonalKey = "ven1_team_2023",
                 PilotName = "IntegrationTestFromPlugin"
-            });
+            };
 
-            ILiveAggregator aggregater = new LiveAggregator();
+            PitWallRemoteRepository target = new PitWallRemoteRepository(configuration);
+
+            ILiveAggregator aggregater = new LiveAggregator(configuration);
 
             aggregater.AddLaptime("00:02:02.0000000");
 
@@ -31,7 +33,6 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
             aggregater.AddRearRightTyreTemperature(48.0);
 
             aggregater.SetSimerKey("ven1_team_2023");
-            aggregater.AddPilotName("IntegrationTestFromPlugin");
 
             var data = aggregater.AsData();
 

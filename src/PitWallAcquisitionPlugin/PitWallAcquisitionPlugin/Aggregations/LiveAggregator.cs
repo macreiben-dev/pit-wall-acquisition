@@ -1,4 +1,5 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations;
+using PitWallAcquisitionPlugin.UI.ViewModels;
 using System;
 using System.Globalization;
 
@@ -21,12 +22,17 @@ namespace PitWallAcquisitionPlugin.Aggregations
         private double? _rearLeftTyreTemp;
         private double? _rearRightTyreTemp;
         private string _simerKey;
+        private readonly IPitWallConfiguration _configuration;
 
         public bool IsDirty => _dirty;
 
         /**
          * Idea: naming is awful. It suggests it is a builder but it's not.
          * */
+
+        public LiveAggregator(IPitWallConfiguration configuration) {
+            _configuration = configuration;
+        }
 
         public void AddSessionTimeLeft(string sessionTimeLeft)
         {
@@ -37,16 +43,6 @@ namespace PitWallAcquisitionPlugin.Aggregations
             if (_sessionTimeLeft != trimmedSessionTimeLeft)
             {
                 _sessionTimeLeft = trimmedSessionTimeLeft;
-
-                SetDirty();
-            }
-        }
-
-        public void AddPilotName(string original)
-        {
-            if (original.ToString() != _pilotName)
-            {
-                _pilotName = original.ToString();
 
                 SetDirty();
             }
@@ -85,7 +81,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
             return new Data
             {
                 SessionTimeLeft = _sessionTimeLeft,
-                PilotName = _pilotName,
+                PilotName = _configuration.PilotName,
                 LaptimeSeconds = _laptimeSeconds,
                 TyresWear = new Tyres()
                 {

@@ -59,7 +59,7 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                 // HOOK@ConfigurationUpdate : Pilot name configuration update
                 if (string.IsNullOrEmpty(this[nameof(PilotName)]))
                 {
-                    _aggregator.AddPilotName(value);
+                    _configuration.PilotName = value;
                 }
             }
         }
