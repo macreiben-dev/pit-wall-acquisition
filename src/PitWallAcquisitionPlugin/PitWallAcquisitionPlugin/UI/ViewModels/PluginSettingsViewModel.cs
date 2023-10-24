@@ -9,7 +9,8 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
     public class PluginSettingsViewModel :
         INotifyPropertyChanged,
         IDataErrorInfo,
-        IDisplayAvailability
+        IDisplayAvailability,
+        IUserDefinedConfiguration
     {
         private const string PILOTNAME_MUST_BE_SET = "Pilot name must be set.";
         private const string VALIDATION_APIADDRESS_MUST_BE_SET = "API address must be set.";
@@ -24,8 +25,8 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
         private string _isApiAvailable;
 
         public PluginSettingsViewModel(
-            IPitWallConfiguration configuration, 
-            ILiveAggregator aggregator, 
+            IPitWallConfiguration configuration,
+            ILiveAggregator aggregator,
             IPluginSettingsCommandFactory cmdFactory)
         {
             _configuration = configuration;
@@ -33,12 +34,14 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             _cmdFactory = cmdFactory;
 
             IsApiAvailableCommand = _cmdFactory.GetInstance(this);
+
+            SaveToConfigurationCommand = _cmdFactory.GetSaveToConfiguration();
         }
 
         public IIsApiAvailableCommand IsApiAvailableCommand { get; }
+        public ISaveToConfigurationCommand SaveToConfigurationCommand { get; }
 
-
-        public string IsApiAvailable 
+        public string IsApiAvailable
         {
             get => _isApiAvailable;
             set

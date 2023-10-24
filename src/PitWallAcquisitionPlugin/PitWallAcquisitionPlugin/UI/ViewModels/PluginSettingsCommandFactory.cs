@@ -18,5 +18,10 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
         {
             return new IsApiAvailableCommand(display, checkService);
         }
+
+        public ISaveToConfigurationCommand GetSaveToConfiguration()
+        {
+            return new SaveToConfigurationCommand();
+        }
     }
 }
