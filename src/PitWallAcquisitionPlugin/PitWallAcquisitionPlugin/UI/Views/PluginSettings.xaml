@@ -139,7 +139,7 @@
                     Grid.Row="2" 
 					Command="{Binding Path=SaveToConfigurationCommand}"
                     CommandParameter="{Binding}">
-                    Test Connectivity
+                    Save
                 </styles:SHButtonPrimary>
             </Grid>
         </styles:SHSection>

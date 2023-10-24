@@ -30,6 +30,8 @@ namespace PitWallAcquisitionPlugin.UI.Views
              * Eventualy pass reference on plugin to add a Start/Stop button also.
              * */
             DataContext = viewModel;
+
+            viewModel.SyncGUI();
         }
     }
 }

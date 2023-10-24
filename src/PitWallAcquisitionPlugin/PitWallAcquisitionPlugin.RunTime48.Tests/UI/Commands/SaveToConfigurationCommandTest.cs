@@ -64,5 +64,55 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.UI.Commands
 
             Check.That(_configuration.PilotName).IsNull();
         }
+
+        [Fact]
+        public void GIVEN_configurationIsValid_AND_execute_invoked_THEN_pitwallConfiguration_personalKey_is_updated()
+        {
+            var original = new FakeUserDefinedConfiguration()
+            {
+                PersonalKey = "SomeData"
+            };
+
+            var target = GetTarget();
+
+            target.Execute(original);
+
+            Check.That(_configuration.PersonalKey).IsEqualTo("SomeData");
+        }
+
+        [Fact]
+        public void GIVEN_configurationIsNull_THEN_personalKey_is_notSet()
+        {
+            var target = GetTarget();
+
+            target.Execute(null);
+
+            Check.That(_configuration.PersonalKey).IsNull();
+        }
+
+        [Fact]
+        public void GIVEN_configurationIsValid_AND_execute_invoked_THEN_pitwallConfiguration_apiAddress_is_updated()
+        {
+            var original = new FakeUserDefinedConfiguration()
+            {
+                ApiAddress = "SomeData"
+            };
+
+            var target = GetTarget();
+
+            target.Execute(original);
+
+            Check.That(_configuration.ApiAddress).IsEqualTo("SomeData");
+        }
+
+        [Fact]
+        public void GIVEN_configurationIsNull_THEN_apiAddress_is_notSet()
+        {
+            var target = GetTarget();
+
+            target.Execute(null);
+
+            Check.That(_configuration.ApiAddress).IsNull();
+        }
     }
 }

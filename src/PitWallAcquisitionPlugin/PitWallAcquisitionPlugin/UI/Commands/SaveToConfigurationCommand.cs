@@ -30,6 +30,16 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             var config = parameter as IUserDefinedConfiguration;
 
             _configuration.PilotName = config.PilotName;
+            _configuration.PersonalKey = config.PersonalKey;
+            _configuration.ApiAddress = config.ApiAddress;
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            if (CanExecuteChanged != null)
+            {
+                CanExecuteChanged(this, EventArgs.Empty);
+            }
         }
     }
 }
