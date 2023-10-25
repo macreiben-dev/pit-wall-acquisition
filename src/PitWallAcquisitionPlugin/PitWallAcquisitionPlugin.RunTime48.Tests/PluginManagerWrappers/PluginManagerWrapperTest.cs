@@ -346,33 +346,81 @@ namespace PitWallAcquisitionPlugin.Tests.PluginManagerWrappers
             [Fact]
             public void Should_map_inner_frontLeft_temperatures()
             {
-                var target = GetTarget();
-
                 Check.That(_targetInner).IsEqualTo(Inner);
             }
 
             [Fact]
             public void Should_map_inner_frontRight_temperatures()
             {
-                var target = GetTarget();
-
                 Check.That(_targetMiddle).IsEqualTo(Middle);
             }
 
             [Fact]
             public void Should_map_outer_frontRight_temperatures()
             {
-                var target = GetTarget();
-
                 Check.That(_targetOuter).IsEqualTo(Outer);
             }
 
             [Fact]
             public void Should_map_average_frontRight_temperatures()
             {
+                Check.That(_targetAverage).IsEqualTo(Average);
+            }
+        }
+
+        public class WeatherCondition
+        {
+            private IPluginManagerAdapter _pluginManagerAdapter;
+            
+            private double? _roadWetness;
+            private double? _raining;
+            private double? _airTemperature;
+
+            private const double RoadWetness = 10.0;
+            private const double Raining = 11.0;
+            private const double AirTemperature = 12.0;
+
+            public WeatherCondition()
+            {
+                _pluginManagerAdapter = Substitute.For<IPluginManagerAdapter>();
+
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameRawData.Scoring.mScoringInfo.mAvgPathWetness")
+                    .Returns(RoadWetness);
+
+                _pluginManagerAdapter.GetPropertyValue("GameRawData.Scoring.mScoringInfo.mRaining")
+                    .Returns(Raining);
+
+                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.AirTemperature")
+                    .Returns(AirTemperature);
+
                 var target = GetTarget();
 
-                Check.That(_targetAverage).IsEqualTo(Average);
+                _roadWetness = target.AvgRoadWetness;
+                _raining = target.Raining;
+                _airTemperature = target.AirTemperature;
+            }
+
+            private PluginManagerWrapper GetTarget()
+            {
+                return new PluginManagerWrapper(_pluginManagerAdapter);
+            }
+
+            [Fact]
+            public void THEN_map_averageWetNess()
+            {
+                Check.That(_roadWetness).IsEqualTo(RoadWetness);
+            }
+
+            [Fact]
+            public void THEN_map_raining()
+            {
+                Check.That(_raining).IsEqualTo(Raining);
+            }
+
+            [Fact]
+            public void THEN_map_airTemperature()
+            {
+                Check.That(_airTemperature).IsEqualTo(AirTemperature);
             }
         }
     }

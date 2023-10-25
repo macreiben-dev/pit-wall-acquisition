@@ -9,7 +9,6 @@ namespace PitWallAcquisitionPlugin.Aggregations
     {
         private string _sessionTimeLeft = string.Empty;
         private bool _dirty = false;
-        private string _pilotName = null;
 
         private double? _laptimeSeconds;
         private double? _frontLeftTyreWear;
@@ -21,7 +20,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         private double? _frontRightTyreTemp;
         private double? _rearLeftTyreTemp;
         private double? _rearRightTyreTemp;
-        private string _simerKey;
+        private double? _avgWetness;
         private readonly IPitWallConfiguration _configuration;
 
         public bool IsDirty => _dirty;
@@ -83,6 +82,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 SessionTimeLeft = _sessionTimeLeft,
                 PilotName = _configuration.PilotName,
                 LaptimeSeconds = _laptimeSeconds,
+                AvgWetness = _avgWetness,
                 TyresWear = new Tyres()
                 {
                     FrontLeftWear = _frontLeftTyreWear,
@@ -202,6 +202,13 @@ namespace PitWallAcquisitionPlugin.Aggregations
             }
 
             _rearRightTyreTemp = tyreTempValue;
+
+            SetDirty();
+        }
+
+        public void AddAvgWetness(double? data)
+        {
+            _avgWetness = data;
 
             SetDirty();
         }

@@ -25,5 +25,6 @@ namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
         public string SessionTimeLeft { get; set; } = string.Empty;
         
         public string SimerKey { get; set; }
+        public double? AvgWetness { get; set; }
     }
 }
