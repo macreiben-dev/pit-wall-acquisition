@@ -38,6 +38,10 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 
             public const string SessionTimeLeft = "DataCorePlugin.GameData.SessionTimeLeft";
             public const string LastLapTime = "DataCorePlugin.GameData.LastLapTime";
+
+            public const string AvgPathWetness = "DataCorePlugin.GameRawData.Scoring.mScoringInfo.mAvgPathWetness";
+            public const string Raining = "GameRawData.Scoring.mScoringInfo.mRaining";
+            public const string AirTemperature = "DataCorePlugin.GameData.AirTemperature";
         }
 
         private readonly IPluginManagerAdapter _pluginManager;
@@ -83,18 +87,32 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
         public ITyreTemperature TyreRearRightTemperature { get; private set; }
 
         public bool IsGameRunning =>
-          PluginManagerFieldConverter.ToBoolean(Constants.GameRunning, _pluginManager);
+          PluginManagerFieldConverter.ToBoolean(
+              Constants.GameRunning, _pluginManager);
 
-        public string SessionTimeLeft => PluginManagerFieldConverter.ToString(Constants.SessionTimeLeft, _pluginManager);
+        public string SessionTimeLeft => PluginManagerFieldConverter.ToString(
+            Constants.SessionTimeLeft, _pluginManager);
 
-        public string LastLaptime => PluginManagerFieldConverter.ToString(Constants.LastLapTime, _pluginManager);
+        public string LastLaptime => PluginManagerFieldConverter.ToString(
+            Constants.LastLapTime, _pluginManager);
 
-        public double? TyreWearFrontLeft => PluginManagerFieldConverter.ToDouble(Constants.TyreWearFrontLeft, _pluginManager);
+        public double? TyreWearFrontLeft => PluginManagerFieldConverter.ToDouble(
+            Constants.TyreWearFrontLeft, _pluginManager);
 
-        public double? TyreWearFrontRight => PluginManagerFieldConverter.ToDouble(Constants.TyreWearFrontRight, _pluginManager);
+        public double? TyreWearFrontRight => PluginManagerFieldConverter.ToDouble(
+            Constants.TyreWearFrontRight, _pluginManager);
 
-        public double? TyreWearRearLeft => PluginManagerFieldConverter.ToDouble(Constants.TyreWearRearLeft, _pluginManager);
+        public double? TyreWearRearLeft => PluginManagerFieldConverter.ToDouble(
+            Constants.TyreWearRearLeft, _pluginManager);
 
-        public double? TyreWearRearRight => PluginManagerFieldConverter.ToDouble(Constants.TyreWearRearRight, _pluginManager);
+        public double? TyreWearRearRight => PluginManagerFieldConverter.ToDouble(
+            Constants.TyreWearRearRight, _pluginManager);
+
+        public double? AvgRoadWetness => PluginManagerFieldConverter.ToDouble(
+            Constants.AvgPathWetness, _pluginManager);
+        public double? Raining => PluginManagerFieldConverter.ToDouble(
+            Constants.Raining, _pluginManager);
+        public double? AirTemperature => PluginManagerFieldConverter.ToDouble(
+            Constants.AirTemperature, _pluginManager);
     }
 }
