@@ -139,6 +139,9 @@ namespace PitWallAcquisitionPlugin
                     return;
                 }
                 await _dataRepository.SendAsync(dataToSend);
+
+                // Reset to 0 after one success.
+                _internalErrorCount = 0;
             }
             catch (ErrorWhenSendDataException ex)
             {
