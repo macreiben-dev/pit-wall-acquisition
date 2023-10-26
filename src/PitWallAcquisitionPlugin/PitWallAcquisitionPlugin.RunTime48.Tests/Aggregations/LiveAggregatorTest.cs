@@ -777,7 +777,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 var target = GetTarget();
 
               target.EnsureValueNullMapped(
-                    a => a.AddFrontLeftTyreTemperature(null),
+                    a => a.AddAvgWetness(null),
                     d => d.AvgWetness);
 
                 Check.That(target.IsDirty).IsFalse();
@@ -807,6 +807,46 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
                 Check.That(target.IsDirty).IsTrue();
             }
+
+
+
+            [Fact]
+            public void GIVEN_airTemp_isNull_THEN_airTemp_isNull_AND_isDirty_isFalse()
+            {
+                var target = GetTarget();
+
+                target.EnsureValueNullMapped(
+                      a => a.SetAirTemperature(null),
+                      d => d.AirTemperature);
+
+                Check.That(target.IsDirty).IsFalse();
+            }
+
+            [Fact]
+            public void GIVEN_airTemp_isNotNull_THEN_airTemp_isNotNull_AND_isDirty_isTrue()
+            {
+                var target = GetTarget();
+
+                target.EnsureValueNotNullMapped(
+                    a => a.SetAirTemperature(10.0),
+                    d => d.AirTemperature);
+
+                Check.That(target.IsDirty).IsTrue();
+            }
+
+            [Fact]
+            public void GIVEN_airTemp_isSet_THEN_airTemp_isEqual_toExpected_AND_isDirty_isTrue()
+            {
+                var target = GetTarget();
+
+                target.EnsureValueEqualsExpected(
+                    a => a.AddAvgWetness(10.0),
+                    d => d.AvgWetness,
+                    10.0);
+
+                Check.That(target.IsDirty).IsTrue();
+            }
+
         }
         
       

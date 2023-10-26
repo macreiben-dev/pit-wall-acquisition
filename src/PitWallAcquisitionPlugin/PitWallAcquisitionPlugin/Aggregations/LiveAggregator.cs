@@ -21,6 +21,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         private double? _rearLeftTyreTemp;
         private double? _rearRightTyreTemp;
         private double? _avgWetness;
+        private double? _airTemperature;
         private readonly IPitWallConfiguration _configuration;
 
         public bool IsDirty => _dirty;
@@ -83,6 +84,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 PilotName = _configuration.PilotName,
                 LaptimeSeconds = _laptimeSeconds,
                 AvgWetness = _avgWetness,
+                AirTemperature = _airTemperature,
                 TyresWear = new Tyres()
                 {
                     FrontLeftWear = _frontLeftTyreWear,
@@ -208,7 +210,23 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
         public void AddAvgWetness(double? data)
         {
+            if (!data.HasValue)
+            {
+                return;
+            }
             _avgWetness = data;
+
+            SetDirty();
+        }
+
+        public void SetAirTemperature(double? data)
+        {
+            if (!data.HasValue)
+            {
+                return;
+            }
+
+            _airTemperature = data;
 
             SetDirty();
         }

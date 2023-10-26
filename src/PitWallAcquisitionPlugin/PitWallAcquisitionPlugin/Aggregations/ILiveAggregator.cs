@@ -85,13 +85,19 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// </summary>
         /// <param name="tyreTempValue"></param>
         void AddRearRightTyreTemperature(double? tyreTempValue);
-        
+
         /// <summary>
         /// <para>Set the average road wetness</para>
         /// </summary>
-        /// <param name="data">percent</param>
+        /// <param name="data"></param>
         void AddAvgWetness(double? data);
-        
+
+        /// <summary>
+        /// Sets the air temperature
+        /// </summary>
+        /// <param name="data"></param>
+        void SetAirTemperature(double? data);
+
         // ====================================================
 
         void Clear();
@@ -101,5 +107,6 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// </summary>
         /// <returns></returns>
         IData AsData();
+       
     }
 }
