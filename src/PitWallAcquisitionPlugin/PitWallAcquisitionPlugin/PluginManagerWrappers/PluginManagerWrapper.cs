@@ -7,6 +7,43 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
     /// </summary>
     public sealed class PluginManagerWrapper : IPluginRecordRepository
     {
+        private static class Constants
+        {
+            public const string TyreTemperatureFrontLeftInner = "DataCorePlugin.GameData.TyreTemperatureFrontLeftInner";
+            public const string TyreTemperatureFrontLeftMiddle = "DataCorePlugin.GameData.TyreTemperatureFrontLeftMiddle";
+            public const string TyreTemperatureFrontLeftOuter = "DataCorePlugin.GameData.TyreTemperatureFrontLeftOuter";
+            public const string TyreTemperatureFrontLeft = "DataCorePlugin.GameData.TyreTemperatureFrontLeft";
+
+            public const string TyreTemperatureFrontRightInner = "DataCorePlugin.GameData.TyreTemperatureFrontRightInner";
+            public const string TyreTemperatureFrontRightMiddle = "DataCorePlugin.GameData.TyreTemperatureFrontRightMiddle";
+            public const string TyreTemperatureFrontRightOuter = "DataCorePlugin.GameData.TyreTemperatureFrontRightOuter";
+            public const string TyreTemperatureFrontRight = "DataCorePlugin.GameData.TyreTemperatureFrontRight";
+
+            public const string TyreTemperatureRearLeftInner = "DataCorePlugin.GameData.TyreTemperatureRearLeftInner";
+            public const string TyreTemperatureRearLeftMiddle = "DataCorePlugin.GameData.TyreTemperatureRearLeftMiddle";
+            public const string TyreTemperatureRearLeftOuter = "DataCorePlugin.GameData.TyreTemperatureRearLeftOuter";
+            public const string TyreTemperatureRearLeft = "DataCorePlugin.GameData.TyreTemperatureRearLeft";
+
+            public const string TyreTemperatureRearRightInner = "DataCorePlugin.GameData.TyreTemperatureRearRightInner";
+            public const string TyreTemperatureRearRightMiddle = "DataCorePlugin.GameData.TyreTemperatureRearRightMiddle";
+            public const string TyreTemperatureRearRightOuter = "DataCorePlugin.GameData.TyreTemperatureRearRightOuter";
+            public const string TyreTemperatureRearRight = "DataCorePlugin.GameData.TyreTemperatureRearRight";
+
+            public const string TyreWearFrontLeft = "DataCorePlugin.GameData.TyreWearFrontLeft";
+            public const string TyreWearFrontRight = "DataCorePlugin.GameData.TyreWearFrontRight";
+            public const string TyreWearRearLeft = "DataCorePlugin.GameData.TyreWearRearLeft";
+            public const string TyreWearRearRight = "DataCorePlugin.GameData.TyreWearRearRight";
+
+            public const string GameRunning = "DataCorePlugin.GameRunning";
+
+            public const string SessionTimeLeft = "DataCorePlugin.GameData.SessionTimeLeft";
+            public const string LastLapTime = "DataCorePlugin.GameData.LastLapTime";
+
+            public const string AvgPathWetness = "DataCorePlugin.GameRawData.Scoring.mScoringInfo.mAvgPathWetness";
+            public const string Raining = "GameRawData.Scoring.mScoringInfo.mRaining";
+            public const string AirTemperature = "DataCorePlugin.GameData.AirTemperature";
+        }
+
         private readonly IPluginManagerAdapter _pluginManager;
 
         public PluginManagerWrapper(IPluginManagerAdapter pluginManager)
@@ -14,31 +51,31 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
             _pluginManager = pluginManager;
 
             TyreFrontLeftTemperature = new TyreTemperature(
-                "DataCorePlugin.GameData.TyreTemperatureFrontLeftInner",
-                "DataCorePlugin.GameData.TyreTemperatureFrontLeftMiddle",
-                "DataCorePlugin.GameData.TyreTemperatureFrontLeftOuter",
-                "DataCorePlugin.GameData.TyreTemperatureFrontLeft",
+                Constants.TyreTemperatureFrontLeftInner,
+                Constants.TyreTemperatureFrontLeftMiddle,
+                Constants.TyreTemperatureFrontLeftOuter,
+                Constants.TyreTemperatureFrontLeft,
                 _pluginManager);
 
             TyreFrontRightTemperature = new TyreTemperature(
-                "DataCorePlugin.GameData.TyreTemperatureFrontRightInner",
-                "DataCorePlugin.GameData.TyreTemperatureFrontRightMiddle",
-                "DataCorePlugin.GameData.TyreTemperatureFrontRightOuter",
-                "DataCorePlugin.GameData.TyreTemperatureFrontRight",
+                Constants.TyreTemperatureFrontRightInner,
+                Constants.TyreTemperatureFrontRightMiddle,
+                Constants.TyreTemperatureFrontRightOuter,
+                Constants.TyreTemperatureFrontRight,
                 _pluginManager);
 
             TyreRearLeftTemperature = new TyreTemperature(
-                "DataCorePlugin.GameData.TyreTemperatureRearLeftInner",
-                "DataCorePlugin.GameData.TyreTemperatureRearLeftMiddle",
-                "DataCorePlugin.GameData.TyreTemperatureRearLeftOuter",
-                "DataCorePlugin.GameData.TyreTemperatureRearLeft",
+                Constants.TyreTemperatureRearLeftInner,
+                Constants.TyreTemperatureRearLeftMiddle,
+                Constants.TyreTemperatureRearLeftOuter,
+                Constants.TyreTemperatureRearLeft,
                 _pluginManager);
 
             TyreRearRightTemperature = new TyreTemperature(
-                "DataCorePlugin.GameData.TyreTemperatureRearRightInner",
-                "DataCorePlugin.GameData.TyreTemperatureRearRightMiddle",
-                "DataCorePlugin.GameData.TyreTemperatureRearRightOuter",
-                "DataCorePlugin.GameData.TyreTemperatureRearRight",
+                Constants.TyreTemperatureRearRightInner,
+                Constants.TyreTemperatureRearRightMiddle,
+                Constants.TyreTemperatureRearRightOuter,
+                Constants.TyreTemperatureRearRight,
                 _pluginManager);
         }
         public ITyreTemperature TyreFrontLeftTemperature { get; private set; }
@@ -50,21 +87,32 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
         public ITyreTemperature TyreRearRightTemperature { get; private set; }
 
         public bool IsGameRunning =>
-          PluginManagerFieldConverter.ToBoolean("DataCorePlugin.GameRunning", _pluginManager);
+          PluginManagerFieldConverter.ToBoolean(
+              Constants.GameRunning, _pluginManager);
 
-        public string SessionTimeLeft => PluginManagerFieldConverter.ToString("DataCorePlugin.GameData.SessionTimeLeft", _pluginManager);
+        public string SessionTimeLeft => PluginManagerFieldConverter.ToString(
+            Constants.SessionTimeLeft, _pluginManager);
 
-        public string LastLaptime => PluginManagerFieldConverter.ToString("DataCorePlugin.GameData.LastLapTime", _pluginManager);
+        public string LastLaptime => PluginManagerFieldConverter.ToString(
+            Constants.LastLapTime, _pluginManager);
 
-        public double? TyreWearFrontLeft => PluginManagerFieldConverter.ToDouble("DataCorePlugin.GameData.TyreWearFrontLeft", _pluginManager);
+        public double? TyreWearFrontLeft => PluginManagerFieldConverter.ToDouble(
+            Constants.TyreWearFrontLeft, _pluginManager);
 
-        public double? TyreWearFrontRight => PluginManagerFieldConverter.ToDouble("DataCorePlugin.GameData.TyreWearFrontRight", _pluginManager);
+        public double? TyreWearFrontRight => PluginManagerFieldConverter.ToDouble(
+            Constants.TyreWearFrontRight, _pluginManager);
 
-        public double? TyreWearRearLeft => PluginManagerFieldConverter.ToDouble("DataCorePlugin.GameData.TyreWearRearLeft", _pluginManager);
+        public double? TyreWearRearLeft => PluginManagerFieldConverter.ToDouble(
+            Constants.TyreWearRearLeft, _pluginManager);
 
-        public double? TyreWearRearRight => PluginManagerFieldConverter.ToDouble("DataCorePlugin.GameData.TyreWearRearRight", _pluginManager);
+        public double? TyreWearRearRight => PluginManagerFieldConverter.ToDouble(
+            Constants.TyreWearRearRight, _pluginManager);
 
-        // TODO pilot name is hard coded for the moment. It will be set from sh GUI
-        public string DriverName => "Pilot1";
+        public double? AvgRoadWetness => PluginManagerFieldConverter.ToDouble(
+            Constants.AvgPathWetness, _pluginManager);
+        public double? Raining => PluginManagerFieldConverter.ToDouble(
+            Constants.Raining, _pluginManager);
+        public double? AirTemperature => PluginManagerFieldConverter.ToDouble(
+            Constants.AirTemperature, _pluginManager);
     }
 }

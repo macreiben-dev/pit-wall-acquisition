@@ -10,6 +10,10 @@
 
         string SessionTimeLeft { get; }
 
+        double? AvgWetness { get; }
+
+        double? AirTemperature { get; }
+
         ITyresWear TyresWear { get; }
 
         ITyresTemperatures TyresTemperatures { get; }

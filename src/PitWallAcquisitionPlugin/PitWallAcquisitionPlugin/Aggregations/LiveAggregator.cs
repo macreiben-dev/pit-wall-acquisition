@@ -9,7 +9,6 @@ namespace PitWallAcquisitionPlugin.Aggregations
     {
         private string _sessionTimeLeft = string.Empty;
         private bool _dirty = false;
-        private string _pilotName = null;
 
         private double? _laptimeSeconds;
         private double? _frontLeftTyreWear;
@@ -21,20 +20,17 @@ namespace PitWallAcquisitionPlugin.Aggregations
         private double? _frontRightTyreTemp;
         private double? _rearLeftTyreTemp;
         private double? _rearRightTyreTemp;
-        private string _simerKey;
+        private double? _avgWetness;
+        private double? _airTemperature;
         private readonly IPitWallConfiguration _configuration;
 
         public bool IsDirty => _dirty;
-
-        /**
-         * Idea: naming is awful. It suggests it is a builder but it's not.
-         * */
 
         public LiveAggregator(IPitWallConfiguration configuration) {
             _configuration = configuration;
         }
 
-        public void AddSessionTimeLeft(string sessionTimeLeft)
+        public void SetSessionTimeLeft(string sessionTimeLeft)
         {
             string trimmedSessionTimeLeft = sessionTimeLeft
                 .ToString()
@@ -48,7 +44,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
             }
         }
 
-        public void AddLaptime(string original)
+        public void SetLaptime(string original)
         {
             if (string.IsNullOrEmpty(original))
             {
@@ -83,6 +79,8 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 SessionTimeLeft = _sessionTimeLeft,
                 PilotName = _configuration.PilotName,
                 LaptimeSeconds = _laptimeSeconds,
+                AvgWetness = _avgWetness,
+                AirTemperature = _airTemperature,
                 TyresWear = new Tyres()
                 {
                     FrontLeftWear = _frontLeftTyreWear,
@@ -106,7 +104,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
         #region tyre wear
 
-        public void AddFrontLeftTyreWear(double? tyreWearValue)
+        public void SetFrontLeftTyreWear(double? tyreWearValue)
         {
             if (!tyreWearValue.HasValue)
             {
@@ -118,7 +116,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
             SetDirty();
         }
 
-        public void AddFrontRightTyreWear(double? tyreWearValue)
+        public void SetFrontRightTyreWear(double? tyreWearValue)
         {
             if (!tyreWearValue.HasValue)
             {
@@ -130,7 +128,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
             SetDirty();
         }
 
-        public void AddRearLeftTyreWear(double? tyreWearValue)
+        public void SetRearLeftTyreWear(double? tyreWearValue)
         {
             if (!tyreWearValue.HasValue)
             {
@@ -142,7 +140,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
             SetDirty();
         }
 
-        public void AddRearRightTyreWear(double? tyreWearValue)
+        public void SetRearRightTyreWear(double? tyreWearValue)
         {
             if (!tyreWearValue.HasValue)
             {
@@ -158,7 +156,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
         #region tyre temperature
 
-        public void AddFrontLeftTyreTemperature(double? tyreTempValue)
+        public void SetFrontLeftTyreTemperature(double? tyreTempValue)
         {
             if (!tyreTempValue.HasValue)
             {
@@ -170,7 +168,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
             SetDirty();
         }
 
-        public void AddFrontRightTyreTemperature(double? tyreTempValue)
+        public void SetFrontRightTyreTemperature(double? tyreTempValue)
         {
             if (!tyreTempValue.HasValue)
             {
@@ -182,7 +180,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
             SetDirty();
         }
 
-        public void AddRearLeftTyreTemperature(double? tyreTempValue)
+        public void SetRearLeftTyreTemperature(double? tyreTempValue)
         {
             if (!tyreTempValue.HasValue)
             {
@@ -194,7 +192,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
             SetDirty();
         }
 
-        public void AddRearRightTyreTemperature(double? tyreTempValue)
+        public void SetRearRightTyreTemperature(double? tyreTempValue)
         {
             if (!tyreTempValue.HasValue)
             {
@@ -202,6 +200,29 @@ namespace PitWallAcquisitionPlugin.Aggregations
             }
 
             _rearRightTyreTemp = tyreTempValue;
+
+            SetDirty();
+        }
+
+        public void SetAvgWetness(double? data)
+        {
+            if (!data.HasValue)
+            {
+                return;
+            }
+            _avgWetness = data;
+
+            SetDirty();
+        }
+
+        public void SetAirTemperature(double? data)
+        {
+            if (!data.HasValue)
+            {
+                return;
+            }
+
+            _airTemperature = data;
 
             SetDirty();
         }

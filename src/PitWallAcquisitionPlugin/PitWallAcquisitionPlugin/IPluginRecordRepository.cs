@@ -46,11 +46,6 @@ namespace FuelAssistantMobile.DataGathering.SimhubPlugin
         /// </summary>
         double? TyreWearRearRight { get; }
 
-        /// <summary>
-        /// The driver name
-        /// </summary>
-        string DriverName { get; }
-
         ITyreTemperature TyreFrontLeftTemperature { get; }
 
         ITyreTemperature TyreFrontRightTemperature { get; }
