@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregations\LiveAggregatorTest.cs" />
+    <Compile Include="Aggregations\LiveAggregatorTestingExtensions.cs" />
     <Compile Include="HealthChecks\HealthCheckServiceTest.cs" />
     <Compile Include="PluginManagerWrappers\PluginManagerFieldConverterTest.cs" />
     <Compile Include="PluginManagerWrappers\PluginManagerWrapperTest.cs" />

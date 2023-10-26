@@ -180,22 +180,22 @@ namespace PitWallAcquisitionPlugin
              * 
              * */
 
-            _liveAggregator.AddSessionTimeLeft(racingDataRepository.SessionTimeLeft);
+            _liveAggregator.SetSessionTimeLeft(racingDataRepository.SessionTimeLeft);
 
-            _liveAggregator.AddLaptime(racingDataRepository.LastLaptime);
+            _liveAggregator.SetLaptime(racingDataRepository.LastLaptime);
 
-            _liveAggregator.AddFrontLeftTyreWear(racingDataRepository.TyreWearFrontLeft);
-            _liveAggregator.AddFrontRightTyreWear(racingDataRepository.TyreWearFrontRight);
-            _liveAggregator.AddRearLeftTyreWear(racingDataRepository.TyreWearRearLeft);
-            _liveAggregator.AddRearRightTyreWear(racingDataRepository.TyreWearRearRight);
+            _liveAggregator.SetFrontLeftTyreWear(racingDataRepository.TyreWearFrontLeft);
+            _liveAggregator.SetFrontRightTyreWear(racingDataRepository.TyreWearFrontRight);
+            _liveAggregator.SetRearLeftTyreWear(racingDataRepository.TyreWearRearLeft);
+            _liveAggregator.SetRearRightTyreWear(racingDataRepository.TyreWearRearRight);
 
-            _liveAggregator.AddFrontLeftTyreTemperature(racingDataRepository.TyreFrontLeftTemperature.Average);
+            _liveAggregator.SetFrontLeftTyreTemperature(racingDataRepository.TyreFrontLeftTemperature.Average);
 
-            _liveAggregator.AddFrontRightTyreTemperature(racingDataRepository.TyreFrontRightTemperature.Average);
+            _liveAggregator.SetFrontRightTyreTemperature(racingDataRepository.TyreFrontRightTemperature.Average);
 
-            _liveAggregator.AddRearLeftTyreTemperature(racingDataRepository.TyreRearLeftTemperature.Average);
+            _liveAggregator.SetRearLeftTyreTemperature(racingDataRepository.TyreRearLeftTemperature.Average);
 
-            _liveAggregator.AddRearRightTyreTemperature(racingDataRepository.TyreRearRightTemperature.Average);
+            _liveAggregator.SetRearRightTyreTemperature(racingDataRepository.TyreRearRightTemperature.Average);
         }
 
         private bool ShouldStopTimer()

@@ -1,8 +1,6 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations;
-using NFluent;
+﻿using NFluent;
 using PitWallAcquisitionPlugin.Aggregations;
 using PitWallAcquisitionPlugin.Tests.UI.ViewModels;
-using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Xunit;
@@ -42,7 +40,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             // ACT
             Stopwatch watch = Stopwatch.StartNew();
 
-            target.AddSessionTimeLeft(original);
+            target.SetSessionTimeLeft(original);
 
             watch.Stop();
 
@@ -104,7 +102,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddLaptime(original);
+                target.SetLaptime(original);
 
                 watch.Stop();
 
@@ -128,7 +126,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddLaptime(original);
+                target.SetLaptime(original);
 
                 watch.Stop();
 
@@ -150,7 +148,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddLaptime(original);
+                target.SetLaptime(original);
 
                 watch.Stop();
 
@@ -191,7 +189,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddFrontLeftTyreWear(original);
+                target.SetFrontLeftTyreWear(original);
 
                 watch.Stop();
 
@@ -213,7 +211,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddFrontLeftTyreWear(null);
+                target.SetFrontLeftTyreWear(null);
 
                 watch.Stop();
 
@@ -235,7 +233,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddFrontLeftTyreWear(null);
+                target.SetFrontLeftTyreWear(null);
 
                 watch.Stop();
 
@@ -262,7 +260,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddFrontRightTyreWear(original);
+                target.SetFrontRightTyreWear(original);
 
                 watch.Stop();
 
@@ -284,7 +282,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddFrontRightTyreWear(null);
+                target.SetFrontRightTyreWear(null);
 
                 watch.Stop();
 
@@ -305,7 +303,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddFrontRightTyreWear(null);
+                target.SetFrontRightTyreWear(null);
 
                 watch.Stop();
 
@@ -332,7 +330,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddRearLeftTyreWear(original);
+                target.SetRearLeftTyreWear(original);
 
                 watch.Stop();
 
@@ -354,7 +352,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddRearLeftTyreWear(null);
+                target.SetRearLeftTyreWear(null);
 
                 watch.Stop();
 
@@ -376,7 +374,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddRearLeftTyreWear(null);
+                target.SetRearLeftTyreWear(null);
 
                 watch.Stop();
 
@@ -403,7 +401,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddRearRightTyreWear(original);
+                target.SetRearRightTyreWear(original);
 
                 watch.Stop();
 
@@ -425,7 +423,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddRearRightTyreWear(null);
+                target.SetRearRightTyreWear(null);
 
                 watch.Stop();
 
@@ -447,7 +445,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddRearRightTyreWear(null);
+                target.SetRearRightTyreWear(null);
 
                 watch.Stop();
 
@@ -488,7 +486,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddFrontLeftTyreTemperature(original);
+                target.SetFrontLeftTyreTemperature(original);
 
                 watch.Stop();
 
@@ -510,7 +508,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddFrontLeftTyreTemperature(null);
+                target.SetFrontLeftTyreTemperature(null);
 
                 watch.Stop();
 
@@ -532,7 +530,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddFrontLeftTyreTemperature(null);
+                target.SetFrontLeftTyreTemperature(null);
 
                 watch.Stop();
 
@@ -559,7 +557,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddFrontRightTyreTemperature(original);
+                target.SetFrontRightTyreTemperature(original);
 
                 watch.Stop();
 
@@ -581,7 +579,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddFrontRightTyreTemperature(null);
+                target.SetFrontRightTyreTemperature(null);
 
                 watch.Stop();
 
@@ -603,7 +601,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddFrontRightTyreTemperature(null);
+                target.SetFrontRightTyreTemperature(null);
 
                 watch.Stop();
 
@@ -630,7 +628,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddRearLeftTyreTemperature(original);
+                target.SetRearLeftTyreTemperature(original);
 
                 watch.Stop();
 
@@ -652,7 +650,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddRearLeftTyreTemperature(null);
+                target.SetRearLeftTyreTemperature(null);
 
                 watch.Stop();
 
@@ -674,7 +672,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddRearLeftTyreTemperature(null);
+                target.SetRearLeftTyreTemperature(null);
 
                 watch.Stop();
 
@@ -701,7 +699,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddRearRightTyreTemperature(original);
+                target.SetRearRightTyreTemperature(original);
 
                 watch.Stop();
 
@@ -723,7 +721,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddRearRightTyreTemperature(null);
+                target.SetRearRightTyreTemperature(null);
 
                 watch.Stop();
 
@@ -745,7 +743,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 // ACT
                 Stopwatch watch = Stopwatch.StartNew();
 
-                target.AddRearRightTyreTemperature(null);
+                target.SetRearRightTyreTemperature(null);
 
                 watch.Stop();
 
@@ -777,7 +775,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 var target = GetTarget();
 
               target.EnsureValueNullMapped(
-                    a => a.AddAvgWetness(null),
+                    a => a.SetAvgWetness(null),
                     d => d.AvgWetness);
 
                 Check.That(target.IsDirty).IsFalse();
@@ -789,7 +787,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 var target = GetTarget();
 
                 target.EnsureValueNotNullMapped(
-                    a => a.AddAvgWetness(10.0),
+                    a => a.SetAvgWetness(10.0),
                     d => d.AvgWetness);
 
                 Check.That(target.IsDirty).IsTrue();
@@ -801,7 +799,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 var target = GetTarget();
 
                 target.EnsureValueEqualsExpected(
-                    a => a.AddAvgWetness(10.0),
+                    a => a.SetAvgWetness(10.0),
                     d => d.AvgWetness,
                     10.0);
 
@@ -840,7 +838,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
                 var target = GetTarget();
 
                 target.EnsureValueEqualsExpected(
-                    a => a.AddAvgWetness(10.0),
+                    a => a.SetAvgWetness(10.0),
                     d => d.AvgWetness,
                     10.0);
 
@@ -849,8 +847,6 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
 
         }
         
-      
-
         [Fact]
         public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_laptime_is_null()
         {
@@ -862,7 +858,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             // ACT
             Stopwatch watch = Stopwatch.StartNew();
 
-            target.AddLaptime(original);
+            target.SetLaptime(original);
 
             target.Clear();
 
@@ -888,7 +884,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             // ACT
             Stopwatch watch = Stopwatch.StartNew();
 
-            target.AddLaptime(original);
+            target.SetLaptime(original);
 
             target.Clear();
 
@@ -914,7 +910,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             // ACT
             Stopwatch watch = Stopwatch.StartNew();
 
-            target.AddFrontLeftTyreWear(original);
+            target.SetFrontLeftTyreWear(original);
 
             target.Clear();
 
@@ -940,7 +936,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             // ACT
             Stopwatch watch = Stopwatch.StartNew();
 
-            target.AddFrontRightTyreWear(original);
+            target.SetFrontRightTyreWear(original);
 
             target.Clear();
 
@@ -966,7 +962,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             // ACT
             Stopwatch watch = Stopwatch.StartNew();
 
-            target.AddRearLeftTyreWear(original);
+            target.SetRearLeftTyreWear(original);
 
             target.Clear();
 
@@ -992,7 +988,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             // ACT
             Stopwatch watch = Stopwatch.StartNew();
 
-            target.AddRearRightTyreWear(original);
+            target.SetRearRightTyreWear(original);
 
             target.Clear();
 
@@ -1004,63 +1000,6 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             Check.That(target.IsDirty).IsFalse();
             Check.That(actual.TyresWear.RearRightWear).IsNull();
 
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
-        }
-    }
-
-    public static class LiveAggregatorTestingExtensions
-    {
-        public static void EnsureValueNullMapped(
-          this LiveAggregator target,
-          Action<ILiveAggregator> setDataAction,
-          Func<IData, double?> fieldSelector)
-        {
-            Stopwatch watch = Stopwatch.StartNew();
-
-            setDataAction(target);
-
-            watch.Stop();
-
-            var actual = target.AsData();
-
-            // ASSERT
-            Check.That(fieldSelector(actual)).IsNull();
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
-        }
-
-        public static void EnsureValueNotNullMapped(
-           this LiveAggregator target,
-           Action<ILiveAggregator> setDataAction,
-           Func<IData, double?> fieldSelector)
-        {
-            Stopwatch watch = Stopwatch.StartNew();
-
-            setDataAction(target);
-
-            watch.Stop();
-
-            var actual = target.AsData();
-
-            // ASSERT
-            Check.That(fieldSelector(actual)).IsNotNull();
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
-        }
-
-        public static void EnsureValueEqualsExpected(
-            this LiveAggregator target,
-             Action<ILiveAggregator> setDataAction,
-               Func<IData, double?> fieldSelector,
-               double? expected)
-        {
-            Stopwatch watch = Stopwatch.StartNew();
-
-            setDataAction(target);
-
-            watch.Stop();
-
-            var actual = target.AsData();
-
-            Check.That(fieldSelector(actual)).IsEqualTo(expected);
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
     }

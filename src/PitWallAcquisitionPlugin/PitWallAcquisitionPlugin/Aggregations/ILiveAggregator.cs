@@ -10,7 +10,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// Receives session time left from simhub runtime.
         /// </summary>
         /// <param name="sessionTimeLeft"></param>
-        void AddSessionTimeLeft(string sessionTimeLeft);
+        void SetSessionTimeLeft(string sessionTimeLeft);
 
         /// <summary>
         /// <para>Add laptime as string to be parsed.</para>
@@ -18,7 +18,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <para>Format is <i>HH:MM:SS.sssssss</i></para>
         /// </summary>
         /// <param name="original"></param>
-        void AddLaptime(string original);
+        void SetLaptime(string original);
 
         /// <summary>
         /// <para>The front left tyre wear.</para>
@@ -26,7 +26,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <para>Format is xxx.xxxxxxxxxxxxx</para>
         /// </summary>
         /// <param name="tyreWearValue"></param>
-        void AddFrontLeftTyreWear(double? tyreWearValue);
+        void SetFrontLeftTyreWear(double? tyreWearValue);
 
         /// <summary>
         /// <para>The front right tyre wear.</para>
@@ -34,7 +34,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <para>Format is xxx.xxxxxxxxxxxxx</para>
         /// </summary>
         /// <param name="tyreWearValue"></param>
-        void AddFrontRightTyreWear(double? tyreWearValue);
+        void SetFrontRightTyreWear(double? tyreWearValue);
 
         /// <summary>
         /// <para>The rear left tyre wear.</para>
@@ -42,7 +42,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <para>Format is xxx.xxxxxxxxxxxxx</para>
         /// </summary>
         /// <param name="tyreWearValue"></param>
-        void AddRearLeftTyreWear(double? tyreWearValue);
+        void SetRearLeftTyreWear(double? tyreWearValue);
 
         /// <summary>
         /// <para>The rear right tyre wear.</para>
@@ -50,7 +50,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <para>Format is xxx.xxxxxxxxxxxxx</para>
         /// </summary>
         /// <param name="tyreWearValue"></param>
-        void AddRearRightTyreWear(double? tyreWearValue);
+        void SetRearRightTyreWear(double? tyreWearValue);
 
         // ====================================================
 
@@ -60,7 +60,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <para>Format is xxx.xxxxxxxxxxxxx</para>
         /// </summary>
         /// <param name="tyreTempValue"></param>
-        void AddFrontLeftTyreTemperature(double? tyreTempValue);
+        void SetFrontLeftTyreTemperature(double? tyreTempValue);
 
         /// <summary>
         /// <para>Front right tyre temp.</para> 
@@ -68,7 +68,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <para>Format is xxx.xxxxxxxxxxxxx</para>
         /// </summary>
         /// <param name="tyreTempValue"></param>
-        void AddFrontRightTyreTemperature(double? tyreTempValue);
+        void SetFrontRightTyreTemperature(double? tyreTempValue);
 
         /// <summary>
         /// <para>Rear left tyre temp.</para> 
@@ -76,7 +76,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <para>Format is xxx.xxxxxxxxxxxxx</para>
         /// </summary>
         /// <param name="tyreTempValue"></param>
-        void AddRearLeftTyreTemperature(double? tyreTempValue);
+        void SetRearLeftTyreTemperature(double? tyreTempValue);
 
         /// <summary>
         /// <para>Rear right tyre temp.</para> 
@@ -84,13 +84,13 @@ namespace PitWallAcquisitionPlugin.Aggregations
         /// <para>Format is xxx.xxxxxxxxxxxxx</para>
         /// </summary>
         /// <param name="tyreTempValue"></param>
-        void AddRearRightTyreTemperature(double? tyreTempValue);
+        void SetRearRightTyreTemperature(double? tyreTempValue);
 
         /// <summary>
         /// <para>Set the average road wetness</para>
         /// </summary>
         /// <param name="data"></param>
-        void AddAvgWetness(double? data);
+        void SetAvgWetness(double? data);
 
         /// <summary>
         /// Sets the air temperature
@@ -100,6 +100,9 @@ namespace PitWallAcquisitionPlugin.Aggregations
 
         // ====================================================
 
+        /// <summary>
+        /// Clears the setted data.
+        /// </summary>
         void Clear();
 
         /// <summary>

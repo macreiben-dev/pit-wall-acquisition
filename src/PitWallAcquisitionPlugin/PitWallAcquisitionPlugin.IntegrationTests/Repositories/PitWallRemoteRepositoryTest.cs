@@ -20,17 +20,17 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
 
             ILiveAggregator aggregater = new LiveAggregator(configuration);
 
-            aggregater.AddLaptime("00:02:02.0000000");
+            aggregater.SetLaptime("00:02:02.0000000");
 
-            aggregater.AddFrontLeftTyreWear(50.0);
-            aggregater.AddFrontRightTyreWear(51.0);
-            aggregater.AddRearLeftTyreWear(52.0);
-            aggregater.AddRearRightTyreWear(53.0);
+            aggregater.SetFrontLeftTyreWear(50.0);
+            aggregater.SetFrontRightTyreWear(51.0);
+            aggregater.SetRearLeftTyreWear(52.0);
+            aggregater.SetRearRightTyreWear(53.0);
 
-            aggregater.AddFrontLeftTyreTemperature(45.0);
-            aggregater.AddFrontRightTyreTemperature(46.0);
-            aggregater.AddRearRightTyreTemperature(47.0);
-            aggregater.AddRearRightTyreTemperature(48.0);
+            aggregater.SetFrontLeftTyreTemperature(45.0);
+            aggregater.SetFrontRightTyreTemperature(46.0);
+            aggregater.SetRearRightTyreTemperature(47.0);
+            aggregater.SetRearRightTyreTemperature(48.0);
 
             var data = aggregater.AsData();
 
