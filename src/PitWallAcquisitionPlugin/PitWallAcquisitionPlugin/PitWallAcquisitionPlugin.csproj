@@ -98,6 +98,7 @@
     <Compile Include="Aggregations\LiveAggregator.cs" />
     <Compile Include="Aggregations\Tyres.cs" />
     <Compile Include="Aggregations\TyresTemperatures.cs" />
+    <Compile Include="Aggregations\v2\ILiveMapper.cs" />
     <Compile Include="Aggregations\v2\LiveMapper.cs" />
     <Compile Include="DataVessel.cs" />
     <Compile Include="HealthChecks\HealthCheckService.cs" />
