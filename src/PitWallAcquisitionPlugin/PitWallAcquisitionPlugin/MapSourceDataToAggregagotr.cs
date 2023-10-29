@@ -18,7 +18,14 @@ namespace PitWallAcquisitionPlugin
                 new LiveMapper(r => r.TyreFrontLeftTemperature.Average, (a, data) => a.SetFrontLeftTyreTemperature(data)),
                 new LiveMapper(r => r.TyreRearLeftTemperature.Average, (a, data) => a.SetRearLeftTyreTemperature(data)),
                 new LiveMapper(r => r.TyreFrontRightTemperature.Average, (a, data) => a.SetFrontRightTyreTemperature(data)),
-                //new LiveMapper(r => r.TyreFrontLeftTemperature.Average, (a, data) => a.SetFrontLeftTyreTemperature(data)),
+                new LiveMapper(r => r.TyreRearRightTemperature.Average, (a, data) => a.SetRearRightTyreTemperature(data)),
+                
+                // ----
+
+                new LiveMapper(r => r.TyreWearFrontLeft, (a, data) => a.SetFrontLeftTyreWear(data)),
+                new LiveMapper(r => r.TyreWearRearLeft, (a, data) => a.SetRearLeftTyreWear(data)),
+                new LiveMapper(r => r.TyreWearFrontRight, (a, data) => a.SetFrontRightTyreWear(data)),
+                new LiveMapper(r => r.TyreWearRearRight, (a, data) => a.SetRearRightTyreWear(data)),
             };
 
             foreach (var config in allConfiguration)
@@ -29,23 +36,6 @@ namespace PitWallAcquisitionPlugin
             aggregator.SetSessionTimeLeft(racingDataRepository.SessionTimeLeft);
 
             aggregator.SetLaptime(racingDataRepository.LastLaptime);
-
-            //aggregator.SetAirTemperature(racingDataRepository.AirTemperature);
-
-            //aggregator.SetAvgWetness(racingDataRepository.AvgRoadWetness);
-
-            aggregator.SetFrontLeftTyreWear(racingDataRepository.TyreWearFrontLeft);
-            aggregator.SetFrontRightTyreWear(racingDataRepository.TyreWearFrontRight);
-            aggregator.SetRearLeftTyreWear(racingDataRepository.TyreWearRearLeft);
-            aggregator.SetRearRightTyreWear(racingDataRepository.TyreWearRearRight);
-
-            //aggregator.SetFrontLeftTyreTemperature(racingDataRepository.TyreFrontLeftTemperature.Average);
-
-            //aggregator.SetFrontRightTyreTemperature(racingDataRepository.TyreFrontRightTemperature.Average);
-
-            //aggregator.SetRearLeftTyreTemperature(racingDataRepository.TyreRearLeftTemperature.Average);
-
-            aggregator.SetRearRightTyreTemperature(racingDataRepository.TyreRearRightTemperature.Average);
         }
     }
 }
