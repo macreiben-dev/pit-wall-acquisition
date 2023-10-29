@@ -98,6 +98,7 @@
     <Compile Include="Aggregations\LiveAggregator.cs" />
     <Compile Include="Aggregations\Tyres.cs" />
     <Compile Include="Aggregations\TyresTemperatures.cs" />
+    <Compile Include="Aggregations\v2\LiveMapper.cs" />
     <Compile Include="DataVessel.cs" />
     <Compile Include="HealthChecks\HealthCheckService.cs" />
     <Compile Include="HealthChecks\IHealthCheckService.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="IWebApiForwarderService.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\SimhubLogger.cs" />
+    <Compile Include="MapSourceDataToAggregagotr.cs" />
     <Compile Include="PluginManagerWrappers\IPluginManagerAdapter.cs" />
     <Compile Include="PluginManagerWrappers\IPluginRecordRepositoryFactory.cs" />
     <Compile Include="PluginManagerWrappers\ITyreTemperature.cs" />

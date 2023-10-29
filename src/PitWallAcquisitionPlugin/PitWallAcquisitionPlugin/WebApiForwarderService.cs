@@ -174,39 +174,21 @@ namespace PitWallAcquisitionPlugin
         private void UpdateAggregator(
             IPluginRecordRepository racingDataRepository)
         {
+
             /**
-             * Idea: we have one side where we read from plugin manager, and another 
-             * in which we map the retrieved data to the aggregator.
-             * 
-             * I don't like big dictionary cause I like control. But I might have to
-             * centralize the definition of the copy from plugin manager to racing data repo.
-             * 
-             * */
+            * Idea: we have one side where we read from plugin manager, and another 
+            * in which we map the retrieved data to the aggregator.
+            * 
+            * I don't like big dictionary cause I like control. But I might have to
+            * centralize the definition of the copy from plugin manager to racing data repo.
+            * 
+            * */
 
             /**
              * Issue : really need to unit test mapping here.
              * */
 
-            _liveAggregator.SetSessionTimeLeft(racingDataRepository.SessionTimeLeft);
-
-            _liveAggregator.SetLaptime(racingDataRepository.LastLaptime);
-
-            _liveAggregator.SetFrontLeftTyreWear(racingDataRepository.TyreWearFrontLeft);
-            _liveAggregator.SetFrontRightTyreWear(racingDataRepository.TyreWearFrontRight);
-            _liveAggregator.SetRearLeftTyreWear(racingDataRepository.TyreWearRearLeft);
-            _liveAggregator.SetRearRightTyreWear(racingDataRepository.TyreWearRearRight);
-
-            _liveAggregator.SetFrontLeftTyreTemperature(racingDataRepository.TyreFrontLeftTemperature.Average);
-
-            _liveAggregator.SetFrontRightTyreTemperature(racingDataRepository.TyreFrontRightTemperature.Average);
-
-            _liveAggregator.SetRearLeftTyreTemperature(racingDataRepository.TyreRearLeftTemperature.Average);
-
-            _liveAggregator.SetRearRightTyreTemperature(racingDataRepository.TyreRearRightTemperature.Average);
-
-            _liveAggregator.SetAirTemperature(racingDataRepository.AirTemperature);
-            
-            _liveAggregator.SetAvgWetness(racingDataRepository.AvgRoadWetness);
+            MapSourceDataToAggregagtor.UpdateAggregatorNow(_liveAggregator, racingDataRepository);
         }
 
         private bool ShouldStopTimer()
