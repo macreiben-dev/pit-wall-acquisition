@@ -28,8 +28,43 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests
             _record.TyreFrontLeftTemperature.Returns(new FakeTyreTemperature() { Average = 21.0 });
             _record.TyreRearLeftTemperature.Returns(new FakeTyreTemperature() { Average = 22.0 });
             _record.TyreFrontRightTemperature.Returns(new FakeTyreTemperature() { Average = 23.0 });
-            _record.TyreRearRightTemperature.Returns(new FakeTyreTemperature() { Average = 23.0 });
+            _record.TyreRearRightTemperature.Returns(new FakeTyreTemperature() { Average = 24.0 });
         }
+
+        [Fact]
+        public void THEN_map_TyreFrontLeftTemperature()
+        {
+            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
+
+            _aggregator.Received(1).SetFrontLeftTyreTemperature(21.0);
+        }
+
+        [Fact]
+        public void THEN_map_TyreRearLeftTemperature()
+        {
+            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
+
+            _aggregator.Received(1).SetRearLeftTyreTemperature(22.0);
+        }
+
+        [Fact]
+        public void THEN_map_TyreFrontRightTemperature()
+        {
+            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
+
+            _aggregator.Received(1).SetFrontRightTyreTemperature(23.0);
+        }
+
+        [Fact]
+        public void THEN_map_TyreRearRightTemperature()
+        {
+            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
+
+            _aggregator.Received(1).SetRearRightTyreTemperature(24.0);
+        }
+
+
+        // ----
 
         [Fact]
         public void THEN_map_TyreWearFrontLeft()
