@@ -53,5 +53,9 @@ namespace FuelAssistantMobile.DataGathering.SimhubPlugin
         ITyreTemperature TyreRearLeftTemperature { get; }
 
         ITyreTemperature TyreRearRightTemperature { get; }
+
+        double? AvgRoadWetness { get; }
+
+        double? AirTemperature { get; }
     }
 }

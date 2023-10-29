@@ -183,6 +183,10 @@ namespace PitWallAcquisitionPlugin
              * 
              * */
 
+            /**
+             * Issue : really need to unit test mapping here.
+             * */
+
             _liveAggregator.SetSessionTimeLeft(racingDataRepository.SessionTimeLeft);
 
             _liveAggregator.SetLaptime(racingDataRepository.LastLaptime);
@@ -199,6 +203,10 @@ namespace PitWallAcquisitionPlugin
             _liveAggregator.SetRearLeftTyreTemperature(racingDataRepository.TyreRearLeftTemperature.Average);
 
             _liveAggregator.SetRearRightTyreTemperature(racingDataRepository.TyreRearRightTemperature.Average);
+
+            _liveAggregator.SetAirTemperature(racingDataRepository.AirTemperature);
+            
+            _liveAggregator.SetAvgWetness(racingDataRepository.AvgRoadWetness);
         }
 
         private bool ShouldStopTimer()
