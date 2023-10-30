@@ -198,10 +198,11 @@ namespace PitWallAcquisitionPlugin
             * centralize the definition of the copy from plugin manager to racing data repo.
             * 
             * */
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(
-                _liveAggregator, 
-                racingDataRepository, 
-                _mappingConfiguration);
+
+            foreach (var config in _mappingConfiguration)
+            {
+                config.Set(racingDataRepository, _liveAggregator);
+            }
         }
 
         private bool ShouldStopTimer()
