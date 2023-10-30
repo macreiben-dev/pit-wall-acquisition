@@ -1,5 +1,4 @@
 ﻿using NFluent;
-using PitWallAcquisitionPlugin.Tests.UI.Commands;
 using PitWallAcquisitionPlugin.Tests.UI.ViewModels;
 using PitWallAcquisitionPlugin.UI.ViewModels;
 using Xunit;

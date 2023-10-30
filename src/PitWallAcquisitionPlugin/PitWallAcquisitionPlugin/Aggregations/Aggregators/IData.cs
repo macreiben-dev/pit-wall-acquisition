@@ -1,4 +1,6 @@
-﻿namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
+﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators.Models;
+
+namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 {
     public interface IData
     {

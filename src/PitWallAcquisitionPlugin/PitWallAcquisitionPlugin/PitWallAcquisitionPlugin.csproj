@@ -90,23 +90,28 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregations\Data.cs" />
-    <Compile Include="Aggregations\IData.cs" />
-    <Compile Include="Aggregations\ILiveAggregator.cs" />
-    <Compile Include="Aggregations\ITyresTemperatures.cs" />
-    <Compile Include="Aggregations\ITyresWear.cs" />
-    <Compile Include="Aggregations\LiveAggregator.cs" />
-    <Compile Include="Aggregations\Tyres.cs" />
-    <Compile Include="Aggregations\TyresTemperatures.cs" />
+    <Compile Include="Aggregations\Aggregators\Data.cs" />
+    <Compile Include="Aggregations\Aggregators\IData.cs" />
+    <Compile Include="Aggregations\Aggregators\ILiveAggregator.cs" />
+    <Compile Include="Aggregations\Aggregators\Models\ITyresTemperatures.cs" />
+    <Compile Include="Aggregations\Aggregators\Models\ITyresWear.cs" />
+    <Compile Include="Aggregations\Aggregators\LiveAggregator.cs" />
+    <Compile Include="Aggregations\Mappers\LiveMapperFactory.cs" />
+    <Compile Include="Aggregations\Aggregators\Models\Tyres.cs" />
+    <Compile Include="Aggregations\Aggregators\Models\TyresTemperatures.cs" />
+    <Compile Include="Aggregations\Mappers\ILiveMapper.cs" />
+    <Compile Include="Aggregations\Mappers\LiveMapper.cs" />
     <Compile Include="DataVessel.cs" />
     <Compile Include="HealthChecks\HealthCheckService.cs" />
     <Compile Include="HealthChecks\IHealthCheckService.cs" />
     <Compile Include="HealthChecks\Repositories\HealthCheckRepository.cs" />
     <Compile Include="HealthChecks\Repositories\IHealthCheckRepository.cs" />
+    <Compile Include="IMappingConfigurationRepository.cs" />
     <Compile Include="IPluginRecordRepository.cs" />
     <Compile Include="IWebApiForwarderService.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\SimhubLogger.cs" />
+    <Compile Include="MappingConfigurationRepository.cs" />
     <Compile Include="PluginManagerWrappers\IPluginManagerAdapter.cs" />
     <Compile Include="PluginManagerWrappers\IPluginRecordRepositoryFactory.cs" />
     <Compile Include="PluginManagerWrappers\ITyreTemperature.cs" />

@@ -3,7 +3,7 @@ using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using GameReaderCommon;
-using PitWallAcquisitionPlugin.Aggregations;
+using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using PitWallAcquisitionPlugin.HealthChecks;
 using PitWallAcquisitionPlugin.HealthChecks.Repositories;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
@@ -97,6 +97,9 @@ namespace PitWallAcquisitionPlugin
             containerBuilder.RegisterType<SimhubPluginConfigurationRepository>()
                 .As<IPitWallConfiguration>()
                 .SingleInstance();
+
+            containerBuilder.RegisterType<MappingConfigurationRepository>()
+                .As<IMappingConfigurationRepository>();
 
             var builder = containerBuilder.Build();
 

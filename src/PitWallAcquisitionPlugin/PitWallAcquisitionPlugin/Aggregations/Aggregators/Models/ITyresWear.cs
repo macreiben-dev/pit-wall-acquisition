@@ -1,4 +1,4 @@
-﻿namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
+﻿namespace PitWallAcquisitionPlugin.Aggregations.Aggregators.Models
 {
     public interface ITyresWear
     {

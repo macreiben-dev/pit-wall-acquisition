@@ -1,10 +1,9 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations;
-using NFluent;
-using PitWallAcquisitionPlugin.Aggregations;
+﻿using NFluent;
+using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using System;
 using System.Diagnostics;
 
-namespace PitWallAcquisitionPlugin.Tests.Aggregations
+namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 {
     public static class LiveAggregatorTestingExtensions
     {

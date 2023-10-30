@@ -1,7 +1,7 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
-using PitWallAcquisitionPlugin.Aggregations;
+using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using System.Timers;
 
 namespace PitWallAcquisitionPlugin
@@ -16,15 +16,25 @@ namespace PitWallAcquisitionPlugin
         private readonly Timer _autoReactivate;
 
         private readonly IStagingDataRepository _dataRepository;
+        private readonly IMappingConfigurationRepository _mappingConfiguration;
         private readonly ILiveAggregator _liveAggregator;
         private readonly ILogger _logger;
 
+        /// <summary>
+        /// Forwards data to the vortext API.
+        /// </summary>
+        /// <param name="aggregator">The aggregator of data.</param>
+        /// <param name="dataRepository">The repository to send data to the API.</param>
+        /// <param name="mappingConfiguration"></param>
+        /// <param name="logger">The logger</param>
+        /// <param name="postToApiTimerHz">Post to API frequency</param>
+        /// <param name="autoReactivateTimer"></param>
         public WebApiForwarderService(
             ILiveAggregator aggregator,
             IStagingDataRepository dataRepository,
+            IMappingConfigurationRepository mappingConfiguration,
             ILogger logger,
-            double postToApiTimerHz,
-            int autoReactivateTimer)
+            double postToApiTimerHz, int autoReactivateTimer)
         {
             _postTimer = new Timer(1000 / postToApiTimerHz); // Interval in milliseconds for 10Hz (1000ms / 10Hz = 100ms)
             _postTimer.Elapsed += PostData;
@@ -33,7 +43,7 @@ namespace PitWallAcquisitionPlugin
             _autoReactivate.Elapsed += AutoReactivate;
 
             _dataRepository = dataRepository;
-
+            _mappingConfiguration = mappingConfiguration;
             _liveAggregator = aggregator;
             _logger = logger;
 
@@ -129,15 +139,13 @@ namespace PitWallAcquisitionPlugin
 
             try
             {
-                // -- PATCH
-                if (string.IsNullOrEmpty(dataToSend.PilotName)
-                    || string.IsNullOrEmpty(dataToSend.SimerKey)
-                    )
+                if (EnsureSimerKeyAndPilotNameAreSet(dataToSend))
                 {
                     _logger.Error($"Mandatory configuration missing, PilotName is [{dataToSend.PilotName}] - SimerKey is [{dataToSend.SimerKey}]");
 
                     return;
                 }
+
                 await _dataRepository.SendAsync(dataToSend);
 
                 // Reset to 0 after one success.
@@ -161,6 +169,12 @@ namespace PitWallAcquisitionPlugin
             }
         }
 
+        private static bool EnsureSimerKeyAndPilotNameAreSet(IData dataToSend)
+        {
+            return string.IsNullOrEmpty(dataToSend.PilotName)
+                || string.IsNullOrEmpty(dataToSend.SimerKey);
+        }
+
         private void AutoReactivate(object sender, ElapsedEventArgs e)
         {
             if (_notifiedStop && _internalErrorCount >= 3)
@@ -174,39 +188,20 @@ namespace PitWallAcquisitionPlugin
         private void UpdateAggregator(
             IPluginRecordRepository racingDataRepository)
         {
-            /**
-             * Idea: we have one side where we read from plugin manager, and another 
-             * in which we map the retrieved data to the aggregator.
-             * 
-             * I don't like big dictionary cause I like control. But I might have to
-             * centralize the definition of the copy from plugin manager to racing data repo.
-             * 
-             * */
 
             /**
-             * Issue : really need to unit test mapping here.
-             * */
+            * Idea: we have one side where we read from plugin manager, and another 
+            * in which we map the retrieved data to the aggregator.
+            * 
+            * I don't like big dictionary cause I like control. But I might have to
+            * centralize the definition of the copy from plugin manager to racing data repo.
+            * 
+            * */
 
-            _liveAggregator.SetSessionTimeLeft(racingDataRepository.SessionTimeLeft);
-
-            _liveAggregator.SetLaptime(racingDataRepository.LastLaptime);
-
-            _liveAggregator.SetFrontLeftTyreWear(racingDataRepository.TyreWearFrontLeft);
-            _liveAggregator.SetFrontRightTyreWear(racingDataRepository.TyreWearFrontRight);
-            _liveAggregator.SetRearLeftTyreWear(racingDataRepository.TyreWearRearLeft);
-            _liveAggregator.SetRearRightTyreWear(racingDataRepository.TyreWearRearRight);
-
-            _liveAggregator.SetFrontLeftTyreTemperature(racingDataRepository.TyreFrontLeftTemperature.Average);
-
-            _liveAggregator.SetFrontRightTyreTemperature(racingDataRepository.TyreFrontRightTemperature.Average);
-
-            _liveAggregator.SetRearLeftTyreTemperature(racingDataRepository.TyreRearLeftTemperature.Average);
-
-            _liveAggregator.SetRearRightTyreTemperature(racingDataRepository.TyreRearRightTemperature.Average);
-
-            _liveAggregator.SetAirTemperature(racingDataRepository.AirTemperature);
-            
-            _liveAggregator.SetAvgWetness(racingDataRepository.AvgRoadWetness);
+            foreach (var config in _mappingConfiguration)
+            {
+                config.Set(racingDataRepository, _liveAggregator);
+            }
         }
 
         private bool ShouldStopTimer()

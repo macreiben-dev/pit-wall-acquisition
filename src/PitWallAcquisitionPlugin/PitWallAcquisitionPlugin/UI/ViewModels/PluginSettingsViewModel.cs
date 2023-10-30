@@ -1,8 +1,7 @@
-﻿using PitWallAcquisitionPlugin.Aggregations;
+﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using PitWallAcquisitionPlugin.Tests.UI.Commands;
 using System;
 using System.ComponentModel;
-using System.Windows.Input;
 
 namespace PitWallAcquisitionPlugin.UI.ViewModels
 {

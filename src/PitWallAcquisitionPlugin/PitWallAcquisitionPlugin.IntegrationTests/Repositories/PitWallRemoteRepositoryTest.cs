@@ -1,5 +1,5 @@
 ﻿using NFluent;
-using PitWallAcquisitionPlugin.Aggregations;
+using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using PitWallAcquisitionPlugin.Repositories;
 
 namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories

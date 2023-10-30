@@ -1,10 +1,9 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using NFluent;
 using NSubstitute;
-using PitWallAcquisitionPlugin.Aggregations;
+using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using System.Threading;
 using Xunit;
 
@@ -15,12 +14,14 @@ namespace PitWallAcquisitionPlugin.Tests
         private ILiveAggregator _aggregator;
         private IStagingDataRepository _dataRepository;
         private ILogger _logger;
+        private IMappingConfigurationRepository _mappingConfiguration;
 
         public WebApiForwarderServiceTest()
         {
             _aggregator = Substitute.For<ILiveAggregator>();
             _dataRepository = Substitute.For<IStagingDataRepository>();
             _logger = Substitute.For<ILogger>();
+            _mappingConfiguration = Substitute.For<IMappingConfigurationRepository>();
         }
 
         [Fact]
@@ -29,9 +30,9 @@ namespace PitWallAcquisitionPlugin.Tests
             Check.ThatCode(() => new WebApiForwarderService(
                 _aggregator,
                 _dataRepository,
+                _mappingConfiguration,
                 _logger,
-                1,
-                1))
+                1, 1))
                 .DoesNotThrow();
         }
 
@@ -53,9 +54,9 @@ namespace PitWallAcquisitionPlugin.Tests
             var target = new WebApiForwarderService(
                 _aggregator,
                 _dataRepository,
+                _mappingConfiguration,
                 _logger,
-                1000,
-                1);
+                1000, 1);
 
             target.Start();
 
@@ -83,8 +84,9 @@ namespace PitWallAcquisitionPlugin.Tests
             var target = new WebApiForwarderService(
                 _aggregator,
                 _dataRepository,
+                _mappingConfiguration,
                 _logger,
-                1000,
+                1000, 
                 1);
 
             target.Start();

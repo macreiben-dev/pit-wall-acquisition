@@ -1,9 +1,9 @@
-﻿namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
+﻿namespace PitWallAcquisitionPlugin.Aggregations.Aggregators.Models
 {
     public interface ITyresTemperatures
     {
         double? FrontLeftTemp { get; }
-        double? FrontRightTemp { get;  }
+        double? FrontRightTemp { get; }
         double? RearLeftTemp { get; }
         double? RearRightTemp { get; }
     }

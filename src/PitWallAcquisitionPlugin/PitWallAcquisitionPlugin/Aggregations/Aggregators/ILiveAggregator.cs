@@ -1,6 +1,4 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations;
-
-namespace PitWallAcquisitionPlugin.Aggregations
+﻿namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 {
     public interface ILiveAggregator
     {

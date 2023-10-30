@@ -1,6 +1,7 @@
-﻿using System;
+﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators.Models;
+using System;
 
-namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
+namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 {
     public sealed class Data : IData
     {
@@ -9,7 +10,7 @@ namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
         public Data()
         {
             _version = new Version(1, 0);
-            TyresWear = new Tyres();
+            TyresWear = new TyresWear();
 
             TyresTemperatures = new TyresTemperatures();
         }

@@ -1,9 +1,9 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations;
+﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators.Models;
 using PitWallAcquisitionPlugin.UI.ViewModels;
 using System;
 using System.Globalization;
 
-namespace PitWallAcquisitionPlugin.Aggregations
+namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 {
     public sealed class LiveAggregator : ILiveAggregator
     {
@@ -81,7 +81,7 @@ namespace PitWallAcquisitionPlugin.Aggregations
                 LaptimeSeconds = _laptimeSeconds,
                 AvgWetness = _avgWetness,
                 AirTemperature = _airTemperature,
-                TyresWear = new Tyres()
+                TyresWear = new TyresWear()
                 {
                     FrontLeftWear = _frontLeftTyreWear,
                     FrontRightWear = _frontRightTyreWear,
