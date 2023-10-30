@@ -105,10 +105,12 @@
     <Compile Include="HealthChecks\IHealthCheckService.cs" />
     <Compile Include="HealthChecks\Repositories\HealthCheckRepository.cs" />
     <Compile Include="HealthChecks\Repositories\IHealthCheckRepository.cs" />
+    <Compile Include="IMappingConfigurationRepository.cs" />
     <Compile Include="IPluginRecordRepository.cs" />
     <Compile Include="IWebApiForwarderService.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\SimhubLogger.cs" />
+    <Compile Include="MappingConfigurationRepository.cs" />
     <Compile Include="MapSourceDataToAggregagotr.cs" />
     <Compile Include="PluginManagerWrappers\IPluginManagerAdapter.cs" />
     <Compile Include="PluginManagerWrappers\IPluginRecordRepositoryFactory.cs" />

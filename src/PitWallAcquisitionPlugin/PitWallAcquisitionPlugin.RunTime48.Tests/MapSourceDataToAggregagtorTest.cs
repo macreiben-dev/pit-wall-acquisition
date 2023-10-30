@@ -9,9 +9,11 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests
     {
         private ILiveAggregator _aggregator;
         private IPluginRecordRepository _record;
+        private MappingConfigurationRepository _mapConfiguration;
 
         public MapSourceDataToAggregagtorTest()
         {
+            // ARRANGE
             _aggregator = Substitute.For<ILiveAggregator>();
             _record = Substitute.For<IPluginRecordRepository>();
 
@@ -29,37 +31,34 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests
             _record.TyreRearLeftTemperature.Returns(new FakeTyreTemperature() { Average = 22.0 });
             _record.TyreFrontRightTemperature.Returns(new FakeTyreTemperature() { Average = 23.0 });
             _record.TyreRearRightTemperature.Returns(new FakeTyreTemperature() { Average = 24.0 });
+
+            _mapConfiguration = new MappingConfigurationRepository();
+
+            // ACT
+            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record, _mapConfiguration);
         }
 
         [Fact]
         public void THEN_map_TyreFrontLeftTemperature()
         {
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
-
             _aggregator.Received(1).SetFrontLeftTyreTemperature(21.0);
         }
 
         [Fact]
         public void THEN_map_TyreRearLeftTemperature()
         {
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
-
             _aggregator.Received(1).SetRearLeftTyreTemperature(22.0);
         }
 
         [Fact]
         public void THEN_map_TyreFrontRightTemperature()
         {
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
-
             _aggregator.Received(1).SetFrontRightTyreTemperature(23.0);
         }
 
         [Fact]
         public void THEN_map_TyreRearRightTemperature()
         {
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
-
             _aggregator.Received(1).SetRearRightTyreTemperature(24.0);
         }
 
@@ -69,32 +68,24 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests
         [Fact]
         public void THEN_map_TyreWearFrontLeft()
         {
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
-
             _aggregator.Received(1).SetFrontLeftTyreWear(10.0);
         }
 
         [Fact]
         public void THEN_map_TyreWearFrontRight()
         {
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
-
             _aggregator.Received(1).SetFrontRightTyreWear(11.0);
         }
 
         [Fact]
         public void THEN_map_TyreWearRearLeft()
         {
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
-
             _aggregator.Received(1).SetRearLeftTyreWear(12.0);
         }
 
         [Fact]
         public void THEN_map_TyreWearRearRight()
         {
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
-
             _aggregator.Received(1).SetRearRightTyreWear(13.0);
         }
 
@@ -103,8 +94,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests
         [Fact]
         public void THEN_map_airTemperature()
         {
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
-
             _aggregator.Received(1).SetAirTemperature(1.0);
         }
 
@@ -112,24 +101,18 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests
         [Fact]
         public void THEN_map_AvgRoadWetness()
         {
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
-
             _aggregator.Received(1).SetAvgWetness(2.0);
         }
 
         [Fact]
         public void THEN_map_LapTime()
         {
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
-
             _aggregator.Received(1).SetLaptime("00:02:02.100");
         }
 
         [Fact]
         public void THEN_map_SessionTimeLeft()
         {
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record);
-
             _aggregator.Received(1).SetSessionTimeLeft("03:03:03.100");
         }
     }
