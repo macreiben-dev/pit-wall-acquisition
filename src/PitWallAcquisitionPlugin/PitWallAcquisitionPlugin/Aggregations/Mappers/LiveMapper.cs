@@ -12,8 +12,9 @@ namespace PitWallAcquisitionPlugin.Aggregations.Mappers
 
         public LiveMapper(Func<IPluginRecordRepository, TCounter> sourceSelector, Action<ILiveAggregator, TCounter> setter)
         {
-            this.sourceSelector = sourceSelector;
-            this.setter = setter;
+            this.sourceSelector = sourceSelector ?? throw new ArgumentNullException(nameof(sourceSelector));
+
+            this.setter = setter ?? throw new ArgumentNullException(nameof(setter));
         }
 
         public void Set(IPluginRecordRepository adapter, ILiveAggregator aggregator)

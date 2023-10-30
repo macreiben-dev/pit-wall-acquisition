@@ -4,7 +4,7 @@ using PitWallAcquisitionPlugin.Tests.UI.ViewModels;
 using System.Diagnostics;
 using Xunit;
 
-namespace PitWallAcquisitionPlugin.Tests.Aggregations
+namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 {
     public class LiveAggregatorTest
     {
@@ -773,9 +773,9 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             {
                 var target = GetTarget();
 
-              target.EnsureValueNullMapped(
-                    a => a.SetAvgWetness(null),
-                    d => d.AvgWetness);
+                target.EnsureValueNullMapped(
+                      a => a.SetAvgWetness(null),
+                      d => d.AvgWetness);
 
                 Check.That(target.IsDirty).IsFalse();
             }
@@ -845,7 +845,7 @@ namespace PitWallAcquisitionPlugin.Tests.Aggregations
             }
 
         }
-        
+
         [Fact]
         public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_laptime_is_null()
         {

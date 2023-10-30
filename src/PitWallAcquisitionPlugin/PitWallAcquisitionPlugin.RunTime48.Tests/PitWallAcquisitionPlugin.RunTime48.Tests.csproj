@@ -85,8 +85,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregations\LiveAggregatorTest.cs" />
-    <Compile Include="Aggregations\LiveAggregatorTestingExtensions.cs" />
+    <Compile Include="Aggregations\Aggregators\LiveAggregatorTest.cs" />
+    <Compile Include="Aggregations\Aggregators\LiveAggregatorTestingExtensions.cs" />
+    <Compile Include="Aggregations\Mappers\LiveMapperTest.cs" />
     <Compile Include="FakeTyreTemperature.cs" />
     <Compile Include="HealthChecks\HealthCheckServiceTest.cs" />
     <Compile Include="MappingConfigurationRepositoryTest.cs" />
