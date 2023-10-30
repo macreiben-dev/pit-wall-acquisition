@@ -1,4 +1,4 @@
-﻿namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
+﻿namespace PitWallAcquisitionPlugin.Aggregations.Aggregators.Models
 {
     public sealed class TyresTemperatures : ITyresTemperatures
     {

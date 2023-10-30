@@ -1,6 +1,6 @@
-﻿namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
+﻿namespace PitWallAcquisitionPlugin.Aggregations.Aggregators.Models
 {
-    public sealed class Tyres : ITyresWear
+    public sealed class TyresWear : ITyresWear
     {
         public double? FrontLeftWear { get; set; }
 

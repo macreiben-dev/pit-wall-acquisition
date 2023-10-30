@@ -1,4 +1,6 @@
-﻿namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
+﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators.Models;
+
+namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 {
     public interface IData
     {

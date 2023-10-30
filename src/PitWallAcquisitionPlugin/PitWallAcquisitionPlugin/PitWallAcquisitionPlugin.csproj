@@ -93,12 +93,12 @@
     <Compile Include="Aggregations\Aggregators\Data.cs" />
     <Compile Include="Aggregations\Aggregators\IData.cs" />
     <Compile Include="Aggregations\Aggregators\ILiveAggregator.cs" />
-    <Compile Include="Aggregations\Aggregators\ITyresTemperatures.cs" />
-    <Compile Include="Aggregations\Aggregators\ITyresWear.cs" />
+    <Compile Include="Aggregations\Aggregators\Models\ITyresTemperatures.cs" />
+    <Compile Include="Aggregations\Aggregators\Models\ITyresWear.cs" />
     <Compile Include="Aggregations\Aggregators\LiveAggregator.cs" />
     <Compile Include="Aggregations\Mappers\LiveMapperFactory.cs" />
-    <Compile Include="Aggregations\Aggregators\Tyres.cs" />
-    <Compile Include="Aggregations\Aggregators\TyresTemperatures.cs" />
+    <Compile Include="Aggregations\Aggregators\Models\Tyres.cs" />
+    <Compile Include="Aggregations\Aggregators\Models\TyresTemperatures.cs" />
     <Compile Include="Aggregations\Mappers\ILiveMapper.cs" />
     <Compile Include="Aggregations\Mappers\LiveMapper.cs" />
     <Compile Include="DataVessel.cs" />

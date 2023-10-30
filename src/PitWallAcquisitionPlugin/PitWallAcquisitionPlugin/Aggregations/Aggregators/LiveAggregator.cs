@@ -1,4 +1,5 @@
-﻿using PitWallAcquisitionPlugin.UI.ViewModels;
+﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators.Models;
+using PitWallAcquisitionPlugin.UI.ViewModels;
 using System;
 using System.Globalization;
 
@@ -80,7 +81,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
                 LaptimeSeconds = _laptimeSeconds,
                 AvgWetness = _avgWetness,
                 AirTemperature = _airTemperature,
-                TyresWear = new Tyres()
+                TyresWear = new TyresWear()
                 {
                     FrontLeftWear = _frontLeftTyreWear,
                     FrontRightWear = _frontRightTyreWear,
