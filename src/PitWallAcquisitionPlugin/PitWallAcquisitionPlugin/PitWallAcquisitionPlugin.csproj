@@ -96,10 +96,11 @@
     <Compile Include="Aggregations\ITyresTemperatures.cs" />
     <Compile Include="Aggregations\ITyresWear.cs" />
     <Compile Include="Aggregations\LiveAggregator.cs" />
+    <Compile Include="Aggregations\Mappers\LiveMapperFactory.cs" />
     <Compile Include="Aggregations\Tyres.cs" />
     <Compile Include="Aggregations\TyresTemperatures.cs" />
-    <Compile Include="Aggregations\v2\ILiveMapper.cs" />
-    <Compile Include="Aggregations\v2\LiveMapper.cs" />
+    <Compile Include="Aggregations\Mappers\ILiveMapper.cs" />
+    <Compile Include="Aggregations\Mappers\LiveMapper.cs" />
     <Compile Include="DataVessel.cs" />
     <Compile Include="HealthChecks\HealthCheckService.cs" />
     <Compile Include="HealthChecks\IHealthCheckService.cs" />

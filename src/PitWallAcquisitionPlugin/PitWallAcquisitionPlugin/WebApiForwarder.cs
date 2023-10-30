@@ -98,6 +98,9 @@ namespace PitWallAcquisitionPlugin
                 .As<IPitWallConfiguration>()
                 .SingleInstance();
 
+            containerBuilder.RegisterType<MappingConfigurationRepository>()
+                .As<IMappingConfigurationRepository>();
+
             var builder = containerBuilder.Build();
 
             return builder;

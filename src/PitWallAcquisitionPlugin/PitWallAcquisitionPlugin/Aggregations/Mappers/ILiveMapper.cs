@@ -1,6 +1,6 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
 
-namespace PitWallAcquisitionPlugin.Aggregations.v2
+namespace PitWallAcquisitionPlugin.Aggregations.Mappers
 {
     public interface ILiveMapper
     {
