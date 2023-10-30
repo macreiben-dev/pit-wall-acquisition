@@ -1,6 +1,6 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using NSubstitute;
-using PitWallAcquisitionPlugin.Aggregations;
+using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using Xunit;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests

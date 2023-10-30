@@ -1,9 +1,7 @@
 ﻿using PitWallAcquisitionPlugin.HealthChecks;
 using PitWallAcquisitionPlugin.UI.ViewModels;
-using SimHub.Plugins.OutputPlugins.GraphicalDash;
 using System;
 using System.ComponentModel;
-using System.Threading.Tasks;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.Commands
 {

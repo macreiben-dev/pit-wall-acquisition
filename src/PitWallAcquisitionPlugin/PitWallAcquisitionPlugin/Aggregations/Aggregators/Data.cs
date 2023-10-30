@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations
+namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 {
     public sealed class Data : IData
     {

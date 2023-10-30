@@ -1,5 +1,4 @@
-﻿using PitWallAcquisitionPlugin.Aggregations;
-using PitWallAcquisitionPlugin.Aggregations.Mappers;
+﻿using PitWallAcquisitionPlugin.Aggregations.Mappers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;

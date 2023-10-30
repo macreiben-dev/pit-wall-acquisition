@@ -1,4 +1,5 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
+using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Mappers
 {

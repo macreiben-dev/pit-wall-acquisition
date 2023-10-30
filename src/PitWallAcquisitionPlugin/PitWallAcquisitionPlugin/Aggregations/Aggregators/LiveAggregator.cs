@@ -1,9 +1,8 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations;
-using PitWallAcquisitionPlugin.UI.ViewModels;
+﻿using PitWallAcquisitionPlugin.UI.ViewModels;
 using System;
 using System.Globalization;
 
-namespace PitWallAcquisitionPlugin.Aggregations
+namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 {
     public sealed class LiveAggregator : ILiveAggregator
     {

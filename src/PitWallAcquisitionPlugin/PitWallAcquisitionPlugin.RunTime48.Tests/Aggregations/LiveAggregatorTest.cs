@@ -1,8 +1,7 @@
 ﻿using NFluent;
-using PitWallAcquisitionPlugin.Aggregations;
+using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using PitWallAcquisitionPlugin.Tests.UI.ViewModels;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace PitWallAcquisitionPlugin.Tests.Aggregations

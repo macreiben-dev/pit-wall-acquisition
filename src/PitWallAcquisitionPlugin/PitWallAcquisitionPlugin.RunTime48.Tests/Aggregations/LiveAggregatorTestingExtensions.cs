@@ -1,6 +1,5 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations;
-using NFluent;
-using PitWallAcquisitionPlugin.Aggregations;
+﻿using NFluent;
+using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using System;
 using System.Diagnostics;
 

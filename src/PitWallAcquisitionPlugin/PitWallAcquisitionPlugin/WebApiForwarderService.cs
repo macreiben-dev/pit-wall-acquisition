@@ -1,8 +1,7 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.Aggregations;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
-using PitWallAcquisitionPlugin.Aggregations;
+using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using System.Timers;
 
 namespace PitWallAcquisitionPlugin

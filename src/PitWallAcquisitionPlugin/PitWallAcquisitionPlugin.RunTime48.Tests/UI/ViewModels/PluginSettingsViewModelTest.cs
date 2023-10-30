@@ -3,9 +3,9 @@ using NFluent;
 using FluentAssertions;
 using System.ComponentModel;
 using Xunit;
-using PitWallAcquisitionPlugin.Aggregations;
 using NSubstitute;
 using PitWallAcquisitionPlugin.HealthChecks;
+using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 {
