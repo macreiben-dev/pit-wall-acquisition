@@ -140,13 +140,13 @@ namespace PitWallAcquisitionPlugin
 
             try
             {
-                // -- PATCH
                 if (EnsureSimerKeyAndPilotNameAreSet(dataToSend))
                 {
                     _logger.Error($"Mandatory configuration missing, PilotName is [{dataToSend.PilotName}] - SimerKey is [{dataToSend.SimerKey}]");
 
                     return;
                 }
+
                 await _dataRepository.SendAsync(dataToSend);
 
                 // Reset to 0 after one success.
@@ -198,17 +198,10 @@ namespace PitWallAcquisitionPlugin
             * centralize the definition of the copy from plugin manager to racing data repo.
             * 
             * */
-
-            /**
-             * Issue : really need to unit test mapping here.
-             * */
-
-            /**
-             * Issue : we are running the aggregation at the simhub frequency. It means
-             * that we surely update the aggregator more than needed.
-             */
-
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_liveAggregator, racingDataRepository, _mappingConfiguration);
+            MapSourceDataToAggregagtor.UpdateAggregatorNow(
+                _liveAggregator, 
+                racingDataRepository, 
+                _mappingConfiguration);
         }
 
         private bool ShouldStopTimer()

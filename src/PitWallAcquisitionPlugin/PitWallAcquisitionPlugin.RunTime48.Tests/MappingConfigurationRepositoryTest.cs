@@ -5,13 +5,13 @@ using Xunit;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests
 {
-    public class MapSourceDataToAggregagtorTest
+    public class MappingConfigurationRepositoryTest
     {
         private ILiveAggregator _aggregator;
         private IPluginRecordRepository _record;
         private MappingConfigurationRepository _mapConfiguration;
 
-        public MapSourceDataToAggregagtorTest()
+        public MappingConfigurationRepositoryTest()
         {
             // ARRANGE
             _aggregator = Substitute.For<ILiveAggregator>();
@@ -32,10 +32,13 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests
             _record.TyreFrontRightTemperature.Returns(new FakeTyreTemperature() { Average = 23.0 });
             _record.TyreRearRightTemperature.Returns(new FakeTyreTemperature() { Average = 24.0 });
 
-            _mapConfiguration = new MappingConfigurationRepository();
+            var target = new MappingConfigurationRepository();
 
             // ACT
-            MapSourceDataToAggregagtor.UpdateAggregatorNow(_aggregator, _record, _mapConfiguration);
+            foreach (var item in target)
+            {
+                item.Set(_record, _aggregator);
+            }
         }
 
         [Fact]

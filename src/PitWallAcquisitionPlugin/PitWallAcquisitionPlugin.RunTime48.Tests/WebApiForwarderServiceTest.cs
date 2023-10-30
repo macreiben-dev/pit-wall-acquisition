@@ -87,7 +87,8 @@ namespace PitWallAcquisitionPlugin.Tests
                 _dataRepository,
                 _mappingConfiguration,
                 _logger,
-                1000, 1);
+                1000, 
+                1);
 
             target.Start();
 
