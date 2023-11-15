@@ -50,13 +50,6 @@
         /// <param name="tyreWearValue"></param>
         void SetRearRightTyreWear(double? tyreWearValue);
 
-        /// <summary>
-        /// <para>Sets the track temperature</para>
-        /// <para>Format is xx.x</para>
-        /// </summary>
-        /// <param name="data"></param>
-        void SetTrackTemperature(double? data);
-
         // ====================================================
 
         /// <summary>

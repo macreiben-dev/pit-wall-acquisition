@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PitWallAcquisitionPlugin
 {
-    public sealed class MappingConfigurationRepository : IMappingConfigurationRepository 
+    public class MappingConfigurationRepository : IMappingConfigurationRepository 
     {
         private readonly ILiveMapper[] _allConfiguration;
 
@@ -15,7 +15,6 @@ namespace PitWallAcquisitionPlugin
               {
                 LiveMapperFactory.GetInstance(r => r.AirTemperature, (a, data) => a.SetAirTemperature(data)),
                 LiveMapperFactory.GetInstance(r => r.AvgRoadWetness, (a, data) => a.SetAvgWetness(data)),
-                LiveMapperFactory.GetInstance(r => r.TraceTemperature, (a, data) => a.SetTrackTemperature(data)),
 
                 // ----
 
@@ -23,8 +22,7 @@ namespace PitWallAcquisitionPlugin
                 LiveMapperFactory.GetInstance(r => r.TyreRearLeftTemperature.Average, (a, data) => a.SetRearLeftTyreTemperature(data)),
                 LiveMapperFactory.GetInstance(r => r.TyreFrontRightTemperature.Average, (a, data) => a.SetFrontRightTyreTemperature(data)),
                 LiveMapperFactory.GetInstance(r => r.TyreRearRightTemperature.Average, (a, data) => a.SetRearRightTyreTemperature(data)),
-
-
+                
                 // ----
 
                 LiveMapperFactory.GetInstance(r => r.TyreWearFrontLeft, (a, data) => a.SetFrontLeftTyreWear(data)),

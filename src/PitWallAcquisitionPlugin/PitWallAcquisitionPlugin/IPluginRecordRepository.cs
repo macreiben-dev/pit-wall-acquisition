@@ -25,7 +25,7 @@ namespace FuelAssistantMobile.DataGathering.SimhubPlugin
         /// The last laptime.
         /// </summary>
         string LastLaptime { get; }
-
+        
         /// <summary>
         /// Tyre wear front left
         /// </summary>
@@ -57,7 +57,5 @@ namespace FuelAssistantMobile.DataGathering.SimhubPlugin
         double? AvgRoadWetness { get; }
 
         double? AirTemperature { get; }
-
-        double? TraceTemperature { get; }
     }
 }

@@ -375,12 +375,10 @@ namespace PitWallAcquisitionPlugin.Tests.PluginManagerWrappers
             private double? _roadWetness;
             private double? _raining;
             private double? _airTemperature;
-            private double? _trackTemperature;
 
             private const double RoadWetness = 10.0;
             private const double Raining = 11.0;
             private const double AirTemperature = 12.0;
-            private const double TrackTemperature = 13.0;
 
             public WeatherCondition()
             {
@@ -395,15 +393,11 @@ namespace PitWallAcquisitionPlugin.Tests.PluginManagerWrappers
                 _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.AirTemperature")
                     .Returns(AirTemperature);
 
-                _pluginManagerAdapter.GetPropertyValue("DataCorePlugin.GameData.RoadTemperature")
-                    .Returns(TrackTemperature);
-
                 var target = GetTarget();
 
                 _roadWetness = target.AvgRoadWetness;
                 _raining = target.Raining;
                 _airTemperature = target.AirTemperature;
-                _trackTemperature = target.TraceTemperature;
             }
 
             private PluginManagerWrapper GetTarget()
@@ -427,12 +421,6 @@ namespace PitWallAcquisitionPlugin.Tests.PluginManagerWrappers
             public void THEN_map_airTemperature()
             {
                 Check.That(_airTemperature).IsEqualTo(AirTemperature);
-            }
-
-            [Fact]
-            public void THEN_map_track_temperature()
-            {
-                Check.That(_trackTemperature).IsEqualTo(TrackTemperature);
             }
         }
     }

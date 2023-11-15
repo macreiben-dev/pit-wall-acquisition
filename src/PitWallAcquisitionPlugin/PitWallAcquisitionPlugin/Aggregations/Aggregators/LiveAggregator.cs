@@ -22,7 +22,6 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         private double? _rearRightTyreTemp;
         private double? _avgWetness;
         private double? _airTemperature;
-        private double? _trackTemperature;
         private readonly IPitWallConfiguration _configuration;
 
         public bool IsDirty => _dirty;
@@ -77,14 +76,11 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         {
             return new Data
             {
-                SimerKey = _configuration.PersonalKey,
-                PilotName = _configuration.PilotName,
-                // ---------------------------------
                 SessionTimeLeft = _sessionTimeLeft,
+                PilotName = _configuration.PilotName,
                 LaptimeSeconds = _laptimeSeconds,
                 AvgWetness = _avgWetness,
                 AirTemperature = _airTemperature,
-                TrackTemperature = _trackTemperature,
                 TyresWear = new TyresWear()
                 {
                     FrontLeftWear = _frontLeftTyreWear,
@@ -102,6 +98,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
                     RearLeftTemp = _rearLeftTyreTemp,
                     RearRightTemp = _rearRightTyreTemp
                 },
+                SimerKey = _configuration.PersonalKey
             };
         }
 
@@ -226,18 +223,6 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
             }
 
             _airTemperature = data;
-
-            SetDirty();
-        }
-
-        public void SetTrackTemperature(double? data)
-        {
-            if (!data.HasValue)
-            {
-                return;
-            }
-
-            _trackTemperature = data;
 
             SetDirty();
         }

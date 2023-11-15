@@ -9,7 +9,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.Commands
 {
     public sealed class IsApiAvailableCommandTest
     {
-        private const string VALID_API_ADDRESS = "http://locallhost:32773/v1";
+        private const string VALID_API_ADDRESS = "http://locallhost:32773";
         private const string INVALID_API_ADDRESS = "httttttp://locallhost:32773";
         private const string OK = "OK";
         private const string KO = "KO";

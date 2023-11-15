@@ -42,7 +42,6 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
             public const string AvgPathWetness = "DataCorePlugin.GameRawData.Scoring.mScoringInfo.mAvgPathWetness";
             public const string Raining = "GameRawData.Scoring.mScoringInfo.mRaining";
             public const string AirTemperature = "DataCorePlugin.GameData.AirTemperature";
-            public const string TrackTemperature = "DataCorePlugin.GameData.RoadTemperature";
         }
 
         private readonly IPluginManagerAdapter _pluginManager;
@@ -115,8 +114,5 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
             Constants.Raining, _pluginManager);
         public double? AirTemperature => PluginManagerFieldConverter.ToDouble(
             Constants.AirTemperature, _pluginManager);
-
-        public double? TraceTemperature => PluginManagerFieldConverter.ToDouble(
-            Constants.TrackTemperature, _pluginManager);
     }
 }
