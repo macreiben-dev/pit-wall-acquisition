@@ -844,6 +844,45 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 Check.That(target.IsDirty).IsTrue();
             }
 
+
+
+            [Fact]
+            public void GIVEN_trackTemp_isNull_THEN_airTemp_isNull_AND_isDirty_isFalse()
+            {
+                var target = GetTarget();
+
+                target.EnsureValueNullMapped(
+                      a => a.SetTrackTemperature(null),
+                      d => d.TrackTemperature);
+
+                Check.That(target.IsDirty).IsFalse();
+            }
+
+            [Fact]
+            public void GIVEN_trackTemp_isNotNull_THEN_airTemp_isNotNull_AND_isDirty_isTrue()
+            {
+                var target = GetTarget();
+
+                target.EnsureValueNotNullMapped(
+                    a => a.SetTrackTemperature(10.0),
+                    d => d.TrackTemperature);
+
+                Check.That(target.IsDirty).IsTrue();
+            }
+
+            [Fact]
+            public void GIVEN_trackTemp_isSet_THEN_airTemp_isEqual_toExpected_AND_isDirty_isTrue()
+            {
+                var target = GetTarget();
+
+                target.EnsureValueEqualsExpected(
+                    a => a.SetTrackTemperature(10.0),
+                    d => d.TrackTemperature,
+                    10.0);
+
+                Check.That(target.IsDirty).IsTrue();
+            }
+
         }
 
         [Fact]

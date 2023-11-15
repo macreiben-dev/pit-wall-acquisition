@@ -16,6 +16,8 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 
         double? AirTemperature { get; }
 
+        double? TrackTemperature { get; }
+
         ITyresWear TyresWear { get; }
 
         ITyresTemperatures TyresTemperatures { get; }

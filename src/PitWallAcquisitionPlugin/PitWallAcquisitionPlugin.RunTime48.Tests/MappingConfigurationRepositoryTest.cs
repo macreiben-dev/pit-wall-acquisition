@@ -9,7 +9,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests
     {
         private ILiveAggregator _aggregator;
         private IPluginRecordRepository _record;
-        private MappingConfigurationRepository _mapConfiguration;
 
         public MappingConfigurationRepositoryTest()
         {
@@ -19,6 +18,8 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests
 
             _record.AirTemperature.Returns(1.0);
             _record.AvgRoadWetness.Returns(2.0);
+            _record.TraceTemperature.Returns(3.0);
+
             _record.LastLaptime.Returns("00:02:02.100");
             _record.SessionTimeLeft.Returns("03:03:03.100");
 
@@ -105,6 +106,12 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests
         public void THEN_map_AvgRoadWetness()
         {
             _aggregator.Received(1).SetAvgWetness(2.0);
+        }
+
+        [Fact]
+        public void THEN_map_trackTemperature()
+        {
+            _aggregator.Received(1).SetTrackTemperature(3.0);
         }
 
         [Fact]
