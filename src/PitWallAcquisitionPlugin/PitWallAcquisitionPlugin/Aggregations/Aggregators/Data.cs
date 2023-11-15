@@ -30,5 +30,6 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         public double? AvgWetness { get; set; }
 
         public double? AirTemperature { get; set; }
+        public double? TrackTemperature { get; set; }
     }
 }
