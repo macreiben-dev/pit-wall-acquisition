@@ -12,6 +12,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         private bool _dirty = false;
 
         private double? _laptimeSeconds;
+        
         private double? _frontLeftTyreWear;
         private double? _frontRightTyreWear;
         private double? _rearLeftTyreWear;
@@ -21,14 +22,18 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         private double? _frontRightTyreTemp;
         private double? _rearLeftTyreTemp;
         private double? _rearRightTyreTemp;
+        
         private double? _avgWetness;
         private double? _airTemperature;
         private double? _trackTemperature;
+
         private double? _fuel;
         private double? _maxFuel;
         private double? _computedLastLapConsumption;
         private double? _computedLiterPerLaps;
         private double? _computedRemainingLaps;
+        private double? _computedRemainingTime;
+        
         private readonly IPitWallConfiguration _configuration;
 
         public bool IsDirty => _dirty;
@@ -115,7 +120,8 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
                     MaxFuel = _maxFuel,
                     ComputedLastLapConsumption = _computedLastLapConsumption,
                     ComputedLiterPerLaps = _computedLiterPerLaps,
-                    ComputedRemainingLaps = _computedRemainingLaps
+                    ComputedRemainingLaps = _computedRemainingLaps,
+                    ComputedRemainingTime = _computedRemainingTime
                 }
             };
         }
@@ -304,6 +310,11 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         public void SetComputedRemainingLaps(double? data)
         {
             SetValueUnlessIsNull(data, (s) => _computedRemainingLaps = s);
+        }
+
+        public void SetComputedRemainingTime(double? data)
+        {
+            SetValueUnlessIsNull(data, (s) => _computedRemainingTime = s);
         }
     }
 }

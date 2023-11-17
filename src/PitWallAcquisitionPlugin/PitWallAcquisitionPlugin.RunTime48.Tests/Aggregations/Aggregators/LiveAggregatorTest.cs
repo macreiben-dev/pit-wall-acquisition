@@ -1012,6 +1012,29 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                     expected);
             }
 
+            [Fact]
+            public void StrategyTests_ComputedRemainingTime()
+            {
+                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedRemainingTime(10.0);
+                Action<ILiveAggregator> setDataNull = a => a.SetComputedRemainingTime(null);
+                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedRemainingTime;
+                double? expected = 10.0;
+
+                EnsureWhenNullStaysNullAndIsDirtyFalse(
+                    setDataNull,
+                    fieldSelector
+                    );
+
+                EnsureWhenNotNullTheMappedAndIsDirtyTrue(
+                    setDataNotNull,
+                    fieldSelector);
+
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue(
+                    setDataNotNull,
+                    fieldSelector,
+                    expected);
+            }
+
             private void EnsureWhenNullStaysNullAndIsDirtyFalse(
                 Action<ILiveAggregator> setDataAction,
                 Func<IData, double?> fieldSelector)

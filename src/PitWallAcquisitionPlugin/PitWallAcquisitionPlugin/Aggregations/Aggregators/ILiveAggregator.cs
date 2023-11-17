@@ -125,5 +125,6 @@
         
         void SetComputedLiterPerLaps(double? v);
         void SetComputedRemainingLaps(double? v);
+        void SetComputedRemainingTime(double? v);
     }
 }
