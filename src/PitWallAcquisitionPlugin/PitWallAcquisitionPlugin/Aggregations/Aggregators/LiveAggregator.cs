@@ -2,6 +2,7 @@
 using PitWallAcquisitionPlugin.UI.ViewModels;
 using System;
 using System.Globalization;
+using System.Windows.Markup;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 {
@@ -23,11 +24,15 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         private double? _avgWetness;
         private double? _airTemperature;
         private double? _trackTemperature;
+        private double? _fuel;
+        private double? _maxFuel;
+        private double? _computedLastLapConsumption;
         private readonly IPitWallConfiguration _configuration;
 
         public bool IsDirty => _dirty;
 
-        public LiveAggregator(IPitWallConfiguration configuration) {
+        public LiveAggregator(IPitWallConfiguration configuration)
+        {
             _configuration = configuration;
         }
 
@@ -102,6 +107,12 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
                     RearLeftTemp = _rearLeftTyreTemp,
                     RearRightTemp = _rearRightTyreTemp
                 },
+                VehicleConsumption = new VehicleConsumption()
+                {
+                    Fuel = _fuel,
+                    MaxFuel = _maxFuel,
+                    ComputedLastLapConsumption = _computedLastLapConsumption
+                }
             };
         }
 
@@ -254,5 +265,31 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
             _dirty = false;
         }
 
+        private void SetValueUnlessIsNull(double? data, Action<double?> setter)
+        {
+            if (!data.HasValue)
+            {
+                return;
+            }
+
+            setter(data);
+
+            SetDirty();
+        }
+
+        public void SetFuel(double? data)
+        {
+            SetValueUnlessIsNull(data, (s) => _fuel = s);
+        }
+
+        public void SetMaxFuel(double? data)
+        {
+            SetValueUnlessIsNull(data, (s) => _maxFuel = s);
+        }
+
+        public void SetComputedLastLapConsumption(double? data)
+        {
+            SetValueUnlessIsNull(data, (s) => _computedLastLapConsumption = s);
+        }
     }
 }

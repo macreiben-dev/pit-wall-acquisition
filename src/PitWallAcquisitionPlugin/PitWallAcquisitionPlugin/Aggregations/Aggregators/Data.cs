@@ -31,5 +31,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 
         public double? AirTemperature { get; set; }
         public double? TrackTemperature { get; set; }
+        public double? Fuel { get; set; }
+        public  IVehicleConsumption VehicleConsumption { get; set; }
     }
 }
