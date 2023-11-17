@@ -59,5 +59,13 @@ namespace FuelAssistantMobile.DataGathering.SimhubPlugin
         double? AirTemperature { get; }
 
         double? TraceTemperature { get; }
+
+        double? Fuel { get; }
+        double? ComputedLastLapConsumption { get; }
+
+        double? MaxFuel { get; }
+        double? ComputedLiterPerLaps { get; }
+        double? ComputedRemainingLaps { get; }
+        string ComputedRemainingTime { get; }
     }
 }

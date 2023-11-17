@@ -312,9 +312,18 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
             SetValueUnlessIsNull(data, (s) => _computedRemainingLaps = s);
         }
 
-        public void SetComputedRemainingTime(double? data)
+        public void SetComputedRemainingTime(string data)
         {
-            SetValueUnlessIsNull(data, (s) => _computedRemainingTime = s);
+            if (string.IsNullOrEmpty(data))
+            {
+                return;
+            }
+
+            var duration = TimeSpan.Parse(data, CultureInfo.InvariantCulture);
+
+            _computedRemainingTime = duration.TotalMilliseconds / 1000;
+
+            SetDirty();
         }
     }
 }

@@ -33,6 +33,13 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests
             _record.TyreFrontRightTemperature.Returns(new FakeTyreTemperature() { Average = 23.0 });
             _record.TyreRearRightTemperature.Returns(new FakeTyreTemperature() { Average = 24.0 });
 
+            _record.MaxFuel.Returns(30.0);
+            _record.Fuel.Returns(31.0);
+            _record.ComputedLastLapConsumption.Returns(32.0);
+            _record.ComputedLiterPerLaps.Returns(33.0);
+            _record.ComputedRemainingLaps.Returns(34.0);
+            _record.ComputedRemainingTime.Returns("04:04:04.100");
+
             var target = new MappingConfigurationRepository();
 
             // ACT
@@ -41,6 +48,44 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests
                 item.Set(_record, _aggregator);
             }
         }
+
+        [Fact]
+        public void THEN_map_MaxFuel()
+        {
+            _aggregator.Received(1).SetMaxFuel(30.0);
+        }
+
+        [Fact]
+        public void THEN_map_Fuel()
+        {
+            _aggregator.Received(1).SetFuel(31.0);
+        }
+
+        [Fact]
+        public void THEN_map_ComputedLastLapConsumptionl()
+        {
+            _aggregator.Received(1).SetComputedLastLapConsumption(32.0);
+        }
+
+        [Fact]
+        public void THEN_map_ComputedLiterPerLaps()
+        {
+            _aggregator.Received(1).SetComputedLiterPerLaps(33.0);
+        }
+
+        [Fact]
+        public void THEN_map_ComputedRemainingLaps()
+        {
+            _aggregator.Received(1).SetComputedRemainingLaps(34.0);
+        }
+
+        [Fact]
+        public void THEN_map_ComputedRemainingTime()
+        {
+            _aggregator.Received(1).SetComputedRemainingTime("04:04:04.100");
+        }
+
+        // ----
 
         [Fact]
         public void THEN_map_TyreFrontLeftTemperature()

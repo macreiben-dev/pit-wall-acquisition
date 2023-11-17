@@ -937,7 +937,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                     setDataNotNull,
                     fieldSelector);
 
-                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue(
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<double?>(
                     setDataNotNull,
                     fieldSelector,
                     expected);
@@ -960,7 +960,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                     setDataNotNull,
                     fieldSelector);
 
-                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue(
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<double?>(
                     setDataNotNull,
                     fieldSelector,
                     expected);
@@ -983,7 +983,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                     setDataNotNull,
                     fieldSelector);
 
-                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue(
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<double?>(
                     setDataNotNull,
                     fieldSelector,
                     expected);
@@ -1006,7 +1006,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                     setDataNotNull,
                     fieldSelector);
 
-                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue(
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<double?>(
                     setDataNotNull,
                     fieldSelector,
                     expected);
@@ -1015,10 +1015,10 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             [Fact]
             public void StrategyTests_ComputedRemainingTime()
             {
-                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedRemainingTime(10.0);
+                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedRemainingTime("04:04:04.100");
                 Action<ILiveAggregator> setDataNull = a => a.SetComputedRemainingTime(null);
                 Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedRemainingTime;
-                double? expected = 10.0;
+                double? expected = 14644.1;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(
                     setDataNull,
@@ -1029,7 +1029,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                     setDataNotNull,
                     fieldSelector);
 
-                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue(
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<double?>(
                     setDataNotNull,
                     fieldSelector,
                     expected);
@@ -1059,10 +1059,25 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 Check.That(target.IsDirty).IsTrue();
             }
 
-            private void EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue(
+            private void EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<TExpected>(
                 Action<ILiveAggregator> setDataAction,
-                Func<IData, double?> fieldSelector,
-                double? expected)
+                Func<IData, TExpected> fieldSelector,
+                TExpected expected)
+            {
+                var target = GetTarget();
+
+                target.EnsureValueEqualsExpected<TExpected>(
+                    setDataAction,
+                    fieldSelector,
+                    expected);
+
+                Check.That(target.IsDirty).IsTrue();
+            }
+
+            private void EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue<TExpected>(
+                Action<ILiveAggregator> setDataAction,
+                Func<IData, TExpected> fieldSelector,
+                TExpected expected)
             {
                 var target = GetTarget();
 
@@ -1073,7 +1088,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 Check.That(target.IsDirty).IsTrue();
             }
-    }
+        }
 
     [Fact]
     public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_laptime_is_null()

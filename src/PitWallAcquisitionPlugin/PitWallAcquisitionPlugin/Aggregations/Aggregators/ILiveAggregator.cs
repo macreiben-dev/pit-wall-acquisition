@@ -124,7 +124,9 @@
         void SetComputedLastLapConsumption(double? data);
         
         void SetComputedLiterPerLaps(double? v);
+
         void SetComputedRemainingLaps(double? v);
-        void SetComputedRemainingTime(double? v);
+
+        void SetComputedRemainingTime(string v);
     }
 }
