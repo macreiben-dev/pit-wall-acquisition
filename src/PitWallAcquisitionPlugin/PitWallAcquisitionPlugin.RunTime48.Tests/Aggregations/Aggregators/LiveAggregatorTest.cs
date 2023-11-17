@@ -845,8 +845,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 Check.That(target.IsDirty).IsTrue();
             }
 
-
-
             [Fact]
             public void GIVEN_trackTemp_isNull_THEN_airTemp_isNull_AND_isDirty_isFalse()
             {
@@ -951,6 +949,52 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 Action<ILiveAggregator> setDataNotNull = a => a.SetComputedLastLapConsumption(10.0);
                 Action<ILiveAggregator> setDataNull = a => a.SetComputedLastLapConsumption(null);
                 Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedLastLapConsumption;
+                double? expected = 10.0;
+
+                EnsureWhenNullStaysNullAndIsDirtyFalse(
+                    setDataNull,
+                    fieldSelector
+                    );
+
+                EnsureWhenNotNullTheMappedAndIsDirtyTrue(
+                    setDataNotNull,
+                    fieldSelector);
+
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue(
+                    setDataNotNull,
+                    fieldSelector,
+                    expected);
+            }
+
+            [Fact]
+            public void StrategyTests_ComputedLiterPerLaps()
+            {
+                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedLiterPerLaps(10.0);
+                Action<ILiveAggregator> setDataNull = a => a.SetComputedLiterPerLaps(null);
+                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedLiterPerLaps;
+                double? expected = 10.0;
+
+                EnsureWhenNullStaysNullAndIsDirtyFalse(
+                    setDataNull,
+                    fieldSelector
+                    );
+
+                EnsureWhenNotNullTheMappedAndIsDirtyTrue(
+                    setDataNotNull,
+                    fieldSelector);
+
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue(
+                    setDataNotNull,
+                    fieldSelector,
+                    expected);
+            }
+
+            [Fact]
+            public void StrategyTests_ComputedRemainingLaps()
+            {
+                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedRemainingLaps(10.0);
+                Action<ILiveAggregator> setDataNull = a => a.SetComputedRemainingLaps(null);
+                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedRemainingLaps;
                 double? expected = 10.0;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(

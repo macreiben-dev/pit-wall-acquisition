@@ -27,6 +27,8 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         private double? _fuel;
         private double? _maxFuel;
         private double? _computedLastLapConsumption;
+        private double? _computedLiterPerLaps;
+        private double? _computedRemainingLaps;
         private readonly IPitWallConfiguration _configuration;
 
         public bool IsDirty => _dirty;
@@ -111,7 +113,9 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
                 {
                     Fuel = _fuel,
                     MaxFuel = _maxFuel,
-                    ComputedLastLapConsumption = _computedLastLapConsumption
+                    ComputedLastLapConsumption = _computedLastLapConsumption,
+                    ComputedLiterPerLaps = _computedLiterPerLaps,
+                    ComputedRemainingLaps = _computedRemainingLaps
                 }
             };
         }
@@ -290,6 +294,16 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         public void SetComputedLastLapConsumption(double? data)
         {
             SetValueUnlessIsNull(data, (s) => _computedLastLapConsumption = s);
+        }
+
+        public void SetComputedLiterPerLaps(double? data)
+        {
+            SetValueUnlessIsNull(data, (s) => _computedLiterPerLaps = s);
+        }
+
+        public void SetComputedRemainingLaps(double? data)
+        {
+            SetValueUnlessIsNull(data, (s) => _computedRemainingLaps = s);
         }
     }
 }

@@ -6,17 +6,20 @@
         double? ComputedLastLapConsumption { get; }
 
         double? MaxFuel { get; }
+        double? ComputedLiterPerLaps { get; }
+        double? ComputedRemainingLaps { get; }
     }
 
     public class VehicleConsumption : IVehicleConsumption
     {
-        public VehicleConsumption()
-        {
-        }
-
         public double? Fuel { get; set; }
 
         public double? ComputedLastLapConsumption { get; set; }
+
         public double? MaxFuel { get; set; }
+
+        public double? ComputedLiterPerLaps { get; set; }
+
+        public double? ComputedRemainingLaps { get; set; }
     }
 }

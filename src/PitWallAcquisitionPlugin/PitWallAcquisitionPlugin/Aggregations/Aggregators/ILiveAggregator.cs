@@ -120,6 +120,10 @@
         /// </summary>
         /// <returns></returns>
         IData AsData();
+
         void SetComputedLastLapConsumption(double? data);
+        
+        void SetComputedLiterPerLaps(double? v);
+        void SetComputedRemainingLaps(double? v);
     }
 }
