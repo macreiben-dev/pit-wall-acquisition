@@ -12,7 +12,7 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
             FakePitWallConfiguration configuration = new FakePitWallConfiguration()
             {
                 ApiAddress = "http://localhost:32773",
-                PersonalKey = "ven1_team_2023",
+                PersonalKey = "some_test_looking_value23",
                 PilotName = "IntegrationTestFromPlugin"
             };
 

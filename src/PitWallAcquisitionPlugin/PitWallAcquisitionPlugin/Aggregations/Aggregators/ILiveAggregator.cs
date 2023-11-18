@@ -103,6 +103,11 @@
         /// <param name="data"></param>
         void SetAirTemperature(double? data);
 
+        void SetFuel(double? value);
+
+        void SetMaxFuel(double? value);
+
+
         // ====================================================
 
         /// <summary>
@@ -115,6 +120,13 @@
         /// </summary>
         /// <returns></returns>
         IData AsData();
-       
+
+        void SetComputedLastLapConsumption(double? data);
+        
+        void SetComputedLiterPerLaps(double? v);
+
+        void SetComputedRemainingLaps(double? v);
+
+        void SetComputedRemainingTime(string v);
     }
 }

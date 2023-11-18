@@ -43,6 +43,13 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
             public const string Raining = "GameRawData.Scoring.mScoringInfo.mRaining";
             public const string AirTemperature = "DataCorePlugin.GameData.AirTemperature";
             public const string TrackTemperature = "DataCorePlugin.GameData.RoadTemperature";
+
+            public const string Fuel = "DataCorePlugin.GameData.Fuel";
+            public const string MaxFuel = "DataCorePlugin.GameData.MaxFuel";
+            public const string ComputedLastLapConsumption = "DataCorePlugin.Computed.Fuel_LastLapConsumption";
+            public const string ComputedLiterPerLaps = "DataCorePlugin.Computed.Fuel_LitersPerLap";
+            public const string ComputedRemainingLaps = "DataCorePlugin.Computed.Fuel_RemainingLaps";
+            public const string ComputedRemainingTime = "DataCorePlugin.Computed.Fuel_RemainingTime";
         }
 
         private readonly IPluginManagerAdapter _pluginManager;
@@ -111,6 +118,7 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 
         public double? AvgRoadWetness => PluginManagerFieldConverter.ToDouble(
             Constants.AvgPathWetness, _pluginManager);
+
         public double? Raining => PluginManagerFieldConverter.ToDouble(
             Constants.Raining, _pluginManager);
         public double? AirTemperature => PluginManagerFieldConverter.ToDouble(
@@ -118,5 +126,23 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 
         public double? TraceTemperature => PluginManagerFieldConverter.ToDouble(
             Constants.TrackTemperature, _pluginManager);
+
+        public double? Fuel => PluginManagerFieldConverter.ToDouble(
+            Constants.Fuel, _pluginManager);
+
+        public double? MaxFuel => PluginManagerFieldConverter.ToDouble(
+            Constants.MaxFuel, _pluginManager);
+
+        public double? ComputedLastLapConsumption => PluginManagerFieldConverter.ToDouble(
+            Constants.ComputedLastLapConsumption, _pluginManager);
+
+        public double? ComputedLiterPerLaps => PluginManagerFieldConverter.ToDouble(
+            Constants.ComputedLiterPerLaps, _pluginManager);
+
+        public double? ComputedRemainingLaps => PluginManagerFieldConverter.ToDouble(
+            Constants.ComputedRemainingLaps, _pluginManager);
+
+        public string ComputedRemainingTime => PluginManagerFieldConverter.ToString(
+            Constants.ComputedRemainingTime, _pluginManager);
     }
 }

@@ -96,6 +96,7 @@
     <Compile Include="Aggregations\Aggregators\Models\ITyresTemperatures.cs" />
     <Compile Include="Aggregations\Aggregators\Models\ITyresWear.cs" />
     <Compile Include="Aggregations\Aggregators\LiveAggregator.cs" />
+    <Compile Include="Aggregations\Aggregators\VehicleConsumption.cs" />
     <Compile Include="Aggregations\Mappers\LiveMapperFactory.cs" />
     <Compile Include="Aggregations\Aggregators\Models\Tyres.cs" />
     <Compile Include="Aggregations\Aggregators\Models\TyresTemperatures.cs" />

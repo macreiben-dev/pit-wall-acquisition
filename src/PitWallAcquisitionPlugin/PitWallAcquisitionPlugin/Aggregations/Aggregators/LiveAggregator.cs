@@ -2,6 +2,7 @@
 using PitWallAcquisitionPlugin.UI.ViewModels;
 using System;
 using System.Globalization;
+using System.Windows.Markup;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 {
@@ -11,6 +12,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         private bool _dirty = false;
 
         private double? _laptimeSeconds;
+        
         private double? _frontLeftTyreWear;
         private double? _frontRightTyreWear;
         private double? _rearLeftTyreWear;
@@ -20,14 +22,24 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         private double? _frontRightTyreTemp;
         private double? _rearLeftTyreTemp;
         private double? _rearRightTyreTemp;
+        
         private double? _avgWetness;
         private double? _airTemperature;
         private double? _trackTemperature;
+
+        private double? _fuel;
+        private double? _maxFuel;
+        private double? _computedLastLapConsumption;
+        private double? _computedLiterPerLaps;
+        private double? _computedRemainingLaps;
+        private double? _computedRemainingTime;
+        
         private readonly IPitWallConfiguration _configuration;
 
         public bool IsDirty => _dirty;
 
-        public LiveAggregator(IPitWallConfiguration configuration) {
+        public LiveAggregator(IPitWallConfiguration configuration)
+        {
             _configuration = configuration;
         }
 
@@ -102,6 +114,15 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
                     RearLeftTemp = _rearLeftTyreTemp,
                     RearRightTemp = _rearRightTyreTemp
                 },
+                VehicleConsumption = new VehicleConsumption()
+                {
+                    Fuel = _fuel,
+                    MaxFuel = _maxFuel,
+                    ComputedLastLapConsumption = _computedLastLapConsumption,
+                    ComputedLiterPerLaps = _computedLiterPerLaps,
+                    ComputedRemainingLaps = _computedRemainingLaps,
+                    ComputedRemainingTime = _computedRemainingTime
+                }
             };
         }
 
@@ -254,5 +275,55 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
             _dirty = false;
         }
 
+        private void SetValueUnlessIsNull(double? data, Action<double?> setter)
+        {
+            if (!data.HasValue)
+            {
+                return;
+            }
+
+            setter(data);
+
+            SetDirty();
+        }
+
+        public void SetFuel(double? data)
+        {
+            SetValueUnlessIsNull(data, (s) => _fuel = s);
+        }
+
+        public void SetMaxFuel(double? data)
+        {
+            SetValueUnlessIsNull(data, (s) => _maxFuel = s);
+        }
+
+        public void SetComputedLastLapConsumption(double? data)
+        {
+            SetValueUnlessIsNull(data, (s) => _computedLastLapConsumption = s);
+        }
+
+        public void SetComputedLiterPerLaps(double? data)
+        {
+            SetValueUnlessIsNull(data, (s) => _computedLiterPerLaps = s);
+        }
+
+        public void SetComputedRemainingLaps(double? data)
+        {
+            SetValueUnlessIsNull(data, (s) => _computedRemainingLaps = s);
+        }
+
+        public void SetComputedRemainingTime(string data)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                return;
+            }
+
+            var duration = TimeSpan.Parse(data, CultureInfo.InvariantCulture);
+
+            _computedRemainingTime = duration.TotalMilliseconds / 1000;
+
+            SetDirty();
+        }
     }
 }

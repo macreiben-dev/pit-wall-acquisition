@@ -60,5 +60,23 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             Check.That(fieldSelector(actual)).IsEqualTo(expected);
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
+
+        public static void EnsureValueEqualsExpected<TExpected>(
+           this LiveAggregator target,
+            Action<ILiveAggregator> setDataAction,
+              Func<IData, TExpected> fieldSelector,
+              TExpected expected)
+        {
+            Stopwatch watch = Stopwatch.StartNew();
+
+            setDataAction(target);
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            Check.That(fieldSelector(actual)).IsEqualTo(expected);
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
     }
 }

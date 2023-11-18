@@ -17,6 +17,13 @@ namespace PitWallAcquisitionPlugin
                 LiveMapperFactory.GetInstance(r => r.AvgRoadWetness, (a, data) => a.SetAvgWetness(data)),
                 LiveMapperFactory.GetInstance(r => r.TraceTemperature, (a, data) => a.SetTrackTemperature(data)),
 
+                LiveMapperFactory.GetInstance(r => r.Fuel, (a, data) => a.SetFuel(data)),
+                LiveMapperFactory.GetInstance(r => r.MaxFuel, (a, data) => a.SetMaxFuel(data)),
+                LiveMapperFactory.GetInstance(r => r.ComputedLastLapConsumption, (a, data) => a.SetComputedLastLapConsumption(data)),
+                LiveMapperFactory.GetInstance(r => r.ComputedLiterPerLaps, (a, data) => a.SetComputedLiterPerLaps(data)),
+                LiveMapperFactory.GetInstance(r => r.ComputedRemainingLaps, (a, data) => a.SetComputedRemainingLaps(data)),
+                LiveMapperFactory.GetInstance(r => r.ComputedRemainingTime, (a, data) => a.SetComputedRemainingTime(data)),
+
                 // ----
 
                 LiveMapperFactory.GetInstance(r => r.TyreFrontLeftTemperature.Average, (a, data) => a.SetFrontLeftTyreTemperature(data)),

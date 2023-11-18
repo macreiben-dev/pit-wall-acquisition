@@ -21,5 +21,8 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         ITyresWear TyresWear { get; }
 
         ITyresTemperatures TyresTemperatures { get; }
+        
+
+        IVehicleConsumption VehicleConsumption { get; }
     }
 }

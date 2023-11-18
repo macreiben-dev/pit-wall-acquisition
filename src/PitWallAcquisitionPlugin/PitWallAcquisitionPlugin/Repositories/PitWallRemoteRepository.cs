@@ -14,7 +14,7 @@ namespace PitWallAcquisitionPlugin.Repositories
          * Idea: use configuration from simhub to define this one.
          * 
          * */
-        private const string RelativeUri = "/api/Telemetry";
+        private const string RelativeUri = "/api/v1/Telemetry";
 
         private readonly HttpClient _httpClient;
         private readonly IPitWallConfiguration _configuration;

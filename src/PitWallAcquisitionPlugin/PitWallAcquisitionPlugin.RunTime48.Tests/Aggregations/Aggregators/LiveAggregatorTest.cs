@@ -1,6 +1,7 @@
 ﻿using NFluent;
 using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using PitWallAcquisitionPlugin.Tests.UI.ViewModels;
+using System;
 using System.Diagnostics;
 using Xunit;
 
@@ -837,14 +838,12 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 var target = GetTarget();
 
                 target.EnsureValueEqualsExpected(
-                    a => a.SetAvgWetness(10.0),
-                    d => d.AvgWetness,
+                    a => a.SetAirTemperature(10.0),
+                    d => d.AirTemperature,
                     10.0);
 
                 Check.That(target.IsDirty).IsTrue();
             }
-
-
 
             [Fact]
             public void GIVEN_trackTemp_isNull_THEN_airTemp_isNull_AND_isDirty_isFalse()
@@ -885,160 +884,366 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
         }
 
-        [Fact]
-        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_laptime_is_null()
+        public class VehicleConsumptionTest
         {
-            // ARRANGE
-            string original = "00:02:02.000";
+            private FakePitWallConfiguration _configuration;
 
-            var target = GetTarget();
+            public VehicleConsumptionTest()
+            {
+                _configuration = new FakePitWallConfiguration();
+            }
+            public LiveAggregator GetTarget()
+            {
+                return new LiveAggregator(_configuration);
+            }
 
-            // ACT
-            Stopwatch watch = Stopwatch.StartNew();
+            [Fact]
+            public void StrategyTests_Fuel()
+            {
+                Action<ILiveAggregator> setDataNotNull = a => a.SetFuel(10.0);
+                Action<ILiveAggregator> setDataNull = a => a.SetFuel(null);
+                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.Fuel;
+                double? expected = 10.0;
 
-            target.SetLaptime(original);
+                EnsureWhenNullStaysNullAndIsDirtyFalse(
+                    setDataNull,
+                    fieldSelector
+                    );
 
-            target.Clear();
+                EnsureWhenNotNullTheMappedAndIsDirtyTrue(
+                    setDataNotNull,
+                    fieldSelector);
 
-            var actual = target.AsData();
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue(
+                    setDataNotNull,
+                    fieldSelector,
+                    expected);
+            }
 
-            watch.Stop();
+            [Fact]
+            public void StrategyTests_MaxFuel()
+            {
+                Action<ILiveAggregator> setDataNotNull = a => a.SetMaxFuel(10.0);
+                Action<ILiveAggregator> setDataNull = a => a.SetMaxFuel(null);
+                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.MaxFuel;
+                double? expected = 10.0;
 
-            // ASSERT
-            Check.That(target.IsDirty).IsFalse();
-            Check.That(actual.LaptimeSeconds).IsNull();
+                EnsureWhenNullStaysNullAndIsDirtyFalse(
+                    setDataNull,
+                    fieldSelector
+                    );
 
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+                EnsureWhenNotNullTheMappedAndIsDirtyTrue(
+                    setDataNotNull,
+                    fieldSelector);
+
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<double?>(
+                    setDataNotNull,
+                    fieldSelector,
+                    expected);
+            }
+
+            [Fact]
+            public void StrategyTests_ComputedLastLapConsumption()
+            {
+                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedLastLapConsumption(10.0);
+                Action<ILiveAggregator> setDataNull = a => a.SetComputedLastLapConsumption(null);
+                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedLastLapConsumption;
+                double? expected = 10.0;
+
+                EnsureWhenNullStaysNullAndIsDirtyFalse(
+                    setDataNull,
+                    fieldSelector
+                    );
+
+                EnsureWhenNotNullTheMappedAndIsDirtyTrue(
+                    setDataNotNull,
+                    fieldSelector);
+
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<double?>(
+                    setDataNotNull,
+                    fieldSelector,
+                    expected);
+            }
+
+            [Fact]
+            public void StrategyTests_ComputedLiterPerLaps()
+            {
+                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedLiterPerLaps(10.0);
+                Action<ILiveAggregator> setDataNull = a => a.SetComputedLiterPerLaps(null);
+                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedLiterPerLaps;
+                double? expected = 10.0;
+
+                EnsureWhenNullStaysNullAndIsDirtyFalse(
+                    setDataNull,
+                    fieldSelector
+                    );
+
+                EnsureWhenNotNullTheMappedAndIsDirtyTrue(
+                    setDataNotNull,
+                    fieldSelector);
+
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<double?>(
+                    setDataNotNull,
+                    fieldSelector,
+                    expected);
+            }
+
+            [Fact]
+            public void StrategyTests_ComputedRemainingLaps()
+            {
+                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedRemainingLaps(10.0);
+                Action<ILiveAggregator> setDataNull = a => a.SetComputedRemainingLaps(null);
+                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedRemainingLaps;
+                double? expected = 10.0;
+
+                EnsureWhenNullStaysNullAndIsDirtyFalse(
+                    setDataNull,
+                    fieldSelector
+                    );
+
+                EnsureWhenNotNullTheMappedAndIsDirtyTrue(
+                    setDataNotNull,
+                    fieldSelector);
+
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<double?>(
+                    setDataNotNull,
+                    fieldSelector,
+                    expected);
+            }
+
+            [Fact]
+            public void StrategyTests_ComputedRemainingTime()
+            {
+                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedRemainingTime("04:04:04.100");
+                Action<ILiveAggregator> setDataNull = a => a.SetComputedRemainingTime(null);
+                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedRemainingTime;
+                double? expected = 14644.1;
+
+                EnsureWhenNullStaysNullAndIsDirtyFalse(
+                    setDataNull,
+                    fieldSelector
+                    );
+
+                EnsureWhenNotNullTheMappedAndIsDirtyTrue(
+                    setDataNotNull,
+                    fieldSelector);
+
+                EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<double?>(
+                    setDataNotNull,
+                    fieldSelector,
+                    expected);
+            }
+
+            private void EnsureWhenNullStaysNullAndIsDirtyFalse(
+                Action<ILiveAggregator> setDataAction,
+                Func<IData, double?> fieldSelector)
+            {
+                var target = GetTarget();
+
+                target.EnsureValueNullMapped(
+                    setDataAction,
+                    fieldSelector);
+            }
+
+            private void EnsureWhenNotNullTheMappedAndIsDirtyTrue(
+               Action<ILiveAggregator> setDataAction,
+               Func<IData, double?> fieldSelector)
+            {
+                var target = GetTarget();
+
+                target.EnsureValueNotNullMapped(
+                    setDataAction,
+                    fieldSelector);
+
+                Check.That(target.IsDirty).IsTrue();
+            }
+
+            private void EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<TExpected>(
+                Action<ILiveAggregator> setDataAction,
+                Func<IData, TExpected> fieldSelector,
+                TExpected expected)
+            {
+                var target = GetTarget();
+
+                target.EnsureValueEqualsExpected<TExpected>(
+                    setDataAction,
+                    fieldSelector,
+                    expected);
+
+                Check.That(target.IsDirty).IsTrue();
+            }
+
+            private void EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue<TExpected>(
+                Action<ILiveAggregator> setDataAction,
+                Func<IData, TExpected> fieldSelector,
+                TExpected expected)
+            {
+                var target = GetTarget();
+
+                target.EnsureValueEqualsExpected(
+                    setDataAction,
+                    fieldSelector,
+                    expected);
+
+                Check.That(target.IsDirty).IsTrue();
+            }
         }
 
-        [Fact]
-        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_sessionTimeLeft_is_null()
-        {
-            // ARRANGE
-            string original = "00:02:02.000";
+    [Fact]
+    public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_laptime_is_null()
+    {
+        // ARRANGE
+        string original = "00:02:02.000";
 
-            var target = GetTarget();
+        var target = GetTarget();
 
-            // ACT
-            Stopwatch watch = Stopwatch.StartNew();
+        // ACT
+        Stopwatch watch = Stopwatch.StartNew();
 
-            target.SetLaptime(original);
+        target.SetLaptime(original);
 
-            target.Clear();
+        target.Clear();
 
-            var actual = target.AsData();
+        var actual = target.AsData();
 
-            watch.Stop();
+        watch.Stop();
 
-            // ASSERT
-            Check.That(target.IsDirty).IsFalse();
-            Check.That(actual.SessionTimeLeft).IsNull();
+        // ASSERT
+        Check.That(target.IsDirty).IsFalse();
+        Check.That(actual.LaptimeSeconds).IsNull();
 
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
-        }
-
-        [Fact]
-        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresFrontLeft_is_null()
-        {
-            // ARRANGE
-            double original = 10.0;
-
-            var target = GetTarget();
-
-            // ACT
-            Stopwatch watch = Stopwatch.StartNew();
-
-            target.SetFrontLeftTyreWear(original);
-
-            target.Clear();
-
-            var actual = target.AsData();
-
-            watch.Stop();
-
-            // ASSERT
-            Check.That(target.IsDirty).IsFalse();
-            Check.That(actual.TyresWear.FrontLeftWear).IsNull();
-
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
-        }
-
-        [Fact]
-        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresFrontRight_is_null()
-        {
-            // ARRANGE
-            double original = 10.0;
-
-            var target = GetTarget();
-
-            // ACT
-            Stopwatch watch = Stopwatch.StartNew();
-
-            target.SetFrontRightTyreWear(original);
-
-            target.Clear();
-
-            var actual = target.AsData();
-
-            watch.Stop();
-
-            // ASSERT
-            Check.That(target.IsDirty).IsFalse();
-            Check.That(actual.TyresWear.FrontRightWear).IsNull();
-
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
-        }
-
-        [Fact]
-        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresRearLeft_is_null()
-        {
-            // ARRANGE
-            double original = 10.0;
-
-            var target = GetTarget();
-
-            // ACT
-            Stopwatch watch = Stopwatch.StartNew();
-
-            target.SetRearLeftTyreWear(original);
-
-            target.Clear();
-
-            var actual = target.AsData();
-
-            watch.Stop();
-
-            // ASSERT
-            Check.That(target.IsDirty).IsFalse();
-            Check.That(actual.TyresWear.ReartLeftWear).IsNull();
-
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
-        }
-
-        [Fact]
-        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresRearRight_is_null()
-        {
-            // ARRANGE
-            double original = 10.0;
-
-            var target = GetTarget();
-
-            // ACT
-            Stopwatch watch = Stopwatch.StartNew();
-
-            target.SetRearRightTyreWear(original);
-
-            target.Clear();
-
-            var actual = target.AsData();
-
-            watch.Stop();
-
-            // ASSERT
-            Check.That(target.IsDirty).IsFalse();
-            Check.That(actual.TyresWear.RearRightWear).IsNull();
-
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
-        }
+        Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
     }
+
+    [Fact]
+    public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_sessionTimeLeft_is_null()
+    {
+        // ARRANGE
+        string original = "00:02:02.000";
+
+        var target = GetTarget();
+
+        // ACT
+        Stopwatch watch = Stopwatch.StartNew();
+
+        target.SetLaptime(original);
+
+        target.Clear();
+
+        var actual = target.AsData();
+
+        watch.Stop();
+
+        // ASSERT
+        Check.That(target.IsDirty).IsFalse();
+        Check.That(actual.SessionTimeLeft).IsNull();
+
+        Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+    }
+
+    [Fact]
+    public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresFrontLeft_is_null()
+    {
+        // ARRANGE
+        double original = 10.0;
+
+        var target = GetTarget();
+
+        // ACT
+        Stopwatch watch = Stopwatch.StartNew();
+
+        target.SetFrontLeftTyreWear(original);
+
+        target.Clear();
+
+        var actual = target.AsData();
+
+        watch.Stop();
+
+        // ASSERT
+        Check.That(target.IsDirty).IsFalse();
+        Check.That(actual.TyresWear.FrontLeftWear).IsNull();
+
+        Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+    }
+
+    [Fact]
+    public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresFrontRight_is_null()
+    {
+        // ARRANGE
+        double original = 10.0;
+
+        var target = GetTarget();
+
+        // ACT
+        Stopwatch watch = Stopwatch.StartNew();
+
+        target.SetFrontRightTyreWear(original);
+
+        target.Clear();
+
+        var actual = target.AsData();
+
+        watch.Stop();
+
+        // ASSERT
+        Check.That(target.IsDirty).IsFalse();
+        Check.That(actual.TyresWear.FrontRightWear).IsNull();
+
+        Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+    }
+
+    [Fact]
+    public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresRearLeft_is_null()
+    {
+        // ARRANGE
+        double original = 10.0;
+
+        var target = GetTarget();
+
+        // ACT
+        Stopwatch watch = Stopwatch.StartNew();
+
+        target.SetRearLeftTyreWear(original);
+
+        target.Clear();
+
+        var actual = target.AsData();
+
+        watch.Stop();
+
+        // ASSERT
+        Check.That(target.IsDirty).IsFalse();
+        Check.That(actual.TyresWear.ReartLeftWear).IsNull();
+
+        Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+    }
+
+    [Fact]
+    public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresRearRight_is_null()
+    {
+        // ARRANGE
+        double original = 10.0;
+
+        var target = GetTarget();
+
+        // ACT
+        Stopwatch watch = Stopwatch.StartNew();
+
+        target.SetRearRightTyreWear(original);
+
+        target.Clear();
+
+        var actual = target.AsData();
+
+        watch.Stop();
+
+        // ASSERT
+        Check.That(target.IsDirty).IsFalse();
+        Check.That(actual.TyresWear.RearRightWear).IsNull();
+
+        Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+    }
+}
 }
