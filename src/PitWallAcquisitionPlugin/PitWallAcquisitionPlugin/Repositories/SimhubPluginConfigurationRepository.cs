@@ -11,11 +11,11 @@ namespace PitWallAcquisitionPlugin.Repositories
 
         private readonly IPlugin _simhubPlugin;
         private readonly ILogger _logger;
-        
+
         private InnerConfiguration _configuration;
 
         public SimhubPluginConfigurationRepository(
-            IPlugin simhubPlugin, 
+            IPlugin simhubPlugin,
             ILogger logger)
         {
             _simhubPlugin = simhubPlugin;
@@ -25,18 +25,23 @@ namespace PitWallAcquisitionPlugin.Repositories
         public string ApiAddress
         {
             get => ReadConfiguration(c => c.ApiAddress);
-            set => UpdateConfiguration((c) => c.ApiAddress = value); 
+            set => UpdateConfiguration((c) => c.ApiAddress = value);
         }
-        public string PersonalKey 
-        { 
-            get => ReadConfiguration(c => c.PersonalKey); 
-            set => UpdateConfiguration((c) => c.PersonalKey = value); 
+        public string PersonalKey
+        {
+            get => ReadConfiguration(c => c.PersonalKey);
+            set => UpdateConfiguration((c) => c.PersonalKey = value);
         }
 
-        public string PilotName 
+        public string PilotName
         {
             get => ReadConfiguration(c => c.PilotName);
             set => UpdateConfiguration((c) => c.PilotName = value);
+        }
+        public string CarName
+        {
+            get => ReadConfiguration(c => c.CarName);
+            set => UpdateConfiguration((c) => c.CarName = value);
         }
 
         private InnerConfiguration TryToLoadConfiguration()
@@ -96,6 +101,7 @@ namespace PitWallAcquisitionPlugin.Repositories
             public string PersonalKey { get; set; }
 
             public string PilotName { get; set; }
+            public string CarName { get; set; }
         }
     }
 }

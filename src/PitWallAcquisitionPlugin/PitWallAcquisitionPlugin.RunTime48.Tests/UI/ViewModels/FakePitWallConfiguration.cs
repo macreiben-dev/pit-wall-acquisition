@@ -16,5 +16,9 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         {
             get; set;
         }
+        public string CarName
+        {
+            get; set;
+        }
     }
 }

@@ -10,6 +10,8 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 
         string PilotName { get; }
 
+        string CarName { get; }
+
         string SessionTimeLeft { get; }
 
         double? AvgWetness { get; }

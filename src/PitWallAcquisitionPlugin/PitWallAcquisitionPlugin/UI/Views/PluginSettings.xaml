@@ -24,7 +24,7 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Margin" Value="5,5,5,5"/>
         </Style>
-        
+
         <Style TargetType="TextBox" x:Key="TextBox_Form">
             <Setter Property="Margin" Value="5,5,5,5"/>
             <Style.Triggers>
@@ -53,7 +53,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <styles:SHSection Title="Pit Wall Plugin">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -66,7 +66,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- Pilot Name -->
-                
+
                 <TextBlock Style="{StaticResource TextBlock_Label}"
                     Grid.Column="0" 
                     Grid.Row="0"
@@ -81,6 +81,19 @@
                     Grid.Row="0"/>
 
                 <!-- Pilot Name ___EOF___ -->
+
+                <TextBlock Style="{StaticResource TextBlock_Label}"
+                     Grid.Column="0" 
+                     Grid.Row="1"
+                     Text="Car name:"/>
+                <TextBox 
+                     Style="{StaticResource TextBox_Form}"
+                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                     Text="{Binding Path=CarName, 
+                         ValidatesOnDataErrors=True,
+                         UpdateSourceTrigger=LostFocus}"
+                     Grid.Column="1"
+                     Grid.Row="1"/>
             </Grid>
         </styles:SHSection>
 

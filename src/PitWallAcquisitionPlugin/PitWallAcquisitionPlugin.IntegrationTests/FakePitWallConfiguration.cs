@@ -16,5 +16,10 @@ namespace PitWallAcquisitionPlugin.IntegrationTests
         {
             get; set;
         }
+
+        public string CarName
+        {
+            get; set;
+        }
     }
 }
