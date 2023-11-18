@@ -76,6 +76,30 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
 
+
+        [Fact]
+        public void Should_add_carName()
+        {
+            // ARRANGE
+            var original = "CarName01";
+
+            var target = GetTarget();
+
+            _configuration.CarName = original;
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            watch.Stop();
+
+            var actual = target.AsData();
+
+            // ASSERT
+            Check.That(actual.CarName).IsEqualTo("CarName01");
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
         public class LapTimes
         {
             private FakePitWallConfiguration _configuration;

@@ -13,7 +13,8 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
             {
                 ApiAddress = "http://localhost:32773",
                 PersonalKey = "some_test_looking_value23",
-                PilotName = "IntegrationTestFromPlugin"
+                PilotName = "Pilot_IntegrationTestFromPlugin",
+                CarName = "Car_IntegrationTestsFromPlugin"
             };
 
             PitWallRemoteRepository target = new PitWallRemoteRepository(configuration);
@@ -31,6 +32,10 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
             aggregater.SetFrontRightTyreTemperature(46.0);
             aggregater.SetRearRightTyreTemperature(47.0);
             aggregater.SetRearRightTyreTemperature(48.0);
+
+            aggregater.SetAvgWetness(0.15);
+            aggregater.SetAirTemperature(15.8);
+            aggregater.SetSessionTimeLeft("00:03:03.0000000");
 
             var data = aggregater.AsData();
 

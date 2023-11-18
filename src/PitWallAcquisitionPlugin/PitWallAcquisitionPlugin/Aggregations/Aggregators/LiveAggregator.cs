@@ -91,6 +91,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
             {
                 SimerKey = _configuration.PersonalKey,
                 PilotName = _configuration.PilotName,
+                CarName = _configuration.CarName,
                 // ---------------------------------
                 SessionTimeLeft = _sessionTimeLeft,
                 LaptimeSeconds = _laptimeSeconds,

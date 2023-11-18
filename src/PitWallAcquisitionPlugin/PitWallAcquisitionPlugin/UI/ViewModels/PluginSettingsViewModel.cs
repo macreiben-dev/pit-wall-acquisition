@@ -12,24 +12,23 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
         IUserDefinedConfiguration
     {
         private const string PILOTNAME_MUST_BE_SET = "Pilot name must be set.";
+        private const string CARNAME_MUST_BE_SET = "Car name must be set.";
+
         private const string VALIDATION_APIADDRESS_MUST_BE_SET = "API address must be set.";
         private const string VALIDATION_APIADDRESS_URI_FORMAT = "API URI format is invalid. Should look like http://domain.ext or http://domain.ext";
         private const string VALIDATION_PERSONALKEY_LENGTH_INVALID = "Personal key length should be at least 10 character long.";
         private const string VALIDATION_PERSONALKEY_FORMAT_INVALID = "Personal should be made of alphanumerical character and \"-\", \"_\", \"@\".";
 
         private readonly IPitWallConfiguration _configuration;
-        private readonly ILiveAggregator _aggregator;
         private readonly IPluginSettingsCommandFactory _cmdFactory;
 
         private string _isApiAvailable;
 
         public PluginSettingsViewModel(
             IPitWallConfiguration configuration,
-            ILiveAggregator aggregator,
             IPluginSettingsCommandFactory cmdFactory)
         {
             _configuration = configuration;
-            _aggregator = aggregator;
             _cmdFactory = cmdFactory;
 
             IsApiAvailableCommand = _cmdFactory.GetInstance(this);
@@ -64,6 +63,25 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                     _configuration.PilotName = value;
                 }
             }
+        }
+
+        private string _carName;
+
+        public string CarName
+        {
+            get => _carName;
+            set
+            {
+                _carName = value;
+
+                NotifyPropertyChanged(nameof(CarName));
+
+                if (string.IsNullOrEmpty(this[nameof(CarName)]))
+                {
+                    _configuration.CarName = value;
+                }
+            }
+
         }
 
         public string ApiAddress
@@ -124,6 +142,13 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                             string.IsNullOrWhiteSpace(PilotName))
                         {
                             return PILOTNAME_MUST_BE_SET;
+                        }
+                        break;
+                    case nameof(CarName):
+                        if (string.IsNullOrEmpty(CarName) ||
+                            string.IsNullOrWhiteSpace(CarName))
+                        {
+                            return CARNAME_MUST_BE_SET;
                         }
                         break;
                     case nameof(ApiAddress):

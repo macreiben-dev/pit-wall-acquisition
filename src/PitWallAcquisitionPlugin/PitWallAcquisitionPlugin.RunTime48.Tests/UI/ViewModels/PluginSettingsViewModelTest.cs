@@ -32,7 +32,6 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         {
             return new PluginSettingsViewModel(
                 _pitWallConfiguration,
-                _aggregator,
                 _isApiAvailableCommand);
         }
 
@@ -44,7 +43,6 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                     PilotName = "SomePilotName",
                     PersonalKey = personalKey
                 },
-                _aggregator,
                 _isApiAvailableCommand);
         }
 
@@ -52,7 +50,6 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         {
             return new PluginSettingsViewModel(
                 _pitWallConfiguration,
-                _aggregator,
                 new PluginSettingsCommandFactory(
                     Substitute.For<IHealthCheckService>(),
                     Substitute.For<IPitWallConfiguration>()));
@@ -101,17 +98,17 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         [Fact]
         public void GIVEN_pilotName_isSet_AND_noError_THEN_updateAggregator()
         {
-            string personalKey = "some_valid_key_ok";
+            string original = "some_pilotName";
 
             // ACT
             var target = GetTarget();
 
-            target.PilotName = personalKey;
+            target.PilotName = original;
 
-            var actual = _aggregator.AsData();
+            var actual = _pitWallConfiguration.PilotName;
 
             // ASSERT
-            Check.That(actual.PilotName).IsEqualTo(personalKey);
+            Check.That(actual).IsEqualTo(original);
         }
 
         [Theory]
@@ -131,6 +128,67 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             // ASSERT
             Check.That(actual.PilotName).IsEqualTo(input);
         }
+
+        #region CarName 
+
+        [Fact]
+        public void GIVEN_CarName_isSet_THEN_notifyPropertychanged_isRaised()
+        {
+            PluginSettingsViewModel target = GetTarget();
+
+            using (var monitored = target.Monitor())
+            {
+                target.CarName = "some_name";
+
+                monitored.Should().Raise("PropertyChanged")
+                    .WithSender(target)
+                    .WithArgs<PropertyChangedEventArgs>(
+                        e => e.PropertyName == "CarName");
+            }
+        }
+
+
+        [Fact]
+        public void GIVEN_CarName_isSet_THEN_CarName_hasExpectedValue()
+        {
+            PluginSettingsViewModel target = GetTarget();
+
+            target.CarName = "some_name";
+
+            Check.That(target.CarName).IsEqualTo("some_name");
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData(" ")]
+        [InlineData("      ")]
+        public void GIVEN_CarName_isNotSet_THEN_dataErrorInfo_returns_notSet(string input)
+        {
+            PluginSettingsViewModel target = GetTarget();
+
+            target.CarName = input;
+
+            Check.That(target["CarName"]).IsEqualTo("Car name must be set.");
+        }
+
+
+        [Fact]
+        public void GIVEN_CarName_isSet_AND_noError_THEN_updateConfiguration()
+        {
+            // ACT
+            var target = GetTarget();
+
+            target.CarName = "some_carName";
+
+            var actual = _pitWallConfiguration.CarName;
+
+            // ASSERT
+            Check.That(actual).IsEqualTo("some_carName");
+        }
+
+
+        #endregion CarName 
 
         #region Api Address
 
