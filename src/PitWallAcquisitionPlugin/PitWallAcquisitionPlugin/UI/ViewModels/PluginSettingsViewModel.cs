@@ -105,8 +105,11 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
 
         public void SyncGUI()
         {
-            var propNames = new[] { nameof(ApiAddress),
-            nameof(PilotName), nameof(PersonalKey)};
+            var propNames = new[] { 
+                nameof(ApiAddress),
+                nameof(PilotName), 
+                nameof(PersonalKey),
+                nameof(CarName)};
 
             foreach (var prop in propNames)
             {
