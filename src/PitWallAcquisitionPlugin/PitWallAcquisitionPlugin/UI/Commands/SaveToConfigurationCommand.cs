@@ -19,16 +19,15 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
         {
             var config = parameter as IUserDefinedConfiguration;
 
-            // TOPO : validate input here aswell
-
             if(config == null)
             {
                 return false;
             }
 
-            return _validator.IsPilotNameValid(config.PilotName);
-
-            //return config != null;
+            return _validator.IsPilotNameValid(config.PilotName) 
+                && _validator.IsPersonalKeyValid(config.PersonalKey)
+                && _validator.IsCarNameValid(config.CarName)
+                && _validator.IsApiAddressValid(config.ApiAddress);
         }
 
         public void Execute(object parameter)

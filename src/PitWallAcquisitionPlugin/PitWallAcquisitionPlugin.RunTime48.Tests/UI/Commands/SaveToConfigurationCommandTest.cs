@@ -133,16 +133,71 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.UI.Commands
 
         // ---
 
-        [Fact]
-        public void GIVEN_pilotName_notValid_WHEN_canExecute_THEN_return_false()
+        [Theory]
+        [InlineData(true, true, true, true)]
+        public void GIVEN_all_isValid_WHEN_canExecute_THEN_return_true(
+            bool isPilotValid, 
+            bool isPersonalKeyValid, 
+            bool isApiAddressValid, 
+            bool isCarNameValid)
         {
             var original = new FakeUserDefinedConfiguration()
             {
-                PilotName = "data"
+                PilotName = "data1",
+                PersonalKey = "data2",
+                ApiAddress = "data3",
+                CarName = "data4"
             };
 
-            _settingsValidator.GetPilotNameIssueMessage("data")
-                .Returns("SomeErrorMessage");
+            _settingsValidator.IsPilotNameValid("data1")
+                .Returns(isPilotValid);
+
+            _settingsValidator.IsPersonalKeyValid("data2")
+                .Returns(isPersonalKeyValid);
+
+            _settingsValidator.IsApiAddressValid("data3")
+                .Returns(isApiAddressValid);    
+
+            _settingsValidator.IsCarNameValid("data4")
+                .Returns(isCarNameValid);   
+
+            var target = GetTarget();
+
+            var actual = target.CanExecute(original);
+
+            Check.That(actual).IsTrue();
+        }
+
+        [Theory]
+        [InlineData(false, true, true, true)]
+        [InlineData(true, false, true, true)]
+        [InlineData(true, true, false, true)]
+        [InlineData(true, true, true, false)]
+        public void GIVEN_oneField_is_invlaid_THEN_return_false(
+            bool isPilotValid,
+            bool isPersonalKeyValid,
+            bool isApiAddressValid,
+            bool isCarNameValid)
+        {
+            var original = new FakeUserDefinedConfiguration()
+            {
+                PilotName = "data1",
+                PersonalKey = "data2",
+                ApiAddress = "data3",
+                CarName = "data4"
+            };
+
+            _settingsValidator.IsPilotNameValid("data1")
+                .Returns(isPilotValid);
+
+            _settingsValidator.IsPersonalKeyValid("data2")
+                .Returns(isPersonalKeyValid);
+
+            _settingsValidator.IsApiAddressValid("data3")
+                .Returns(isApiAddressValid);
+
+            _settingsValidator.IsCarNameValid("data4")
+                .Returns(isCarNameValid);
 
             var target = GetTarget();
 
@@ -150,7 +205,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.UI.Commands
 
             Check.That(actual).IsFalse();
         }
-
 
         private void SetAllValidationOk()
         {
