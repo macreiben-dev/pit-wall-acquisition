@@ -16,5 +16,10 @@
         {
             get;
         }
+
+        string CarName
+        {
+            get;
+        }
     }
 }

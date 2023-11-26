@@ -32,6 +32,7 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             _configuration.PilotName = config.PilotName;
             _configuration.PersonalKey = config.PersonalKey;
             _configuration.ApiAddress = config.ApiAddress;
+            _configuration.CarName = config.CarName;
         }
 
         public void RaiseCanExecuteChanged()

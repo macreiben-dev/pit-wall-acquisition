@@ -105,6 +105,22 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.UI.Commands
         }
 
         [Fact]
+        public void GIVEN_configurationIsValid_AND_execute_invoked_THEN_pitwallConfiguration_carName_is_updated()
+        {
+            var original = new FakeUserDefinedConfiguration()
+            {
+                CarName = "SomeCarName"
+            };
+
+            var target = GetTarget();
+
+            target.Execute(original);
+
+            Check.That(_configuration.CarName).IsEqualTo("SomeCarName");
+        }
+
+
+        [Fact]
         public void GIVEN_configurationIsNull_THEN_apiAddress_is_notSet()
         {
             var target = GetTarget();

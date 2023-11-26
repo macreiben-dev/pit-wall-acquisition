@@ -25,5 +25,11 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.UI.Commands
             get;
             set;
         }
+
+        public string CarName
+        {
+            get;
+            set;
+        }
     }
 }
