@@ -129,6 +129,8 @@
     <Compile Include="Repositories\IStagingDataRepository.cs" />
     <Compile Include="Repositories\StatusCodeNotOkException.cs" />
     <Compile Include="UI\Commands\ISaveToConfigurationCommand.cs" />
+    <Compile Include="UI\ViewModels\DataValidator.cs" />
+    <Compile Include="UI\ViewModels\ISettingsValidatorWrapper.cs" />
     <Compile Include="UI\ViewModels\IUserDefinedConfiguration.cs" />
     <Compile Include="UI\ViewModels\PluginSettingsCommandFactory.cs" />
     <Compile Include="UI\ViewModels\IDisplayAvailability.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="UI\ViewModels\PluginSettingsViewModel.cs" />
     <Compile Include="UI\Commands\SaveToConfigurationCommand.cs" />
     <Compile Include="UI\ViewModels\SettingsValidators.cs" />
+    <Compile Include="UI\ViewModels\SettingsValidatorWrapper.cs" />
     <Compile Include="UI\Views\PluginSettings.xaml.cs">
       <DependentUpon>PluginSettings.xaml</DependentUpon>
     </Compile>

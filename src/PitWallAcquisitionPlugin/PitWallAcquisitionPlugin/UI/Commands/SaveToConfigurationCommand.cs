@@ -17,6 +17,8 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
         {
             var config = parameter as IUserDefinedConfiguration;
 
+            // TOPO : validate input here aswell
+
             return config != null;
         }
 

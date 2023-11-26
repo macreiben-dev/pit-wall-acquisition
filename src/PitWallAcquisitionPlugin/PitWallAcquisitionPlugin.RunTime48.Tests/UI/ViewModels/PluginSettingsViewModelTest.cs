@@ -14,6 +14,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         private const string VALID_API_ADDRESS = "http://api.address.net";
         private FakePitWallConfiguration _pitWallConfiguration;
         private IPluginSettingsCommandFactory _isApiAvailableCommand;
+        private ISettingsValidator _settingsValidator;
 
         public PluginSettingsViewModelTest()
         {
@@ -23,20 +24,24 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             };
 
             _isApiAvailableCommand = Substitute.For<IPluginSettingsCommandFactory>();
+
+            _settingsValidator = Substitute.For<ISettingsValidator>();
         }
 
         private PluginSettingsViewModel GetTarget()
         {
             return new PluginSettingsViewModel(
                 _pitWallConfiguration,
-                _isApiAvailableCommand);
+                _isApiAvailableCommand,
+                _settingsValidator);
         }
 
         public PluginSettingsViewModel GetTargetWithPersonalKey(string personalKey)
         {
             return new PluginSettingsViewModel(
                 _pitWallConfiguration,
-                _isApiAvailableCommand);
+                _isApiAvailableCommand,
+                _settingsValidator);
         }
 
         private PluginSettingsViewModel GetTargetWithRealCommand()
@@ -45,7 +50,8 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                 _pitWallConfiguration,
                 new PluginSettingsCommandFactory(
                     Substitute.For<IHealthCheckService>(),
-                    Substitute.For<IPitWallConfiguration>()));
+                    Substitute.For<IPitWallConfiguration>()),
+                _settingsValidator);
         }
 
         [Fact]
@@ -164,7 +170,6 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             }
         }
 
-
         [Fact]
         public void GIVEN_ApiAddress_isSet_THEN_ApiAddress_hasExpectedValue()
         {
@@ -175,48 +180,21 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(target.ApiAddress).IsEqualTo(VALID_API_ADDRESS);
         }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        [InlineData(" ")]
-        [InlineData("      ")]
-        public void GIVEN_ApiAddress_isNotSet_THEN_dataErrorInfo_returns_notSet(string input)
-        {
-            var target = GetTarget();
-
-            target.ApiAddress = input;
-
-            Check.That(target["ApiAddress"]).IsEqualTo("API address must be set.");
-        }
-
         [Fact]
-        public void GIVEN_apiAddress_uri_isValid_THEN_error_isNull()
+        public void GIVEN_apiAddress_isNotValid_THEN_errorIndexer_return_message()
         {
+            _settingsValidator.IsApiAddressValid("someAddress")
+               .Returns("SomeErrorMessage");
+
             var target = GetTarget();
 
-            target.ApiAddress = VALID_API_ADDRESS;
+            target.ApiAddress = "someAddress";
 
             var actual = target["ApiAddress"];
 
-            Check.That(actual).IsNull();
+            Check.That(actual)
+               .IsEqualTo("SomeErrorMessage");
         }
-
-        [Theory]
-        [InlineData("htttttp://....ext")]
-        [InlineData("http://test,test2.ext")]
-        [InlineData("http://test=test2.ext")]
-        public void GIVEN_apiAddress_uri_isNotValid_THEN_error_isSet(string input)
-        {
-            var target = GetTarget();
-
-            target.ApiAddress = input;
-
-            var actual = target["ApiAddress"];
-
-            Check.That(actual).IsEqualTo(
-                "API URI format is invalid. Should look like http://domain.ext or http://domain.ext");
-        }
-
         #endregion Api Address
 
         #region Personal key
@@ -231,38 +209,18 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(target.PersonalKey).IsEqualTo("some_key");
         }
 
-        [Theory]
-        [InlineData("1")]
-        [InlineData("12")]
-        [InlineData("123")]
-        [InlineData("1234")]
-        [InlineData("12345")]
-        [InlineData("123456")]
-        [InlineData("1234567")]
-        [InlineData("12345678")]
-        [InlineData("123456789")]
-        public void GIVEN_personalKey_isLessThan_10character_THEN_fail(string input)
+        [Fact]
+        public void GIVEN_personalKey_isNotValid_THEN_errorIndexer_return_message()
         {
+            _settingsValidator.IsPersonalKeyValid("personalKey")
+                .Returns("SomeErrorMessage");
+
             var target = GetTarget();
 
-            target.PersonalKey = input;
-
-            Check.That(target["PersonalKey"]).IsEqualTo("Personal key length should be at least 10 character long.");
-        }
-
-        [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData(" ")]
-        [InlineData("     ")]
-        public void GIVEN_personalKey_isNullOrEmptyOrWhiteSpace_THEN_fail(string input)
-        {
-            var target = GetTarget();
-
-            target.PersonalKey = input;
+            target.PersonalKey = "personalKey";
 
             Check.That(target["PersonalKey"])
-                .IsEqualTo("Personal should be made of alphanumerical character and \"-\", \"_\", \"@\".");
+                .IsEqualTo("SomeErrorMessage");
         }
 
         [Fact]
@@ -396,5 +354,91 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(target.PersonalKey).IsEqualTo("some_test_looking_value_2023");
         }
         #endregion Constructor
+    }
+
+    public class SettingsValidatorWrapperTest
+    {
+        private const string VALID_API_ADDRESS = "http://api.address.net";
+
+        private SettingsValidatorWrapper GetTarget()
+        {
+            return new SettingsValidatorWrapper();
+        }
+
+        [Theory]
+        [InlineData("1")]
+        [InlineData("12")]
+        [InlineData("123")]
+        [InlineData("1234")]
+        [InlineData("12345")]
+        [InlineData("123456")]
+        [InlineData("1234567")]
+        [InlineData("12345678")]
+        [InlineData("123456789")]
+        public void GIVEN_personalKey_isLessThan_10character_THEN_fail(string input)
+        {
+            var target = GetTarget();
+
+            var actual = target.IsPersonalKeyValid(input);
+
+            Check.That(actual).IsEqualTo("Personal key length should be at least 10 character long.");
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("     ")]
+        public void GIVEN_personalKey_isNullOrEmptyOrWhiteSpace_THEN_fail(string input)
+        {
+            var target = GetTarget();
+
+            var actual = target.IsPersonalKeyValid(input);
+
+            Check.That(actual)
+                .IsEqualTo("Personal should be made of alphanumerical character and \"-\", \"_\", \"@\".");
+        }
+
+        // ----------------------
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData(" ")]
+        [InlineData("      ")]
+        public void GIVEN_ApiAddress_isNotSet_THEN_dataErrorInfo_returns_notSet(string input)
+        {
+            var target = GetTarget();
+
+            var actual = target.IsApiAddressValid(input);
+
+            Check.That(actual).IsEqualTo("API address must be set.");
+        }
+
+        [Fact]
+        public void GIVEN_apiAddress_uri_isValid_THEN_error_isNull()
+        {
+            string input = VALID_API_ADDRESS;
+
+            var target = GetTarget();
+
+            var actual = target.IsApiAddressValid(input);
+
+            Check.That(actual).IsNull();
+        }
+
+        [Theory]
+        [InlineData("htttttp://....ext")]
+        [InlineData("http://test,test2.ext")]
+        [InlineData("http://test=test2.ext")]
+        public void GIVEN_apiAddress_uri_isNotValid_THEN_error_isSet(string input)
+        {
+            var target = GetTarget();
+
+            var actual = target.IsApiAddressValid(input);
+
+            Check.That(actual).IsEqualTo(
+                "API URI format is invalid. Should look like http://domain.ext or http://domain.ext");
+        }
     }
 }

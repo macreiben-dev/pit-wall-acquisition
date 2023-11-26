@@ -1,5 +1,4 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
-using PitWallAcquisitionPlugin.Tests.UI.Commands;
+﻿using PitWallAcquisitionPlugin.Tests.UI.Commands;
 using System;
 using System.ComponentModel;
 
@@ -11,16 +10,10 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
         IDisplayAvailability,
         IUserDefinedConfiguration
     {
-        private const string PILOTNAME_MUST_BE_SET = "Pilot name must be set.";
         private const string CARNAME_MUST_BE_SET = "Car name must be set.";
 
-        private const string VALIDATION_APIADDRESS_MUST_BE_SET = "API address must be set.";
-        private const string VALIDATION_APIADDRESS_URI_FORMAT = "API URI format is invalid. Should look like http://domain.ext or http://domain.ext";
-        private const string VALIDATION_PERSONALKEY_LENGTH_INVALID = "Personal key length should be at least 10 character long.";
-        private const string VALIDATION_PERSONALKEY_FORMAT_INVALID = "Personal should be made of alphanumerical character and \"-\", \"_\", \"@\".";
-
         private readonly IPluginSettingsCommandFactory _cmdFactory;
-
+        private readonly ISettingsValidator _settingsValidator;
         private string _isApiAvailable;
 
         private string _carName;
@@ -33,10 +26,11 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
 
         public PluginSettingsViewModel(
             IPitWallConfiguration configuration,
-            IPluginSettingsCommandFactory cmdFactory)
+            IPluginSettingsCommandFactory cmdFactory, 
+            ISettingsValidator settingsValidator)
         {
             _cmdFactory = cmdFactory;
-
+            _settingsValidator = settingsValidator;
             IsApiAvailableCommand = _cmdFactory.GetInstance(this);
 
             SaveToConfigurationCommand = _cmdFactory.GetSaveToConfiguration();
@@ -138,45 +132,13 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                 switch (propertyName)
                 {
                     case nameof(PilotName):
-                        if (string.IsNullOrEmpty(PilotName) ||
-                            string.IsNullOrWhiteSpace(PilotName))
-                        {
-                            return PILOTNAME_MUST_BE_SET;
-                        }
-                        break;
+                        return DataValidator.PilotName.IsValid(PilotName);
                     case nameof(CarName):
-                        if (string.IsNullOrEmpty(CarName) ||
-                            string.IsNullOrWhiteSpace(CarName))
-                        {
-                            return CARNAME_MUST_BE_SET;
-                        }
-                        break;
+                        return DataValidator.CarName.IsValid(CarName); 
                     case nameof(ApiAddress):
-                        if (string.IsNullOrEmpty(ApiAddress) ||
-                            string.IsNullOrWhiteSpace(ApiAddress))
-                        {
-                            return VALIDATION_APIADDRESS_MUST_BE_SET;
-                        }
-                        bool isFormatValid = SettingsValidators.IsUriValid(ApiAddress);
-
-                        if (!isFormatValid)
-                        {
-                            return VALIDATION_APIADDRESS_URI_FORMAT;
-                        }
-                        break;
+                        return _settingsValidator.IsApiAddressValid(ApiAddress);
                     case nameof(PersonalKey):
-                        if (string.IsNullOrEmpty(PersonalKey) ||
-                           string.IsNullOrWhiteSpace(PersonalKey))
-                        {
-                            return VALIDATION_PERSONALKEY_FORMAT_INVALID;
-                        }
-
-                        if (PersonalKey.Length < 10)
-                        {
-                            return VALIDATION_PERSONALKEY_LENGTH_INVALID;
-                        }
-
-                        break;
+                        return _settingsValidator.IsPersonalKeyValid(PersonalKey);
                 }
 
                 return null;
