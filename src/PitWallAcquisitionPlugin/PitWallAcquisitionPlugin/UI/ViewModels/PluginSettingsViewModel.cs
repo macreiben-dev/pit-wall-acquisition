@@ -134,7 +134,7 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                     case nameof(PilotName):
                         return DataValidator.PilotName.IsValid(PilotName);
                     case nameof(CarName):
-                        return DataValidator.CarName.IsValid(CarName); 
+                        return _settingsValidator.IsCarNameValid(CarName);
                     case nameof(ApiAddress):
                         return _settingsValidator.IsApiAddressValid(ApiAddress);
                     case nameof(PersonalKey):

@@ -123,18 +123,21 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(target.CarName).IsEqualTo("some_name");
         }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        [InlineData(" ")]
-        [InlineData("      ")]
-        public void GIVEN_CarName_isNotSet_THEN_dataErrorInfo_returns_notSet(string input)
+     
+        [Fact]
+        public void GIVEN_carName_isNotValid_THEN_errorIndexer_return_message()
         {
-            PluginSettingsViewModel target = GetTarget();
+            _settingsValidator.IsCarNameValid("someCarName")
+               .Returns("SomeErrorMessage");
 
-            target.CarName = input;
+            var target = GetTarget();
 
-            Check.That(target["CarName"]).IsEqualTo("Car name must be set.");
+            target.CarName = "someCarName";
+
+            var actual = target["CarName"];
+
+            Check.That(actual)
+               .IsEqualTo("SomeErrorMessage");
         }
 
         #endregion CarName 
@@ -195,6 +198,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(actual)
                .IsEqualTo("SomeErrorMessage");
         }
+
         #endregion Api Address
 
         #region Personal key
@@ -439,6 +443,36 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 
             Check.That(actual).IsEqualTo(
                 "API URI format is invalid. Should look like http://domain.ext or http://domain.ext");
+        }
+
+        // ----------------------
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData(" ")]
+        [InlineData("      ")]
+        public void GIVEN_CarName_isNotSet_THEN_dataErrorInfo_returns_notSet(string input)
+        {
+            var target = GetTarget();
+
+            var actual = target.IsCarNameValid(input);
+
+            Check.That(actual).IsEqualTo("Car name must be set.");
+        }
+
+        [Theory]
+        [InlineData("CarName1")]
+        [InlineData("CarName2")]
+        [InlineData("Car2")]
+        [InlineData("Car")]
+        public void GIVEN_carName_isValid_THEN_return_null(string input)
+        {
+            var target = GetTarget();
+
+            var actual = target.IsCarNameValid(input);
+
+            Check.That(actual).IsNull();
         }
     }
 }
