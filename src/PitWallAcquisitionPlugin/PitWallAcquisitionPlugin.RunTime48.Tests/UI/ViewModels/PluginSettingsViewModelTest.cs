@@ -13,7 +13,6 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
     {
         private const string VALID_API_ADDRESS = "http://api.address.net";
         private FakePitWallConfiguration _pitWallConfiguration;
-        private ILiveAggregator _aggregator;
         private IPluginSettingsCommandFactory _isApiAvailableCommand;
 
         public PluginSettingsViewModelTest()
@@ -22,8 +21,6 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             {
                 PilotName = "SomePilot1"
             };
-
-            _aggregator = new LiveAggregator(_pitWallConfiguration);
 
             _isApiAvailableCommand = Substitute.For<IPluginSettingsCommandFactory>();
         }
@@ -38,11 +35,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         public PluginSettingsViewModel GetTargetWithPersonalKey(string personalKey)
         {
             return new PluginSettingsViewModel(
-                new FakePitWallConfiguration()
-                {
-                    PilotName = "SomePilotName",
-                    PersonalKey = personalKey
-                },
+                _pitWallConfiguration,
                 _isApiAvailableCommand);
         }
 
@@ -95,40 +88,6 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(target["PilotName"]).IsEqualTo("Pilot name must be set.");
         }
 
-        [Fact]
-        public void GIVEN_pilotName_isSet_AND_noError_THEN_updateAggregator()
-        {
-            string original = "some_pilotName";
-
-            // ACT
-            var target = GetTarget();
-
-            target.PilotName = original;
-
-            var actual = _pitWallConfiguration.PilotName;
-
-            // ASSERT
-            Check.That(actual).IsEqualTo(original);
-        }
-
-        [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        [InlineData(" ")]
-        [InlineData("      ")]
-        public void GIVEN_pilotName_isSet_AND_error_THEN_doNotUpdateUpdate_aggregator(string input)
-        {
-            // ACT
-            var target = GetTarget();
-
-            target.PilotName = input;
-
-            var actual = _aggregator.AsData();
-
-            // ASSERT
-            Check.That(actual.PilotName).IsEqualTo(input);
-        }
-
         #region CarName 
 
         [Fact]
@@ -171,22 +130,6 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 
             Check.That(target["CarName"]).IsEqualTo("Car name must be set.");
         }
-
-
-        [Fact]
-        public void GIVEN_CarName_isSet_AND_noError_THEN_updateConfiguration()
-        {
-            // ACT
-            var target = GetTarget();
-
-            target.CarName = "some_carName";
-
-            var actual = _pitWallConfiguration.CarName;
-
-            // ASSERT
-            Check.That(actual).IsEqualTo("some_carName");
-        }
-
 
         #endregion CarName 
 
@@ -352,39 +295,6 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             }
         }
 
-        [Fact]
-        public void GIVEN_personalKey_isSet_AND_noError_THEN_updateAggregator()
-        {
-            string personalKey = "some_valid_key_ok";
-
-            // ACT
-            var target = GetTarget();
-
-            target.PersonalKey = personalKey;
-
-            // ASSERT
-            Check.That(_pitWallConfiguration.PersonalKey).IsEqualTo(personalKey);
-        }
-
-        [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData(" ")]
-        [InlineData("     ")]
-        public void GIVEN_personalKey_isSet_AND_error_THEN_doNotUpdateUpdate_aggregator(string input)
-        {
-            string personalKey = input;
-
-            // ACT
-            var target = GetTargetWithPersonalKey("somekey");
-
-            target.PersonalKey = personalKey;
-
-            var actual = _aggregator.AsData();
-
-            // ASSERT
-            Check.That(actual.SimerKey).IsNull();
-        }
 
         #endregion Personal key
 
@@ -441,5 +351,50 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         }
 
         #endregion SaveConfig
+
+        #region Constructor
+
+        [Fact]
+        public void GIVEN_configuration_saved_THEN_load_pilotName()
+        {
+            _pitWallConfiguration.PilotName = "SomePilotName";
+
+            var target = GetTarget();
+
+            Check.That(target.PilotName).IsEqualTo("SomePilotName");
+        }
+
+        [Fact]
+        public void GIVEN_configuration_saved_THEN_load_carName()
+        {
+            _pitWallConfiguration.CarName = "SomeCarName";
+
+            var target = GetTarget();
+
+            Check.That(target.CarName).IsEqualTo("SomeCarName");
+        }
+
+
+        [Fact]
+        public void GIVEN_configuration_saved_THEN_load_apiAddress()
+        {
+            _pitWallConfiguration.ApiAddress = "http://api.data.net";
+
+            var target = GetTarget();
+
+            Check.That(target.ApiAddress).IsEqualTo("http://api.data.net");
+        }
+
+
+        [Fact]
+        public void GIVEN_configuration_saved_THEN_load_personalKey()
+        {
+            _pitWallConfiguration.PersonalKey = "some_test_looking_value_2023";
+
+            var target = GetTarget();
+
+            Check.That(target.PersonalKey).IsEqualTo("some_test_looking_value_2023");
+        }
+        #endregion Constructor
     }
 }
