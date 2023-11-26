@@ -54,6 +54,8 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                 _settingsValidator);
         }
 
+        #region pilotName
+
         [Fact]
         public void GIVEN_pilotName_isSet_THEN_notifyPropertychanged_pilotName()
         {
@@ -80,19 +82,23 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(target.PilotName).IsEqualTo("some_name");
         }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        [InlineData(" ")]
-        [InlineData("      ")]
-        public void GIVEN_pilotName_isNotSet_THEN_dataErrorInfo_returns_notSet(string input)
+        [Fact]
+        public void GIVEN_pilotName_isNotValid_THEN_errorIndexer_return_message()
         {
-            PluginSettingsViewModel target = GetTarget();
+            _settingsValidator.IsPilotNameValid("pilotName")
+               .Returns("SomeErrorMessage");
 
-            target.PilotName = input;
+            var target = GetTarget();
 
-            Check.That(target["PilotName"]).IsEqualTo("Pilot name must be set.");
+            target.PilotName = "pilotName";
+
+            var actual = target["PilotName"];
+
+            Check.That(actual)
+               .IsEqualTo("SomeErrorMessage");
         }
+
+        #endregion pilotName
 
         #region CarName 
 
@@ -473,6 +479,22 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             var actual = target.IsCarNameValid(input);
 
             Check.That(actual).IsNull();
+        }
+
+        // ----------------------
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData(" ")]
+        [InlineData("      ")]
+        public void GIVEN_pilotName_isNotSet_THEN_dataErrorInfo_returns_notSet(string input)
+        {
+            var target = GetTarget();
+
+            var actual = target.IsPilotNameValid(input);
+
+            Check.That(actual).IsEqualTo("Pilot name must be set.");
         }
     }
 }
