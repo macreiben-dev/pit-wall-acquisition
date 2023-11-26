@@ -5,12 +5,14 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
     public sealed class SaveToConfigurationCommand : ISaveToConfigurationCommand
     {
         private IPitWallConfiguration _configuration;
+        private ISettingsValidator _validator;
 
         public event EventHandler CanExecuteChanged;
 
-        public SaveToConfigurationCommand(IPitWallConfiguration configuration)
+        public SaveToConfigurationCommand(IPitWallConfiguration configuration, ISettingsValidator validator)
         {
             _configuration = configuration;
+            _validator = validator;
         }
 
         public bool CanExecute(object parameter)
@@ -19,7 +21,14 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
 
             // TOPO : validate input here aswell
 
-            return config != null;
+            if(config == null)
+            {
+                return false;
+            }
+
+            return _validator.IsPilotNameValid(config.PilotName);
+
+            //return config != null;
         }
 
         public void Execute(object parameter)

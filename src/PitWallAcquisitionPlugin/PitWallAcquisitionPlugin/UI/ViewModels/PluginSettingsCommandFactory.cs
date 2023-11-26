@@ -7,13 +7,16 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
     {
         private readonly IHealthCheckService checkService;
         private readonly IPitWallConfiguration _configuration;
+        private readonly ISettingsValidator _validator;
 
         public PluginSettingsCommandFactory(
-            IHealthCheckService checkService, 
-            IPitWallConfiguration pitWallConfiguration)
+            IHealthCheckService checkService,
+            IPitWallConfiguration pitWallConfiguration, 
+            ISettingsValidator validator)
         {
             this.checkService = checkService;
             _configuration = pitWallConfiguration;
+            _validator = validator;
         }
 
         public IIsApiAvailableCommand GetInstance(
@@ -24,7 +27,7 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
 
         public ISaveToConfigurationCommand GetSaveToConfiguration()
         {
-            return new SaveToConfigurationCommand(_configuration);
+            return new SaveToConfigurationCommand(_configuration, _validator);
         }
     }
 }

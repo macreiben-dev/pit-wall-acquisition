@@ -132,13 +132,13 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                 switch (propertyName)
                 {
                     case nameof(PilotName):
-                        return _settingsValidator.IsPilotNameValid(PilotName);
+                        return _settingsValidator.GetPilotNameIssueMessage(PilotName);
                     case nameof(CarName):
-                        return _settingsValidator.IsCarNameValid(CarName);
+                        return _settingsValidator.GetCarNameIssueMessage(CarName);
                     case nameof(ApiAddress):
-                        return _settingsValidator.IsApiAddressValid(ApiAddress);
+                        return _settingsValidator.GetApiAddressIssueMessage(ApiAddress);
                     case nameof(PersonalKey):
-                        return _settingsValidator.IsPersonalKeyValid(PersonalKey);
+                        return _settingsValidator.GetPersonalKeyIssueMessage(PersonalKey);
                 }
 
                 return null;

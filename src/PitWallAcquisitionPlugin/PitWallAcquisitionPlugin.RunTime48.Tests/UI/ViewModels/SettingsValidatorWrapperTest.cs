@@ -189,7 +189,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         {
             var target = GetTarget();
 
-            var actual = target.IsCarValid(input);
+            var actual = target.IsCarNameValid(input);
 
             Check.That(actual).IsTrue();
         }
@@ -203,7 +203,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         {
             var target = GetTarget();
 
-            var actual = target.IsCarValid(input);
+            var actual = target.IsCarNameValid(input);
 
             Check.That(actual).IsFalse();
         }
@@ -237,7 +237,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         {
             var target = GetTarget();
 
-            var actual = target.IsPilotValid(input);
+            var actual = target.IsPilotNameValid(input);
 
             Check.That(actual).IsTrue();
         }
@@ -251,7 +251,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         {
             var target = GetTarget();
 
-            var actual = target.IsPilotValid(input);
+            var actual = target.IsPilotNameValid(input);
 
             Check.That(actual).IsFalse();
         }

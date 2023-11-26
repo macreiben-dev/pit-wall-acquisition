@@ -36,12 +36,12 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             return GetApiAddressIssueMessage(value) == null;
         }
 
-        public bool IsCarValid(string value)
+        public bool IsCarNameValid(string value)
         {
             return GetCarNameIssueMessage(value) == null;
         }
 
-        public bool IsPilotValid(string input)
+        public bool IsPilotNameValid(string input)
         {
             return GetPilotNameIssueMessage(input) == null;
         }
