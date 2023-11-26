@@ -1,5 +1,4 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
-using PitWallAcquisitionPlugin.Tests.UI.Commands;
+﻿using PitWallAcquisitionPlugin.Tests.UI.Commands;
 using System;
 using System.ComponentModel;
 
@@ -11,29 +10,35 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
         IDisplayAvailability,
         IUserDefinedConfiguration
     {
-        private const string PILOTNAME_MUST_BE_SET = "Pilot name must be set.";
         private const string CARNAME_MUST_BE_SET = "Car name must be set.";
 
-        private const string VALIDATION_APIADDRESS_MUST_BE_SET = "API address must be set.";
-        private const string VALIDATION_APIADDRESS_URI_FORMAT = "API URI format is invalid. Should look like http://domain.ext or http://domain.ext";
-        private const string VALIDATION_PERSONALKEY_LENGTH_INVALID = "Personal key length should be at least 10 character long.";
-        private const string VALIDATION_PERSONALKEY_FORMAT_INVALID = "Personal should be made of alphanumerical character and \"-\", \"_\", \"@\".";
-
-        private readonly IPitWallConfiguration _configuration;
         private readonly IPluginSettingsCommandFactory _cmdFactory;
-
+        private readonly ISettingsValidator _settingsValidator;
         private string _isApiAvailable;
+
+        private string _carName;
+
+        private string _pilotName;
+
+        private string _apiAddress;
+
+        private string _personalKey;
 
         public PluginSettingsViewModel(
             IPitWallConfiguration configuration,
-            IPluginSettingsCommandFactory cmdFactory)
+            IPluginSettingsCommandFactory cmdFactory, 
+            ISettingsValidator settingsValidator)
         {
-            _configuration = configuration;
             _cmdFactory = cmdFactory;
-
+            _settingsValidator = settingsValidator;
             IsApiAvailableCommand = _cmdFactory.GetInstance(this);
 
             SaveToConfigurationCommand = _cmdFactory.GetSaveToConfiguration();
+
+            _pilotName = configuration.PilotName;
+            _carName = configuration.CarName;
+            _apiAddress = configuration.ApiAddress;
+            _personalKey = configuration.PersonalKey;
         }
 
         public IIsApiAvailableCommand IsApiAvailableCommand { get; }
@@ -51,21 +56,14 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
 
         public string PilotName
         {
-            get => _configuration.PilotName;
+            get => _pilotName;
             set
             {
-                _configuration.PilotName = value;
+                _pilotName = value;
                 NotifyPropertyChanged(nameof(PilotName));
-
-                // HOOK@ConfigurationUpdate : Pilot name configuration update
-                if (string.IsNullOrEmpty(this[nameof(PilotName)]))
-                {
-                    _configuration.PilotName = value;
-                }
+                RaiseCommandChanged();
             }
         }
-
-        private string _carName;
 
         public string CarName
         {
@@ -73,25 +71,30 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             set
             {
                 _carName = value;
-
                 NotifyPropertyChanged(nameof(CarName));
-
-                if (string.IsNullOrEmpty(this[nameof(CarName)]))
-                {
-                    _configuration.CarName = value;
-                }
+                RaiseCommandChanged();
             }
 
         }
 
         public string ApiAddress
         {
-            get => _configuration.ApiAddress;
+            get => _apiAddress;
             set
             {
-                _configuration.ApiAddress = value;
-
+                _apiAddress = value;
                 NotifyPropertyChanged(nameof(ApiAddress));
+                RaiseCommandChanged();
+            }
+        }
+
+        public string PersonalKey
+        {
+            get => _personalKey;
+            set
+            {
+                _personalKey = value;
+                NotifyPropertyChanged(nameof(PersonalKey));
 
                 RaiseCommandChanged();
             }
@@ -120,18 +123,6 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             RaiseCommandChanged();
         }
 
-        public string PersonalKey
-        {
-            get => _configuration.PersonalKey;
-            set
-            {
-                _configuration.PersonalKey = value;
-                NotifyPropertyChanged(nameof(PersonalKey));
-
-                RaiseCommandChanged();
-            }
-        }
-
         #region Observability
 
         public string this[string propertyName]
@@ -141,45 +132,13 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
                 switch (propertyName)
                 {
                     case nameof(PilotName):
-                        if (string.IsNullOrEmpty(PilotName) ||
-                            string.IsNullOrWhiteSpace(PilotName))
-                        {
-                            return PILOTNAME_MUST_BE_SET;
-                        }
-                        break;
+                        return _settingsValidator.GetPilotNameIssueMessage(PilotName);
                     case nameof(CarName):
-                        if (string.IsNullOrEmpty(CarName) ||
-                            string.IsNullOrWhiteSpace(CarName))
-                        {
-                            return CARNAME_MUST_BE_SET;
-                        }
-                        break;
+                        return _settingsValidator.GetCarNameIssueMessage(CarName);
                     case nameof(ApiAddress):
-                        if (string.IsNullOrEmpty(ApiAddress) ||
-                            string.IsNullOrWhiteSpace(ApiAddress))
-                        {
-                            return VALIDATION_APIADDRESS_MUST_BE_SET;
-                        }
-                        bool isFormatValid = SettingsValidators.IsUriValid(ApiAddress);
-
-                        if (!isFormatValid)
-                        {
-                            return VALIDATION_APIADDRESS_URI_FORMAT;
-                        }
-                        break;
+                        return _settingsValidator.GetApiAddressIssueMessage(ApiAddress);
                     case nameof(PersonalKey):
-                        if (string.IsNullOrEmpty(PersonalKey) ||
-                           string.IsNullOrWhiteSpace(PersonalKey))
-                        {
-                            return VALIDATION_PERSONALKEY_FORMAT_INVALID;
-                        }
-
-                        if (PersonalKey.Length < 10)
-                        {
-                            return VALIDATION_PERSONALKEY_LENGTH_INVALID;
-                        }
-
-                        break;
+                        return _settingsValidator.GetPersonalKeyIssueMessage(PersonalKey);
                 }
 
                 return null;

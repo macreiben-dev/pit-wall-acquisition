@@ -13,8 +13,8 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
     {
         private const string VALID_API_ADDRESS = "http://api.address.net";
         private FakePitWallConfiguration _pitWallConfiguration;
-        private ILiveAggregator _aggregator;
         private IPluginSettingsCommandFactory _isApiAvailableCommand;
+        private ISettingsValidator _settingsValidator;
 
         public PluginSettingsViewModelTest()
         {
@@ -23,27 +23,25 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                 PilotName = "SomePilot1"
             };
 
-            _aggregator = new LiveAggregator(_pitWallConfiguration);
-
             _isApiAvailableCommand = Substitute.For<IPluginSettingsCommandFactory>();
+
+            _settingsValidator = Substitute.For<ISettingsValidator>();
         }
 
         private PluginSettingsViewModel GetTarget()
         {
             return new PluginSettingsViewModel(
                 _pitWallConfiguration,
-                _isApiAvailableCommand);
+                _isApiAvailableCommand,
+                _settingsValidator);
         }
 
         public PluginSettingsViewModel GetTargetWithPersonalKey(string personalKey)
         {
             return new PluginSettingsViewModel(
-                new FakePitWallConfiguration()
-                {
-                    PilotName = "SomePilotName",
-                    PersonalKey = personalKey
-                },
-                _isApiAvailableCommand);
+                _pitWallConfiguration,
+                _isApiAvailableCommand,
+                _settingsValidator);
         }
 
         private PluginSettingsViewModel GetTargetWithRealCommand()
@@ -52,8 +50,12 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                 _pitWallConfiguration,
                 new PluginSettingsCommandFactory(
                     Substitute.For<IHealthCheckService>(),
-                    Substitute.For<IPitWallConfiguration>()));
+                    Substitute.For<IPitWallConfiguration>(), 
+                    Substitute.For<ISettingsValidator>()),
+                _settingsValidator);
         }
+
+        #region pilotName
 
         [Fact]
         public void GIVEN_pilotName_isSet_THEN_notifyPropertychanged_pilotName()
@@ -81,53 +83,23 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(target.PilotName).IsEqualTo("some_name");
         }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        [InlineData(" ")]
-        [InlineData("      ")]
-        public void GIVEN_pilotName_isNotSet_THEN_dataErrorInfo_returns_notSet(string input)
-        {
-            PluginSettingsViewModel target = GetTarget();
-
-            target.PilotName = input;
-
-            Check.That(target["PilotName"]).IsEqualTo("Pilot name must be set.");
-        }
-
         [Fact]
-        public void GIVEN_pilotName_isSet_AND_noError_THEN_updateAggregator()
+        public void GIVEN_pilotName_isNotValid_THEN_errorIndexer_return_message()
         {
-            string original = "some_pilotName";
+            _settingsValidator.GetPilotNameIssueMessage("pilotName")
+               .Returns("SomeErrorMessage");
 
-            // ACT
             var target = GetTarget();
 
-            target.PilotName = original;
+            target.PilotName = "pilotName";
 
-            var actual = _pitWallConfiguration.PilotName;
+            var actual = target["PilotName"];
 
-            // ASSERT
-            Check.That(actual).IsEqualTo(original);
+            Check.That(actual)
+               .IsEqualTo("SomeErrorMessage");
         }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        [InlineData(" ")]
-        [InlineData("      ")]
-        public void GIVEN_pilotName_isSet_AND_error_THEN_doNotUpdateUpdate_aggregator(string input)
-        {
-            // ACT
-            var target = GetTarget();
-
-            target.PilotName = input;
-
-            var actual = _aggregator.AsData();
-
-            // ASSERT
-            Check.That(actual.PilotName).IsEqualTo(input);
-        }
+        #endregion pilotName
 
         #region CarName 
 
@@ -158,35 +130,22 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(target.CarName).IsEqualTo("some_name");
         }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        [InlineData(" ")]
-        [InlineData("      ")]
-        public void GIVEN_CarName_isNotSet_THEN_dataErrorInfo_returns_notSet(string input)
-        {
-            PluginSettingsViewModel target = GetTarget();
-
-            target.CarName = input;
-
-            Check.That(target["CarName"]).IsEqualTo("Car name must be set.");
-        }
-
-
+     
         [Fact]
-        public void GIVEN_CarName_isSet_AND_noError_THEN_updateConfiguration()
+        public void GIVEN_carName_isNotValid_THEN_errorIndexer_return_message()
         {
-            // ACT
+            _settingsValidator.GetCarNameIssueMessage("someCarName")
+               .Returns("SomeErrorMessage");
+
             var target = GetTarget();
 
-            target.CarName = "some_carName";
+            target.CarName = "someCarName";
 
-            var actual = _pitWallConfiguration.CarName;
+            var actual = target["CarName"];
 
-            // ASSERT
-            Check.That(actual).IsEqualTo("some_carName");
+            Check.That(actual)
+               .IsEqualTo("SomeErrorMessage");
         }
-
 
         #endregion CarName 
 
@@ -221,7 +180,6 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             }
         }
 
-
         [Fact]
         public void GIVEN_ApiAddress_isSet_THEN_ApiAddress_hasExpectedValue()
         {
@@ -232,46 +190,20 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(target.ApiAddress).IsEqualTo(VALID_API_ADDRESS);
         }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        [InlineData(" ")]
-        [InlineData("      ")]
-        public void GIVEN_ApiAddress_isNotSet_THEN_dataErrorInfo_returns_notSet(string input)
-        {
-            var target = GetTarget();
-
-            target.ApiAddress = input;
-
-            Check.That(target["ApiAddress"]).IsEqualTo("API address must be set.");
-        }
-
         [Fact]
-        public void GIVEN_apiAddress_uri_isValid_THEN_error_isNull()
+        public void GIVEN_apiAddress_isNotValid_THEN_errorIndexer_return_message()
         {
+            _settingsValidator.GetApiAddressIssueMessage("someAddress")
+               .Returns("SomeErrorMessage");
+
             var target = GetTarget();
 
-            target.ApiAddress = VALID_API_ADDRESS;
+            target.ApiAddress = "someAddress";
 
             var actual = target["ApiAddress"];
 
-            Check.That(actual).IsNull();
-        }
-
-        [Theory]
-        [InlineData("htttttp://....ext")]
-        [InlineData("http://test,test2.ext")]
-        [InlineData("http://test=test2.ext")]
-        public void GIVEN_apiAddress_uri_isNotValid_THEN_error_isSet(string input)
-        {
-            var target = GetTarget();
-
-            target.ApiAddress = input;
-
-            var actual = target["ApiAddress"];
-
-            Check.That(actual).IsEqualTo(
-                "API URI format is invalid. Should look like http://domain.ext or http://domain.ext");
+            Check.That(actual)
+               .IsEqualTo("SomeErrorMessage");
         }
 
         #endregion Api Address
@@ -288,38 +220,18 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             Check.That(target.PersonalKey).IsEqualTo("some_key");
         }
 
-        [Theory]
-        [InlineData("1")]
-        [InlineData("12")]
-        [InlineData("123")]
-        [InlineData("1234")]
-        [InlineData("12345")]
-        [InlineData("123456")]
-        [InlineData("1234567")]
-        [InlineData("12345678")]
-        [InlineData("123456789")]
-        public void GIVEN_personalKey_isLessThan_10character_THEN_fail(string input)
+        [Fact]
+        public void GIVEN_personalKey_isNotValid_THEN_errorIndexer_return_message()
         {
+            _settingsValidator.GetPersonalKeyIssueMessage("personalKey")
+                .Returns("SomeErrorMessage");
+
             var target = GetTarget();
 
-            target.PersonalKey = input;
-
-            Check.That(target["PersonalKey"]).IsEqualTo("Personal key length should be at least 10 character long.");
-        }
-
-        [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData(" ")]
-        [InlineData("     ")]
-        public void GIVEN_personalKey_isNullOrEmptyOrWhiteSpace_THEN_fail(string input)
-        {
-            var target = GetTarget();
-
-            target.PersonalKey = input;
+            target.PersonalKey = "personalKey";
 
             Check.That(target["PersonalKey"])
-                .IsEqualTo("Personal should be made of alphanumerical character and \"-\", \"_\", \"@\".");
+                .IsEqualTo("SomeErrorMessage");
         }
 
         [Fact]
@@ -352,39 +264,6 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
             }
         }
 
-        [Fact]
-        public void GIVEN_personalKey_isSet_AND_noError_THEN_updateAggregator()
-        {
-            string personalKey = "some_valid_key_ok";
-
-            // ACT
-            var target = GetTarget();
-
-            target.PersonalKey = personalKey;
-
-            // ASSERT
-            Check.That(_pitWallConfiguration.PersonalKey).IsEqualTo(personalKey);
-        }
-
-        [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData(" ")]
-        [InlineData("     ")]
-        public void GIVEN_personalKey_isSet_AND_error_THEN_doNotUpdateUpdate_aggregator(string input)
-        {
-            string personalKey = input;
-
-            // ACT
-            var target = GetTargetWithPersonalKey("somekey");
-
-            target.PersonalKey = personalKey;
-
-            var actual = _aggregator.AsData();
-
-            // ASSERT
-            Check.That(actual.SimerKey).IsNull();
-        }
 
         #endregion Personal key
 
@@ -441,5 +320,50 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
         }
 
         #endregion SaveConfig
+
+        #region Constructor
+
+        [Fact]
+        public void GIVEN_configuration_saved_THEN_load_pilotName()
+        {
+            _pitWallConfiguration.PilotName = "SomePilotName";
+
+            var target = GetTarget();
+
+            Check.That(target.PilotName).IsEqualTo("SomePilotName");
+        }
+
+        [Fact]
+        public void GIVEN_configuration_saved_THEN_load_carName()
+        {
+            _pitWallConfiguration.CarName = "SomeCarName";
+
+            var target = GetTarget();
+
+            Check.That(target.CarName).IsEqualTo("SomeCarName");
+        }
+
+
+        [Fact]
+        public void GIVEN_configuration_saved_THEN_load_apiAddress()
+        {
+            _pitWallConfiguration.ApiAddress = "http://api.data.net";
+
+            var target = GetTarget();
+
+            Check.That(target.ApiAddress).IsEqualTo("http://api.data.net");
+        }
+
+
+        [Fact]
+        public void GIVEN_configuration_saved_THEN_load_personalKey()
+        {
+            _pitWallConfiguration.PersonalKey = "some_test_looking_value_2023";
+
+            var target = GetTarget();
+
+            Check.That(target.PersonalKey).IsEqualTo("some_test_looking_value_2023");
+        }
+        #endregion Constructor
     }
 }

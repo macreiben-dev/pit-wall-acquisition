@@ -5,19 +5,29 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
     public sealed class SaveToConfigurationCommand : ISaveToConfigurationCommand
     {
         private IPitWallConfiguration _configuration;
+        private ISettingsValidator _validator;
 
         public event EventHandler CanExecuteChanged;
 
-        public SaveToConfigurationCommand(IPitWallConfiguration configuration)
+        public SaveToConfigurationCommand(IPitWallConfiguration configuration, ISettingsValidator validator)
         {
             _configuration = configuration;
+            _validator = validator;
         }
 
         public bool CanExecute(object parameter)
         {
             var config = parameter as IUserDefinedConfiguration;
 
-            return config != null;
+            if(config == null)
+            {
+                return false;
+            }
+
+            return _validator.IsPilotNameValid(config.PilotName) 
+                && _validator.IsPersonalKeyValid(config.PersonalKey)
+                && _validator.IsCarNameValid(config.CarName)
+                && _validator.IsApiAddressValid(config.ApiAddress);
         }
 
         public void Execute(object parameter)
@@ -32,6 +42,7 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
             _configuration.PilotName = config.PilotName;
             _configuration.PersonalKey = config.PersonalKey;
             _configuration.ApiAddress = config.ApiAddress;
+            _configuration.CarName = config.CarName;
         }
 
         public void RaiseCanExecuteChanged()

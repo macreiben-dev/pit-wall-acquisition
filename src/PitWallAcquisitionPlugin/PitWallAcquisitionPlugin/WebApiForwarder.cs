@@ -101,6 +101,9 @@ namespace PitWallAcquisitionPlugin
             containerBuilder.RegisterType<MappingConfigurationRepository>()
                 .As<IMappingConfigurationRepository>();
 
+            containerBuilder.RegisterType<SettingsValidatorWrapper>()
+                .As<ISettingsValidator>();
+
             var builder = containerBuilder.Build();
 
             return builder;
