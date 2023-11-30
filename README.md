@@ -2,6 +2,8 @@
 
 This plugin is to be used with simhub to forward data to a WebApi.
 
+[Download latest version](https://github.com/macreiben-dev/pit-wall-acquisition/releases/tag/Live-20231126.5)
+
 ## Key code items
 
 ### LiveAggregator
