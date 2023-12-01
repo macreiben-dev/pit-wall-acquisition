@@ -31,3 +31,43 @@ Any simulator supported by [SimHub](https://www.simhubdash.com/) can be used wit
 - Go to Settings
 
 ![Go to Settings](./docs/assets/Slide2.png)
+
+- Then plugins
+
+![Got to plugins](./docs//assets/Slide3.PNG)
+
+- Ensure plugins is activated
+
+![Ensure plugins is activated](./docs//assets/Slide4.PNG)
+
+You can check the checbox "Show in the left main menu" to access the plugin directly.
+
+### Configuration
+
+- Open the plugin configuration screen
+- Set the pilot name and car name
+
+![Set the pilot name and car name](./docs/assets/SETUP_Slide1.PNG)
+
+This two informations will be use to group the metrics by car and pilots.
+
+It is recommended to have a unique pilot name by user. Car name can be shared. Doing so will enable you to support driver swap scenarii.
+
+- Set the server address and personal key
+
+![Set the server address and personal key](./docs/assets/SETUP_Slide2.PNG)
+
+Personal key will be checked each time a user tries to send metrics. One server knows one personal key.
+
+- Click save button
+
+![Click save button](./docs/assets/SETUP_Slide3.PNG)
+
+Save button updates the configuration. You do not need to restart Simhub.
+
+- Test Connectivity button
+
+Tries to contact the server without authentication. This is to avoid personal key brut force attack.
+
+- OK : server is reachable
+- KO : server is unreachable
