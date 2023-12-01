@@ -71,3 +71,5 @@ Tries to contact the server without authentication. This is to avoid personal ke
 
 - OK : server is reachable
 - KO : server is unreachable
+
+To setup the server see [pitwall api](https://github.com/macreiben-dev/pit-wall-api)
