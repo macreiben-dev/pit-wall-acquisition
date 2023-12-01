@@ -4,6 +4,10 @@ This plugin is to be used with simhub to forward data to a WebApi.
 
 [Download latest version](https://github.com/macreiben-dev/pit-wall-acquisition/releases/tag/Live-20231126.5)
 
+## How it works
+
+![Global schematic](./docs/assets/pitwall_prez.png)
+
 ## Key code items
 
 ### LiveAggregator
@@ -34,6 +38,7 @@ The adapter to integrate the plugin to simhub.
 ### Limitations
 
 - Autofac should not be updated because it has a dependencies in commong with Simhub.
+
 ## Appendices
 
 ### Azure Resources
