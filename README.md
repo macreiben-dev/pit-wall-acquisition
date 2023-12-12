@@ -1,4 +1,4 @@
-# Pit Wall Acquisition Plugin
+# Pitwall Acquisition Plugin
 
 This plugin is to be used with simhub to forward data to a WebApi. This WebApi then exposes an endpoint to feed a prometheus database.
 
