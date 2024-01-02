@@ -102,7 +102,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
                 {
                     FrontLeftWear = _frontLeftTyreWear,
                     FrontRightWear = _frontRightTyreWear,
-                    ReartLeftWear = _rearLeftTyreWear,
+                    RearLeftWear = _rearLeftTyreWear,
                     RearRightWear = _rearRightTyreWear,
                 },
                 TyresTemperatures = new TyresTemperatures()

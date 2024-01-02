@@ -6,7 +6,7 @@
 
         public double? FrontRightWear { get; set; }
 
-        public double? ReartLeftWear { get; set; }
+        public double? RearLeftWear { get; set; }
 
         public double? RearRightWear { get; set; }
     }
