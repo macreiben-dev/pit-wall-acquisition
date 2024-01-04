@@ -1,8 +1,8 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using NFluent;
 using NSubstitute;
-using PitWallAcquisitionPlugin.Aggregations.Aggregators;
-using PitWallAcquisitionPlugin.Aggregations.Mappers;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Mappers;
 using System;
 using Xunit;
 
@@ -10,18 +10,18 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Mappers
 {
     public class LiveMapperTest
     {
-        private ILiveAggregator _aggregator;
+        private ITelemetryLiveAggregator _aggregator;
         private IPluginRecordRepository _adapter;
         private Func<IPluginRecordRepository, string> _sourceSelector;
-        private Action<ILiveAggregator, string> _setter;
+        private Action<ITelemetryLiveAggregator, string> _setter;
 
         public LiveMapperTest() {
-            _aggregator = Substitute.For<ILiveAggregator>();
+            _aggregator = Substitute.For<ITelemetryLiveAggregator>();
             _adapter = Substitute.For<IPluginRecordRepository>();
 
             Func<IPluginRecordRepository, string> sourceSelector = (r) => r.LastLaptime;
 
-            Action<ILiveAggregator, string> setter = (a, counter) => a.SetLaptime(counter);
+            Action<ITelemetryLiveAggregator, string> setter = (a, counter) => a.SetLaptime(counter);
 
             _sourceSelector = sourceSelector;
 
@@ -47,7 +47,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Mappers
         {
             Func<IPluginRecordRepository, string> sourceSelector = (r) => r.LastLaptime;
 
-            Action<ILiveAggregator, string> setter = (a, counter) => a.SetLaptime(counter);
+            Action<ITelemetryLiveAggregator, string> setter = (a, counter) => a.SetLaptime(counter);
 
             var target = new LiveMapper<string>(
                     sourceSelector,
@@ -63,7 +63,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Mappers
         {
             Func<IPluginRecordRepository, string> sourceSelector = (r) => r.LastLaptime;
 
-            Action<ILiveAggregator, string> setter = (a, counter) => a.SetLaptime(counter);
+            Action<ITelemetryLiveAggregator, string> setter = (a, counter) => a.SetLaptime(counter);
 
             var target = new LiveMapper<string>(
                     sourceSelector,

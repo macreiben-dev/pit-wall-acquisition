@@ -1,18 +1,18 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators.Models;
+﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using PitWallAcquisitionPlugin.UI.ViewModels;
 using System;
 using System.Globalization;
-using System.Windows.Markup;
 
-namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
+namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
 {
-    public sealed class LiveAggregator : ILiveAggregator
+    public sealed class TelemetryLiveAggregator : ITelemetryLiveAggregator
     {
         private string _sessionTimeLeft = string.Empty;
         private bool _dirty = false;
 
         private double? _laptimeSeconds;
-        
+
         private double? _frontLeftTyreWear;
         private double? _frontRightTyreWear;
         private double? _rearLeftTyreWear;
@@ -22,7 +22,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         private double? _frontRightTyreTemp;
         private double? _rearLeftTyreTemp;
         private double? _rearRightTyreTemp;
-        
+
         private double? _avgWetness;
         private double? _airTemperature;
         private double? _trackTemperature;
@@ -33,12 +33,12 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         private double? _computedLiterPerLaps;
         private double? _computedRemainingLaps;
         private double? _computedRemainingTime;
-        
+
         private readonly IPitWallConfiguration _configuration;
 
         public bool IsDirty => _dirty;
 
-        public LiveAggregator(IPitWallConfiguration configuration)
+        public TelemetryLiveAggregator(IPitWallConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -85,9 +85,9 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
             _rearRightTyreWear = null;
         }
 
-        public IData AsData()
+        public ITelemetryData AsData()
         {
-            return new Data
+            return new TelemetryData
             {
                 SimerKey = _configuration.PersonalKey,
                 PilotName = _configuration.PilotName,

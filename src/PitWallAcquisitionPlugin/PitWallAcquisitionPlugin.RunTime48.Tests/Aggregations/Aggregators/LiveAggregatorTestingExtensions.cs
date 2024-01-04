@@ -1,5 +1,6 @@
 ﻿using NFluent;
 using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using System;
 using System.Diagnostics;
 
@@ -8,9 +9,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
     public static class LiveAggregatorTestingExtensions
     {
         public static void EnsureValueNullMapped(
-          this LiveAggregator target,
-          Action<ILiveAggregator> setDataAction,
-          Func<IData, double?> fieldSelector)
+          this TelemetryLiveAggregator target,
+          Action<ITelemetryLiveAggregator> setDataAction,
+          Func<ITelemetryData, double?> fieldSelector)
         {
             Stopwatch watch = Stopwatch.StartNew();
 
@@ -26,9 +27,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
         }
 
         public static void EnsureValueNotNullMapped(
-           this LiveAggregator target,
-           Action<ILiveAggregator> setDataAction,
-           Func<IData, double?> fieldSelector)
+           this TelemetryLiveAggregator target,
+           Action<ITelemetryLiveAggregator> setDataAction,
+           Func<ITelemetryData, double?> fieldSelector)
         {
             Stopwatch watch = Stopwatch.StartNew();
 
@@ -44,9 +45,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
         }
 
         public static void EnsureValueEqualsExpected(
-            this LiveAggregator target,
-             Action<ILiveAggregator> setDataAction,
-               Func<IData, double?> fieldSelector,
+            this TelemetryLiveAggregator target,
+             Action<ITelemetryLiveAggregator> setDataAction,
+               Func<ITelemetryData, double?> fieldSelector,
                double? expected)
         {
             Stopwatch watch = Stopwatch.StartNew();
@@ -62,9 +63,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
         }
 
         public static void EnsureValueEqualsExpected<TExpected>(
-           this LiveAggregator target,
-            Action<ILiveAggregator> setDataAction,
-              Func<IData, TExpected> fieldSelector,
+           this TelemetryLiveAggregator target,
+            Action<ITelemetryLiveAggregator> setDataAction,
+              Func<ITelemetryData, TExpected> fieldSelector,
               TExpected expected)
         {
             Stopwatch watch = Stopwatch.StartNew();

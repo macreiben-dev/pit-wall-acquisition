@@ -1,5 +1,6 @@
 ﻿using NFluent;
 using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Tests.UI.ViewModels;
 using System;
 using System.Diagnostics;
@@ -16,9 +17,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             _configuration = new FakePitWallConfiguration();
         }
 
-        public LiveAggregator GetTarget()
+        public TelemetryLiveAggregator GetTarget()
         {
-            return new LiveAggregator(_configuration);
+            return new TelemetryLiveAggregator(_configuration);
         }
 
         [Fact]
@@ -108,9 +109,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public LiveAggregator GetTarget()
+            public TelemetryLiveAggregator GetTarget()
             {
-                return new LiveAggregator(_configuration);
+                return new TelemetryLiveAggregator(_configuration);
             }
 
             // ===== Laptime milliseconds
@@ -193,9 +194,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public LiveAggregator GetTarget()
+            public TelemetryLiveAggregator GetTarget()
             {
-                return new LiveAggregator(_configuration);
+                return new TelemetryLiveAggregator(_configuration);
             }
 
             // ===== Laptime milliseconds ___EOF___
@@ -492,9 +493,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public LiveAggregator GetTarget()
+            public TelemetryLiveAggregator GetTarget()
             {
-                return new LiveAggregator(_configuration);
+                return new TelemetryLiveAggregator(_configuration);
             }
 
             // ===== Tyre temperature front left
@@ -788,9 +789,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public LiveAggregator GetTarget()
+            public TelemetryLiveAggregator GetTarget()
             {
-                return new LiveAggregator(_configuration);
+                return new TelemetryLiveAggregator(_configuration);
             }
 
             [Fact]
@@ -916,17 +917,17 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public LiveAggregator GetTarget()
+            public TelemetryLiveAggregator GetTarget()
             {
-                return new LiveAggregator(_configuration);
+                return new TelemetryLiveAggregator(_configuration);
             }
 
             [Fact]
             public void StrategyTests_Fuel()
             {
-                Action<ILiveAggregator> setDataNotNull = a => a.SetFuel(10.0);
-                Action<ILiveAggregator> setDataNull = a => a.SetFuel(null);
-                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.Fuel;
+                Action<ITelemetryLiveAggregator> setDataNotNull = a => a.SetFuel(10.0);
+                Action<ITelemetryLiveAggregator> setDataNull = a => a.SetFuel(null);
+                Func<ITelemetryData, double?> fieldSelector = d => d.VehicleConsumption.Fuel;
                 double? expected = 10.0;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(
@@ -947,9 +948,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             [Fact]
             public void StrategyTests_MaxFuel()
             {
-                Action<ILiveAggregator> setDataNotNull = a => a.SetMaxFuel(10.0);
-                Action<ILiveAggregator> setDataNull = a => a.SetMaxFuel(null);
-                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.MaxFuel;
+                Action<ITelemetryLiveAggregator> setDataNotNull = a => a.SetMaxFuel(10.0);
+                Action<ITelemetryLiveAggregator> setDataNull = a => a.SetMaxFuel(null);
+                Func<ITelemetryData, double?> fieldSelector = d => d.VehicleConsumption.MaxFuel;
                 double? expected = 10.0;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(
@@ -970,9 +971,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             [Fact]
             public void StrategyTests_ComputedLastLapConsumption()
             {
-                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedLastLapConsumption(10.0);
-                Action<ILiveAggregator> setDataNull = a => a.SetComputedLastLapConsumption(null);
-                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedLastLapConsumption;
+                Action<ITelemetryLiveAggregator> setDataNotNull = a => a.SetComputedLastLapConsumption(10.0);
+                Action<ITelemetryLiveAggregator> setDataNull = a => a.SetComputedLastLapConsumption(null);
+                Func<ITelemetryData, double?> fieldSelector = d => d.VehicleConsumption.ComputedLastLapConsumption;
                 double? expected = 10.0;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(
@@ -993,9 +994,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             [Fact]
             public void StrategyTests_ComputedLiterPerLaps()
             {
-                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedLiterPerLaps(10.0);
-                Action<ILiveAggregator> setDataNull = a => a.SetComputedLiterPerLaps(null);
-                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedLiterPerLaps;
+                Action<ITelemetryLiveAggregator> setDataNotNull = a => a.SetComputedLiterPerLaps(10.0);
+                Action<ITelemetryLiveAggregator> setDataNull = a => a.SetComputedLiterPerLaps(null);
+                Func<ITelemetryData, double?> fieldSelector = d => d.VehicleConsumption.ComputedLiterPerLaps;
                 double? expected = 10.0;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(
@@ -1016,9 +1017,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             [Fact]
             public void StrategyTests_ComputedRemainingLaps()
             {
-                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedRemainingLaps(10.0);
-                Action<ILiveAggregator> setDataNull = a => a.SetComputedRemainingLaps(null);
-                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedRemainingLaps;
+                Action<ITelemetryLiveAggregator> setDataNotNull = a => a.SetComputedRemainingLaps(10.0);
+                Action<ITelemetryLiveAggregator> setDataNull = a => a.SetComputedRemainingLaps(null);
+                Func<ITelemetryData, double?> fieldSelector = d => d.VehicleConsumption.ComputedRemainingLaps;
                 double? expected = 10.0;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(
@@ -1039,9 +1040,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             [Fact]
             public void StrategyTests_ComputedRemainingTime()
             {
-                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedRemainingTime("04:04:04.100");
-                Action<ILiveAggregator> setDataNull = a => a.SetComputedRemainingTime(null);
-                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedRemainingTime;
+                Action<ITelemetryLiveAggregator> setDataNotNull = a => a.SetComputedRemainingTime("04:04:04.100");
+                Action<ITelemetryLiveAggregator> setDataNull = a => a.SetComputedRemainingTime(null);
+                Func<ITelemetryData, double?> fieldSelector = d => d.VehicleConsumption.ComputedRemainingTime;
                 double? expected = 14644.1;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(
@@ -1060,8 +1061,8 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             }
 
             private void EnsureWhenNullStaysNullAndIsDirtyFalse(
-                Action<ILiveAggregator> setDataAction,
-                Func<IData, double?> fieldSelector)
+                Action<ITelemetryLiveAggregator> setDataAction,
+                Func<ITelemetryData, double?> fieldSelector)
             {
                 var target = GetTarget();
 
@@ -1071,8 +1072,8 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             }
 
             private void EnsureWhenNotNullTheMappedAndIsDirtyTrue(
-               Action<ILiveAggregator> setDataAction,
-               Func<IData, double?> fieldSelector)
+               Action<ITelemetryLiveAggregator> setDataAction,
+               Func<ITelemetryData, double?> fieldSelector)
             {
                 var target = GetTarget();
 
@@ -1084,8 +1085,8 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             }
 
             private void EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<TExpected>(
-                Action<ILiveAggregator> setDataAction,
-                Func<IData, TExpected> fieldSelector,
+                Action<ITelemetryLiveAggregator> setDataAction,
+                Func<ITelemetryData, TExpected> fieldSelector,
                 TExpected expected)
             {
                 var target = GetTarget();
@@ -1099,8 +1100,8 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             }
 
             private void EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue<TExpected>(
-                Action<ILiveAggregator> setDataAction,
-                Func<IData, TExpected> fieldSelector,
+                Action<ITelemetryLiveAggregator> setDataAction,
+                Func<ITelemetryData, TExpected> fieldSelector,
                 TExpected expected)
             {
                 var target = GetTarget();

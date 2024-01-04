@@ -1,19 +1,19 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using NSubstitute;
-using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using Xunit;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests
 {
     public class MappingConfigurationRepositoryTest
     {
-        private ILiveAggregator _aggregator;
+        private ITelemetryLiveAggregator _aggregator;
         private IPluginRecordRepository _record;
 
         public MappingConfigurationRepositoryTest()
         {
             // ARRANGE
-            _aggregator = Substitute.For<ILiveAggregator>();
+            _aggregator = Substitute.For<ITelemetryLiveAggregator>();
             _record = Substitute.For<IPluginRecordRepository>();
 
             _record.AirTemperature.Returns(1.0);

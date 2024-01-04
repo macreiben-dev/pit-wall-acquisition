@@ -1,8 +1,9 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators.Models;
+﻿using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 {
-    public interface IData
+    public interface ITelemetryData
     {
         string SimerKey { get; }
 

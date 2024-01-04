@@ -1,6 +1,8 @@
-﻿namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
+﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+
+namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
 {
-    public interface ILiveAggregator
+    public interface ITelemetryLiveAggregator
     {
         bool IsDirty { get; }
 
@@ -119,10 +121,10 @@
         /// The data object to be send to the API
         /// </summary>
         /// <returns></returns>
-        IData AsData();
+        ITelemetryData AsData();
 
         void SetComputedLastLapConsumption(double? data);
-        
+
         void SetComputedLiterPerLaps(double? v);
 
         void SetComputedRemainingLaps(double? v);

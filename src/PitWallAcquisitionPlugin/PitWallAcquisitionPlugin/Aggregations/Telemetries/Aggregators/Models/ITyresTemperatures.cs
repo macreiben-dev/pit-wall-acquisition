@@ -1,4 +1,4 @@
-﻿namespace PitWallAcquisitionPlugin.Aggregations.Aggregators.Models
+﻿namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models
 {
     public interface ITyresTemperatures
     {

@@ -2,6 +2,7 @@
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using System.Timers;
 
 namespace PitWallAcquisitionPlugin
@@ -17,7 +18,7 @@ namespace PitWallAcquisitionPlugin
 
         private readonly IStagingDataRepository _dataRepository;
         private readonly IMappingConfigurationRepository _mappingConfiguration;
-        private readonly ILiveAggregator _liveAggregator;
+        private readonly ITelemetryLiveAggregator _liveAggregator;
         private readonly ILogger _logger;
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace PitWallAcquisitionPlugin
         /// <param name="postToApiTimerHz">Post to API frequency</param>
         /// <param name="autoReactivateTimer"></param>
         public WebApiForwarderService(
-            ILiveAggregator aggregator,
+            ITelemetryLiveAggregator aggregator,
             IStagingDataRepository dataRepository,
             IMappingConfigurationRepository mappingConfiguration,
             ILogger logger,
@@ -169,7 +170,7 @@ namespace PitWallAcquisitionPlugin
             }
         }
 
-        private static bool EnsureSimerKeyAndPilotNameAreSet(IData dataToSend)
+        private static bool EnsureSimerKeyAndPilotNameAreSet(ITelemetryData dataToSend)
         {
             return string.IsNullOrEmpty(dataToSend.PilotName)
                 || string.IsNullOrEmpty(dataToSend.SimerKey);
