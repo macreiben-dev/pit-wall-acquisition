@@ -7,7 +7,7 @@ using System.Timers;
 
 namespace PitWallAcquisitionPlugin
 {
-    public sealed class WebApiForwarderService : IWebApiForwarderService
+    public sealed class WebApiTelemtryForwarderService : IWebApiForwarderService
     {
         private int _internalErrorCount = 0;
         private bool _notifiedStop = false;
@@ -30,7 +30,7 @@ namespace PitWallAcquisitionPlugin
         /// <param name="logger">The logger</param>
         /// <param name="postToApiTimerHz">Post to API frequency</param>
         /// <param name="autoReactivateTimer"></param>
-        public WebApiForwarderService(
+        public WebApiTelemtryForwarderService(
             ITelemetryLiveAggregator aggregator,
             IStagingDataRepository dataRepository,
             IMappingConfigurationRepository mappingConfiguration,

@@ -148,7 +148,7 @@
     </Compile>
     <Compile Include="UI\Views\ValidationConverter.cs" />
     <Compile Include="WebApiForwarder.cs" />
-    <Compile Include="WebApiForwarderService.cs" />
+    <Compile Include="WebApiTelemtryForwarderService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

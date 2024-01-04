@@ -80,7 +80,7 @@ namespace PitWallAcquisitionPlugin
                 .As<IPluginRecordRepositoryFactory>()
                 .SingleInstance();
 
-            containerBuilder.RegisterType<WebApiForwarderService>()
+            containerBuilder.RegisterType<WebApiTelemtryForwarderService>()
                 .As<IWebApiForwarderService>()
                 .WithParameter("postToApiTimerHz", 1)
                 .WithParameter("autoReactivateTimer", 5000)

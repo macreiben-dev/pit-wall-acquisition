@@ -28,7 +28,7 @@ namespace PitWallAcquisitionPlugin.Tests
         [Fact]
         public void Should_build()
         {
-            Check.ThatCode(() => new WebApiForwarderService(
+            Check.ThatCode(() => new WebApiTelemtryForwarderService(
                 _aggregator,
                 _dataRepository,
                 _mappingConfiguration,
@@ -52,7 +52,7 @@ namespace PitWallAcquisitionPlugin.Tests
 
             _aggregator.IsDirty.Returns(true);
 
-            var target = new WebApiForwarderService(
+            var target = new WebApiTelemtryForwarderService(
                 _aggregator,
                 _dataRepository,
                 _mappingConfiguration,
@@ -82,7 +82,7 @@ namespace PitWallAcquisitionPlugin.Tests
 
             _aggregator.IsDirty.Returns(false);
 
-            var target = new WebApiForwarderService(
+            var target = new WebApiTelemtryForwarderService(
                 _aggregator,
                 _dataRepository,
                 _mappingConfiguration,
