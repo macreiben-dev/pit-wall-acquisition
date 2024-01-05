@@ -1,9 +1,10 @@
 ﻿using Autofac;
 using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using GameReaderCommon;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
 using PitWallAcquisitionPlugin.HealthChecks;
 using PitWallAcquisitionPlugin.HealthChecks.Repositories;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
@@ -65,8 +66,8 @@ namespace PitWallAcquisitionPlugin
                 .As<ITelemetryLiveAggregator>()
                 .SingleInstance();
 
-            containerBuilder.RegisterType<PitWallRemoteRepository>()
-                .As<IStagingDataRepository>()
+            containerBuilder.RegisterType<PitWallTelemetryRemoteRepository>()
+                .As<IStagingTelemetryDataRepository>()
                 .SingleInstance();
 
             containerBuilder.RegisterType<HealthCheckService>()

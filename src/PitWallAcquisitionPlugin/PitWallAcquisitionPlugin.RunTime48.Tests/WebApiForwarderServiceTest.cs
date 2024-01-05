@@ -1,10 +1,10 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
 using System.Threading;
 using Xunit;
 
@@ -13,14 +13,14 @@ namespace PitWallAcquisitionPlugin.Tests
     public class WebApiForwarderServiceTest
     {
         private ITelemetryLiveAggregator _aggregator;
-        private IStagingDataRepository _dataRepository;
+        private IStagingTelemetryDataRepository _dataRepository;
         private ILogger _logger;
         private IMappingConfigurationRepository _mappingConfiguration;
 
         public WebApiForwarderServiceTest()
         {
             _aggregator = Substitute.For<ITelemetryLiveAggregator>();
-            _dataRepository = Substitute.For<IStagingDataRepository>();
+            _dataRepository = Substitute.For<IStagingTelemetryDataRepository>();
             _logger = Substitute.For<ILogger>();
             _mappingConfiguration = Substitute.For<IMappingConfigurationRepository>();
         }

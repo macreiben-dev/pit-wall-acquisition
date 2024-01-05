@@ -1,7 +1,7 @@
 ﻿using NFluent;
 using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
-using PitWallAcquisitionPlugin.Repositories;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
 
 namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
 {
@@ -18,7 +18,7 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
                 CarName = "Car_IntegrationTestsFromPlugin"
             };
 
-            PitWallRemoteRepository target = new PitWallRemoteRepository(configuration);
+            PitWallTelemetryRemoteRepository target = new PitWallTelemetryRemoteRepository(configuration);
 
             ITelemetryLiveAggregator aggregater = new TelemetryLiveAggregator(
                 configuration, 

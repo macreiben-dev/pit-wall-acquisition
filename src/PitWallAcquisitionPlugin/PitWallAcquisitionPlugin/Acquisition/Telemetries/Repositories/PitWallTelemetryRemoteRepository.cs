@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using PitWallAcquisitionPlugin.UI.ViewModels;
 
-namespace PitWallAcquisitionPlugin.Repositories
+namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories
 {
-    public sealed class PitWallRemoteRepository : IStagingDataRepository
+    public sealed class PitWallTelemetryRemoteRepository : IStagingTelemetryDataRepository
     {
         /**
          * Idea: use configuration from simhub to define this one.
@@ -19,7 +19,7 @@ namespace PitWallAcquisitionPlugin.Repositories
         private readonly HttpClient _httpClient;
         private readonly IPitWallConfiguration _configuration;
 
-        public PitWallRemoteRepository(IPitWallConfiguration configuration)
+        public PitWallTelemetryRemoteRepository(IPitWallConfiguration configuration)
         {
             _httpClient = new HttpClient();
             _configuration = configuration;

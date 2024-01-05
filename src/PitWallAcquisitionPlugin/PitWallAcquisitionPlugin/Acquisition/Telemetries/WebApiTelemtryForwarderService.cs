@@ -3,9 +3,10 @@ using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
 using System.Timers;
 
-namespace PitWallAcquisitionPlugin
+namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
 {
     public sealed class WebApiTelemtryForwarderService : IWebApiForwarderService
     {
@@ -16,7 +17,7 @@ namespace PitWallAcquisitionPlugin
         private readonly Timer _postTimer;
         private readonly Timer _autoReactivate;
 
-        private readonly IStagingDataRepository _dataRepository;
+        private readonly IStagingTelemetryDataRepository _dataRepository;
         private readonly IMappingConfigurationRepository _mappingConfiguration;
         private readonly ITelemetryLiveAggregator _liveAggregator;
         private readonly ILogger _logger;
@@ -32,7 +33,7 @@ namespace PitWallAcquisitionPlugin
         /// <param name="autoReactivateTimer"></param>
         public WebApiTelemtryForwarderService(
             ITelemetryLiveAggregator aggregator, // Can use IAggregator
-            IStagingDataRepository dataRepository,
+            IStagingTelemetryDataRepository dataRepository,
             IMappingConfigurationRepository mappingConfiguration,
             ILogger logger,
             double postToApiTimerHz, int autoReactivateTimer)
