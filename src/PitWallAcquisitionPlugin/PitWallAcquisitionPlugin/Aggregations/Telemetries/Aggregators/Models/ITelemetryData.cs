@@ -1,10 +1,9 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
+﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 
-namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
+namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models
 {
     public interface ITelemetryData : ISendableData
-    { 
+    {
         double? LaptimeSeconds { get; }
 
         string SessionTimeLeft { get; }
@@ -18,7 +17,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         ITyresWear TyresWear { get; }
 
         ITyresTemperatures TyresTemperatures { get; }
-        
+
         IVehicleConsumption VehicleConsumption { get; }
     }
 }

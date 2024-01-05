@@ -1,6 +1,6 @@
 ﻿using NFluent;
-using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using System;
 using System.Diagnostics;
 

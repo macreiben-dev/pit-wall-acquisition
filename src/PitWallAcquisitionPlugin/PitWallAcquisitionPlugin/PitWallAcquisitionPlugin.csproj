@@ -91,7 +91,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregations\ISendableData.cs" />
-    <Compile Include="Aggregations\Aggregators\ITelemetryData.cs" />
+    <Compile Include="Aggregations\Leadeboards\LeaderboardData.cs" />
+    <Compile Include="Aggregations\Telemetries\Aggregators\Models\ITelemetryData.cs" />
     <Compile Include="Aggregations\IAggregator.cs" />
     <Compile Include="Aggregations\Leadeboards\ILeaderboardLiveAggregator.cs" />
     <Compile Include="Aggregations\Leadeboards\LeaderboardLiveAggregator.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Aggregations\Telemetries\Aggregators\Models\ITyresWear.cs" />
     <Compile Include="Aggregations\Telemetries\Aggregators\TelemetryLiveAggregator.cs" />
     <Compile Include="Aggregations\Telemetries\Aggregators\VehicleConsumption.cs" />
+    <Compile Include="Aggregations\Telemetries\Mappers\GenericLiveMapper.cs" />
     <Compile Include="Aggregations\Telemetries\Mappers\LiveMapperFactory.cs" />
     <Compile Include="Aggregations\Telemetries\Aggregators\Models\Tyres.cs" />
     <Compile Include="Aggregations\Telemetries\Aggregators\Models\TyresTemperatures.cs" />

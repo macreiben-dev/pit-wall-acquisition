@@ -1,5 +1,4 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
+﻿using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using System;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
