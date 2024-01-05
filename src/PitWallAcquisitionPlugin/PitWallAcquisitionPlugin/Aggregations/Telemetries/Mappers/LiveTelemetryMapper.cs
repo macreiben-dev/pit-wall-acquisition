@@ -5,14 +5,14 @@ using System;
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Mappers
 {
 
-    public sealed class LiveMapper<TCounter> : ILiveMapper
+    public sealed class LiveTelemetryMapper<TCounter> : ILiveTelemetryMapper
     {
         private readonly GenericLiveMapper<TCounter, ITelemetryLiveAggregator> _mapper;
         /**
          * THOUGHT: We have some genericity here that could make this code reusable.
          * */
 
-        public LiveMapper(Func<IPluginRecordRepository, TCounter> sourceSelector, Action<ITelemetryLiveAggregator, TCounter> setter)
+        public LiveTelemetryMapper(Func<IPluginRecordRepository, TCounter> sourceSelector, Action<ITelemetryLiveAggregator, TCounter> setter)
         {
             _mapper = new GenericLiveMapper<TCounter, ITelemetryLiveAggregator>(sourceSelector, setter);
         }

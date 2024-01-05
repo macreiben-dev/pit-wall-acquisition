@@ -103,12 +103,12 @@
     <Compile Include="Aggregations\Telemetries\Aggregators\Models\ITyresWear.cs" />
     <Compile Include="Aggregations\Telemetries\Aggregators\TelemetryLiveAggregator.cs" />
     <Compile Include="Aggregations\Telemetries\Aggregators\VehicleConsumption.cs" />
-    <Compile Include="Aggregations\Telemetries\Mappers\GenericLiveMapper.cs" />
-    <Compile Include="Aggregations\Telemetries\Mappers\LiveMapperFactory.cs" />
+    <Compile Include="Aggregations\GenericLiveMapper.cs" />
+    <Compile Include="Aggregations\Telemetries\Mappers\LiveTelemetryMapperFactory.cs" />
     <Compile Include="Aggregations\Telemetries\Aggregators\Models\Tyres.cs" />
     <Compile Include="Aggregations\Telemetries\Aggregators\Models\TyresTemperatures.cs" />
-    <Compile Include="Aggregations\Telemetries\Mappers\ILiveMapper.cs" />
-    <Compile Include="Aggregations\Telemetries\Mappers\LiveMapper.cs" />
+    <Compile Include="Aggregations\Telemetries\Mappers\ILiveTelemetryMapper.cs" />
+    <Compile Include="Aggregations\Telemetries\Mappers\LiveTelemetryMapper.cs" />
     <Compile Include="DataVessel.cs" />
     <Compile Include="HealthChecks\HealthCheckService.cs" />
     <Compile Include="HealthChecks\IHealthCheckService.cs" />

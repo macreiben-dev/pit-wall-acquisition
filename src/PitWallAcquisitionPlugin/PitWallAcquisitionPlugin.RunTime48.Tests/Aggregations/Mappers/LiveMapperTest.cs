@@ -31,14 +31,14 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Mappers
         [Fact]
         public void WHEN_sourceSelector_isNull_THEN_fail()
         {
-            Check.ThatCode(() => new LiveMapper<string>(null, _setter))
+            Check.ThatCode(() => new LiveTelemetryMapper<string>(null, _setter))
                 .Throws<ArgumentNullException>();
         }
 
         [Fact]
         public void WHEN_setter_isNull_THEN_fail()
         {
-            Check.ThatCode(() => new LiveMapper<string>(_sourceSelector, null))
+            Check.ThatCode(() => new LiveTelemetryMapper<string>(_sourceSelector, null))
                 .Throws<ArgumentNullException>();
         }
 
@@ -49,7 +49,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Mappers
 
             Action<ITelemetryLiveAggregator, string> setter = (a, counter) => a.SetLaptime(counter);
 
-            var target = new LiveMapper<string>(
+            var target = new LiveTelemetryMapper<string>(
                     sourceSelector,
                     setter
                 );
@@ -65,7 +65,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Mappers
 
             Action<ITelemetryLiveAggregator, string> setter = (a, counter) => a.SetLaptime(counter);
 
-            var target = new LiveMapper<string>(
+            var target = new LiveTelemetryMapper<string>(
                     sourceSelector,
                     setter
                 );
