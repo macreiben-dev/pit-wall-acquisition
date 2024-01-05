@@ -91,7 +91,7 @@ namespace PitWallAcquisitionPlugin
             _postTimer.Start();
             _liveAggregator.Clear();
 
-            _logger.Info("Fam Data Gathering plugin STARTED");
+            _logger.Info("Pitwall acquisition plugin - Telemetry Gathering STARTED");
         }
 
         public void Stop()
@@ -106,7 +106,7 @@ namespace PitWallAcquisitionPlugin
             _internalErrorCount = 0;
             _notifiedStop = true;
 
-            _logger.Info("Fam Data Gathering plugin STOPPED");
+            _logger.Info("Pitwall acquisition plugin - Telemetry Gathering STOPPED");
         }
 
         private async void PostData(object sender, ElapsedEventArgs e)
