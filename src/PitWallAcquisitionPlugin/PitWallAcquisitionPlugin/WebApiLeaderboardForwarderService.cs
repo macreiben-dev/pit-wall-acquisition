@@ -2,12 +2,13 @@
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using System.Timers;
 
 namespace PitWallAcquisitionPlugin
 {
-    public sealed class WebApiTelemtryForwarderService : IWebApiForwarderService
+    public sealed class WebApiLeaderboardForwarderService
     {
         private int _internalErrorCount = 0;
         private bool _notifiedStop = false;
@@ -18,7 +19,7 @@ namespace PitWallAcquisitionPlugin
 
         private readonly IStagingDataRepository _dataRepository;
         private readonly IMappingConfigurationRepository _mappingConfiguration;
-        private readonly ITelemetryLiveAggregator _liveAggregator;
+        private readonly ILeaderboardLiveAggregator _liveAggregator;
         private readonly ILogger _logger;
 
         /// <summary>
@@ -30,12 +31,13 @@ namespace PitWallAcquisitionPlugin
         /// <param name="logger">The logger</param>
         /// <param name="postToApiTimerHz">Post to API frequency</param>
         /// <param name="autoReactivateTimer"></param>
-        public WebApiTelemtryForwarderService(
-            ITelemetryLiveAggregator aggregator, // Can use IAggregator
+        public WebApiLeaderboardForwarderService(
+            ILeaderboardLiveAggregator aggregator,
             IStagingDataRepository dataRepository,
             IMappingConfigurationRepository mappingConfiguration,
             ILogger logger,
-            double postToApiTimerHz, int autoReactivateTimer)
+            double postToApiTimerHz,
+            int autoReactivateTimer)
         {
             _postTimer = new Timer(1000 / postToApiTimerHz); // Interval in milliseconds for 10Hz (1000ms / 10Hz = 100ms)
             _postTimer.Elapsed += PostData;
@@ -136,7 +138,7 @@ namespace PitWallAcquisitionPlugin
             }
 
             // Replace the following lines with your own logic to get the data you want to send
-            var dataToSend = (ITelemetryData)_liveAggregator.AsData();
+            var dataToSend = _liveAggregator.AsData();
 
             try
             {
@@ -170,7 +172,7 @@ namespace PitWallAcquisitionPlugin
             }
         }
 
-        private static bool EnsureSimerKeyAndPilotNameAreSet(ITelemetryData dataToSend)
+        private static bool EnsureSimerKeyAndPilotNameAreSet(ISendableData dataToSend)
         {
             return string.IsNullOrEmpty(dataToSend.PilotName)
                 || string.IsNullOrEmpty(dataToSend.SimerKey);

@@ -1,11 +1,10 @@
 ﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
 {
-    public interface ITelemetryLiveAggregator
+    public interface ITelemetryLiveAggregator : IAggregator
     {
-        bool IsDirty { get; }
-
         /// <summary>
         /// Receives session time left from simhub runtime.
         /// </summary>
@@ -112,16 +111,6 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
 
         // ====================================================
 
-        /// <summary>
-        /// Clears the setted data.
-        /// </summary>
-        void Clear();
-
-        /// <summary>
-        /// The data object to be send to the API
-        /// </summary>
-        /// <returns></returns>
-        ITelemetryData AsData();
 
         void SetComputedLastLapConsumption(double? data);
 

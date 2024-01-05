@@ -19,7 +19,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             watch.Stop();
 
-            var actual = target.AsData();
+            var actual = (ITelemetryData)target.AsData();
 
             // ASSERT
             Check.That(fieldSelector(actual)).IsNull();
@@ -37,7 +37,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             watch.Stop();
 
-            var actual = target.AsData();
+            var actual = (ITelemetryData)target.AsData();
 
             // ASSERT
             Check.That(fieldSelector(actual)).IsNotNull();
@@ -56,7 +56,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             watch.Stop();
 
-            var actual = target.AsData();
+            var actual = (ITelemetryData)target.AsData();
 
             Check.That(fieldSelector(actual)).IsEqualTo(expected);
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
@@ -74,7 +74,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             watch.Stop();
 
-            var actual = target.AsData();
+            var actual = (ITelemetryData)target.AsData();
 
             Check.That(fieldSelector(actual)).IsEqualTo(expected);
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);

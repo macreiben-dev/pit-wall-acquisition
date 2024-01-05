@@ -20,7 +20,9 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
 
             PitWallRemoteRepository target = new PitWallRemoteRepository(configuration);
 
-            ITelemetryLiveAggregator aggregater = new TelemetryLiveAggregator(configuration);
+            ITelemetryLiveAggregator aggregater = new TelemetryLiveAggregator(
+                configuration, 
+                new MappingConfigurationRepository());
 
             aggregater.SetLaptime("00:02:02.0000000");
 
