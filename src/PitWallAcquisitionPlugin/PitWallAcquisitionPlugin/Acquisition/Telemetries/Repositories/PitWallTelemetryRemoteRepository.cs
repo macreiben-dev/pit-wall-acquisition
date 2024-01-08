@@ -8,7 +8,7 @@ using PitWallAcquisitionPlugin.UI.ViewModels;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories
 {
-    public sealed class PitWallTelemetryRemoteRepository : IStagingTelemetryDataRepository
+    public sealed class PitWallTelemetryRemoteRepositoryLegacy : IStagingTelemetryDataRepository
     {
         /**
          * Idea: use configuration from simhub to define this one.
@@ -19,7 +19,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories
         private readonly HttpClient _httpClient;
         private readonly IPitWallConfiguration _configuration;
 
-        public PitWallTelemetryRemoteRepository(IPitWallConfiguration configuration)
+        public PitWallTelemetryRemoteRepositoryLegacy(IPitWallConfiguration configuration)
         {
             _httpClient = new HttpClient();
             _configuration = configuration;

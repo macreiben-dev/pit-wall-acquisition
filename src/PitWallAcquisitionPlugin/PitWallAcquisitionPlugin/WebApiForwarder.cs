@@ -66,7 +66,7 @@ namespace PitWallAcquisitionPlugin
                 .As<ITelemetryLiveAggregator>()
                 .SingleInstance();
 
-            containerBuilder.RegisterType<PitWallTelemetryRemoteRepository>()
+            containerBuilder.RegisterType<PitWallTelemetryRemoteRepositoryLegacy>()
                 .As<IStagingTelemetryDataRepository>()
                 .SingleInstance();
 

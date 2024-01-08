@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acquisition\ISendableData.cs" />
+    <Compile Include="Acquisition\Leadeboards\IWebApiLeaderboardForwarderService.cs" />
     <Compile Include="Acquisition\Leadeboards\LeaderboardData.cs" />
     <Compile Include="Acquisition\Repositories\ITelemetryDataRepository.cs" />
     <Compile Include="Acquisition\Telemetries\Aggregators\Models\ITelemetryData.cs" />
@@ -158,7 +159,7 @@
     <Compile Include="UI\Views\ValidationConverter.cs" />
     <Compile Include="WebApiForwarder.cs" />
     <Compile Include="Acquisition\Leadeboards\WebApiLeaderboardForwarderService.cs" />
-    <Compile Include="Acquisition\Telemetries\WebApiTelemtryForwarderService.cs" />
+    <Compile Include="Acquisition\Telemetries\WebApiTelemetryForwarderService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
