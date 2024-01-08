@@ -1,5 +1,6 @@
 ﻿using NFluent;
-using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using PitWallAcquisitionPlugin.Tests.UI.ViewModels;
 using System;
 using System.Diagnostics;
@@ -16,9 +17,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             _configuration = new FakePitWallConfiguration();
         }
 
-        public LiveAggregator GetTarget()
+        public TelemetryLiveAggregator GetTarget()
         {
-            return new LiveAggregator(_configuration);
+            return new TelemetryLiveAggregator(_configuration, new MappingConfigurationRepository());
         }
 
         [Fact]
@@ -44,7 +45,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             watch.Stop();
 
-            var actual = target.AsData();
+            var actual = (ITelemetryData)target.AsData();
 
             // ASSERT
             Check.That(actual.SessionTimeLeft).IsEqualTo("00:56:39");
@@ -68,7 +69,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             watch.Stop();
 
-            var actual = target.AsData();
+            var actual = (ITelemetryData)target.AsData();
 
             // ASSERT
             Check.That(actual.PilotName).IsEqualTo("PilotName01");
@@ -92,7 +93,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             watch.Stop();
 
-            var actual = target.AsData();
+            var actual = (ITelemetryData)target.AsData();
 
             // ASSERT
             Check.That(actual.CarName).IsEqualTo("CarName01");
@@ -108,9 +109,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public LiveAggregator GetTarget()
+            public TelemetryLiveAggregator GetTarget()
             {
-                return new LiveAggregator(_configuration);
+                return new TelemetryLiveAggregator(_configuration, new MappingConfigurationRepository());
             }
 
             // ===== Laptime milliseconds
@@ -130,7 +131,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.LaptimeSeconds).IsEqualTo(122.0);
@@ -154,7 +155,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.LaptimeSeconds).IsNull();
@@ -176,7 +177,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.LaptimeSeconds).IsNull();
@@ -193,9 +194,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public LiveAggregator GetTarget()
+            public TelemetryLiveAggregator GetTarget()
             {
-                return new LiveAggregator(_configuration);
+                return new TelemetryLiveAggregator(_configuration, new MappingConfigurationRepository());
             }
 
             // ===== Laptime milliseconds ___EOF___
@@ -217,7 +218,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresWear.FrontLeftWear).IsEqualTo(85.000000001);
@@ -239,7 +240,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresWear.FrontLeftWear).IsNull();
@@ -261,7 +262,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
@@ -288,7 +289,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresWear.FrontRightWear).IsEqualTo(85.000000001);
@@ -310,7 +311,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresWear.FrontRightWear).IsNull();
@@ -331,7 +332,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
@@ -358,7 +359,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresWear.RearLeftWear).IsEqualTo(85.000000001);
@@ -380,7 +381,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresWear.RearLeftWear).IsNull();
@@ -402,7 +403,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
@@ -429,7 +430,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresWear.RearRightWear).IsEqualTo(85.000000001);
@@ -451,7 +452,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresWear.RearLeftWear).IsNull();
@@ -473,7 +474,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
@@ -492,9 +493,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public LiveAggregator GetTarget()
+            public TelemetryLiveAggregator GetTarget()
             {
-                return new LiveAggregator(_configuration);
+                return new TelemetryLiveAggregator(_configuration, new MappingConfigurationRepository());
             }
 
             // ===== Tyre temperature front left
@@ -514,7 +515,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresTemperatures.FrontLeftTemp).IsEqualTo(85.000000001);
@@ -536,7 +537,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresTemperatures.FrontLeftTemp).IsNull();
@@ -558,7 +559,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
@@ -585,7 +586,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresTemperatures.FrontRightTemp).IsEqualTo(85.000000001);
@@ -607,7 +608,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresTemperatures.FrontLeftTemp).IsNull();
@@ -629,7 +630,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
@@ -656,7 +657,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresTemperatures.RearLeftTemp).IsEqualTo(85.000000001);
@@ -678,7 +679,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresTemperatures.RearLeftTemp).IsNull();
@@ -700,7 +701,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
@@ -727,7 +728,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresTemperatures.RearRightTemp).IsEqualTo(85.000000001);
@@ -749,7 +750,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 watch.Stop();
 
-                var actual = target.AsData();
+                var actual = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(actual.TyresTemperatures.RearRightTemp).IsNull();
@@ -788,9 +789,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public LiveAggregator GetTarget()
+            public TelemetryLiveAggregator GetTarget()
             {
-                return new LiveAggregator(_configuration);
+                return new TelemetryLiveAggregator(_configuration, new MappingConfigurationRepository());
             }
 
             [Fact]
@@ -916,17 +917,17 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public LiveAggregator GetTarget()
+            public TelemetryLiveAggregator GetTarget()
             {
-                return new LiveAggregator(_configuration);
+                return new TelemetryLiveAggregator(_configuration, new MappingConfigurationRepository());
             }
 
             [Fact]
             public void StrategyTests_Fuel()
             {
-                Action<ILiveAggregator> setDataNotNull = a => a.SetFuel(10.0);
-                Action<ILiveAggregator> setDataNull = a => a.SetFuel(null);
-                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.Fuel;
+                Action<ITelemetryLiveAggregator> setDataNotNull = a => a.SetFuel(10.0);
+                Action<ITelemetryLiveAggregator> setDataNull = a => a.SetFuel(null);
+                Func<ITelemetryData, double?> fieldSelector = d => d.VehicleConsumption.Fuel;
                 double? expected = 10.0;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(
@@ -947,9 +948,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             [Fact]
             public void StrategyTests_MaxFuel()
             {
-                Action<ILiveAggregator> setDataNotNull = a => a.SetMaxFuel(10.0);
-                Action<ILiveAggregator> setDataNull = a => a.SetMaxFuel(null);
-                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.MaxFuel;
+                Action<ITelemetryLiveAggregator> setDataNotNull = a => a.SetMaxFuel(10.0);
+                Action<ITelemetryLiveAggregator> setDataNull = a => a.SetMaxFuel(null);
+                Func<ITelemetryData, double?> fieldSelector = d => d.VehicleConsumption.MaxFuel;
                 double? expected = 10.0;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(
@@ -970,9 +971,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             [Fact]
             public void StrategyTests_ComputedLastLapConsumption()
             {
-                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedLastLapConsumption(10.0);
-                Action<ILiveAggregator> setDataNull = a => a.SetComputedLastLapConsumption(null);
-                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedLastLapConsumption;
+                Action<ITelemetryLiveAggregator> setDataNotNull = a => a.SetComputedLastLapConsumption(10.0);
+                Action<ITelemetryLiveAggregator> setDataNull = a => a.SetComputedLastLapConsumption(null);
+                Func<ITelemetryData, double?> fieldSelector = d => d.VehicleConsumption.ComputedLastLapConsumption;
                 double? expected = 10.0;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(
@@ -993,9 +994,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             [Fact]
             public void StrategyTests_ComputedLiterPerLaps()
             {
-                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedLiterPerLaps(10.0);
-                Action<ILiveAggregator> setDataNull = a => a.SetComputedLiterPerLaps(null);
-                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedLiterPerLaps;
+                Action<ITelemetryLiveAggregator> setDataNotNull = a => a.SetComputedLiterPerLaps(10.0);
+                Action<ITelemetryLiveAggregator> setDataNull = a => a.SetComputedLiterPerLaps(null);
+                Func<ITelemetryData, double?> fieldSelector = d => d.VehicleConsumption.ComputedLiterPerLaps;
                 double? expected = 10.0;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(
@@ -1016,9 +1017,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             [Fact]
             public void StrategyTests_ComputedRemainingLaps()
             {
-                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedRemainingLaps(10.0);
-                Action<ILiveAggregator> setDataNull = a => a.SetComputedRemainingLaps(null);
-                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedRemainingLaps;
+                Action<ITelemetryLiveAggregator> setDataNotNull = a => a.SetComputedRemainingLaps(10.0);
+                Action<ITelemetryLiveAggregator> setDataNull = a => a.SetComputedRemainingLaps(null);
+                Func<ITelemetryData, double?> fieldSelector = d => d.VehicleConsumption.ComputedRemainingLaps;
                 double? expected = 10.0;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(
@@ -1039,9 +1040,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             [Fact]
             public void StrategyTests_ComputedRemainingTime()
             {
-                Action<ILiveAggregator> setDataNotNull = a => a.SetComputedRemainingTime("04:04:04.100");
-                Action<ILiveAggregator> setDataNull = a => a.SetComputedRemainingTime(null);
-                Func<IData, double?> fieldSelector = d => d.VehicleConsumption.ComputedRemainingTime;
+                Action<ITelemetryLiveAggregator> setDataNotNull = a => a.SetComputedRemainingTime("04:04:04.100");
+                Action<ITelemetryLiveAggregator> setDataNull = a => a.SetComputedRemainingTime(null);
+                Func<ITelemetryData, double?> fieldSelector = d => d.VehicleConsumption.ComputedRemainingTime;
                 double? expected = 14644.1;
 
                 EnsureWhenNullStaysNullAndIsDirtyFalse(
@@ -1060,8 +1061,8 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             }
 
             private void EnsureWhenNullStaysNullAndIsDirtyFalse(
-                Action<ILiveAggregator> setDataAction,
-                Func<IData, double?> fieldSelector)
+                Action<ITelemetryLiveAggregator> setDataAction,
+                Func<ITelemetryData, double?> fieldSelector)
             {
                 var target = GetTarget();
 
@@ -1071,8 +1072,8 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             }
 
             private void EnsureWhenNotNullTheMappedAndIsDirtyTrue(
-               Action<ILiveAggregator> setDataAction,
-               Func<IData, double?> fieldSelector)
+               Action<ITelemetryLiveAggregator> setDataAction,
+               Func<ITelemetryData, double?> fieldSelector)
             {
                 var target = GetTarget();
 
@@ -1084,8 +1085,8 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             }
 
             private void EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrueGeneric<TExpected>(
-                Action<ILiveAggregator> setDataAction,
-                Func<IData, TExpected> fieldSelector,
+                Action<ITelemetryLiveAggregator> setDataAction,
+                Func<ITelemetryData, TExpected> fieldSelector,
                 TExpected expected)
             {
                 var target = GetTarget();
@@ -1099,8 +1100,8 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             }
 
             private void EnsureWhenNotNullThenExpectedMappedAndIsDirtyTrue<TExpected>(
-                Action<ILiveAggregator> setDataAction,
-                Func<IData, TExpected> fieldSelector,
+                Action<ITelemetryLiveAggregator> setDataAction,
+                Func<ITelemetryData, TExpected> fieldSelector,
                 TExpected expected)
             {
                 var target = GetTarget();
@@ -1114,160 +1115,160 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             }
         }
 
-    [Fact]
-    public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_laptime_is_null()
-    {
-        // ARRANGE
-        string original = "00:02:02.000";
+        [Fact]
+        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_laptime_is_null()
+        {
+            // ARRANGE
+            string original = "00:02:02.000";
 
-        var target = GetTarget();
+            var target = GetTarget();
 
-        // ACT
-        Stopwatch watch = Stopwatch.StartNew();
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
 
-        target.SetLaptime(original);
+            target.SetLaptime(original);
 
-        target.Clear();
+            target.Clear();
 
-        var actual = target.AsData();
+            var actual = (ITelemetryData)target.AsData();
 
-        watch.Stop();
+            watch.Stop();
 
-        // ASSERT
-        Check.That(target.IsDirty).IsFalse();
-        Check.That(actual.LaptimeSeconds).IsNull();
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+            Check.That(actual.LaptimeSeconds).IsNull();
 
-        Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_sessionTimeLeft_is_null()
+        {
+            // ARRANGE
+            string original = "00:02:02.000";
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.SetLaptime(original);
+
+            target.Clear();
+
+            var actual = (ITelemetryData)target.AsData();
+
+            watch.Stop();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+            Check.That(actual.SessionTimeLeft).IsNull();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresFrontLeft_is_null()
+        {
+            // ARRANGE
+            double original = 10.0;
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.SetFrontLeftTyreWear(original);
+
+            target.Clear();
+
+            var actual = (ITelemetryData)target.AsData();
+
+            watch.Stop();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+            Check.That(actual.TyresWear.FrontLeftWear).IsNull();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresFrontRight_is_null()
+        {
+            // ARRANGE
+            double original = 10.0;
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.SetFrontRightTyreWear(original);
+
+            target.Clear();
+
+            var actual = (ITelemetryData)target.AsData();
+
+            watch.Stop();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+            Check.That(actual.TyresWear.FrontRightWear).IsNull();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresRearLeft_is_null()
+        {
+            // ARRANGE
+            double original = 10.0;
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.SetRearLeftTyreWear(original);
+
+            target.Clear();
+
+            var actual = (ITelemetryData)target.AsData();
+
+            watch.Stop();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+            Check.That(actual.TyresWear.RearLeftWear).IsNull();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
+
+        [Fact]
+        public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresRearRight_is_null()
+        {
+            // ARRANGE
+            double original = 10.0;
+
+            var target = GetTarget();
+
+            // ACT
+            Stopwatch watch = Stopwatch.StartNew();
+
+            target.SetRearRightTyreWear(original);
+
+            target.Clear();
+
+            var actual = (ITelemetryData)target.AsData();
+
+            watch.Stop();
+
+            // ASSERT
+            Check.That(target.IsDirty).IsFalse();
+            Check.That(actual.TyresWear.RearRightWear).IsNull();
+
+            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
+        }
     }
-
-    [Fact]
-    public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_sessionTimeLeft_is_null()
-    {
-        // ARRANGE
-        string original = "00:02:02.000";
-
-        var target = GetTarget();
-
-        // ACT
-        Stopwatch watch = Stopwatch.StartNew();
-
-        target.SetLaptime(original);
-
-        target.Clear();
-
-        var actual = target.AsData();
-
-        watch.Stop();
-
-        // ASSERT
-        Check.That(target.IsDirty).IsFalse();
-        Check.That(actual.SessionTimeLeft).IsNull();
-
-        Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
-    }
-
-    [Fact]
-    public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresFrontLeft_is_null()
-    {
-        // ARRANGE
-        double original = 10.0;
-
-        var target = GetTarget();
-
-        // ACT
-        Stopwatch watch = Stopwatch.StartNew();
-
-        target.SetFrontLeftTyreWear(original);
-
-        target.Clear();
-
-        var actual = target.AsData();
-
-        watch.Stop();
-
-        // ASSERT
-        Check.That(target.IsDirty).IsFalse();
-        Check.That(actual.TyresWear.FrontLeftWear).IsNull();
-
-        Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
-    }
-
-    [Fact]
-    public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresFrontRight_is_null()
-    {
-        // ARRANGE
-        double original = 10.0;
-
-        var target = GetTarget();
-
-        // ACT
-        Stopwatch watch = Stopwatch.StartNew();
-
-        target.SetFrontRightTyreWear(original);
-
-        target.Clear();
-
-        var actual = target.AsData();
-
-        watch.Stop();
-
-        // ASSERT
-        Check.That(target.IsDirty).IsFalse();
-        Check.That(actual.TyresWear.FrontRightWear).IsNull();
-
-        Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
-    }
-
-    [Fact]
-    public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresRearLeft_is_null()
-    {
-        // ARRANGE
-        double original = 10.0;
-
-        var target = GetTarget();
-
-        // ACT
-        Stopwatch watch = Stopwatch.StartNew();
-
-        target.SetRearLeftTyreWear(original);
-
-        target.Clear();
-
-        var actual = target.AsData();
-
-        watch.Stop();
-
-        // ASSERT
-        Check.That(target.IsDirty).IsFalse();
-        Check.That(actual.TyresWear.RearLeftWear).IsNull();
-
-        Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
-    }
-
-    [Fact]
-    public void Given_aggregator_cleared_THEN_isDirty_is_false_AND_tyresRearRight_is_null()
-    {
-        // ARRANGE
-        double original = 10.0;
-
-        var target = GetTarget();
-
-        // ACT
-        Stopwatch watch = Stopwatch.StartNew();
-
-        target.SetRearRightTyreWear(original);
-
-        target.Clear();
-
-        var actual = target.AsData();
-
-        watch.Stop();
-
-        // ASSERT
-        Check.That(target.IsDirty).IsFalse();
-        Check.That(actual.TyresWear.RearRightWear).IsNull();
-
-        Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
-    }
-}
 }

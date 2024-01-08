@@ -3,7 +3,7 @@ using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using GameReaderCommon;
-using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.HealthChecks;
 using PitWallAcquisitionPlugin.HealthChecks.Repositories;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
@@ -61,8 +61,8 @@ namespace PitWallAcquisitionPlugin
 
             containerBuilder.RegisterInstance(logger);
 
-            containerBuilder.RegisterType<LiveAggregator>()
-                .As<ILiveAggregator>()
+            containerBuilder.RegisterType<TelemetryLiveAggregator>()
+                .As<ITelemetryLiveAggregator>()
                 .SingleInstance();
 
             containerBuilder.RegisterType<PitWallRemoteRepository>()
@@ -80,7 +80,7 @@ namespace PitWallAcquisitionPlugin
                 .As<IPluginRecordRepositoryFactory>()
                 .SingleInstance();
 
-            containerBuilder.RegisterType<WebApiForwarderService>()
+            containerBuilder.RegisterType<WebApiTelemtryForwarderService>()
                 .As<IWebApiForwarderService>()
                 .WithParameter("postToApiTimerHz", 1)
                 .WithParameter("autoReactivateTimer", 5000)

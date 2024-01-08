@@ -1,12 +1,13 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
-using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using System.Timers;
 
 namespace PitWallAcquisitionPlugin
 {
-    public sealed class WebApiForwarderService : IWebApiForwarderService
+    public sealed class WebApiTelemtryForwarderService : IWebApiForwarderService
     {
         private int _internalErrorCount = 0;
         private bool _notifiedStop = false;
@@ -17,7 +18,7 @@ namespace PitWallAcquisitionPlugin
 
         private readonly IStagingDataRepository _dataRepository;
         private readonly IMappingConfigurationRepository _mappingConfiguration;
-        private readonly ILiveAggregator _liveAggregator;
+        private readonly ITelemetryLiveAggregator _liveAggregator;
         private readonly ILogger _logger;
 
         /// <summary>
@@ -29,8 +30,8 @@ namespace PitWallAcquisitionPlugin
         /// <param name="logger">The logger</param>
         /// <param name="postToApiTimerHz">Post to API frequency</param>
         /// <param name="autoReactivateTimer"></param>
-        public WebApiForwarderService(
-            ILiveAggregator aggregator,
+        public WebApiTelemtryForwarderService(
+            ITelemetryLiveAggregator aggregator, // Can use IAggregator
             IStagingDataRepository dataRepository,
             IMappingConfigurationRepository mappingConfiguration,
             ILogger logger,
@@ -56,7 +57,7 @@ namespace PitWallAcquisitionPlugin
             {
                 Start();
 
-                UpdateAggregator(pluginRecordRepository);
+                _liveAggregator.UpdateAggregator(pluginRecordRepository);
 
                 _firstLaunch = true;
             }
@@ -72,7 +73,7 @@ namespace PitWallAcquisitionPlugin
             {
                 Start();
 
-                UpdateAggregator(pluginRecordRepository);
+                _liveAggregator.UpdateAggregator(pluginRecordRepository);
 
                 return;
             }
@@ -90,7 +91,7 @@ namespace PitWallAcquisitionPlugin
             _postTimer.Start();
             _liveAggregator.Clear();
 
-            _logger.Info("Fam Data Gathering plugin STARTED");
+            _logger.Info("Pitwall acquisition plugin - Telemetry Gathering STARTED");
         }
 
         public void Stop()
@@ -105,7 +106,7 @@ namespace PitWallAcquisitionPlugin
             _internalErrorCount = 0;
             _notifiedStop = true;
 
-            _logger.Info("Fam Data Gathering plugin STOPPED");
+            _logger.Info("Pitwall acquisition plugin - Telemetry Gathering STOPPED");
         }
 
         private async void PostData(object sender, ElapsedEventArgs e)
@@ -135,7 +136,7 @@ namespace PitWallAcquisitionPlugin
             }
 
             // Replace the following lines with your own logic to get the data you want to send
-            var dataToSend = _liveAggregator.AsData();
+            var dataToSend = (ITelemetryData)_liveAggregator.AsData();
 
             try
             {
@@ -169,7 +170,7 @@ namespace PitWallAcquisitionPlugin
             }
         }
 
-        private static bool EnsureSimerKeyAndPilotNameAreSet(IData dataToSend)
+        private static bool EnsureSimerKeyAndPilotNameAreSet(ITelemetryData dataToSend)
         {
             return string.IsNullOrEmpty(dataToSend.PilotName)
                 || string.IsNullOrEmpty(dataToSend.SimerKey);
@@ -182,25 +183,6 @@ namespace PitWallAcquisitionPlugin
                 _logger.Info("Trying to restart plugin after errors ...");
 
                 Start();
-            }
-        }
-
-        private void UpdateAggregator(
-            IPluginRecordRepository racingDataRepository)
-        {
-
-            /**
-            * Idea: we have one side where we read from plugin manager, and another 
-            * in which we map the retrieved data to the aggregator.
-            * 
-            * I don't like big dictionary cause I like control. But I might have to
-            * centralize the definition of the copy from plugin manager to racing data repo.
-            * 
-            * */
-
-            foreach (var config in _mappingConfiguration)
-            {
-                config.Set(racingDataRepository, _liveAggregator);
             }
         }
 

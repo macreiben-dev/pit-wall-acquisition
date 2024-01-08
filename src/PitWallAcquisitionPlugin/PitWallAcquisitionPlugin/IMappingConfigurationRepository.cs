@@ -1,9 +1,9 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Mappers;
+﻿using PitWallAcquisitionPlugin.Aggregations.Telemetries.Mappers;
 using System.Collections.Generic;
 
 namespace PitWallAcquisitionPlugin
 {
-    public interface IMappingConfigurationRepository : IEnumerable<ILiveMapper>
+    public interface IMappingConfigurationRepository : IEnumerable<ILiveTelemetryMapper>
     {
     }
 }

@@ -1,18 +1,19 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators.Models;
+﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
+using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using PitWallAcquisitionPlugin.UI.ViewModels;
 using System;
 using System.Globalization;
-using System.Windows.Markup;
 
-namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
+namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
 {
-    public sealed class LiveAggregator : ILiveAggregator
+    public sealed class TelemetryLiveAggregator : ITelemetryLiveAggregator
     {
         private string _sessionTimeLeft = string.Empty;
         private bool _dirty = false;
 
         private double? _laptimeSeconds;
-        
+
         private double? _frontLeftTyreWear;
         private double? _frontRightTyreWear;
         private double? _rearLeftTyreWear;
@@ -22,7 +23,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         private double? _frontRightTyreTemp;
         private double? _rearLeftTyreTemp;
         private double? _rearRightTyreTemp;
-        
+
         private double? _avgWetness;
         private double? _airTemperature;
         private double? _trackTemperature;
@@ -33,14 +34,15 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
         private double? _computedLiterPerLaps;
         private double? _computedRemainingLaps;
         private double? _computedRemainingTime;
-        
+
         private readonly IPitWallConfiguration _configuration;
+        private readonly IMappingConfigurationRepository _mappingConfiguration;
 
-        public bool IsDirty => _dirty;
-
-        public LiveAggregator(IPitWallConfiguration configuration)
+    
+        public TelemetryLiveAggregator(IPitWallConfiguration configuration, IMappingConfigurationRepository mappingConfiguration)
         {
             _configuration = configuration;
+            _mappingConfiguration = mappingConfiguration;
         }
 
         public void SetSessionTimeLeft(string sessionTimeLeft)
@@ -69,62 +71,6 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
             _laptimeSeconds = duration.TotalMilliseconds / 1000;
 
             SetDirty();
-        }
-
-        public void Clear()
-        {
-            SetClean();
-
-            _sessionTimeLeft = null;
-            _laptimeSeconds = null;
-
-            _frontLeftTyreWear = null;
-            _frontRightTyreWear = null;
-
-            _rearLeftTyreWear = null;
-            _rearRightTyreWear = null;
-        }
-
-        public IData AsData()
-        {
-            return new Data
-            {
-                SimerKey = _configuration.PersonalKey,
-                PilotName = _configuration.PilotName,
-                CarName = _configuration.CarName,
-                // ---------------------------------
-                SessionTimeLeft = _sessionTimeLeft,
-                LaptimeSeconds = _laptimeSeconds,
-                AvgWetness = _avgWetness,
-                AirTemperature = _airTemperature,
-                TrackTemperature = _trackTemperature,
-                TyresWear = new TyresWear()
-                {
-                    FrontLeftWear = _frontLeftTyreWear,
-                    FrontRightWear = _frontRightTyreWear,
-                    RearLeftWear = _rearLeftTyreWear,
-                    RearRightWear = _rearRightTyreWear,
-                },
-                TyresTemperatures = new TyresTemperatures()
-                {
-                    /**
-                     * Idea: add the inner/middle/outer temperature.
-                     * */
-                    FrontLeftTemp = _frontLeftTyreTemp,
-                    FrontRightTemp = _frontRightTyreTemp,
-                    RearLeftTemp = _rearLeftTyreTemp,
-                    RearRightTemp = _rearRightTyreTemp
-                },
-                VehicleConsumption = new VehicleConsumption()
-                {
-                    Fuel = _fuel,
-                    MaxFuel = _maxFuel,
-                    ComputedLastLapConsumption = _computedLastLapConsumption,
-                    ComputedLiterPerLaps = _computedLiterPerLaps,
-                    ComputedRemainingLaps = _computedRemainingLaps,
-                    ComputedRemainingTime = _computedRemainingTime
-                }
-            };
         }
 
         #region tyre wear
@@ -326,5 +272,86 @@ namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 
             SetDirty();
         }
+
+        #region IAggregator
+
+        public void Clear()
+        {
+            SetClean();
+
+            _sessionTimeLeft = null;
+            _laptimeSeconds = null;
+
+            _frontLeftTyreWear = null;
+            _frontRightTyreWear = null;
+
+            _rearLeftTyreWear = null;
+            _rearRightTyreWear = null;
+        }
+
+        public ISendableData AsData()
+        {
+            return new TelemetryData
+            {
+                SimerKey = _configuration.PersonalKey,
+                PilotName = _configuration.PilotName,
+                CarName = _configuration.CarName,
+                // ---------------------------------
+                SessionTimeLeft = _sessionTimeLeft,
+                LaptimeSeconds = _laptimeSeconds,
+                AvgWetness = _avgWetness,
+                AirTemperature = _airTemperature,
+                TrackTemperature = _trackTemperature,
+                TyresWear = new TyresWear()
+                {
+                    FrontLeftWear = _frontLeftTyreWear,
+                    FrontRightWear = _frontRightTyreWear,
+                    RearLeftWear = _rearLeftTyreWear,
+                    RearRightWear = _rearRightTyreWear,
+                },
+                TyresTemperatures = new TyresTemperatures()
+                {
+                    /**
+                     * Idea: add the inner/middle/outer temperature.
+                     * */
+                    FrontLeftTemp = _frontLeftTyreTemp,
+                    FrontRightTemp = _frontRightTyreTemp,
+                    RearLeftTemp = _rearLeftTyreTemp,
+                    RearRightTemp = _rearRightTyreTemp
+                },
+                VehicleConsumption = new VehicleConsumption()
+                {
+                    Fuel = _fuel,
+                    MaxFuel = _maxFuel,
+                    ComputedLastLapConsumption = _computedLastLapConsumption,
+                    ComputedLiterPerLaps = _computedLiterPerLaps,
+                    ComputedRemainingLaps = _computedRemainingLaps,
+                    ComputedRemainingTime = _computedRemainingTime
+                }
+            };
+        }
+
+        public void UpdateAggregator(
+           IPluginRecordRepository racingDataRepository)
+        {
+
+            /**
+            * Idea: we have one side where we read from plugin manager, and another 
+            * in which we map the retrieved data to the aggregator.
+            * 
+            * I don't like big dictionary cause I like control. But I might have to
+            * centralize the definition of the copy from plugin manager to racing data repo.
+            * 
+            * */
+
+            foreach (var config in _mappingConfiguration)
+            {
+                config.Set(racingDataRepository, this);
+            }
+        }
+
+        public bool IsDirty => _dirty;
+
+        #endregion IAggregator
     }
 }

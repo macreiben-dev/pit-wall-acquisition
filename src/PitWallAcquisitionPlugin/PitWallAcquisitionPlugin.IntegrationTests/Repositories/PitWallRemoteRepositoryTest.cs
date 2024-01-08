@@ -1,5 +1,6 @@
 ﻿using NFluent;
 using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Repositories;
 
 namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
@@ -19,7 +20,9 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
 
             PitWallRemoteRepository target = new PitWallRemoteRepository(configuration);
 
-            ILiveAggregator aggregater = new LiveAggregator(configuration);
+            ITelemetryLiveAggregator aggregater = new TelemetryLiveAggregator(
+                configuration, 
+                new MappingConfigurationRepository());
 
             aggregater.SetLaptime("00:02:02.0000000");
 

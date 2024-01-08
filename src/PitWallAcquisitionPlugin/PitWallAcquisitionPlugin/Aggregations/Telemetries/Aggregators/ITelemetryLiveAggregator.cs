@@ -1,9 +1,10 @@
-﻿namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
-{
-    public interface ILiveAggregator
-    {
-        bool IsDirty { get; }
+﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
 
+namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
+{
+    public interface ITelemetryLiveAggregator : IAggregator
+    {
         /// <summary>
         /// Receives session time left from simhub runtime.
         /// </summary>
@@ -110,19 +111,9 @@
 
         // ====================================================
 
-        /// <summary>
-        /// Clears the setted data.
-        /// </summary>
-        void Clear();
-
-        /// <summary>
-        /// The data object to be send to the API
-        /// </summary>
-        /// <returns></returns>
-        IData AsData();
 
         void SetComputedLastLapConsumption(double? data);
-        
+
         void SetComputedLiterPerLaps(double? v);
 
         void SetComputedRemainingLaps(double? v);
