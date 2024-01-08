@@ -2,6 +2,7 @@
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using NFluent;
 using NSubstitute;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
@@ -28,12 +29,12 @@ namespace PitWallAcquisitionPlugin.Tests
         [Fact]
         public void Should_build()
         {
-            Check.ThatCode(() => new WebApiTelemtryForwarderService(
+            Check.ThatCode(() => new WebApiTelemetryForwarderService(
                 _aggregator,
                 _dataRepository,
-                _mappingConfiguration,
                 _logger,
-                1, 1))
+                1,
+                1))
                 .DoesNotThrow();
         }
 
@@ -52,12 +53,12 @@ namespace PitWallAcquisitionPlugin.Tests
 
             _aggregator.IsDirty.Returns(true);
 
-            var target = new WebApiTelemtryForwarderService(
+            var target = new WebApiTelemetryForwarderService(
                 _aggregator,
                 _dataRepository,
-                _mappingConfiguration,
                 _logger,
-                1000, 1);
+                1000,
+                1);
 
             target.Start();
 
@@ -82,12 +83,11 @@ namespace PitWallAcquisitionPlugin.Tests
 
             _aggregator.IsDirty.Returns(false);
 
-            var target = new WebApiTelemtryForwarderService(
+            var target = new WebApiTelemetryForwarderService(
                 _aggregator,
                 _dataRepository,
-                _mappingConfiguration,
                 _logger,
-                1000, 
+                1000,
                 1);
 
             target.Start();

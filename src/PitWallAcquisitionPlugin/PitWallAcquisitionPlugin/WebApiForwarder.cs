@@ -25,7 +25,7 @@ namespace PitWallAcquisitionPlugin
         private readonly IPluginRecordRepositoryFactory _pluginRecordFactory;
         private readonly IContainer _builder;
         private readonly ILogger _logger;
-        private readonly IWebApiForwarderService _webApiForwarderService;
+        private readonly ITelemetryForwarderService _webApiForwarderService;
 
         public WebApiForwarder()
             : this(
@@ -49,7 +49,7 @@ namespace PitWallAcquisitionPlugin
 
             _pluginRecordFactory = _builder.Resolve<IPluginRecordRepositoryFactory>();
 
-            _webApiForwarderService = _builder.Resolve<IWebApiForwarderService>();
+            _webApiForwarderService = _builder.Resolve<ITelemetryForwarderService>();
         }
 
         private static IContainer CreateBuilder(
@@ -81,8 +81,8 @@ namespace PitWallAcquisitionPlugin
                 .As<IPluginRecordRepositoryFactory>()
                 .SingleInstance();
 
-            containerBuilder.RegisterType<WebApiTelemtryForwarderService>()
-                .As<IWebApiForwarderService>()
+            containerBuilder.RegisterType<WebApiTelemetryForwarderService>()
+                .As<ITelemetryForwarderService>()
                 .WithParameter("postToApiTimerHz", 1)
                 .WithParameter("autoReactivateTimer", 5000)
                 .SingleInstance();

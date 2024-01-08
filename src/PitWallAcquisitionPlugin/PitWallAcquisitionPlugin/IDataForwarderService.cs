@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin
 {
-    public interface IWebApiForwarderService
+    public interface IDataForwarderService
     {
         void HandleDataUpdate(IPluginRecordRepository pluginRecordRepository);
         void Start();

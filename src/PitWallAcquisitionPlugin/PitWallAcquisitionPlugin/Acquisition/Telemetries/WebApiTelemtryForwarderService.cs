@@ -7,8 +7,8 @@ using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
 using System.Timers;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
-{
-    public sealed class WebApiTelemtryForwarderService : IWebApiForwarderService
+{ 
+    public sealed class WebApiTelemetryForwarderService : ITelemetryForwarderService
     {
         private int _internalErrorCount = 0;
         private bool _notifiedStop = false;
@@ -18,7 +18,6 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
         private readonly Timer _autoReactivate;
 
         private readonly IStagingTelemetryDataRepository _dataRepository;
-        private readonly IMappingConfigurationRepository _mappingConfiguration;
         private readonly ITelemetryLiveAggregator _liveAggregator;
         private readonly ILogger _logger;
 
@@ -27,16 +26,16 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
         /// </summary>
         /// <param name="aggregator">The aggregator of data.</param>
         /// <param name="dataRepository">The repository to send data to the API.</param>
-        /// <param name="mappingConfiguration"></param>
         /// <param name="logger">The logger</param>
         /// <param name="postToApiTimerHz">Post to API frequency</param>
         /// <param name="autoReactivateTimer"></param>
-        public WebApiTelemtryForwarderService(
+        /// 
+        public WebApiTelemetryForwarderService(
             ITelemetryLiveAggregator aggregator, // Can use IAggregator
             IStagingTelemetryDataRepository dataRepository,
-            IMappingConfigurationRepository mappingConfiguration,
             ILogger logger,
-            double postToApiTimerHz, int autoReactivateTimer)
+            double postToApiTimerHz,
+            int autoReactivateTimer)
         {
             _postTimer = new Timer(1000 / postToApiTimerHz); // Interval in milliseconds for 10Hz (1000ms / 10Hz = 100ms)
             _postTimer.Elapsed += PostData;
@@ -45,7 +44,6 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             _autoReactivate.Elapsed += AutoReactivate;
 
             _dataRepository = dataRepository;
-            _mappingConfiguration = mappingConfiguration;
             _liveAggregator = aggregator;
             _logger = logger;
 
