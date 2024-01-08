@@ -2,7 +2,8 @@
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories
 {
-    public interface IStagingTelemetryDataRepository : IPitwallRemoteRepository
+    public interface IPitwallRemoteRepository
     {
+        Task SendAsync(object dataToSend);
     }
 }

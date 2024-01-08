@@ -66,9 +66,13 @@ namespace PitWallAcquisitionPlugin
                 .As<ITelemetryLiveAggregator>()
                 .SingleInstance();
 
+            //-------------
+
             containerBuilder.RegisterType<PitWallTelemetryRemoteRepositoryLegacy>()
                 .As<IStagingTelemetryDataRepository>()
                 .SingleInstance();
+
+            //-------------
 
             containerBuilder.RegisterType<HealthCheckService>()
                 .As<IHealthCheckService>();

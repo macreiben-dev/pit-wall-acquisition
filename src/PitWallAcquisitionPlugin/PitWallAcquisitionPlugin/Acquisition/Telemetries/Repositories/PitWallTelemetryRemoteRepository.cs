@@ -8,6 +8,21 @@ using PitWallAcquisitionPlugin.UI.ViewModels;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories
 {
+    public sealed class PitWallTelemetryRemoteRepository : IStagingTelemetryDataRepository
+    {
+        private readonly IPitwallRemoteRepository _remoteRepository;
+
+        public PitWallTelemetryRemoteRepository(IPitwallRemoteRepository remoteRepository)
+        {
+            _remoteRepository =  remoteRepository;
+        }
+
+        public Task SendAsync(object dataToSend)
+        {
+            return _remoteRepository.SendAsync(dataToSend);
+        }
+    }
+
     public sealed class PitWallTelemetryRemoteRepositoryLegacy : IStagingTelemetryDataRepository
     {
         /**
