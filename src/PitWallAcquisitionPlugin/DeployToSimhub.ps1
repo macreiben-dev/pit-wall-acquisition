@@ -10,7 +10,9 @@ if($ConfigurationName -eq "Release") {
 
 $isSimhubInstallationDirectoryValid = Test-Path $SimhubInstallationDirectory
 
-$isArtifactOutputPathValid = Test-Path $ArtifactOutputPath
+$SourceArtifactOutputPath = $ArtifactOutputPath + "\\bin\\" + $ConfigurationName
+
+$isArtifactOutputPathValid = Test-Path $SourceArtifactOutputPath
 
 if ($isSimhubInstallationDirectoryValid -eq $false) {
   Write-Host("Simub installation directory is invalid")
@@ -23,9 +25,9 @@ if ($isArtifactOutputPathValid -eq $false) {
 }
 
 Write-Host "Simhub installation path is:   $isSimhubInstallationDirectoryValid"
-Write-Host "Artifact output path is:       $isArtifactOutputPathValid"
+Write-Host "Artifact output path is:       $SourceArtifactOutputPath"
 
-$Source = $ArtifactOutputPath + "\\PitWallAcquisitionPlugin.*"
+$Source = $SourceArtifactOutputPath + "\\PitWallAcquisitionPlugin.dll"
 $Destination = $SimhubInstallationDirectory
 
 Write-Host "-------------------------------------------------------------"
