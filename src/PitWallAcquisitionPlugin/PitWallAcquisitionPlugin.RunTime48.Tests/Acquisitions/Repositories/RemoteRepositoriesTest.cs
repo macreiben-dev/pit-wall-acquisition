@@ -1,11 +1,8 @@
 ﻿using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.Acquisition.Repositories;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
 using PitWallAcquisitionPlugin.UI.ViewModels;
 using System;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 

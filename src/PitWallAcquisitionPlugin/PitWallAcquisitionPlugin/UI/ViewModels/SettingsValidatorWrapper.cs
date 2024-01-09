@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PitWallAcquisitionPlugin.UI.ViewModels
+﻿namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
     public sealed class SettingsValidatorWrapper : ISettingsValidator
     {

@@ -8,7 +8,6 @@ using PitWallAcquisitionPlugin.Aggregations.Telemetries;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
-using PitWallAcquisitionPlugin.PluginManagerWrappers;
 using System.Threading;
 using Xunit;
 

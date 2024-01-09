@@ -1,11 +1,7 @@
 ﻿using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
 using PitWallAcquisitionPlugin.UI.ViewModels;
-using SimHub.Plugins;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PitWallAcquisitionPlugin.Acquisition.Repositories
 {

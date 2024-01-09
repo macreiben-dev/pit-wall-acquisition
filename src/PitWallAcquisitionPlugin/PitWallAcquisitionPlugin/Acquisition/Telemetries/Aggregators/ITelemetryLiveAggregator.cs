@@ -1,5 +1,4 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
-using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
+﻿using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
 {
