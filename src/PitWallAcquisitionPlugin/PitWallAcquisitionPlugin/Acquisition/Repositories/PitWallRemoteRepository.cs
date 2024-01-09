@@ -27,6 +27,8 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories
             _relativeUri = relativeUri;
         }
 
+        public string Uri => _relativeUri;
+
         public async Task SendAsync(object dataToSend)
         {
             // Convert the data to JSON

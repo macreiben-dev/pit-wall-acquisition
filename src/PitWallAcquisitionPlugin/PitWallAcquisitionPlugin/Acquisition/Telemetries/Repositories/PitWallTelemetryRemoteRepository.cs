@@ -12,9 +12,16 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories
     {
         private readonly IPitwallRemoteRepository _remoteRepository;
 
-        public PitWallTelemetryRemoteRepository(IPitwallRemoteRepository remoteRepository)
+        public string Uri { get; }
+
+        public PitWallTelemetryRemoteRepository(IPitWallConfiguration configuration, string relativeUri)
         {
-            _remoteRepository =  remoteRepository;
+            /**
+             * Not very happy with this one. Could have a repository of remotes organized by uri... 
+             * */
+            _remoteRepository = new PitwallRemoteRepository(configuration, relativeUri);
+
+            Uri = relativeUri;
         }
 
         public Task SendAsync(object dataToSend)
@@ -33,6 +40,8 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories
 
         private readonly HttpClient _httpClient;
         private readonly IPitWallConfiguration _configuration;
+
+        public string Uri => RelativeUri;
 
         public PitWallTelemetryRemoteRepositoryLegacy(IPitWallConfiguration configuration)
         {

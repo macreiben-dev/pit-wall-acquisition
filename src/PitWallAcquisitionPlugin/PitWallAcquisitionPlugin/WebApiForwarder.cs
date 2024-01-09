@@ -72,6 +72,11 @@ namespace PitWallAcquisitionPlugin
                 .As<IStagingTelemetryDataRepository>()
                 .SingleInstance();
 
+
+            //containerBuilder.RegisterType<PitWallTelemetryRemoteRepository>()
+            //    .As<IStagingTelemetryDataRepository>()
+            //    .SingleInstance();
+
             //-------------
 
             containerBuilder.RegisterType<HealthCheckService>()

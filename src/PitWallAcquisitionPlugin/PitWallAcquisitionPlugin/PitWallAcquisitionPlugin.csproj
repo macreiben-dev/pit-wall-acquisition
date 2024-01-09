@@ -93,8 +93,12 @@
     <Compile Include="Acquisition\ISendableData.cs" />
     <Compile Include="Acquisition\Leadeboards\IWebApiLeaderboardForwarderService.cs" />
     <Compile Include="Acquisition\Leadeboards\LeaderboardData.cs" />
+    <Compile Include="Acquisition\Repositories\IPitwallRemoteClient.cs" />
     <Compile Include="Acquisition\Repositories\IPitwallRemoteRepository.cs" />
+    <Compile Include="Acquisition\Repositories\IRemotesRepository.cs" />
     <Compile Include="Acquisition\Repositories\ITelemetryDataRepository.cs" />
+    <Compile Include="Acquisition\Repositories\RemotesRepository.cs" />
+    <Compile Include="Acquisition\Repositories\RemoteTypeEnum.cs" />
     <Compile Include="Acquisition\Telemetries\Aggregators\Models\ITelemetryData.cs" />
     <Compile Include="Acquisition\IAggregator.cs" />
     <Compile Include="Acquisition\Leadeboards\ILeaderboardLiveAggregator.cs" />
@@ -181,6 +185,6 @@
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)
 
-powershell .\DeployToSimhub.ps1 -ArtifactOutputPath .\PitWallAcquisitionPlugin\bin\Debug\ -SimhubInstallationDirectory 'C:\Program Files (x86)\SimHub\' '$(ConfigurationName)'</PostBuildEvent>
+powershell .\DeployToSimhub.ps1 -ArtifactOutputPath .\PitWallAcquisitionPlugin\ -SimhubInstallationDirectory 'C:\Program Files (x86)\SimHub\' -ConfigurationName '$(ConfigurationName)'</PostBuildEvent>
   </PropertyGroup>
 </Project>

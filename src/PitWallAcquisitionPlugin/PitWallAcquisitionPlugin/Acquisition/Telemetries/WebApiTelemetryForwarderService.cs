@@ -1,6 +1,7 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
+using PitWallAcquisitionPlugin.Acquisition.Repositories;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
@@ -17,25 +18,24 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
         private readonly Timer _postTimer;
         private readonly Timer _autoReactivate;
 
-        private readonly IStagingTelemetryDataRepository _dataRepository;
         private readonly ITelemetryLiveAggregator _liveAggregator;
         private readonly ILogger _logger;
+        private readonly IRemotesRepository _remoteRepositories;
 
         /// <summary>
         /// Forwards data to the vortext API.
         /// </summary>
         /// <param name="aggregator">The aggregator of data.</param>
-        /// <param name="dataRepository">The repository to send data to the API.</param>
         /// <param name="logger">The logger</param>
         /// <param name="postToApiTimerHz">Post to API frequency</param>
         /// <param name="autoReactivateTimer"></param>
-        /// 
+        /// <param name="remoteRepositories"></param>
         public WebApiTelemetryForwarderService(
             ITelemetryLiveAggregator aggregator, // Can use IAggregator
-            IStagingTelemetryDataRepository dataRepository,
             ILogger logger,
             double postToApiTimerHz,
-            int autoReactivateTimer)
+            int autoReactivateTimer,
+            IRemotesRepository remoteRepositories)
         {
             _postTimer = new Timer(1000 / postToApiTimerHz); // Interval in milliseconds for 10Hz (1000ms / 10Hz = 100ms)
             _postTimer.Elapsed += PostData;
@@ -43,10 +43,10 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             _autoReactivate = new Timer(autoReactivateTimer);
             _autoReactivate.Elapsed += AutoReactivate;
 
-            _dataRepository = dataRepository;
             _liveAggregator = aggregator;
             _logger = logger;
 
+            _remoteRepositories = remoteRepositories;
             _notifiedStop = true;
         }
 
@@ -146,7 +146,9 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
                     return;
                 }
 
-                await _dataRepository.SendAsync(dataToSend);
+                await _remoteRepositories.SelectFrom(RemoteTypeEnum.Telemetry).SendAsync(dataToSend);
+
+                //await _dataRepository.SendAsync(dataToSend);
 
                 // Reset to 0 after one success.
                 _internalErrorCount = 0;

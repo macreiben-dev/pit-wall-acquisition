@@ -2,6 +2,7 @@
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using NFluent;
 using NSubstitute;
+using PitWallAcquisitionPlugin.Acquisition.Repositories;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
@@ -14,16 +15,30 @@ namespace PitWallAcquisitionPlugin.Tests
     public class WebApiForwarderServiceTest
     {
         private ITelemetryLiveAggregator _aggregator;
-        private IStagingTelemetryDataRepository _dataRepository;
         private ILogger _logger;
-        private IMappingConfigurationRepository _mappingConfiguration;
+        private IRemotesRepository _remotesRepository;
+        private IPitwallRemoteRepository _repo;
 
         public WebApiForwarderServiceTest()
         {
             _aggregator = Substitute.For<ITelemetryLiveAggregator>();
-            _dataRepository = Substitute.For<IStagingTelemetryDataRepository>();
             _logger = Substitute.For<ILogger>();
-            _mappingConfiguration = Substitute.For<IMappingConfigurationRepository>();
+
+            _remotesRepository = Substitute.For<IRemotesRepository>();
+            _repo = Substitute.For<IPitwallRemoteRepository>();
+
+            _remotesRepository.SelectFrom(RemoteTypeEnum.Telemetry)
+                .Returns(_repo);
+        }
+
+        private WebApiTelemetryForwarderService GetTarget()
+        {
+            return new WebApiTelemetryForwarderService(
+                _aggregator,
+                _logger,
+                1000,
+                1,
+                _remotesRepository);
         }
 
         [Fact]
@@ -31,10 +46,10 @@ namespace PitWallAcquisitionPlugin.Tests
         {
             Check.ThatCode(() => new WebApiTelemetryForwarderService(
                 _aggregator,
-                _dataRepository,
                 _logger,
                 1,
-                1))
+                1,
+                _remotesRepository))
                 .DoesNotThrow();
         }
 
@@ -52,13 +67,9 @@ namespace PitWallAcquisitionPlugin.Tests
                 .Returns(original);
 
             _aggregator.IsDirty.Returns(true);
-
-            var target = new WebApiTelemetryForwarderService(
-                _aggregator,
-                _dataRepository,
-                _logger,
-                1000,
-                1);
+            
+            // ACT
+            var target = GetTarget();
 
             target.Start();
 
@@ -66,9 +77,11 @@ namespace PitWallAcquisitionPlugin.Tests
 
             target.Stop();
 
-            _dataRepository.Received().SendAsync(
+            // ASSERT
+            _repo.Received().SendAsync(
                 Arg.Is<object>(c => ((ITelemetryData)c).SessionTimeLeft == "00:00:01"));
         }
+
 
         [Fact]
         public void Should_not_send_when_aggregator_not_dirty()
@@ -83,12 +96,8 @@ namespace PitWallAcquisitionPlugin.Tests
 
             _aggregator.IsDirty.Returns(false);
 
-            var target = new WebApiTelemetryForwarderService(
-                _aggregator,
-                _dataRepository,
-                _logger,
-                1000,
-                1);
+            // ACT
+            var target = GetTarget();
 
             target.Start();
 
@@ -96,7 +105,8 @@ namespace PitWallAcquisitionPlugin.Tests
 
             target.Stop();
 
-            _dataRepository.Received(0).SendAsync(Arg.Any<DataVessel>());
+            // ASSERT
+            _repo.Received(0).SendAsync(Arg.Any<DataVessel>());
         }
     }
 }
