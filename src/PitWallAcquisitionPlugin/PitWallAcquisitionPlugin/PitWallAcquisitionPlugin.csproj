@@ -95,7 +95,6 @@
     <Compile Include="Acquisition\IForwarderServiceFactory.cs" />
     <Compile Include="Acquisition\ISendableData.cs" />
     <Compile Include="Acquisition\Leadeboards\DummyData.cs" />
-    <Compile Include="Acquisition\Leadeboards\IWebApiLeaderboardForwarderService.cs" />
     <Compile Include="Acquisition\Leadeboards\LeaderboardData.cs" />
     <Compile Include="Acquisition\Repositories\IPitwallRemoteClient.cs" />
     <Compile Include="Acquisition\Repositories\IPitwallRemoteRepository.cs" />
@@ -130,8 +129,8 @@
     <Compile Include="IAcquisitionService.cs" />
     <Compile Include="IDataForwarderService.cs" />
     <Compile Include="IMappingConfigurationRepository.cs" />
+    <Compile Include="IocContainerInitialization.cs" />
     <Compile Include="IPluginRecordRepository.cs" />
-    <Compile Include="Acquisition\Telemetries\ITelemetryForwarderService.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\SimhubLogger.cs" />
     <Compile Include="MappingConfigurationRepository.cs" />
@@ -167,8 +166,6 @@
     </Compile>
     <Compile Include="UI\Views\ValidationConverter.cs" />
     <Compile Include="WebApiForwarder.cs" />
-    <Compile Include="Acquisition\Leadeboards\WebApiLeaderboardForwarderService.cs" />
-    <Compile Include="Acquisition\Telemetries\WebApiTelemetryForwarderService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

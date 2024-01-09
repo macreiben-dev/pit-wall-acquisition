@@ -106,7 +106,6 @@
     <Compile Include="UI\ViewModels\PluginSettingsViewModelTest.cs" />
     <Compile Include="UI\ViewModels\SettingsValidatorWrapperTest.cs" />
     <Compile Include="WebApiForwarderServiceTest.cs" />
-    <Compile Include="WebApiForwarderServiceLegacyTest.cs" />
     <Compile Include="WebApiForwarderTest.cs" />
   </ItemGroup>
   <ItemGroup>
