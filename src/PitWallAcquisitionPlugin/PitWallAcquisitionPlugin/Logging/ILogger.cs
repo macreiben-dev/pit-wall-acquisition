@@ -2,7 +2,7 @@
 
 namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Logging
 {
-    public interface ILogger
+    internal interface ILogger
     {
         void Info(string message);
         void Debug(string message);

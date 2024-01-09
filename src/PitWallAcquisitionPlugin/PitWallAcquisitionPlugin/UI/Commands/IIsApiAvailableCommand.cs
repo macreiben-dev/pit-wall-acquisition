@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.Tests.UI.Commands
 {
-    public interface IIsApiAvailableCommand : ICommand
+    internal interface IIsApiAvailableCommand : ICommand
     {
         void RaiseCanExecuteChanged();
     }

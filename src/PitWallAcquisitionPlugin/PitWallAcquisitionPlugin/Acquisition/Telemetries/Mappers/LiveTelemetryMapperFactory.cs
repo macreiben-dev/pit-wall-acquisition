@@ -4,7 +4,7 @@ using System;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Mappers
 {
-    public sealed class LiveTelemetryMapperFactory
+    internal sealed class LiveTelemetryMapperFactory
     {
         public static ILiveTelemetryMapper GetInstance(Func<IPluginRecordRepository, double?> sourceSelector, Action<ITelemetryLiveAggregator, double?> setter)
         {

@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 {
-    public interface IPluginManagerAdapter
+    internal interface IPluginManagerAdapter
     {
         object GetPropertyValue(string key);
     }

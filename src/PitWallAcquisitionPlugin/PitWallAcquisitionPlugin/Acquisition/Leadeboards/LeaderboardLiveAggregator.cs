@@ -3,7 +3,7 @@ using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
 {
-    public sealed class FakeLeaderboardLiveAggregator : ILeaderboardLiveAggregator
+    internal sealed class FakeLeaderboardLiveAggregator : ILeaderboardLiveAggregator
     {
         public bool IsDirty => true;
 

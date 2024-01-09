@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
-    public sealed class SaveToConfigurationCommand : ISaveToConfigurationCommand
+    internal sealed class SaveToConfigurationCommand : ISaveToConfigurationCommand
     {
         private IPitWallConfiguration _configuration;
         private ISettingsValidator _validator;

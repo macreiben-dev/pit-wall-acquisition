@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models
 {
-    public sealed class TyresWear : ITyresWear
+    internal sealed class TyresWear : ITyresWear
     {
         public double? FrontLeftWear { get; set; }
 

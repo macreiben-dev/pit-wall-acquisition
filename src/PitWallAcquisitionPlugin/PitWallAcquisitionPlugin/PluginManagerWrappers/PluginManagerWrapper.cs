@@ -5,7 +5,7 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
     /// <summary>
     /// The wrapper around the plugin manager. This is the primary source of data.
     /// </summary>
-    public sealed class PluginManagerWrapper : IPluginRecordRepository
+    internal sealed class PluginManagerWrapper : IPluginRecordRepository
     {
         private static class Constants
         {

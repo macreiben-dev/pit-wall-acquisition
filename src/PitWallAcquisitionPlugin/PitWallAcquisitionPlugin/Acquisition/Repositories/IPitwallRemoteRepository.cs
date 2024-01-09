@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories
 {
-    public interface IPitwallRemoteRepository
+    internal interface IPitwallRemoteRepository
     {
         Task SendAsync(object dataToSend);
 

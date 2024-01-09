@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
-    public interface ISettingsValidator
+    internal interface ISettingsValidator
     {
         string GetApiAddressIssueMessage(string value);
         string GetCarNameIssueMessage(string value);

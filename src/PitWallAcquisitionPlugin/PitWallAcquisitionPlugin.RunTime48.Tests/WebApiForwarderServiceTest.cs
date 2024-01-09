@@ -13,7 +13,7 @@ using Xunit;
 
 namespace PitWallAcquisitionPlugin.Tests
 {
-    public class WebApiForwarderServiceTest
+    internal class WebApiForwarderServiceTest
     {
         private IAggregator _aggregator;
         private ILogger _logger;

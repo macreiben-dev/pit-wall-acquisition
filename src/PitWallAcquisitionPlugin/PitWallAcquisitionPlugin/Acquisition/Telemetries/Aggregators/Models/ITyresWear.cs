@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models
 {
-    public interface ITyresWear
+    internal interface ITyresWear
     {
         double? FrontLeftWear { get; }
         double? FrontRightWear { get; }

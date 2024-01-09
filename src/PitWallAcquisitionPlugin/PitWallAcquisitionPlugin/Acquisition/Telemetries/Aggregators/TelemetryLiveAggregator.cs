@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
 {
-    public sealed class TelemetryLiveAggregator : ITelemetryLiveAggregator
+    internal sealed class TelemetryLiveAggregator : ITelemetryLiveAggregator
     {
         private string _sessionTimeLeft = string.Empty;
         private bool _dirty = false;

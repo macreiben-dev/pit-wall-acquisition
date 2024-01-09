@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
 {
-    public interface IVehicleConsumption
+    internal interface IVehicleConsumption
     {
         double? Fuel { get; }
         double? ComputedLastLapConsumption { get; }

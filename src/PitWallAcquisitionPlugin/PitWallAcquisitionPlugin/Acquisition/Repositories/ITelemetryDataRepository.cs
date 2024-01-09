@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories
 {
-    public interface ITelemetryDataRepository
+    internal interface ITelemetryDataRepository
     {
     }
 }

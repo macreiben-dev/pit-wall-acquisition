@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.Acquisition.Repositories
 {
-    public interface IPitwallRemoteClient
+    internal interface IPitwallRemoteClient
     {
         void PostAsync(string uriPath, HttpContent payload);
     }

@@ -3,7 +3,7 @@ using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
 {
-    public interface IAggregator
+    internal interface IAggregator
     {
         bool IsDirty { get; }
 

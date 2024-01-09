@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.Acquisition.Repositories
 {
-    public interface IRemotesRepository
+    internal interface IRemotesRepository
     {
         IPitwallRemoteRepository SelectFrom(RemoteTypeEnum remoteType);
     }

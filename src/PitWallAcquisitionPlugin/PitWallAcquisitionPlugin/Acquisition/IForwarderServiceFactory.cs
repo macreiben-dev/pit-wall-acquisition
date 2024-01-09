@@ -3,7 +3,7 @@ using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
 
 namespace PitWallAcquisitionPlugin.Acquisition
 {
-    public interface IForwarderServiceFactory
+    internal interface IForwarderServiceFactory
     {
         IDataForwarderService GetInstance(IAggregator aggregator, RemoteTypeEnum remoteType);
     }

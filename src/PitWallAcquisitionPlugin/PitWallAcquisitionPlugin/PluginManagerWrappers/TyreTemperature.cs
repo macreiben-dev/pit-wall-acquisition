@@ -1,7 +1,7 @@
 ﻿namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 {
 
-    public sealed class TyreTemperature : ITyreTemperature
+    internal sealed class TyreTemperature : ITyreTemperature
     {
         private readonly string innerKey;
         private readonly string middleKey;

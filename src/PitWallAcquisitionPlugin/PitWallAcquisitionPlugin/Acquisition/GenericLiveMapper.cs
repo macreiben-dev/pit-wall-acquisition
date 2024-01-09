@@ -4,7 +4,7 @@ using System;
 namespace PitWallAcquisitionPlugin.Aggregations
 {
 
-    public sealed class GenericLiveMapper<TCounter, ISourceAggregator> //: ILiveMapper
+    internal sealed class GenericLiveMapper<TCounter, ISourceAggregator>
     {
         private readonly Func<IPluginRecordRepository, TCounter> sourceSelector;
         private readonly Action<ISourceAggregator, TCounter> setter;

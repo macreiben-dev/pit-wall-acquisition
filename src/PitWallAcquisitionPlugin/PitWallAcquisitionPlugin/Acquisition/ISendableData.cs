@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
 {
-    public interface ISendableData
+    internal interface ISendableData
     {
         string SimerKey { get; }
 

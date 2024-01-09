@@ -3,7 +3,7 @@ using System;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
 {
-    public sealed class LeaderboardData : ISendableData
+    internal sealed class LeaderboardData : ISendableData
     {
         /**
          * This class will holds the data to be sent. Just creating it here to write any ideas about arch.

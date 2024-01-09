@@ -6,7 +6,7 @@ using System.ComponentModel;
 namespace PitWallAcquisitionPlugin.Tests.UI.Commands
 {
 
-    public sealed class IsApiAvailableCommand : IIsApiAvailableCommand
+    internal sealed class IsApiAvailableCommand : IIsApiAvailableCommand
     {
         private readonly IDisplayAvailability viewModel;
         private readonly IHealthCheckService statusRepo;

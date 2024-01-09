@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace PitWallAcquisitionPlugin
 {
-    public sealed class AcquisitionService : IAcquisitionService
+    internal sealed class AcquisitionService : IAcquisitionService
     {
         private readonly List<IDataForwarderService> _services;
 

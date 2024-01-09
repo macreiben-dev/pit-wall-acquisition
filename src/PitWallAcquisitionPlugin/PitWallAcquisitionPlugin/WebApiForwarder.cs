@@ -28,7 +28,7 @@ namespace PitWallAcquisitionPlugin
 
         }
 
-        public WebApiForwarder(
+        internal WebApiForwarder(
             ILogger logger,
             IPluginRecordRepositoryFactory pluginRecordFactory)
         {

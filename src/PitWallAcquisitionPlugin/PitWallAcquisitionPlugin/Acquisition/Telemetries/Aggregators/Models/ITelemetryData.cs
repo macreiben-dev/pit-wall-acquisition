@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models
 {
-    public interface ITelemetryData : ISendableData
+    internal interface ITelemetryData : ISendableData
     {
         double? LaptimeSeconds { get; }
 

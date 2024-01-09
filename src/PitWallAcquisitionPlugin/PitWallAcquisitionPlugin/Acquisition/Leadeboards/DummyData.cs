@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
 {
-    public class DummyData : ISendableData
+    internal class DummyData : ISendableData
     {
         public string SimerKey { get; set; }
 

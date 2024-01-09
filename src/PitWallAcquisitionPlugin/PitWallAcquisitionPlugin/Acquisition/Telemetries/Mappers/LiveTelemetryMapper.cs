@@ -5,7 +5,7 @@ using System;
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Mappers
 {
 
-    public sealed class LiveTelemetryMapper<TCounter> : ILiveTelemetryMapper
+    internal sealed class LiveTelemetryMapper<TCounter> : ILiveTelemetryMapper
     {
         private readonly GenericLiveMapper<TCounter, ITelemetryLiveAggregator> _mapper;
         /**

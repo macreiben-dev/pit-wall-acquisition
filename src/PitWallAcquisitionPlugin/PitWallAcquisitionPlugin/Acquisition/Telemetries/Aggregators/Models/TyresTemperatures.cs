@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models
 {
-    public sealed class TyresTemperatures : ITyresTemperatures
+    internal sealed class TyresTemperatures : ITyresTemperatures
     {
         public TyresTemperatures()
         {

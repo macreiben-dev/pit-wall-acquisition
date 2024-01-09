@@ -3,7 +3,7 @@ using SimHub.Plugins;
 
 namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 {
-    public sealed class PluginRecordRepositoryFactory : IPluginRecordRepositoryFactory
+    internal sealed class PluginRecordRepositoryFactory : IPluginRecordRepositoryFactory
     {
         public IPluginRecordRepository GetInstance(PluginManager pluginManager)
         {

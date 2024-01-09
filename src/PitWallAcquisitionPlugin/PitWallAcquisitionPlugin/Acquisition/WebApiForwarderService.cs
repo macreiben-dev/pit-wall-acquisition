@@ -8,7 +8,7 @@ using System.Timers;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
 {
-    public sealed class WebApiForwarderService : IDataForwarderService
+    internal sealed class WebApiForwarderService : IDataForwarderService
     {
         private const int MAX_ERROR_COUNT = 3;
         private const int NO_ERROR_COUNT = 0;

@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
 {
-    public sealed class TelemetryData : ITelemetryData
+    internal sealed class TelemetryData : ITelemetryData
     {
         public TelemetryData()
         {

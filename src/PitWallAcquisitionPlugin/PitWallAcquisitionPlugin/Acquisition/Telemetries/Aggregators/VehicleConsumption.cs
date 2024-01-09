@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
 {
-    public class VehicleConsumption : IVehicleConsumption
+    internal class VehicleConsumption : IVehicleConsumption
     {
         public double? Fuel { get; set; }
 

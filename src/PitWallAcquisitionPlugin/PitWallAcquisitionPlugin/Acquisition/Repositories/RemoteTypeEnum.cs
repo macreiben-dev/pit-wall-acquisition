@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.Acquisition.Repositories
 {
-    public enum RemoteTypeEnum
+    internal enum RemoteTypeEnum
     {
         None = 0,
         Telemetry = 1,

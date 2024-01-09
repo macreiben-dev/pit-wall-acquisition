@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
 {
-    public interface ITelemetryLiveAggregator : IAggregator
+    internal interface ITelemetryLiveAggregator : IAggregator
     {
         /// <summary>
         /// Receives session time left from simhub runtime.

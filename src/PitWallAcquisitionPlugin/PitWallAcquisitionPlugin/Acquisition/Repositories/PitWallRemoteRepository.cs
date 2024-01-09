@@ -8,7 +8,7 @@ using PitWallAcquisitionPlugin.UI.ViewModels;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories
 {
-    public sealed class PitwallRemoteRepository : IPitwallRemoteRepository
+    internal sealed class PitwallRemoteRepository : IPitwallRemoteRepository
     {
         /**
          * Idea: use configuration from simhub to define this one.

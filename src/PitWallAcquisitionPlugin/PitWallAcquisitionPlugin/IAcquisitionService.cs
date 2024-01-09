@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin
 {
-    public interface IAcquisitionService
+    internal interface IAcquisitionService
     {
         void HandleDataUpdate(IPluginRecordRepository pluginRecordRepository);
         void Start();

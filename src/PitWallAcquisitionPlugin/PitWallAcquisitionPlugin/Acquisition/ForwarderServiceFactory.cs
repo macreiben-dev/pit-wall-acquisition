@@ -5,7 +5,7 @@ using PitWallAcquisitionPlugin.Aggregations.Telemetries;
 
 namespace PitWallAcquisitionPlugin.Acquisition
 {
-    public sealed class ForwarderServiceFactory : IForwarderServiceFactory
+    internal sealed class ForwarderServiceFactory : IForwarderServiceFactory
     {
         private readonly ILogger logger;
         private readonly IRemotesRepository remotesRepository;

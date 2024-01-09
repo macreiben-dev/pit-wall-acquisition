@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models
 {
-    public interface ITyresTemperatures
+    internal interface ITyresTemperatures
     {
         double? FrontLeftTemp { get; }
         double? FrontRightTemp { get; }

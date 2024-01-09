@@ -9,7 +9,7 @@ namespace FuelAssistantMobile.DataGathering.SimhubPlugin
     /// 
     /// See <see cref="PitWallAcquisitionPlugin.Aggregations.LiveAggregator"/> and <see cref="PitWallAcquisitionPlugin.Aggregations.ILiveAggregator"/> to create the counter aggregations.
     /// </summary>
-    public interface IPluginRecordRepository
+    internal interface IPluginRecordRepository
     {
         /// <summary>
         /// True when game is running.

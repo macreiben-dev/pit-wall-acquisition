@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 {
-    public static class LiveAggregatorTestingExtensions
+    internal static class LiveAggregatorTestingExtensions
     {
         public static void EnsureValueNullMapped(
           this TelemetryLiveAggregator target,

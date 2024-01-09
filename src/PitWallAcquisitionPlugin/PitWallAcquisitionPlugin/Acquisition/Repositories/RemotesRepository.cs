@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PitWallAcquisitionPlugin.Acquisition.Repositories
 {
-    public sealed class RemotesRepository : IRemotesRepository
+    internal sealed class RemotesRepository : IRemotesRepository
     {
         private readonly IPitWallConfiguration configuration;
         private readonly IDictionary<RemoteTypeEnum, IPitwallRemoteRepository> remoteRepositories
