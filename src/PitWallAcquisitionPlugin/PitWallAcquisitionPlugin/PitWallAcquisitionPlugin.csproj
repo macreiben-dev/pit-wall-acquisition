@@ -90,7 +90,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcquisitionService.cs" />
+    <Compile Include="Acquisition\ForwarderServiceFactory.cs" />
+    <Compile Include="Acquisition\IForwarderServiceFactory.cs" />
     <Compile Include="Acquisition\ISendableData.cs" />
+    <Compile Include="Acquisition\Leadeboards\DummyData.cs" />
     <Compile Include="Acquisition\Leadeboards\IWebApiLeaderboardForwarderService.cs" />
     <Compile Include="Acquisition\Leadeboards\LeaderboardData.cs" />
     <Compile Include="Acquisition\Repositories\IPitwallRemoteClient.cs" />
@@ -123,6 +127,7 @@
     <Compile Include="HealthChecks\IHealthCheckService.cs" />
     <Compile Include="HealthChecks\Repositories\HealthCheckRepository.cs" />
     <Compile Include="HealthChecks\Repositories\IHealthCheckRepository.cs" />
+    <Compile Include="IAcquisitionService.cs" />
     <Compile Include="IDataForwarderService.cs" />
     <Compile Include="IMappingConfigurationRepository.cs" />
     <Compile Include="IPluginRecordRepository.cs" />

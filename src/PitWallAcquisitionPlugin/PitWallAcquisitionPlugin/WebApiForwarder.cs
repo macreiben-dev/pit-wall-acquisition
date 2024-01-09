@@ -2,7 +2,9 @@
 using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using GameReaderCommon;
+using PitWallAcquisitionPlugin.Acquisition;
 using PitWallAcquisitionPlugin.Acquisition.Repositories;
+using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
@@ -27,6 +29,7 @@ namespace PitWallAcquisitionPlugin
         private readonly IContainer _builder;
         private readonly ILogger _logger;
         private readonly ITelemetryForwarderService _webApiForwarderService;
+        private readonly IAcquisitionService _acquisitionService;
 
         public WebApiForwarder()
             : this(
@@ -51,6 +54,8 @@ namespace PitWallAcquisitionPlugin
             _pluginRecordFactory = _builder.Resolve<IPluginRecordRepositoryFactory>();
 
             _webApiForwarderService = _builder.Resolve<ITelemetryForwarderService>();
+
+            _acquisitionService = _builder.Resolve<IAcquisitionService>();
         }
 
         private static IContainer CreateBuilder(
@@ -72,11 +77,6 @@ namespace PitWallAcquisitionPlugin
             containerBuilder.RegisterType<RemotesRepository>()
                 .As<IRemotesRepository>()
                 .SingleInstance();
-
-
-            //containerBuilder.RegisterType<PitWallTelemetryRemoteRepository>()
-            //    .As<IStagingTelemetryDataRepository>()
-            //    .SingleInstance();
 
             //-------------
 
@@ -115,6 +115,15 @@ namespace PitWallAcquisitionPlugin
             containerBuilder.RegisterType<SettingsValidatorWrapper>()
                 .As<ISettingsValidator>();
 
+            containerBuilder.RegisterType<ForwarderServiceFactory>()
+                .As<IForwarderServiceFactory>();
+
+            containerBuilder.RegisterType<FakeLeaderboardLiveAggregator>()
+                .As<ILeaderboardLiveAggregator>();
+
+            containerBuilder.RegisterType<AcquisitionService>()
+                .As<IAcquisitionService>();
+
             var builder = containerBuilder.Build();
 
             return builder;
@@ -136,14 +145,16 @@ namespace PitWallAcquisitionPlugin
              * Idea: use ioc framework to host plugin manager
              * */
 
-            _webApiForwarderService.HandleDataUpdate(pluginRecordRepository);
+            _acquisitionService.HandleDataUpdate(pluginRecordRepository);
+
+            //_webApiForwarderService.HandleDataUpdate(pluginRecordRepository);
         }
 
         public void End(PluginManager pluginManager)
         {
             _logger.Info("Data plugin closing ...");
 
-            _webApiForwarderService.Stop();
+            _acquisitionService.Stop();
 
             _logger.Info("Data plugin closing DONE!");
         }
@@ -156,7 +167,7 @@ namespace PitWallAcquisitionPlugin
              * Idea: use ioc framework to split classes when too big.
              * */
 
-            _webApiForwarderService.Start();
+            _acquisitionService.Start();
 
             _logger.Info("Starting Fam Data Gathering plugin DONE!");
         }

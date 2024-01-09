@@ -4,11 +4,12 @@ using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using PitWallAcquisitionPlugin.Acquisition.Repositories;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
+using System;
 using System.Timers;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
-{ 
+{
+    [Obsolete]
     public sealed class WebApiTelemetryForwarderService : ITelemetryForwarderService
     {
         private int _internalErrorCount = 0;

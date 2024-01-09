@@ -2,8 +2,8 @@
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using PitWallAcquisitionPlugin.Acquisition.Repositories;
+using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using System.Timers;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
@@ -146,7 +146,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
              * IDEA : should not send data when in pitlane ?
              * */
 
-            var dataToSend = (ITelemetryData)_liveAggregator.AsData();
+            var dataToSend = _liveAggregator.AsData();
 
             try
             {
@@ -180,7 +180,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             }
         }
 
-        private static bool EnsureSimerKeyAndPilotNameAreSet(ITelemetryData dataToSend)
+        private static bool EnsureSimerKeyAndPilotNameAreSet(ISendableData dataToSend)
         {
             return string.IsNullOrEmpty(dataToSend.PilotName)
                 || string.IsNullOrEmpty(dataToSend.SimerKey);

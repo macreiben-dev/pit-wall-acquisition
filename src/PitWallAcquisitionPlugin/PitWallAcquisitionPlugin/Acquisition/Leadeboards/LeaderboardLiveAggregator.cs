@@ -1,26 +1,29 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using PitWallAcquisitionPlugin.Aggregations.Aggregators;
-using System;
-using System.Net.Sockets;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
 {
-    public class LeaderboardLiveAggregator : ILeaderboardLiveAggregator
+    public sealed class FakeLeaderboardLiveAggregator : ILeaderboardLiveAggregator
     {
-        public bool IsDirty => throw new NotImplementedException();
+        public bool IsDirty => true;
 
         public ISendableData AsData()
         {
-            throw new NotImplementedException();
+            return new DummyData()
+            {
+                CarName = string.Empty,
+                PilotName = string.Empty,
+                SimerKey = string.Empty,
+            };
         }
         public void Clear()
         {
-            throw new NotImplementedException();
+            // Do nothing here.
         }
 
         public void UpdateAggregator(IPluginRecordRepository racingDataRepository)
         {
-            throw new NotImplementedException();
+            // Do nothing here.
         }
     }
 }

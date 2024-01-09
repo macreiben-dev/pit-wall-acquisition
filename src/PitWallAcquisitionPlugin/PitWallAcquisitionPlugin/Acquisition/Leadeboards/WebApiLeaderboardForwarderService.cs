@@ -8,7 +8,7 @@ using System.Timers;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
 {
-
+    [Obsolete]
     public sealed class WebApiLeaderboardForwarderService : IWebApiLeaderboardForwarderService
     {
         private int _internalErrorCount = 0;
