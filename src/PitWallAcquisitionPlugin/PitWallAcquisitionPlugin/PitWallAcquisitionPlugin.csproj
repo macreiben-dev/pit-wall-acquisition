@@ -117,7 +117,7 @@
     <Compile Include="Acquisition\Telemetries\Mappers\ILiveTelemetryMapper.cs" />
     <Compile Include="Acquisition\Telemetries\Mappers\LiveTelemetryMapper.cs" />
     <Compile Include="Acquisition\Repositories\PitWallRemoteRepository.cs" />
-    <Compile Include="Acquisition\WebApiTelemetryForwarderService.cs" />
+    <Compile Include="Acquisition\WebApiForwarderService.cs" />
     <Compile Include="DataVessel.cs" />
     <Compile Include="HealthChecks\HealthCheckService.cs" />
     <Compile Include="HealthChecks\IHealthCheckService.cs" />

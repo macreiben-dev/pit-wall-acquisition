@@ -18,7 +18,7 @@ namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
                 CarName = "Car_IntegrationTestsFromPlugin"
             };
 
-            PitWallTelemetryRemoteRepositoryLegacy target = new PitWallTelemetryRemoteRepositoryLegacy(configuration);
+            var target = new PitwallRemoteRepository(configuration, "/api/v1/telemetry");
 
             ITelemetryLiveAggregator aggregater = new TelemetryLiveAggregator(
                 configuration, 

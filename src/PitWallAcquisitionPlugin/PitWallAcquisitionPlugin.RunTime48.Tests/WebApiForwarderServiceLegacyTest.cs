@@ -3,7 +3,6 @@ using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.Acquisition.Repositories;
-using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
@@ -13,16 +12,16 @@ using Xunit;
 
 namespace PitWallAcquisitionPlugin.Tests
 {
-    public class WebApiForwarderServiceTest
+    public class WebApiForwarderServiceLegacyTest
     {
-        private IAggregator _aggregator;
+        private ITelemetryLiveAggregator _aggregator;
         private ILogger _logger;
         private IRemotesRepository _remotesRepository;
         private IPitwallRemoteRepository _repo;
 
-        public WebApiForwarderServiceTest()
+        public WebApiForwarderServiceLegacyTest()
         {
-            _aggregator = Substitute.For<IAggregator>();
+            _aggregator = Substitute.For<ITelemetryLiveAggregator>();
             _logger = Substitute.For<ILogger>();
 
             _remotesRepository = Substitute.For<IRemotesRepository>();
@@ -32,13 +31,12 @@ namespace PitWallAcquisitionPlugin.Tests
                 .Returns(_repo);
         }
 
-        private WebApiForwarderService GetTarget()
+        private WebApiTelemetryForwarderService GetTarget()
         {
-            return new WebApiForwarderService(
+            return new WebApiTelemetryForwarderService(
                 _aggregator,
                 _remotesRepository,
                 _logger,
-                RemoteTypeEnum.Telemetry,
                 1000,
                 1);
         }
@@ -46,11 +44,10 @@ namespace PitWallAcquisitionPlugin.Tests
         [Fact]
         public void Should_build()
         {
-            Check.ThatCode(() => new WebApiForwarderService(
+            Check.ThatCode(() => new WebApiTelemetryForwarderService(
                 _aggregator,
                 _remotesRepository,
                 _logger,
-                RemoteTypeEnum.Telemetry,
                 1,
                 1))
                 .DoesNotThrow();
@@ -110,35 +107,6 @@ namespace PitWallAcquisitionPlugin.Tests
 
             // ASSERT
             _repo.Received(0).SendAsync(Arg.Any<DataVessel>());
-        }
-
-        [Fact]
-        public void GIVEN_name_WHEN_starting_THEN_use_remoteType_in_logger()
-        {
-            var target = GetTarget();
-
-            target.Start();
-
-            Thread.Sleep(200);
-
-            _logger.Received(1).Info("Pitwall acquisition plugin - Telemetry Gathering STARTED");
-
-            target.Stop();
-        }
-
-        [Fact]
-        public void GIVEN_name_WHEN_stopping_THEN_use_remoteType_in_logger()
-        {
-            var target = GetTarget();
-
-            target.Start();
-
-            target.Stop();
-
-            Thread.Sleep(200);
-
-            _logger.Received(1).Info("Pitwall acquisition plugin - Telemetry Gathering STOPPED");
-
         }
     }
 }

@@ -3,6 +3,7 @@ using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using PitWallAcquisitionPlugin.Acquisition.Repositories;
 using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using System;
 using System.Timers;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
@@ -146,8 +147,9 @@ namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
 
                     return;
                 }
+                throw new NotImplementedException();
 
-                await _dataRepository.SendAsync(dataToSend);
+                //await _dataRepository.SendAsync(dataToSend);
 
                 // Reset to 0 after one success.
                 _internalErrorCount = 0;
