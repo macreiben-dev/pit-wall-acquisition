@@ -6,7 +6,7 @@ using Xunit;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests.UI.Commands
 {
-    internal class SaveToConfigurationCommandTest
+    public class SaveToConfigurationCommandTest
     {
         private FakePitWallConfiguration _configuration;
         private ISettingsValidator _settingsValidator;
@@ -18,7 +18,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.UI.Commands
             _settingsValidator = Substitute.For<ISettingsValidator>();
         }
 
-        public ISaveToConfigurationCommand GetTarget()
+        private ISaveToConfigurationCommand GetTarget()
         {
             return new SaveToConfigurationCommand(_configuration, _settingsValidator);
         }

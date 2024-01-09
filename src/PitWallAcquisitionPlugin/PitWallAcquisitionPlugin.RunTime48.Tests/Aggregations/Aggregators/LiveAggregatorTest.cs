@@ -8,7 +8,7 @@ using Xunit;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 {
-    internal class LiveAggregatorTest
+    public class LiveAggregatorTest
     {
         private FakePitWallConfiguration _configuration;
 
@@ -17,7 +17,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             _configuration = new FakePitWallConfiguration();
         }
 
-        public TelemetryLiveAggregator GetTarget()
+        private TelemetryLiveAggregator GetTarget()
         {
             return new TelemetryLiveAggregator(_configuration, new MappingConfigurationRepository());
         }
@@ -109,7 +109,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public TelemetryLiveAggregator GetTarget()
+            private TelemetryLiveAggregator GetTarget()
             {
                 return new TelemetryLiveAggregator(_configuration, new MappingConfigurationRepository());
             }
@@ -194,7 +194,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public TelemetryLiveAggregator GetTarget()
+            private TelemetryLiveAggregator GetTarget()
             {
                 return new TelemetryLiveAggregator(_configuration, new MappingConfigurationRepository());
             }
@@ -493,7 +493,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public TelemetryLiveAggregator GetTarget()
+            private TelemetryLiveAggregator GetTarget()
             {
                 return new TelemetryLiveAggregator(_configuration, new MappingConfigurationRepository());
             }
@@ -789,7 +789,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public TelemetryLiveAggregator GetTarget()
+            private TelemetryLiveAggregator GetTarget()
             {
                 return new TelemetryLiveAggregator(_configuration, new MappingConfigurationRepository());
             }
@@ -917,7 +917,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             {
                 _configuration = new FakePitWallConfiguration();
             }
-            public TelemetryLiveAggregator GetTarget()
+            private TelemetryLiveAggregator GetTarget()
             {
                 return new TelemetryLiveAggregator(_configuration, new MappingConfigurationRepository());
             }
