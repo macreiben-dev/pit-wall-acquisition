@@ -67,6 +67,8 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
                 _liveAggregator.UpdateAggregator(pluginRecordRepository);
 
                 _firstLaunch = true;
+
+                return;
             }
 
             if (!pluginRecordRepository.IsGameRunning)
@@ -103,21 +105,32 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
 
         public void Stop()
         {
-            if (_notifiedStop == true)
+            try
             {
-                return;
+                if (_notifiedStop == true)
+                {
+                    return;
+                }
+
+                _liveAggregator.Clear();
+                _postTimer.Stop();
+                _internalErrorCount = 0;
+                _notifiedStop = true;
             }
-
-            _liveAggregator.Clear();
-            _postTimer.Stop();
-            _internalErrorCount = 0;
-            _notifiedStop = true;
-
-            _logger.Info($"Pitwall acquisition plugin - {_remoteType} Gathering STOPPED");
+            finally
+            {
+                _logger.Info($"Pitwall acquisition plugin - {_remoteType} Gathering STOPPED");
+            }
         }
 
         private async void PostData(object sender, ElapsedEventArgs e)
         {
+            /**
+             * This part is tightly coupled to timer which makes it hard to test. Might need to rework this.
+             * 
+             * Move this one to a static function at minimum to test it.
+             * */
+
             // THOUGHT: check game status before doing anything. If it is not running. Then do nothing.
             if (ShouldStopTimer())
             {
@@ -127,14 +140,14 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
                 }
                 catch { }
 
-                _logger.Error("WebAPI post stoped.");
+                _logger.Error($"Pitwall acquisition plugin - {_remoteType} - WebAPI post stoped.");
 
                 return;
             }
 
             if (ShouldNotifyRetrying())
             {
-                _logger.Warn($"Retrying to contact API - error count is [{_internalErrorCount}]");
+                _logger.Warn($"Pitwall acquisition plugin - {_remoteType} - Retrying to contact API - error count is [{_internalErrorCount}]");
             }
 
             if (!_liveAggregator.IsDirty)
@@ -152,7 +165,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             {
                 if (EnsureSimerKeyAndPilotNameAreSet(dataToSend))
                 {
-                    _logger.Error($"Mandatory configuration missing, PilotName is [{dataToSend.PilotName}] - SimerKey is [{dataToSend.SimerKey}]");
+                    _logger.Error($"Pitwall acquisition plugin - {_remoteType} - Mandatory configuration missing, PilotName is [{dataToSend.PilotName}] - SimerKey is [{dataToSend.SimerKey}]");
 
                     return;
                 }
@@ -166,17 +179,17 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             {
                 _internalErrorCount++;
 
-                _logger.Error($"Issue during posting [{ex.WebApiUrl}] - [{_internalErrorCount}] error count.");
-                _logger.Error("Posted data is:");
+                _logger.Error($"Pitwall acquisition plugin - {_remoteType} - Issue during posting [{ex.WebApiUrl}] - [{_internalErrorCount}] error count.");
+                _logger.Error($"Pitwall acquisition plugin - {_remoteType} - Posted data is:");
                 _logger.Error(ex.JsonData);
-                _logger.Error($"Exception is:", ex);
+                _logger.Error($"Pitwall acquisition plugin - {_remoteType} - Exception is:", ex);
             }
             catch (StatusCodeNotOkException ex)
             {
                 _internalErrorCount++;
 
-                _logger.Error($"Issue during posting [{ex.WebApiUrl}] - [{_internalErrorCount}] error count.");
-                _logger.Error($"API failed returned code is not OK - [{ex.StatusCode}]");
+                _logger.Error($"Pitwall acquisition plugin - {_remoteType} - Issue during posting [{ex.WebApiUrl}] - [{_internalErrorCount}] error count.");
+                _logger.Error($"Pitwall acquisition plugin - {_remoteType} - API failed returned code is not OK - [{ex.StatusCode}]");
             }
         }
 
@@ -190,7 +203,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
         {
             if (HasBeenNotifiedToStop() && SufferedInternalError())
             {
-                _logger.Info("Trying to restart plugin after errors ...");
+                _logger.Info($"Pitwall acquisition plugin - {_remoteType} - Trying to restart plugin after errors ...");
 
                 Start();
             }
