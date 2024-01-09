@@ -2,6 +2,7 @@
 using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using GameReaderCommon;
+using PitWallAcquisitionPlugin.Acquisition.Repositories;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
@@ -70,6 +71,10 @@ namespace PitWallAcquisitionPlugin
 
             containerBuilder.RegisterType<PitWallTelemetryRemoteRepositoryLegacy>()
                 .As<IStagingTelemetryDataRepository>()
+                .SingleInstance();
+
+            containerBuilder.RegisterType<RemotesRepository>()
+                .As<IRemotesRepository>()
                 .SingleInstance();
 
 
