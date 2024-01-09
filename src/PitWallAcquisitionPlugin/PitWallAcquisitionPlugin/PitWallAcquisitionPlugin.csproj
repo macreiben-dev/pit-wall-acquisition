@@ -117,6 +117,7 @@
     <Compile Include="Acquisition\Telemetries\Mappers\ILiveTelemetryMapper.cs" />
     <Compile Include="Acquisition\Telemetries\Mappers\LiveTelemetryMapper.cs" />
     <Compile Include="Acquisition\Repositories\PitWallRemoteRepository.cs" />
+    <Compile Include="Acquisition\WebApiTelemetryForwarderService.cs" />
     <Compile Include="DataVessel.cs" />
     <Compile Include="HealthChecks\HealthCheckService.cs" />
     <Compile Include="HealthChecks\IHealthCheckService.cs" />
@@ -141,8 +142,6 @@
     <Compile Include="Repositories\ErrorWhenSendDataException.cs" />
     <Compile Include="Repositories\SimhubPluginConfigurationRepository.cs" />
     <Compile Include="Repositories\IPitWallApiStatusRepository.cs" />
-    <Compile Include="Acquisition\Telemetries\Repositories\PitWallTelemetryRemoteRepository.cs" />
-    <Compile Include="Acquisition\Telemetries\Repositories\IStagingTelemetryDataRepository.cs" />
     <Compile Include="Repositories\StatusCodeNotOkException.cs" />
     <Compile Include="UI\Commands\ISaveToConfigurationCommand.cs" />
     <Compile Include="UI\ViewModels\DataValidator.cs" />

@@ -35,10 +35,10 @@ namespace PitWallAcquisitionPlugin.Tests
         {
             return new WebApiTelemetryForwarderService(
                 _aggregator,
+                _remotesRepository,
                 _logger,
                 1000,
-                1,
-                _remotesRepository);
+                1);
         }
 
         [Fact]
@@ -46,10 +46,10 @@ namespace PitWallAcquisitionPlugin.Tests
         {
             Check.ThatCode(() => new WebApiTelemetryForwarderService(
                 _aggregator,
+                _remotesRepository,
                 _logger,
                 1,
-                1,
-                _remotesRepository))
+                1))
                 .DoesNotThrow();
         }
 

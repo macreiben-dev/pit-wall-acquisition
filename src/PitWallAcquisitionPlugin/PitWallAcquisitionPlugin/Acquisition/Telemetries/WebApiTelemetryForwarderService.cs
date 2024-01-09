@@ -26,16 +26,16 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
         /// Forwards data to the vortext API.
         /// </summary>
         /// <param name="aggregator">The aggregator of data.</param>
+        /// <param name="remoteRepositories"></param>
         /// <param name="logger">The logger</param>
         /// <param name="postToApiTimerHz">Post to API frequency</param>
         /// <param name="autoReactivateTimer"></param>
-        /// <param name="remoteRepositories"></param>
         public WebApiTelemetryForwarderService(
             ITelemetryLiveAggregator aggregator, // Can use IAggregator
+            IRemotesRepository remoteRepositories,
             ILogger logger,
             double postToApiTimerHz,
-            int autoReactivateTimer,
-            IRemotesRepository remoteRepositories)
+            int autoReactivateTimer)
         {
             _postTimer = new Timer(1000 / postToApiTimerHz); // Interval in milliseconds for 10Hz (1000ms / 10Hz = 100ms)
             _postTimer.Elapsed += PostData;

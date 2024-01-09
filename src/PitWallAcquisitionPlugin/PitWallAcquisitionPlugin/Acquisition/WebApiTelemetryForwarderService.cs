@@ -2,38 +2,39 @@
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using PitWallAcquisitionPlugin.Acquisition.Repositories;
-using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
+using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using System.Timers;
 
-namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
+namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
 {
-
-    public sealed class WebApiLeaderboardForwarderService : IWebApiLeaderboardForwarderService
+    public sealed class WebApiForwarderService : IDataForwarderService
     {
         private int _internalErrorCount = 0;
         private bool _notifiedStop = false;
+        private readonly RemoteTypeEnum _remoteType;
         private bool _firstLaunch = false;
 
         private readonly Timer _postTimer;
         private readonly Timer _autoReactivate;
 
-        private readonly IRemotesRepository _dataRepository;
-        private readonly ILeaderboardLiveAggregator _liveAggregator;
+        private readonly IAggregator _liveAggregator;
         private readonly ILogger _logger;
+        private readonly IRemotesRepository _remoteRepositories;
 
         /// <summary>
         /// Forwards data to the vortext API.
         /// </summary>
         /// <param name="aggregator">The aggregator of data.</param>
-        /// <param name="dataRepository">The repository to send data to the API.</param>
+        /// <param name="remoteRepositories"></param>
         /// <param name="logger">The logger</param>
         /// <param name="postToApiTimerHz">Post to API frequency</param>
         /// <param name="autoReactivateTimer"></param>
-        /// 
-        public WebApiLeaderboardForwarderService(
-            ILeaderboardLiveAggregator aggregator,
-            IRemotesRepository dataRepository,
+        public WebApiForwarderService(
+            IAggregator aggregator,
+            IRemotesRepository remoteRepositories,
             ILogger logger,
+            RemoteTypeEnum remoteType,
             double postToApiTimerHz,
             int autoReactivateTimer)
         {
@@ -43,12 +44,13 @@ namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
             _autoReactivate = new Timer(autoReactivateTimer);
             _autoReactivate.Elapsed += AutoReactivate;
 
-            _dataRepository = dataRepository;
-
             _liveAggregator = aggregator;
             _logger = logger;
 
+            _remoteRepositories = remoteRepositories;
             _notifiedStop = true;
+
+            _remoteType = remoteType;
         }
 
         public void HandleDataUpdate(IPluginRecordRepository pluginRecordRepository)
@@ -91,7 +93,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
             _postTimer.Start();
             _liveAggregator.Clear();
 
-            _logger.Info("Pitwall acquisition plugin - Leaderboard Gathering STARTED");
+            _logger.Info("Pitwall acquisition plugin - Telemetry Gathering STARTED");
         }
 
         public void Stop()
@@ -106,7 +108,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
             _internalErrorCount = 0;
             _notifiedStop = true;
 
-            _logger.Info("Pitwall acquisition plugin - Leaderboard Gathering STOPPED");
+            _logger.Info("Pitwall acquisition plugin - Telemetry Gathering STOPPED");
         }
 
         private async void PostData(object sender, ElapsedEventArgs e)
@@ -136,7 +138,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
             }
 
             // Replace the following lines with your own logic to get the data you want to send
-            var dataToSend = _liveAggregator.AsData();
+            var dataToSend = (ITelemetryData)_liveAggregator.AsData();
 
             try
             {
@@ -147,7 +149,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
                     return;
                 }
 
-                await _dataRepository.SendAsync(dataToSend);
+                await _remoteRepositories.SelectFrom(_remoteType).SendAsync(dataToSend);
 
                 // Reset to 0 after one success.
                 _internalErrorCount = 0;
@@ -170,7 +172,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
             }
         }
 
-        private static bool EnsureSimerKeyAndPilotNameAreSet(ISendableData dataToSend)
+        private static bool EnsureSimerKeyAndPilotNameAreSet(ITelemetryData dataToSend)
         {
             return string.IsNullOrEmpty(dataToSend.PilotName)
                 || string.IsNullOrEmpty(dataToSend.SimerKey);
