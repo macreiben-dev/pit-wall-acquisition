@@ -43,6 +43,18 @@ namespace PitWallAcquisitionPlugin.Tests
                 1);
         }
 
+        private WebApiForwarderService GetTarget(RemoteTypeEnum remoteType)
+        {
+            return new WebApiForwarderService(
+                _aggregator,
+                _remotesRepository,
+                _logger,
+                remoteType,
+                1000,
+                1);
+        }
+
+
         [Fact]
         public void Should_build()
         {
@@ -85,7 +97,6 @@ namespace PitWallAcquisitionPlugin.Tests
                 Arg.Is<object>(c => ((ITelemetryData)c).SessionTimeLeft == "00:00:01"));
         }
 
-
         [Fact]
         public void Should_not_send_when_aggregator_not_dirty()
         {
@@ -112,24 +123,28 @@ namespace PitWallAcquisitionPlugin.Tests
             _repo.Received(0).SendAsync(Arg.Any<DataVessel>());
         }
 
-        [Fact]
-        public void GIVEN_name_WHEN_starting_THEN_use_remoteType_in_logger()
+        [Theory]
+        [InlineData(RemoteTypeEnum.Telemetry)]
+        [InlineData(RemoteTypeEnum.Leaderboard)]
+        public void GIVEN_name_WHEN_starting_THEN_use_remoteType_in_logger(RemoteTypeEnum remoteType)
         {
-            var target = GetTarget();
+            var target = GetTarget(remoteType);
 
             target.Start();
 
             Thread.Sleep(200);
 
-            _logger.Received(1).Info("Pitwall acquisition plugin - Telemetry Gathering STARTED");
+            _logger.Received(1).Info($"Pitwall acquisition plugin - {remoteType} Gathering STARTED");
 
             target.Stop();
         }
 
-        [Fact]
-        public void GIVEN_name_WHEN_stopping_THEN_use_remoteType_in_logger()
+        [Theory]
+        [InlineData(RemoteTypeEnum.Telemetry)]
+        [InlineData(RemoteTypeEnum.Leaderboard)]
+        public void GIVEN_name_WHEN_stopping_THEN_use_remoteType_in_logger(RemoteTypeEnum remoteType)
         {
-            var target = GetTarget();
+            var target = GetTarget(remoteType);
 
             target.Start();
 
@@ -137,8 +152,7 @@ namespace PitWallAcquisitionPlugin.Tests
 
             Thread.Sleep(200);
 
-            _logger.Received(1).Info("Pitwall acquisition plugin - Telemetry Gathering STOPPED");
-
+            _logger.Received(1).Info($"Pitwall acquisition plugin - {remoteType} Gathering STOPPED");
         }
     }
 }

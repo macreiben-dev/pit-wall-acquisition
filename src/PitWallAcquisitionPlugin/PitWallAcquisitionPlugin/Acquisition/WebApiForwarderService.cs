@@ -10,6 +10,8 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
 {
     public sealed class WebApiForwarderService : IDataForwarderService
     {
+        private const int MAX_ERROR_COUNT = 3;
+        private const int NO_ERROR_COUNT = 0;
         private int _internalErrorCount = 0;
         private bool _notifiedStop = false;
         private readonly RemoteTypeEnum _remoteType;
@@ -38,6 +40,9 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             double postToApiTimerHz,
             int autoReactivateTimer)
         {
+            /**
+             * IDEA : use seconds instead of Hz, because it's not human friendly in the code and for admins
+             * */
             _postTimer = new Timer(1000 / postToApiTimerHz); // Interval in milliseconds for 10Hz (1000ms / 10Hz = 100ms)
             _postTimer.Elapsed += PostData;
 
@@ -93,7 +98,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             _postTimer.Start();
             _liveAggregator.Clear();
 
-            _logger.Info("Pitwall acquisition plugin - Telemetry Gathering STARTED");
+            _logger.Info($"Pitwall acquisition plugin - {_remoteType} Gathering STARTED");
         }
 
         public void Stop()
@@ -108,7 +113,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             _internalErrorCount = 0;
             _notifiedStop = true;
 
-            _logger.Info("Pitwall acquisition plugin - Telemetry Gathering STOPPED");
+            _logger.Info($"Pitwall acquisition plugin - {_remoteType} Gathering STOPPED");
         }
 
         private async void PostData(object sender, ElapsedEventArgs e)
@@ -137,7 +142,10 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
                 return;
             }
 
-            // Replace the following lines with your own logic to get the data you want to send
+            /**
+             * IDEA : should not send data when in pitlane ?
+             * */
+
             var dataToSend = (ITelemetryData)_liveAggregator.AsData();
 
             try
@@ -180,7 +188,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
 
         private void AutoReactivate(object sender, ElapsedEventArgs e)
         {
-            if (_notifiedStop && _internalErrorCount >= 3)
+            if (HasBeenNotifiedToStop() && SufferedInternalError())
             {
                 _logger.Info("Trying to restart plugin after errors ...");
 
@@ -188,14 +196,24 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             }
         }
 
+        private bool SufferedInternalError()
+        {
+            return _internalErrorCount >= MAX_ERROR_COUNT;
+        }
+
+        private bool HasBeenNotifiedToStop()
+        {
+            return _notifiedStop;
+        }
+
         private bool ShouldStopTimer()
         {
-            return _internalErrorCount >= 3;
+            return _internalErrorCount >= MAX_ERROR_COUNT;
         }
 
         private bool ShouldNotifyRetrying()
         {
-            return _internalErrorCount > 0 && _internalErrorCount < 3;
+            return _internalErrorCount > NO_ERROR_COUNT && _internalErrorCount < MAX_ERROR_COUNT;
         }
     }
 }
