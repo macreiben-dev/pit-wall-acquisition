@@ -37,4 +37,5 @@ using System.Runtime.InteropServices;
 
 [assembly: InternalsVisibleTo("PitWallAcquisitionPlugin.RunTime48.Tests")]
 [assembly: InternalsVisibleTo("PitWallAcquisitionPlugin.IntegrationTests")]
+[assembly: InternalsVisibleTo("DemoProject.RunTime48.Tests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
