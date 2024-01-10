@@ -33,7 +33,8 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     testAssemblyVer2: | 
-      **\*Tests.dll
+      **\*DemoProject.RunTime48.Tests.dll
+      **\*PitWallAcquisitionPlugin.RunTime48.Tests
       !**\*IntegrationTests.dll
 
 - task: PublishBuildArtifacts@1
