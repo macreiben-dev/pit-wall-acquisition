@@ -36,7 +36,6 @@ steps:
       **\*DemoProject.RunTime48.Tests.dll
       **\*PitWallAcquisitionPlugin.RunTime48.Tests
       !**\*IntegrationTests.dll
-
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.SourcesDirectory)/$(publishDir)'
