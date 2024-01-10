@@ -8,7 +8,7 @@ using PitWallAcquisitionPlugin.HealthChecks;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 {
-    internal class PluginSettingsViewModelTest
+    public class PluginSettingsViewModelTest
     {
         private const string VALID_API_ADDRESS = "http://api.address.net";
         private FakePitWallConfiguration _pitWallConfiguration;
@@ -35,7 +35,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                 _settingsValidator);
         }
 
-        public PluginSettingsViewModel GetTargetWithPersonalKey(string personalKey)
+        private PluginSettingsViewModel GetTargetWithPersonalKey(string personalKey)
         {
             return new PluginSettingsViewModel(
                 _pitWallConfiguration,

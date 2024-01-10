@@ -13,7 +13,7 @@ using Xunit;
 
 namespace PitWallAcquisitionPlugin.Tests
 {
-    internal class WebApiForwarderServiceTest
+    public class WebApiForwarderServiceTest
     {
         private IAggregator _aggregator;
         private ILogger _logger;
@@ -128,7 +128,7 @@ namespace PitWallAcquisitionPlugin.Tests
         [Theory]
         [InlineData(RemoteTypeEnum.Telemetry)]
         [InlineData(RemoteTypeEnum.Leaderboard)]
-        public void GIVEN_name_WHEN_starting_THEN_use_remoteType_in_logger(RemoteTypeEnum remoteType)
+        internal void GIVEN_name_WHEN_starting_THEN_use_remoteType_in_logger(RemoteTypeEnum remoteType)
         {
             var target = GetTarget(remoteType);
 
@@ -144,7 +144,7 @@ namespace PitWallAcquisitionPlugin.Tests
         [Theory]
         [InlineData(RemoteTypeEnum.Telemetry)]
         [InlineData(RemoteTypeEnum.Leaderboard)]
-        public void GIVEN_name_WHEN_stopping_THEN_use_remoteType_in_logger(RemoteTypeEnum remoteType)
+        internal void GIVEN_name_WHEN_stopping_THEN_use_remoteType_in_logger(RemoteTypeEnum remoteType)
         {
             var target = GetTarget(remoteType);
 
