@@ -1129,9 +1129,11 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             target.Clear();
 
-            var actual = (ITelemetryData)target.AsData();
+            var intermediary = target.AsData();
 
             watch.Stop();
+
+            var actual = (ITelemetryData)intermediary;
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
@@ -1155,9 +1157,11 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             target.Clear();
 
-            var actual = (ITelemetryData)target.AsData();
+            var intermediary = target.AsData();
 
             watch.Stop();
+
+            var actual = (ITelemetryData)intermediary;
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
@@ -1181,9 +1185,11 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             target.Clear();
 
-            var actual = (ITelemetryData)target.AsData();
+            var intermediary = target.AsData();
 
             watch.Stop();
+
+            var actual = (ITelemetryData)intermediary;
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
@@ -1207,9 +1213,11 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             target.Clear();
 
-            var actual = (ITelemetryData)target.AsData();
+            var intermediary = target.AsData();
 
             watch.Stop();
+
+            var actual = (ITelemetryData)intermediary;
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
@@ -1233,9 +1241,11 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             target.Clear();
 
-            var actual = (ITelemetryData)target.AsData();
+            var intermediary = target.AsData();
 
             watch.Stop();
+
+            var actual = (ITelemetryData)intermediary;
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
