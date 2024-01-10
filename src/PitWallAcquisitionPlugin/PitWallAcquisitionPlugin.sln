@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PitWallAcquisitionPlugin.In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PitWallAcquisitionPlugin.RunTime48.Tests", "PitWallAcquisitionPlugin.RunTime48.Tests\PitWallAcquisitionPlugin.RunTime48.Tests.csproj", "{2C9EB657-8310-4B8E-A2CB-0BA38C8E67B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoProject.RunTime48.Tests", "DemoProject.RunTime48.Tests\DemoProject.RunTime48.Tests.csproj", "{D73D8DCB-F998-4823-8761-D135FA0E601C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,10 +35,6 @@ Global
 		{2C9EB657-8310-4B8E-A2CB-0BA38C8E67B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C9EB657-8310-4B8E-A2CB-0BA38C8E67B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C9EB657-8310-4B8E-A2CB-0BA38C8E67B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D73D8DCB-F998-4823-8761-D135FA0E601C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D73D8DCB-F998-4823-8761-D135FA0E601C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D73D8DCB-F998-4823-8761-D135FA0E601C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D73D8DCB-F998-4823-8761-D135FA0E601C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
