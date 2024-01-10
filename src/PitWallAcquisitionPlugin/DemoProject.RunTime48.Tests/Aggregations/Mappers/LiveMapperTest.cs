@@ -8,6 +8,7 @@ using System;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Mappers
 {
+    [TestClass]
     public class LiveMapperTest
     {
         private ITelemetryLiveAggregator _aggregator;

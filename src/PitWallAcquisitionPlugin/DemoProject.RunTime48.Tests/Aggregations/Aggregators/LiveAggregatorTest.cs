@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 {
+    [TestClass]
     public class LiveAggregatorTest
     {
         private FakePitWallConfiguration _configuration;
@@ -99,7 +100,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
-
+        [TestClass]
         public class LapTimes
         {
             private FakePitWallConfiguration _configuration;
