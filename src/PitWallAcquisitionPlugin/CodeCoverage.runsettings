@@ -34,11 +34,12 @@ Included items must then not match any entries in the exclude list to remain inc
 							</Include>
 							<Exclude>
 								<ModulePath>.*CPPUnitTestFramework.*</ModulePath>
+								<ModulePath>.*Tests\.dll$</ModulePath>
 							</Exclude>
 							<!-- Specifies additional list of directories where binaries static native instrumentation should be searched. -->
-							<IncludeDirectories>
+							<!--<IncludeDirectories>
 								<Directory Recursive="true">C:\b59fb11c-1611-4562-9a2b-c35719da65d3</Directory>
-							</IncludeDirectories>
+							</IncludeDirectories>-->
 						</ModulePaths>
 
 						<!-- Match fully qualified names of functions: -->
