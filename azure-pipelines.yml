@@ -34,8 +34,6 @@ steps:
     configuration: '$(buildConfiguration)'
     testAssemblyVer2: | 
       **\PitWallAcquisitionPlugin.RunTime48.Tests.dll
-      !**\*IntegrationTests.dll
-
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.SourcesDirectory)/$(publishDir)'
