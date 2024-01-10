@@ -99,7 +99,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.Commands
 
         private static void WaitForWorkerToComplete()
         {
-            Thread.Sleep(20);
+            Thread.Sleep(60);
         }
     }
 }
