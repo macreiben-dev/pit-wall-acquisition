@@ -32,6 +32,7 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    codeCoverageEnabled: true
     testAssemblyVer2: | 
       **\*.Tests.dll
       !**\*IntegrationTests.dll
