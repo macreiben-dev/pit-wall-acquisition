@@ -66,6 +66,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregations\Aggregators\LiveAggregatorTest.cs" />
+    <Compile Include="Aggregations\Aggregators\LiveAggregatorTestingExtensions.cs" />
+    <Compile Include="Aggregations\Mappers\LiveMapperTest.cs" />
+    <Compile Include="FakePitWallConfiguration.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
