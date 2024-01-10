@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 {
-    public sealed class PluginManagerAdapter : IPluginManagerAdapter
+    internal sealed class PluginManagerAdapter : IPluginManagerAdapter
     {
         private readonly PluginManager _pluginManager;
 

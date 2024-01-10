@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PitWallAcquisitionPlugin
 {
-    public sealed class MappingConfigurationRepository : IMappingConfigurationRepository 
+    internal sealed class MappingConfigurationRepository : IMappingConfigurationRepository 
     {
         private readonly ILiveTelemetryMapper[] _allConfiguration;
 

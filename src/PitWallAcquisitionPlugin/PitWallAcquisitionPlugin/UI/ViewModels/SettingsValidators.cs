@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
-    public static class SettingsValidators
+    internal static class SettingsValidators
     {
 
         public static bool IsUriValid(string apiAddress)

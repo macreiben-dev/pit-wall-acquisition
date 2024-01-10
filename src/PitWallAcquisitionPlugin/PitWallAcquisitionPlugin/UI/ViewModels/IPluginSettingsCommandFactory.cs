@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
-    public interface IPluginSettingsCommandFactory
+    internal interface IPluginSettingsCommandFactory
     {
         IIsApiAvailableCommand GetInstance(IDisplayAvailability display);
 

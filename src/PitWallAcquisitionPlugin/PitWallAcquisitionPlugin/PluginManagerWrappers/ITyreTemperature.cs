@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 {
-    public interface ITyreTemperature
+    internal interface ITyreTemperature
     {
         double? Average { get; }
         double? Inner { get; }

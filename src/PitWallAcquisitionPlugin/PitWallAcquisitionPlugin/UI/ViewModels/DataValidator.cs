@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
-    public static class DataValidator
+    internal static class DataValidator
     {
         public static class PilotName
         {

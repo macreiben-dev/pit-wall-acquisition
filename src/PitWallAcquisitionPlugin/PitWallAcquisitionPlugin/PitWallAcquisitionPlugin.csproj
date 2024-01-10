@@ -90,33 +90,47 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregations\ISendableData.cs" />
-    <Compile Include="Aggregations\Leadeboards\LeaderboardData.cs" />
-    <Compile Include="Aggregations\Telemetries\Aggregators\Models\ITelemetryData.cs" />
-    <Compile Include="Aggregations\IAggregator.cs" />
-    <Compile Include="Aggregations\Leadeboards\ILeaderboardLiveAggregator.cs" />
-    <Compile Include="Aggregations\Leadeboards\LeaderboardLiveAggregator.cs" />
-    <Compile Include="Aggregations\Telemetries\Aggregators\IVehicleConsumption.cs" />
-    <Compile Include="Aggregations\Telemetries\Aggregators\TelemetryData.cs" />
-    <Compile Include="Aggregations\Telemetries\Aggregators\ITelemetryLiveAggregator.cs" />
-    <Compile Include="Aggregations\Telemetries\Aggregators\Models\ITyresTemperatures.cs" />
-    <Compile Include="Aggregations\Telemetries\Aggregators\Models\ITyresWear.cs" />
-    <Compile Include="Aggregations\Telemetries\Aggregators\TelemetryLiveAggregator.cs" />
-    <Compile Include="Aggregations\Telemetries\Aggregators\VehicleConsumption.cs" />
-    <Compile Include="Aggregations\GenericLiveMapper.cs" />
-    <Compile Include="Aggregations\Telemetries\Mappers\LiveTelemetryMapperFactory.cs" />
-    <Compile Include="Aggregations\Telemetries\Aggregators\Models\Tyres.cs" />
-    <Compile Include="Aggregations\Telemetries\Aggregators\Models\TyresTemperatures.cs" />
-    <Compile Include="Aggregations\Telemetries\Mappers\ILiveTelemetryMapper.cs" />
-    <Compile Include="Aggregations\Telemetries\Mappers\LiveTelemetryMapper.cs" />
+    <Compile Include="AcquisitionService.cs" />
+    <Compile Include="Acquisition\ForwarderServiceFactory.cs" />
+    <Compile Include="Acquisition\IForwarderServiceFactory.cs" />
+    <Compile Include="Acquisition\ISendableData.cs" />
+    <Compile Include="Acquisition\Leadeboards\DummyData.cs" />
+    <Compile Include="Acquisition\Leadeboards\LeaderboardData.cs" />
+    <Compile Include="Acquisition\Repositories\IPitwallRemoteClient.cs" />
+    <Compile Include="Acquisition\Repositories\IPitwallRemoteRepository.cs" />
+    <Compile Include="Acquisition\Repositories\IRemotesRepository.cs" />
+    <Compile Include="Acquisition\Repositories\ITelemetryDataRepository.cs" />
+    <Compile Include="Acquisition\Repositories\RemotesRepository.cs" />
+    <Compile Include="Acquisition\Repositories\RemoteTypeEnum.cs" />
+    <Compile Include="Acquisition\Telemetries\Aggregators\Models\ITelemetryData.cs" />
+    <Compile Include="Acquisition\IAggregator.cs" />
+    <Compile Include="Acquisition\Leadeboards\ILeaderboardLiveAggregator.cs" />
+    <Compile Include="Acquisition\Leadeboards\LeaderboardLiveAggregator.cs" />
+    <Compile Include="Acquisition\Telemetries\Aggregators\IVehicleConsumption.cs" />
+    <Compile Include="Acquisition\Telemetries\Aggregators\TelemetryData.cs" />
+    <Compile Include="Acquisition\Telemetries\Aggregators\ITelemetryLiveAggregator.cs" />
+    <Compile Include="Acquisition\Telemetries\Aggregators\Models\ITyresTemperatures.cs" />
+    <Compile Include="Acquisition\Telemetries\Aggregators\Models\ITyresWear.cs" />
+    <Compile Include="Acquisition\Telemetries\Aggregators\TelemetryLiveAggregator.cs" />
+    <Compile Include="Acquisition\Telemetries\Aggregators\VehicleConsumption.cs" />
+    <Compile Include="Acquisition\GenericLiveMapper.cs" />
+    <Compile Include="Acquisition\Telemetries\Mappers\LiveTelemetryMapperFactory.cs" />
+    <Compile Include="Acquisition\Telemetries\Aggregators\Models\Tyres.cs" />
+    <Compile Include="Acquisition\Telemetries\Aggregators\Models\TyresTemperatures.cs" />
+    <Compile Include="Acquisition\Telemetries\Mappers\ILiveTelemetryMapper.cs" />
+    <Compile Include="Acquisition\Telemetries\Mappers\LiveTelemetryMapper.cs" />
+    <Compile Include="Acquisition\Repositories\PitWallRemoteRepository.cs" />
+    <Compile Include="Acquisition\WebApiForwarderService.cs" />
     <Compile Include="DataVessel.cs" />
     <Compile Include="HealthChecks\HealthCheckService.cs" />
     <Compile Include="HealthChecks\IHealthCheckService.cs" />
     <Compile Include="HealthChecks\Repositories\HealthCheckRepository.cs" />
     <Compile Include="HealthChecks\Repositories\IHealthCheckRepository.cs" />
+    <Compile Include="IAcquisitionService.cs" />
+    <Compile Include="IDataForwarderService.cs" />
     <Compile Include="IMappingConfigurationRepository.cs" />
+    <Compile Include="IocContainerInitialization.cs" />
     <Compile Include="IPluginRecordRepository.cs" />
-    <Compile Include="IWebApiForwarderService.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\SimhubLogger.cs" />
     <Compile Include="MappingConfigurationRepository.cs" />
@@ -132,8 +146,6 @@
     <Compile Include="Repositories\ErrorWhenSendDataException.cs" />
     <Compile Include="Repositories\SimhubPluginConfigurationRepository.cs" />
     <Compile Include="Repositories\IPitWallApiStatusRepository.cs" />
-    <Compile Include="Repositories\PitWallRemoteRepository.cs" />
-    <Compile Include="Repositories\IStagingDataRepository.cs" />
     <Compile Include="Repositories\StatusCodeNotOkException.cs" />
     <Compile Include="UI\Commands\ISaveToConfigurationCommand.cs" />
     <Compile Include="UI\ViewModels\DataValidator.cs" />
@@ -154,8 +166,6 @@
     </Compile>
     <Compile Include="UI\Views\ValidationConverter.cs" />
     <Compile Include="WebApiForwarder.cs" />
-    <Compile Include="WebApiLeaderboardForwarderService.cs" />
-    <Compile Include="WebApiTelemtryForwarderService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -176,6 +186,6 @@
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)
 
-powershell .\DeployToSimhub.ps1 -ArtifactOutputPath .\PitWallAcquisitionPlugin\bin\Debug\ -SimhubInstallationDirectory 'C:\Program Files (x86)\SimHub\' '$(ConfigurationName)'</PostBuildEvent>
+powershell .\DeployToSimhub.ps1 -ArtifactOutputPath .\PitWallAcquisitionPlugin\ -SimhubInstallationDirectory 'C:\Program Files (x86)\SimHub\' -ConfigurationName '$(ConfigurationName)'</PostBuildEvent>
   </PropertyGroup>
 </Project>

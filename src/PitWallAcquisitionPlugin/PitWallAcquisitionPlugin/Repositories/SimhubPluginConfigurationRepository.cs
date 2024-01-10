@@ -5,7 +5,7 @@ using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 
 namespace PitWallAcquisitionPlugin.Repositories
 {
-    public class SimhubPluginConfigurationRepository : IPitWallConfiguration
+    internal class SimhubPluginConfigurationRepository : IPitWallConfiguration
     {
         private const string SettingsName = "PitWallAcquisitionPlugin";
 

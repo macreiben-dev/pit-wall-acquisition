@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PitWallAcquisitionPlugin
 {
-    public interface IMappingConfigurationRepository : IEnumerable<ILiveTelemetryMapper>
+    internal interface IMappingConfigurationRepository : IEnumerable<ILiveTelemetryMapper>
     {
     }
 }

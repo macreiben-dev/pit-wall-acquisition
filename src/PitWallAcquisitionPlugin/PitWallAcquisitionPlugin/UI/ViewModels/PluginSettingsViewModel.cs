@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
-    public class PluginSettingsViewModel :
+    internal class PluginSettingsViewModel :
         INotifyPropertyChanged,
         IDataErrorInfo,
         IDisplayAvailability,

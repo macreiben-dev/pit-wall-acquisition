@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PitWallAcquisitionPlugin.HealthChecks.Repositories
 {
-    public class HealthCheckRepository : IHealthCheckRepository
+    internal class HealthCheckRepository : IHealthCheckRepository
     {
         private readonly object _lock = new object();
 

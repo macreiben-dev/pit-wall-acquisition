@@ -1,6 +1,6 @@
 ﻿namespace PitWallAcquisitionPlugin.Repositories
 {
-    public interface IPitWallApiStatusRepository
+    internal interface IPitWallApiStatusRepository
     {
         bool IsAvailable(string apiUri);
     }

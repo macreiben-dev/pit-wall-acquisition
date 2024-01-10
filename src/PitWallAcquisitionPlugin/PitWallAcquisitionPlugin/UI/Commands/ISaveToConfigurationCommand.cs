@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
-    public interface ISaveToConfigurationCommand : ICommand
+    internal interface ISaveToConfigurationCommand : ICommand
     {
         void RaiseCanExecuteChanged();
     }

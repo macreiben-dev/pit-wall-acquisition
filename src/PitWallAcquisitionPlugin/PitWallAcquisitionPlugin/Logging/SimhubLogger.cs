@@ -3,7 +3,7 @@ using System;
 
 namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Logging
 {
-    public sealed class SimhubLogger : ILogger
+    internal sealed class SimhubLogger : ILogger
     {
         private const string LOG_PREFIX = "PitWallAcquisitionPlugin: ";
 

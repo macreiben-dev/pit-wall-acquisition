@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace PitWallAcquisitionPlugin.UI.ViewModels
+﻿namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
-    public sealed class SettingsValidatorWrapper : ISettingsValidator
+    internal sealed class SettingsValidatorWrapper : ISettingsValidator
     {
         public string GetPilotNameIssueMessage(string value)
         {

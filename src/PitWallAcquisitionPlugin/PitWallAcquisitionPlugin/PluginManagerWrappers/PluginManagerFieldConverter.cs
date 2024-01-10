@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 {
-    public static class PluginManagerFieldConverter
+    internal static class PluginManagerFieldConverter
     {
         public static string ToString(string key, IPluginManagerAdapter pluginManager)
         {

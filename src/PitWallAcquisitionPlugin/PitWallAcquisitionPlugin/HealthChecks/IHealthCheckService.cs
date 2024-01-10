@@ -2,7 +2,7 @@
 
 namespace PitWallAcquisitionPlugin.HealthChecks
 {
-    public interface IHealthCheckService
+    internal interface IHealthCheckService
     {
         Task<bool> Check(string originalApiAddress);
     }

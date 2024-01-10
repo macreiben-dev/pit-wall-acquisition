@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PitWallAcquisitionPlugin.HealthChecks
 {
-    public sealed class HealthCheckService : IHealthCheckService
+    internal sealed class HealthCheckService : IHealthCheckService
     {
         private readonly IHealthCheckRepository repo;
 

@@ -5,7 +5,6 @@ using System.ComponentModel;
 using Xunit;
 using NSubstitute;
 using PitWallAcquisitionPlugin.HealthChecks;
-using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 {
@@ -36,7 +35,7 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                 _settingsValidator);
         }
 
-        public PluginSettingsViewModel GetTargetWithPersonalKey(string personalKey)
+        private PluginSettingsViewModel GetTargetWithPersonalKey(string personalKey)
         {
             return new PluginSettingsViewModel(
                 _pitWallConfiguration,

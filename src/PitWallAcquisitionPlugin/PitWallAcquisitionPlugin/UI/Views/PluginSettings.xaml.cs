@@ -10,7 +10,7 @@ namespace PitWallAcquisitionPlugin.UI.Views
     {
         private readonly PluginSettingsViewModel viewModel;
 
-        public PluginSettings(PluginSettingsViewModel viewModel)
+        internal PluginSettings(PluginSettingsViewModel viewModel)
         {
             InitializeComponent();
 

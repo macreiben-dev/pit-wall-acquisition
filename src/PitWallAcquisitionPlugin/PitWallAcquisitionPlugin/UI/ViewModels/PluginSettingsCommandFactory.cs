@@ -3,7 +3,7 @@ using PitWallAcquisitionPlugin.Tests.UI.Commands;
 
 namespace PitWallAcquisitionPlugin.UI.ViewModels
 {
-    public class PluginSettingsCommandFactory : IPluginSettingsCommandFactory
+    internal class PluginSettingsCommandFactory : IPluginSettingsCommandFactory
     {
         private readonly IHealthCheckService checkService;
         private readonly IPitWallConfiguration _configuration;
