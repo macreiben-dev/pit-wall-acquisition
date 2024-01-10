@@ -2,6 +2,7 @@
 using PitWallAcquisitionPlugin.UI.ViewModels;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.Commands
 {
@@ -38,6 +39,8 @@ namespace PitWallAcquisitionPlugin.Tests.UI.Commands
 
             worker.DoWork += (o, e) =>
             {
+                Trace.WriteLine(nameof(IsApiAvailableCommand) + " - Worker started.");
+
                 var isAvailable = statusRepo.Check(parameter.ToString());
 
                 worker.ReportProgress(50);
@@ -57,6 +60,8 @@ namespace PitWallAcquisitionPlugin.Tests.UI.Commands
                 bool actual = (bool) e.Result;
 
                 viewModel.IsApiAvailable = actual ? "OK" : "KO";
+
+                Trace.WriteLine(nameof(IsApiAvailableCommand) + " - Worker completed.");
             };
 
             worker.RunWorkerAsync();
