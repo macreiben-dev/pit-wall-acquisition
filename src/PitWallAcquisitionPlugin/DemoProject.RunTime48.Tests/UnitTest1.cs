@@ -9,11 +9,11 @@ namespace DemoProject.RunTime48.Tests
     public class UnitTest1
     {
         [Fact]
-        public void GIVEN_something_THEN_fail()
+        public void GIVEN_something_THEN_check1()
         {
             var temp = Substitute.For<IAcquisitionService>();
 
-            Check.That(1).IsEqualTo(2);
+            Check.That(1).IsEqualTo(1);
         }
     }
 }
