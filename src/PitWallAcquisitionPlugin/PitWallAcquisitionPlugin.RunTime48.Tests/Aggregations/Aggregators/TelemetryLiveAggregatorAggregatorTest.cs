@@ -7,11 +7,11 @@ using Xunit;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 {
-    public class LiveAggregatorTest
+    public class TelemetryLiveAggregatorAggregatorTest
     {
         private FakePitWallConfiguration _configuration;
 
-        public LiveAggregatorTest()
+        public TelemetryLiveAggregatorAggregatorTest()
         {
             _configuration = new FakePitWallConfiguration();
         }
