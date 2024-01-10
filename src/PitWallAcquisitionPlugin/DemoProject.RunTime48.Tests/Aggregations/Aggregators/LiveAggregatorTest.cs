@@ -4,10 +4,11 @@ using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using PitWallAcquisitionPlugin.IntegrationTests;
 using System.Diagnostics;
+using Xunit;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 {
-    [TestClass]
+    
     public class LiveAggregatorTest
     {
         private FakePitWallConfiguration _configuration;
@@ -22,7 +23,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             return new TelemetryLiveAggregator(_configuration, new MappingConfigurationRepository());
         }
 
-        [TestMethod]
+        [Fact]
         public void Should_notBe_dirty_by_default()
         {
             var aggregator = GetTarget();
@@ -30,7 +31,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             Check.That(aggregator.IsDirty).IsFalse();
         }
 
-        [TestMethod]
+        [Fact]
         public void Should_trim_sessionLeft()
         {
             // ARRANGE
@@ -54,7 +55,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
 
-        [TestMethod]
+        [Fact]
         public void Should_add_pilotName()
         {
             // ARRANGE
@@ -78,7 +79,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
         }
 
 
-        [TestMethod]
+        [Fact]
         public void Should_add_carName()
         {
             // ARRANGE
@@ -100,7 +101,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
-        [TestClass]
+        
         public class LapTimes
         {
             private FakePitWallConfiguration _configuration;
@@ -116,7 +117,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             // ===== Laptime milliseconds
 
-            [TestMethod]
+            [Fact]
             public void Should_add_lapTimeMilliseconds()
             {
                 // ARRANGE
@@ -140,7 +141,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
             }
 
-            [TestMethod]
+            [Fact]
             public void Should_notAdd_lapTimeMilliseconds_WHEN_null()
             {
                 // ARRANGE
@@ -162,7 +163,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 Check.That(target.IsDirty).IsFalse();
             }
 
-            [TestMethod]
+            [Fact]
             public void Should_notAdd_lapTimeMilliseconds_WHEN_empty()
             {
                 // ARRANGE

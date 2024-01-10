@@ -1,14 +1,14 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Mappers;
 using System;
+using Xunit;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Mappers
 {
-    [TestClass]
+
     public class LiveMapperTest
     {
         private ITelemetryLiveAggregator _aggregator;
@@ -29,21 +29,21 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Mappers
             _setter = setter;
         }
 
-        [TestMethod]
+        [Fact]
         public void WHEN_sourceSelector_isNull_THEN_fail()
         {
             Check.ThatCode(() => new LiveTelemetryMapper<string>(null, _setter))
                 .Throws<ArgumentNullException>();
         }
 
-        [TestMethod]
+        [Fact]
         public void WHEN_setter_isNull_THEN_fail()
         {
             Check.ThatCode(() => new LiveTelemetryMapper<string>(_sourceSelector, null))
                 .Throws<ArgumentNullException>();
         }
 
-        [TestMethod]
+        [Fact]
         public void WHEN_adapter_isNull_THEN_fail()
         {
             Func<IPluginRecordRepository, string> sourceSelector = (r) => r.LastLaptime;
@@ -59,7 +59,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Mappers
                 .Throws<ArgumentNullException>();   
         }
 
-        [TestMethod]
+        [Fact]
         public void WHEN_aggregator_isNull_THEN_fail()
         {
             Func<IPluginRecordRepository, string> sourceSelector = (r) => r.LastLaptime;
