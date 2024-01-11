@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PitWallAcquisitionPlugin.PluginManagerWrappers
+namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
 {
 
     internal class LeaderboardEntry

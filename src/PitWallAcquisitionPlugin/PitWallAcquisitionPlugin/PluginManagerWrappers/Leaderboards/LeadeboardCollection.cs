@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace PitWallAcquisitionPlugin.PluginManagerWrappers
+namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
 {
     internal class LeadeboardCollection : IEnumerable<LeaderboardEntry>
     {
@@ -15,7 +15,7 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 
         public IEnumerator<LeaderboardEntry> GetEnumerator()
         {
-            if(_entries != null)
+            if (_entries != null)
             {
                 return _entries.GetEnumerator();
             }

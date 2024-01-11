@@ -134,8 +134,8 @@
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\SimhubLogger.cs" />
     <Compile Include="MappingConfigurationRepository.cs" />
-    <Compile Include="PluginManagerWrappers\LeadeboardCollection.cs" />
-    <Compile Include="PluginManagerWrappers\LeaderboardEntry.cs" />
+    <Compile Include="PluginManagerWrappers\Leaderboards\LeadeboardCollection.cs" />
+    <Compile Include="PluginManagerWrappers\Leaderboards\LeaderboardEntry.cs" />
     <Compile Include="PluginManagerWrappers\IPluginManagerAdapter.cs" />
     <Compile Include="PluginManagerWrappers\IPluginRecordRepositoryFactory.cs" />
     <Compile Include="PluginManagerWrappers\ITyreTemperature.cs" />
