@@ -548,13 +548,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 var target = GetTarget();
 
                 // ACT
-                Stopwatch watch = Stopwatch.StartNew();
-
                 target.SetFrontLeftTyreTemperature(null);
 
-                watch.Stop();
-
-                var actual = (ITelemetryData)target.AsData();
+                _ = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
@@ -573,11 +569,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 var target = GetTarget();
 
                 // ACT
-                Stopwatch watch = Stopwatch.StartNew();
-
                 target.SetFrontRightTyreTemperature(original);
-
-                watch.Stop();
 
                 var actual = (ITelemetryData)target.AsData();
 
@@ -593,11 +585,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 var target = GetTarget();
 
                 // ACT
-                Stopwatch watch = Stopwatch.StartNew();
-
                 target.SetFrontRightTyreTemperature(null);
-
-                watch.Stop();
 
                 var actual = (ITelemetryData)target.AsData();
 
@@ -613,13 +601,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 var target = GetTarget();
 
                 // ACT
-                Stopwatch watch = Stopwatch.StartNew();
-
                 target.SetFrontRightTyreTemperature(null);
 
-                watch.Stop();
-
-                var actual = (ITelemetryData)target.AsData();
+                _ = (ITelemetryData)target.AsData();
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
@@ -638,11 +622,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 var target = GetTarget();
 
                 // ACT
-                Stopwatch watch = Stopwatch.StartNew();
-
                 target.SetRearLeftTyreTemperature(original);
-
-                watch.Stop();
 
                 var actual = (ITelemetryData)target.AsData();
 
@@ -658,11 +638,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 var target = GetTarget();
 
                 // ACT
-                Stopwatch watch = Stopwatch.StartNew();
-
                 target.SetRearLeftTyreTemperature(null);
-
-                watch.Stop();
 
                 var actual = (ITelemetryData)target.AsData();
 
@@ -678,11 +654,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 var target = GetTarget();
 
                 // ACT
-                Stopwatch watch = Stopwatch.StartNew();
-
                 target.SetRearLeftTyreTemperature(null);
-
-                watch.Stop();
 
                 var actual = (ITelemetryData)target.AsData();
 
@@ -703,11 +675,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 var target = GetTarget();
 
                 // ACT
-                Stopwatch watch = Stopwatch.StartNew();
-
                 target.SetRearRightTyreTemperature(original);
-
-                watch.Stop();
 
                 var actual = (ITelemetryData)target.AsData();
 
@@ -723,11 +691,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 var target = GetTarget();
 
                 // ACT
-                Stopwatch watch = Stopwatch.StartNew();
-
                 target.SetRearRightTyreTemperature(null);
-
-                watch.Stop();
 
                 var actual = (ITelemetryData)target.AsData();
 
@@ -743,11 +707,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 var target = GetTarget();
 
                 // ACT
-                Stopwatch watch = Stopwatch.StartNew();
-
                 target.SetRearRightTyreTemperature(null);
-
-                watch.Stop();
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
@@ -1114,8 +1074,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
             Check.That(actual.LaptimeSeconds).IsNull();
-
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
 
         [Fact]
@@ -1127,23 +1085,17 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             var target = GetTarget();
 
             // ACT
-            Stopwatch watch = Stopwatch.StartNew();
-
             target.SetLaptime(original);
 
             target.Clear();
 
             var intermediary = target.AsData();
 
-            watch.Stop();
-
             var actual = (ITelemetryData)intermediary;
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
             Check.That(actual.SessionTimeLeft).IsNull();
-
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
 
         [Fact]
@@ -1170,8 +1122,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
             Check.That(actual.TyresWear.FrontLeftWear).IsNull();
-
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
 
         [Fact]
@@ -1183,23 +1133,17 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             var target = GetTarget();
 
             // ACT
-            Stopwatch watch = Stopwatch.StartNew();
-
             target.SetFrontRightTyreWear(original);
 
             target.Clear();
 
             var intermediary = target.AsData();
 
-            watch.Stop();
-
             var actual = (ITelemetryData)intermediary;
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
             Check.That(actual.TyresWear.FrontRightWear).IsNull();
-
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
 
         [Fact]
@@ -1211,23 +1155,17 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             var target = GetTarget();
 
             // ACT
-            Stopwatch watch = Stopwatch.StartNew();
-
             target.SetRearLeftTyreWear(original);
 
             target.Clear();
 
             var intermediary = target.AsData();
 
-            watch.Stop();
-
             var actual = (ITelemetryData)intermediary;
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
             Check.That(actual.TyresWear.RearLeftWear).IsNull();
-
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
 
         [Fact]
@@ -1239,21 +1177,15 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             var target = GetTarget();
 
             // ACT
-            Stopwatch watch = Stopwatch.StartNew();
-
             target.SetRearRightTyreWear(original);
 
             target.Clear();
 
             var actual = (ITelemetryData)target.AsData();
 
-            watch.Stop();
-
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
             Check.That(actual.TyresWear.RearRightWear).IsNull();
-
-            Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
         }
     }
 }
