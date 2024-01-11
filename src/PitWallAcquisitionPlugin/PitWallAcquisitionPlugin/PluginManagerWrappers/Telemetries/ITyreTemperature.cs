@@ -1,4 +1,4 @@
-﻿namespace PitWallAcquisitionPlugin.PluginManagerWrappers
+﻿namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Telemetries
 {
     internal interface ITyreTemperature
     {

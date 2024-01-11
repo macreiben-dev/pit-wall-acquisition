@@ -3,7 +3,7 @@
 namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
 {
 
-    internal class LeaderboardEntry
+    internal sealed class LeaderboardEntry : ILeaderboardEntry
     {
         private readonly IPluginManagerAdapter pluginAdapter;
         private readonly int position;

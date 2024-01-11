@@ -1,4 +1,4 @@
-﻿namespace PitWallAcquisitionPlugin.PluginManagerWrappers
+﻿namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Telemetries
 {
 
     internal sealed class TyreTemperature : ITyreTemperature
@@ -19,7 +19,7 @@
             this.innerKey = innerKey;
             this.middleKey = middleKey;
             this.outerKey = outerKey;
-            this.averageKey = average;
+            averageKey = average;
 
             this.pluginManager = pluginManager;
         }

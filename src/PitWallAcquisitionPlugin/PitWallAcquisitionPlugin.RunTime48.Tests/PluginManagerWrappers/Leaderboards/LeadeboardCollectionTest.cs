@@ -1,9 +1,8 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using NFluent;
+﻿using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
+using PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards;
 using System.Linq;
-using System.Xml;
 using Xunit;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests.PluginManagerWrappers

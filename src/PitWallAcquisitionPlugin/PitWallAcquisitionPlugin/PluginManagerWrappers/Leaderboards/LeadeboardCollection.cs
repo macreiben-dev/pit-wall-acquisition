@@ -3,24 +3,25 @@ using System.Collections.Generic;
 
 namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
 {
-    internal class LeadeboardCollection : IEnumerable<LeaderboardEntry>
+    internal sealed class LeadeboardCollection : IEnumerable<ILeaderboardEntry>
     {
+        private const int TOTAL_PILOT_COUNT = 99;
         private IPluginManagerAdapter adapter;
-        private IList<LeaderboardEntry> _entries;
+        private IList<ILeaderboardEntry> _entries;
 
         public LeadeboardCollection(IPluginManagerAdapter adapter)
         {
             this.adapter = adapter;
         }
 
-        public IEnumerator<LeaderboardEntry> GetEnumerator()
+        public IEnumerator<ILeaderboardEntry> GetEnumerator()
         {
             if (_entries != null)
             {
                 return _entries.GetEnumerator();
             }
 
-            List<LeaderboardEntry> entries = new List<LeaderboardEntry>(99);
+            List<ILeaderboardEntry> entries = new List<ILeaderboardEntry>(TOTAL_PILOT_COUNT);
 
             for (int position = 1; position <= 99; position++)
             {
