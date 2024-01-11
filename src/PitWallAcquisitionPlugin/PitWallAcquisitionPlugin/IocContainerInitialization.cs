@@ -58,6 +58,9 @@ namespace PitWallAcquisitionPlugin
                 .As<IDisplayAvailability>()
                 .SingleInstance();
 
+            containerBuilder.RegisterType<LocalWorkerFactory>()
+                .As<ILocalWorkerFactory>();
+
             containerBuilder.RegisterType<SimhubPluginConfigurationRepository>()
                 .As<IPitWallConfiguration>()
                 .SingleInstance();

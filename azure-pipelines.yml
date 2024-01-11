@@ -32,6 +32,8 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    codeCoverageEnabled: true
+    runSettingsFile: 'src/PitWallAcquisitionPlugin/CodeCoverage.runsettings'
     testAssemblyVer2: | 
       **\*.Tests.dll
       !**\*IntegrationTests.dll
