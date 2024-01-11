@@ -127,7 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acquisitions\Repositories\RemoteRepositoriesTest.cs" />
-    <Compile Include="Aggregations\Aggregators\TelemetryLiveAggregatorAggregatorTest.cs" />
+    <Compile Include="Aggregations\Aggregators\TelemetryLiveAggregatorTest.cs" />
     <Compile Include="Aggregations\Aggregators\LiveAggregatorTestingExtensions.cs" />
     <Compile Include="Aggregations\Mappers\LiveMapperTest.cs" />
     <Compile Include="FakePitWallConfiguration.cs" />
