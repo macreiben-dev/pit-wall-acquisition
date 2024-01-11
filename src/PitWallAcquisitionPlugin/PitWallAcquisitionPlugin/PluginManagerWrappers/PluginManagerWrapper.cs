@@ -86,6 +86,7 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
                 Constants.TyreTemperatureRearRight,
                 _pluginManager);
         }
+
         public ITyreTemperature TyreFrontLeftTemperature { get; private set; }
 
         public ITyreTemperature TyreFrontRightTemperature { get; private set; }

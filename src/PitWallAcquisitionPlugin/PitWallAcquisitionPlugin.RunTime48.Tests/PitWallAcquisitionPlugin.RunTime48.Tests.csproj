@@ -134,6 +134,7 @@
     <Compile Include="FakeTyreTemperature.cs" />
     <Compile Include="HealthChecks\HealthCheckServiceTest.cs" />
     <Compile Include="MappingConfigurationRepositoryTest.cs" />
+    <Compile Include="PluginManagerWrappers\LeaderboardEntryTest.cs" />
     <Compile Include="PluginManagerWrappers\PluginManagerFieldConverterTest.cs" />
     <Compile Include="PluginManagerWrappers\PluginManagerWrapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
