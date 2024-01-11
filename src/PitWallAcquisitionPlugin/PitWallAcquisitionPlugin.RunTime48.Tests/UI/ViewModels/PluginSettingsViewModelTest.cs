@@ -5,6 +5,7 @@ using System.ComponentModel;
 using Xunit;
 using NSubstitute;
 using PitWallAcquisitionPlugin.HealthChecks;
+using PitWallAcquisitionPlugin.Tests.UI.Commands;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 {
@@ -49,8 +50,9 @@ namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
                 _pitWallConfiguration,
                 new PluginSettingsCommandFactory(
                     Substitute.For<IHealthCheckService>(),
-                    Substitute.For<IPitWallConfiguration>(), 
-                    Substitute.For<ISettingsValidator>()),
+                    Substitute.For<IPitWallConfiguration>(),
+                    Substitute.For<ISettingsValidator>(), 
+                    Substitute.For<ILocalWorkerFactory>()),
                 _settingsValidator);
         }
 

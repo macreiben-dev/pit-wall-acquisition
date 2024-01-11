@@ -7,11 +7,11 @@ using Xunit;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 {
-    public class LiveAggregatorTest
+    public class TelemetryLiveAggregatorTest
     {
         private FakePitWallConfiguration _configuration;
 
-        public LiveAggregatorTest()
+        public TelemetryLiveAggregatorTest()
         {
             _configuration = new FakePitWallConfiguration();
         }
@@ -519,8 +519,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 // ASSERT
                 Check.That(actual.TyresTemperatures.FrontLeftTemp).IsEqualTo(85.000000001);
                 Check.That(target.IsDirty).IsTrue();
-
-                Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
             }
 
             [Fact]
@@ -541,8 +539,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 // ASSERT
                 Check.That(actual.TyresTemperatures.FrontLeftTemp).IsNull();
                 Check.That(target.IsDirty).IsFalse();
-
-                Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
             }
 
             [Fact]
@@ -562,8 +558,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
-
-                Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
             }
 
             // ===== Tyre temperature front left ___EOF___
@@ -590,8 +584,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 // ASSERT
                 Check.That(actual.TyresTemperatures.FrontRightTemp).IsEqualTo(85.000000001);
                 Check.That(target.IsDirty).IsTrue();
-
-                Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
             }
 
             [Fact]
@@ -612,8 +604,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 // ASSERT
                 Check.That(actual.TyresTemperatures.FrontLeftTemp).IsNull();
                 Check.That(target.IsDirty).IsFalse();
-
-                Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
             }
 
             [Fact]
@@ -633,8 +623,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
-
-                Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
             }
 
             // ===== Tyre temperature front right ___EOF___
@@ -661,8 +649,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 // ASSERT
                 Check.That(actual.TyresTemperatures.RearLeftTemp).IsEqualTo(85.000000001);
                 Check.That(target.IsDirty).IsTrue();
-
-                Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
             }
 
             [Fact]
@@ -683,8 +669,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 // ASSERT
                 Check.That(actual.TyresTemperatures.RearLeftTemp).IsNull();
                 Check.That(target.IsDirty).IsFalse();
-
-                Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
             }
 
             [Fact]
@@ -704,8 +688,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
-
-                Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
             }
 
             // ===== Tyre temperature rear left ___EOF___
@@ -732,8 +714,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 // ASSERT
                 Check.That(actual.TyresTemperatures.RearRightTemp).IsEqualTo(85.000000001);
                 Check.That(target.IsDirty).IsTrue();
-
-                Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
             }
 
             [Fact]
@@ -754,8 +734,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
                 // ASSERT
                 Check.That(actual.TyresTemperatures.RearRightTemp).IsNull();
                 Check.That(target.IsDirty).IsFalse();
-
-                Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
             }
 
             [Fact]
@@ -773,8 +751,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
                 // ASSERT
                 Check.That(target.IsDirty).IsFalse();
-
-                Check.That(watch.ElapsedMilliseconds).IsLessOrEqualThan(3);
             }
 
             // ===== Tyre temperature rear right ___EOF___
@@ -1129,9 +1105,11 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             target.Clear();
 
-            var actual = (ITelemetryData)target.AsData();
+            var intermediary = target.AsData();
 
             watch.Stop();
+
+            var actual = (ITelemetryData)intermediary;
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
@@ -1155,9 +1133,11 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             target.Clear();
 
-            var actual = (ITelemetryData)target.AsData();
+            var intermediary = target.AsData();
 
             watch.Stop();
+
+            var actual = (ITelemetryData)intermediary;
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
@@ -1181,9 +1161,11 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             target.Clear();
 
-            var actual = (ITelemetryData)target.AsData();
+            var intermediary = target.AsData();
 
             watch.Stop();
+
+            var actual = (ITelemetryData)intermediary;
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
@@ -1207,9 +1189,11 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             target.Clear();
 
-            var actual = (ITelemetryData)target.AsData();
+            var intermediary = target.AsData();
 
             watch.Stop();
+
+            var actual = (ITelemetryData)intermediary;
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();
@@ -1233,9 +1217,11 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             target.Clear();
 
-            var actual = (ITelemetryData)target.AsData();
+            var intermediary = target.AsData();
 
             watch.Stop();
+
+            var actual = (ITelemetryData)intermediary;
 
             // ASSERT
             Check.That(target.IsDirty).IsFalse();

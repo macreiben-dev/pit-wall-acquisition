@@ -8,21 +8,24 @@ namespace PitWallAcquisitionPlugin.UI.ViewModels
         private readonly IHealthCheckService checkService;
         private readonly IPitWallConfiguration _configuration;
         private readonly ISettingsValidator _validator;
+        private readonly ILocalWorkerFactory workerFactory;
 
         public PluginSettingsCommandFactory(
             IHealthCheckService checkService,
-            IPitWallConfiguration pitWallConfiguration, 
-            ISettingsValidator validator)
+            IPitWallConfiguration pitWallConfiguration,
+            ISettingsValidator validator, 
+            ILocalWorkerFactory workerFactory)
         {
             this.checkService = checkService;
             _configuration = pitWallConfiguration;
             _validator = validator;
+            this.workerFactory = workerFactory;
         }
 
         public IIsApiAvailableCommand GetInstance(
             IDisplayAvailability display)
         {
-            return new IsApiAvailableCommand(display, checkService);
+            return new IsApiAvailableCommand(display, checkService, workerFactory);
         }
 
         public ISaveToConfigurationCommand GetSaveToConfiguration()
