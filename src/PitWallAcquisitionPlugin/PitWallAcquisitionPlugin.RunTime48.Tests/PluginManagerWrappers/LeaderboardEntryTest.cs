@@ -19,36 +19,74 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.PluginManagerWrappers
             return new LeaderboardEntry(_pluginAdapter, position);
         }
 
-        [Fact]
-        public void GIVEN_pluginAdapter_AND_position_THEN_return_lastLapInSconds()
+        [Theory]
+        [InlineData(1)]
+        [InlineData(15)]
+        [InlineData(80)]
+        public void GIVEN_pluginAdapter_AND_position_THEN_return_lastLapInScondsint(int position)
         {
             // ARRANGE
-            _pluginAdapter.GetPropertyValue("GarySwallowDataPlugin.Leaderboard.Position01.LastLap")
+            string metricName = string.Format(
+                "GarySwallowDataPlugin.Leaderboard.Position{0:00}.LastLap", 
+                position);
+
+        _pluginAdapter.GetPropertyValue(metricName)
                 .Returns(122.2);
 
             // ACT
-            var target = GetTarget(1);
+            var target = GetTarget(position);
 
-            double actual = target.LasLapInSeconds;
+            double actual = target.LastLapInSeconds;
 
             // ASSERT
             Check.That(actual).IsEqualTo(122.2);
         }
 
-        [Fact]
-        public void GIVEN_pluginAdapter_AND_position_THEN_return_CarName()
+        [Theory]
+        [InlineData(1)]
+        [InlineData(15)]
+        [InlineData(80)]
+        public void GIVEN_pluginAdapter_AND_position_THEN_return_CarName(int position)
         {
             // ARRANGE
-            _pluginAdapter.GetPropertyValue("GarySwallowDataPlugin.Leaderboard.Position01.CarName")
+            string metricName = string.Format(
+                "GarySwallowDataPlugin.Leaderboard.Position{0:00}.CarName", 
+                position);
+
+            _pluginAdapter.GetPropertyValue(metricName)
                 .Returns("SomeCarName01");
 
             // ACT
-            var target = GetTarget(1);
+            var target = GetTarget(position);
 
             string actual = target.CarName;
 
             // ASSERT
             Check.That(actual).IsEqualTo("SomeCarName01");
+        }
+
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(15)]
+        [InlineData(80)]
+        public void GIVEN_pluginAdapter_AND_position_THEN_return_position(int position)
+        {
+            // ARRANGE
+            string metricName = string.Format(
+                "GarySwallowDataPlugin.Leaderboard.Position{0:00}.LastLap",
+                position);
+
+            _pluginAdapter.GetPropertyValue(metricName)
+                    .Returns(122.2);
+
+            // ACT
+            var target = GetTarget(position);
+
+            int actual = target.Position;
+
+            // ASSERT
+            Check.That(actual).IsEqualTo(position);
         }
     }
 }

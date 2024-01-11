@@ -5,38 +5,55 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 
     internal class LeaderboardEntry
     {
-        //private IPluginManagerAdapter _adapter;
-        //private int _position;
-        //private readonly string _metricName;
-        //private const string Prefix = "GarySwallowDataPlugin.Leaderboard.Position{0:00}";
-        //private const string BestLap = "BestLap";
-
-        //public LeaderboardEntry(IPluginManagerAdapter adapter, int position)
-        //{
-        //    _adapter = adapter;
-        //    _position = position;
-        //}
-
-        //public double? LastLapInScondes => TimeAsDouble(BestLap);
-
-        //private double? TimeAsDouble(string selector)
-        //{
-        //    var metricName = string.Format(Prefix + "." + selector, _position);
-
-        //    return _adapter.GetPropertyValue(metricName) as double?;
-        //}
         private readonly IPluginManagerAdapter pluginAdapter;
         private readonly int position;
+        private readonly double _lastlapInSeconds;
+        private readonly string _carName;
 
         public LeaderboardEntry(IPluginManagerAdapter pluginAdapter, int position)
         {
             this.pluginAdapter = pluginAdapter;
             this.position = position;
+
+            _lastlapInSeconds = ReadDouble("LastLap");
+            _carName = ReadString("CarName");
         }
 
-        public double LasLapInSeconds => (double)pluginAdapter.GetPropertyValue("GarySwallowDataPlugin.Leaderboard.Position01.LastLap");
+        private const string Prefix = "GarySwallowDataPlugin.Leaderboard.Position{0:00}.{1}";
 
-        public string CarName => (string)pluginAdapter.GetPropertyValue("GarySwallowDataPlugin.Leaderboard.Position01.CarName");
+        public double LastLapInSeconds => _lastlapInSeconds;
 
+        public string CarName => _carName;
+
+        public int Position => position;
+
+        private string BuildMetricName(string metricSuffix)
+        {
+            return string.Format(Prefix, position, metricSuffix);
+        }
+
+        private double ReadDouble(string metricName)
+        {
+            var actual = pluginAdapter.GetPropertyValue(
+            BuildMetricName(metricName));
+
+            if (actual == null)
+            {
+                return 0;
+            }
+            return Convert.ToDouble(actual);
+        }
+
+        private string ReadString(string metricName)
+        {
+            var actual = pluginAdapter.GetPropertyValue(
+            BuildMetricName(metricName));
+
+            if (actual == null)
+            {
+                return "N/A";
+            }
+            return actual.ToString();
+        }
     }
 }
