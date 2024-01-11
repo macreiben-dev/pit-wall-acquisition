@@ -15,19 +15,23 @@ namespace PitWallAcquisitionPlugin.Tests.UI.Commands
         private const string KO = "KO";
         private IHealthCheckService _apiAvailabilityRepo;
         private IDisplayAvailability _viewModel;
+        private FakeWorkerFactory _workerFactory;
 
         public IsApiAvailableCommandTest()
         {
             _apiAvailabilityRepo = Substitute.For<IHealthCheckService>();
 
             _viewModel = new FakeDisplayAvailability();
+
+            _workerFactory = new FakeWorkerFactory();
         }
 
         private IsApiAvailableCommand GetTarget()
         {
             return new IsApiAvailableCommand(
                 _viewModel,
-                _apiAvailabilityRepo);
+                _apiAvailabilityRepo,
+                _workerFactory);
         }
 
         [Theory]

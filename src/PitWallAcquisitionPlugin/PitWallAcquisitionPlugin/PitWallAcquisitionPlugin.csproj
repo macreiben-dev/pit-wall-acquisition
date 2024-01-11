@@ -147,6 +147,8 @@
     <Compile Include="Repositories\SimhubPluginConfigurationRepository.cs" />
     <Compile Include="Repositories\IPitWallApiStatusRepository.cs" />
     <Compile Include="Repositories\StatusCodeNotOkException.cs" />
+    <Compile Include="UI\Commands\ILocalWorker.cs" />
+    <Compile Include="UI\Commands\ILocalWorkerFactory.cs" />
     <Compile Include="UI\Commands\ISaveToConfigurationCommand.cs" />
     <Compile Include="UI\ViewModels\DataValidator.cs" />
     <Compile Include="UI\ViewModels\ISettingsValidatorWrapper.cs" />
