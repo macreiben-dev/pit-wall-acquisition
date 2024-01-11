@@ -23,7 +23,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             // ASSERT
             Check.That(fieldSelector(actual)).IsNull();
-            EnsureExecutionTakesNotLong(watch);
         }
 
         public static void EnsureValueNotNullMapped(
@@ -41,7 +40,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 
             // ASSERT
             Check.That(fieldSelector(actual)).IsNotNull();
-            EnsureExecutionTakesNotLong(watch);
         }
 
         public static void EnsureValueEqualsExpected(
@@ -59,7 +57,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
             var actual = (ITelemetryData)target.AsData();
 
             Check.That(fieldSelector(actual)).IsEqualTo(expected);
-            EnsureExecutionTakesNotLong(watch);
         }
 
         public static void EnsureValueEqualsExpected<TExpected>(

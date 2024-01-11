@@ -38,7 +38,6 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
         private readonly IPitWallConfiguration _configuration;
         private readonly IMappingConfigurationRepository _mappingConfiguration;
 
-    
         public TelemetryLiveAggregator(IPitWallConfiguration configuration, IMappingConfigurationRepository mappingConfiguration)
         {
             _configuration = configuration;
