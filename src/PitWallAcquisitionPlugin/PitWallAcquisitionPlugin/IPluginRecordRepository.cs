@@ -1,4 +1,5 @@
-﻿using PitWallAcquisitionPlugin.PluginManagerWrappers.Telemetries;
+﻿using PitWallAcquisitionPlugin.PluginManagerWrappers;
+using PitWallAcquisitionPlugin.PluginManagerWrappers.Telemetries;
 
 namespace FuelAssistantMobile.DataGathering.SimhubPlugin
 {
@@ -67,5 +68,7 @@ namespace FuelAssistantMobile.DataGathering.SimhubPlugin
         double? ComputedLiterPerLaps { get; }
         double? ComputedRemainingLaps { get; }
         string ComputedRemainingTime { get; }
+
+        IPluginManagerAdapter PluginManager { get; }
     }
 }

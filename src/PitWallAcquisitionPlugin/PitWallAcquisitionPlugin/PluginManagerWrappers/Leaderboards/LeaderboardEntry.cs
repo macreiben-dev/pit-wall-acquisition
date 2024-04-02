@@ -9,6 +9,7 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
         private readonly int position;
         private readonly double _lastlapInSeconds;
         private readonly string _carName;
+        private readonly string _carNumber;
 
         public LeaderboardEntry(IPluginManagerAdapter pluginAdapter, int position)
         {
@@ -17,6 +18,7 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
 
             _lastlapInSeconds = ReadDouble("LastLap");
             _carName = ReadString("CarName");
+            _carNumber = ReadString("CarNumber");
         }
 
         private const string Prefix = "GarySwallowDataPlugin.Leaderboard.Position{0:00}.{1}";
@@ -26,6 +28,8 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
         public string CarName => _carName;
 
         public int Position => position;
+
+        public string CarNumber => _carNumber;
 
         private string BuildMetricName(string metricSuffix)
         {
@@ -37,7 +41,7 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
             var actual = pluginAdapter.GetPropertyValue(
             BuildMetricName(metricName));
 
-            if (actual == null)
+            if (actual == null || actual == "No Data") // To be tested
             {
                 return 0;
             }
@@ -55,5 +59,18 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
             }
             return actual.ToString();
         }
+
+        private int ReadInteger(string metricName) // To be tested
+        {
+            var actual = pluginAdapter.GetPropertyValue(
+           BuildMetricName(metricName));
+
+            if (actual == null || actual == "No Data") // To be tested
+            {
+                return 0;
+            }
+            return Convert.ToInt32(actual);
+        }
+
     }
 }

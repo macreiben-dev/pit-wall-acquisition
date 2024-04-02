@@ -96,6 +96,7 @@
     <Compile Include="Acquisition\ISendableData.cs" />
     <Compile Include="Acquisition\Leadeboards\DummyData.cs" />
     <Compile Include="Acquisition\Leadeboards\LeaderboardData.cs" />
+    <Compile Include="Acquisition\Leadeboards\LeaderboardLiveAggregator.cs" />
     <Compile Include="Acquisition\Repositories\IPitwallRemoteClient.cs" />
     <Compile Include="Acquisition\Repositories\IPitwallRemoteRepository.cs" />
     <Compile Include="Acquisition\Repositories\IRemotesRepository.cs" />
@@ -105,7 +106,7 @@
     <Compile Include="Acquisition\Telemetries\Aggregators\Models\ITelemetryData.cs" />
     <Compile Include="Acquisition\IAggregator.cs" />
     <Compile Include="Acquisition\Leadeboards\ILeaderboardLiveAggregator.cs" />
-    <Compile Include="Acquisition\Leadeboards\LeaderboardLiveAggregator.cs" />
+    <Compile Include="Acquisition\Leadeboards\FakeLeaderboardLiveAggregator.cs" />
     <Compile Include="Acquisition\Telemetries\Aggregators\IVehicleConsumption.cs" />
     <Compile Include="Acquisition\Telemetries\Aggregators\TelemetryData.cs" />
     <Compile Include="Acquisition\Telemetries\Aggregators\ITelemetryLiveAggregator.cs" />

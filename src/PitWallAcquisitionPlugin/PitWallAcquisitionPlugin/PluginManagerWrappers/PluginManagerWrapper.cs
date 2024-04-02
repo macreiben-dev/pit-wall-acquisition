@@ -146,5 +146,7 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 
         public string ComputedRemainingTime => PluginManagerFieldConverter.ToString(
             Constants.ComputedRemainingTime, _pluginManager);
+
+        public IPluginManagerAdapter PluginManager => _pluginManager;
     }
 }
