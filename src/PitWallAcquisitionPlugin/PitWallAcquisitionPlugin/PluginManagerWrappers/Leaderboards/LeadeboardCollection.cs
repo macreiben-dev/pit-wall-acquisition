@@ -5,13 +5,13 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
 {
     internal sealed class LeadeboardCollection : IEnumerable<ILeaderboardEntry>
     {
-        private const int TOTAL_PILOT_COUNT = 99;
-        private IPluginManagerAdapter adapter;
+        private const int TotalPilotCount = 99;
+        private readonly IPluginManagerAdapter _adapter;
         private IList<ILeaderboardEntry> _entries;
 
         public LeadeboardCollection(IPluginManagerAdapter adapter)
         {
-            this.adapter = adapter;
+            _adapter = adapter;
         }
 
         public IEnumerator<ILeaderboardEntry> GetEnumerator()
@@ -21,11 +21,11 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
                 return _entries.GetEnumerator();
             }
 
-            List<ILeaderboardEntry> entries = new List<ILeaderboardEntry>(TOTAL_PILOT_COUNT);
+            List<ILeaderboardEntry> entries = new List<ILeaderboardEntry>(TotalPilotCount);
 
             for (int position = 1; position <= 99; position++)
             {
-                entries.Add(new LeaderboardEntry(adapter, position));
+                entries.Add(new LeaderboardEntry(_adapter, position));
             }
 
             _entries = entries;

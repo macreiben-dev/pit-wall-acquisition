@@ -8,6 +8,9 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.PluginManagerWrappers.Leaderb
 {
     public class LeaderboardEntryTest
     {
+        private const string GaryswallowdatapluginLeaderboardPositionInpitlane = "GarySwallowDataPlugin.Leaderboard.Position{0:00}.InPitLane";
+        private const string GaryswallowdatapluginLeaderboardPositionInpitbox = "GarySwallowDataPlugin.Leaderboard.Position{0:00}.InPitBox";
+
         private readonly IPluginManagerAdapter _pluginAdapter;
 
         public LeaderboardEntryTest()
@@ -98,7 +101,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.PluginManagerWrappers.Leaderb
         {
             // ARRANGE
             string metricName = string.Format(
-                "GarySwallowDataPlugin.Leaderboard.Position{0:00}.InPitLane",
+                GaryswallowdatapluginLeaderboardPositionInpitlane,
                 position);
 
             _pluginAdapter.GetPropertyValue(metricName)
@@ -121,7 +124,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.PluginManagerWrappers.Leaderb
         {
             // ARRANGE
             string metricName = string.Format(
-                "GarySwallowDataPlugin.Leaderboard.Position{0:00}.InPitLane",
+                GaryswallowdatapluginLeaderboardPositionInpitlane,
                 position);
 
             _pluginAdapter.GetPropertyValue(metricName)
@@ -144,7 +147,7 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.PluginManagerWrappers.Leaderb
         {
             // ARRANGE
             string metricName = string.Format(
-                "GarySwallowDataPlugin.Leaderboard.Position{0:00}.InPitLane",
+                GaryswallowdatapluginLeaderboardPositionInpitlane,
                 position);
 
             _pluginAdapter.GetPropertyValue(metricName)
@@ -154,6 +157,75 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.PluginManagerWrappers.Leaderb
             var target = GetTarget(position);
 
             bool actual = target.InPitLane;
+
+            // ASSERT
+            Check.That(actual).IsEqualTo(false);
+        }
+        
+        [Theory]
+        [InlineData(1)]
+        [InlineData(15)]
+        [InlineData(80)]
+        public void GIVEN_pluginAdapter_AND_position_WHEN_inPitBox_THEN_return_true(int position)
+        {
+            // ARRANGE
+            string metricName = string.Format(
+                GaryswallowdatapluginLeaderboardPositionInpitbox,
+                position);
+
+            _pluginAdapter.GetPropertyValue(metricName)
+                .Returns(1);
+
+            // ACT
+            var target = GetTarget(position);
+
+            bool actual = target.InPitBox;
+
+            // ASSERT
+            Check.That(actual).IsEqualTo(true);
+        }
+        
+        [Theory]
+        [InlineData(1)]
+        [InlineData(15)]
+        [InlineData(80)]
+        public void GIVEN_pluginAdapter_AND_position_WHEN_not_inPitBox_THEN_return_true(int position)
+        {
+            // ARRANGE
+            string metricName = string.Format(
+                GaryswallowdatapluginLeaderboardPositionInpitbox,
+                position);
+
+            _pluginAdapter.GetPropertyValue(metricName)
+                .Returns(0);
+
+            // ACT
+            var target = GetTarget(position);
+
+            bool actual = target.InPitBox;
+
+            // ASSERT
+            Check.That(actual).IsEqualTo(false);
+        }
+        
+        [Theory]
+        [InlineData(1)]
+        [InlineData(15)]
+        [InlineData(80)]
+        public void GIVEN_pluginAdapter_AND_position_WHEN_inPitBox_isNull_THEN_return_false(int position)
+        {
+            // ARRANGE
+            string metricName = string.Format(
+                GaryswallowdatapluginLeaderboardPositionInpitbox,
+                position);
+
+            _pluginAdapter.GetPropertyValue(metricName)
+                .Returns(null);
+
+            // ACT
+            var target = GetTarget(position);
+
+            bool actual = target.InPitBox;
 
             // ASSERT
             Check.That(actual).IsEqualTo(false);
