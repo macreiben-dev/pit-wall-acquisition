@@ -10,6 +10,7 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
         private readonly double _lastlapInSeconds;
         private readonly string _carName;
         private readonly string _carNumber;
+        private readonly bool _inPitLane;
 
         public LeaderboardEntry(IPluginManagerAdapter pluginAdapter, int position)
         {
@@ -19,6 +20,22 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
             _lastlapInSeconds = ReadDouble("LastLap");
             _carName = ReadString("CarName");
             _carNumber = ReadString("CarNumber");
+            _inPitLane = ReadBool("InPitLane");
+        }
+
+        private bool ReadBool(string metricName)
+        {
+            var actual = pluginAdapter.GetPropertyValue(
+                BuildMetricName(metricName));
+
+            var intermediary = actual is int ? (int)actual : 0;
+            
+            if (intermediary == 1)
+            {
+                return true;
+            }
+            
+            return false;
         }
 
         private const string Prefix = "GarySwallowDataPlugin.Leaderboard.Position{0:00}.{1}";
@@ -30,6 +47,8 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards
         public int Position => position;
 
         public string CarNumber => _carNumber;
+        
+        public bool InPitLane => _inPitLane;
 
         private string BuildMetricName(string metricSuffix)
         {
