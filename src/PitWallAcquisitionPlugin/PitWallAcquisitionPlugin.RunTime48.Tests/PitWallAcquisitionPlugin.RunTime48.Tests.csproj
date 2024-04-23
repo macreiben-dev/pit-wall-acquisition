@@ -47,13 +47,11 @@
     <Reference Include="FluentAssertions, Version=6.12.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.6.12.0\lib\net47\FluentAssertions.dll</HintPath>
     </Reference>
-    <Reference Include="GameReaderCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Thirdparties\Simhub.9.1.2\GameReaderCommon.dll</HintPath>
+    <Reference Include="GameReaderCommon">
+      <HintPath>..\Thirdparties\Simhub.9.2.12\GameReaderCommon.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Thirdparties\Simhub.9.1.2\log4net.dll</HintPath>
+    <Reference Include="log4net">
+      <HintPath>..\Thirdparties\Simhub.9.2.12\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.TestPlatform.CoreUtilities, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -83,9 +81,11 @@
     <Reference Include="NuGet.Frameworks, Version=6.8.0.131, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\NuGet.Frameworks.6.8.0\lib\net472\NuGet.Frameworks.dll</HintPath>
     </Reference>
-    <Reference Include="SimHub.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Thirdparties\Simhub.9.1.2\SimHub.Logging.dll</HintPath>
+    <Reference Include="SimHub.Logging">
+      <HintPath>..\Thirdparties\Simhub.9.2.12\SimHub.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="SimHub.Plugins">
+      <HintPath>..\Thirdparties\Simhub.9.2.12\SimHub.Plugins.dll</HintPath>
     </Reference>
     <Reference Include="SimHub.Plugins, Version=1.0.8682.23503, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
