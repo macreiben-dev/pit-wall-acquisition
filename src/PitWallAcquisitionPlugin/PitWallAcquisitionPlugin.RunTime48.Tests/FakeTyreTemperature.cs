@@ -1,4 +1,4 @@
-﻿using PitWallAcquisitionPlugin.PluginManagerWrappers;
+﻿using PitWallAcquisitionPlugin.PluginManagerWrappers.Telemetries;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests
 {

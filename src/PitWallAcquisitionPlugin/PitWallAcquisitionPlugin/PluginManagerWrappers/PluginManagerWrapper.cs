@@ -1,4 +1,5 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
+using PitWallAcquisitionPlugin.PluginManagerWrappers.Telemetries;
 
 namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 {
@@ -86,6 +87,7 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
                 Constants.TyreTemperatureRearRight,
                 _pluginManager);
         }
+
         public ITyreTemperature TyreFrontLeftTemperature { get; private set; }
 
         public ITyreTemperature TyreFrontRightTemperature { get; private set; }
@@ -144,5 +146,7 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
 
         public string ComputedRemainingTime => PluginManagerFieldConverter.ToString(
             Constants.ComputedRemainingTime, _pluginManager);
+
+        public IPluginManagerAdapter PluginManager => _pluginManager;
     }
 }

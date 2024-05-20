@@ -74,7 +74,7 @@ namespace PitWallAcquisitionPlugin
             containerBuilder.RegisterType<ForwarderServiceFactory>()
                 .As<IForwarderServiceFactory>();
 
-            containerBuilder.RegisterType<FakeLeaderboardLiveAggregator>()
+            containerBuilder.RegisterType<LeaderboardLiveAggregator>()
                 .As<ILeaderboardLiveAggregator>();
 
             containerBuilder.RegisterType<AcquisitionService>()

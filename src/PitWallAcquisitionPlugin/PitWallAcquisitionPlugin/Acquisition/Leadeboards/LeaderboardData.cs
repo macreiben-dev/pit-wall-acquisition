@@ -1,5 +1,6 @@
 ﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
-using System;
+using PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards;
+using System.Collections.Generic;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
 {
@@ -13,10 +14,11 @@ namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
         public string PilotName { get; set; }
 
         public string CarName { get; set; }
+        public List<ILeaderboardEntry> Entries { get; internal set; }
 
         public object AsData()
         {
-            throw new NotImplementedException();
+            return this;
         }
     }
 }
