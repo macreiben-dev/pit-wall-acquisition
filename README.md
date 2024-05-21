@@ -1,5 +1,7 @@
 # Pitwall Acquisition Plugin
 
+![Pitwall Header](./docs/assets/pitwall_header.png)
+
 This plugin is to be used with simhub to forward data to a WebApi. This WebApi then exposes an endpoint to feed a prometheus database.
 
 ## Versions
