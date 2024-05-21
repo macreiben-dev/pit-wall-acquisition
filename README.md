@@ -2,7 +2,9 @@
 
 This plugin is to be used with simhub to forward data to a WebApi. This WebApi then exposes an endpoint to feed a prometheus database.
 
-[Download latest version](https://github.com/macreiben-dev/pit-wall-acquisition/releases/tag/Live-20231126.5)
+## Versions
+- [Download latest Stable version](https://github.com/macreiben-dev/pit-wall-acquisition/releases/tag/Live-20231126.5)
+- [Download Release Candidate version](https://github.com/macreiben-dev/pit-wall-acquisition/releases/download/RC-20240520.2-801/PitwallAcquisitionPlugin-RC-20240520.2-801.zip)
 
 ## Pre requisites
 
