@@ -132,6 +132,7 @@
     <Compile Include="IMappingConfigurationRepository.cs" />
     <Compile Include="IocContainerInitialization.cs" />
     <Compile Include="IPluginRecordRepository.cs" />
+    <Compile Include="Logging\ConditionalLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\SimhubLogger.cs" />
     <Compile Include="MappingConfigurationRepository.cs" />
