@@ -7,6 +7,7 @@ using PitWallAcquisitionPlugin.UI.ViewModels;
 using PitWallAcquisitionPlugin.UI.Views;
 using SimHub.Plugins;
 using System.Windows.Controls;
+using PitWallAcquisitionPlugin.Logging;
 
 namespace PitWallAcquisitionPlugin
 {

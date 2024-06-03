@@ -1,7 +1,8 @@
 ﻿
 using System;
+using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 
-namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Logging
+namespace PitWallAcquisitionPlugin.Logging
 {
     internal sealed class SimhubLogger : ILogger
     {
