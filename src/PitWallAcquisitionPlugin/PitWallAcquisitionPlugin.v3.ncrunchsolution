@@ -1,12 +1,14 @@
 ﻿<SolutionConfiguration>
   <Settings>
     <AllowParallelTestExecution>True</AllowParallelTestExecution>
+    <EnableRDI>True</EnableRDI>
     <MetricsExclusionList>
       <Value>PitWallAcquisitionPlugin.IntegrationTests\PitWallAcquisitionPlugin.IntegrationTests.csproj</Value>
       <Value>PitWallAcquisitionPlugin.Tests\PitWallAcquisitionPlugin.Tests.csproj</Value>
       <Value>PitWallAcquisitionPlugin.RunTime48.Tests\PitWallAcquisitionPlugin.RunTime48.Tests.csproj</Value>
       <Value>DemoProject.RunTime48.Tests\DemoProject.RunTime48.Tests.csproj</Value>
     </MetricsExclusionList>
+    <RdiConfigured>True</RdiConfigured>
     <SolutionConfigured>True</SolutionConfigured>
   </Settings>
 </SolutionConfiguration>
