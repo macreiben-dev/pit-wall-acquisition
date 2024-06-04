@@ -136,7 +136,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
              * */
 
             // THOUGHT: check game status before doing anything. If it is not running. Then do nothing.
-            if (ShouldStopTimer())
+            if (ShouldStopTimerBecauseToManyErrors())
             {
                 try
                 {
@@ -144,9 +144,10 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
                 }
                 catch
                 {
+                    _logger.Error($"Error while stopping the {_remoteType} acquisition service.");
                 }
 
-                _logger.Error($"Pitwall acquisition plugin - {_remoteType} - WebAPI post stoped.");
+                _logger.Error($"Pitwall acquisition plugin - {_remoteType} - encountered too many error and was STOPPED.");
 
                 return;
             }
@@ -227,7 +228,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             return _notifiedStop;
         }
 
-        private bool ShouldStopTimer()
+        private bool ShouldStopTimerBecauseToManyErrors()
         {
             return _internalErrorCount >= MAX_ERROR_COUNT;
         }
