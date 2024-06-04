@@ -162,10 +162,6 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
                 return;
             }
 
-            /**
-             * IDEA : should not send data when in pitlane ?
-             * */
-
             var dataToSend = _liveAggregator.AsData();
 
             try
