@@ -1,11 +1,12 @@
 ﻿using Autofac;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
+using log4net;
 using PitWallAcquisitionPlugin.Acquisition;
 using PitWallAcquisitionPlugin.Acquisition.Repositories;
 using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.HealthChecks;
 using PitWallAcquisitionPlugin.HealthChecks.Repositories;
+using PitWallAcquisitionPlugin.Logging;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
 using PitWallAcquisitionPlugin.Repositories;
 using PitWallAcquisitionPlugin.Tests.UI.Commands;
@@ -18,19 +19,27 @@ namespace PitWallAcquisitionPlugin
     {
 
         public static IContainer CreateBuilder(
-            ILogger logger,
+            ILog log,
             IDataPlugin plugin)
         {
             var containerBuilder = new ContainerBuilder();
 
             containerBuilder.RegisterInstance(plugin).As<IPlugin>();
 
-            containerBuilder.RegisterInstance(logger);
-
             containerBuilder.RegisterType<TelemetryLiveAggregator>()
                 .As<ITelemetryLiveAggregator>()
                 .SingleInstance();
 
+            //-------------
+
+            containerBuilder.RegisterInstance(log)
+                .As<ILog>()
+                .SingleInstance();
+
+            containerBuilder.RegisterType<SimhubLogger>()
+                .As<ILogger>()
+                .SingleInstance();
+            
             //-------------
 
             containerBuilder.RegisterType<RemotesRepository>()
