@@ -39,6 +39,9 @@ namespace PitWallAcquisitionPlugin
             containerBuilder.RegisterType<SimhubLogger>()
                 .As<ILogger>()
                 .SingleInstance();
+
+            containerBuilder.RegisterType<ConditionalLoggerFactory>()
+                .As<IConditionalLoggerFactory>();
             
             //-------------
 

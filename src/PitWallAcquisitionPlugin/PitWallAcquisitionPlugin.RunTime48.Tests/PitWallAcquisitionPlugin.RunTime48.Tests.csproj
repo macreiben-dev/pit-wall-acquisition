@@ -133,7 +133,10 @@
     <Compile Include="FakePitWallConfiguration.cs" />
     <Compile Include="FakeTyreTemperature.cs" />
     <Compile Include="HealthChecks\HealthCheckServiceTest.cs" />
+    <Compile Include="Logging\ConditionalLoggerFactoryTest.cs" />
     <Compile Include="Logging\ConditionalLoggerTests.cs" />
+    <Compile Include="Logging\FakeConditionalLogger.cs" />
+    <Compile Include="Logging\FakeConditionalLoggerFactory.cs" />
     <Compile Include="Logging\SimhubLoggerTest.cs" />
     <Compile Include="MappingConfigurationRepositoryTest.cs" />
     <Compile Include="PluginManagerWrappers\Leaderboards\LeadeboardCollectionTest.cs" />

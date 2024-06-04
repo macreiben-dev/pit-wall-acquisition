@@ -10,17 +10,20 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Logging
     {
         private readonly ILog _log;
         private readonly IConditionalLogger _conditionLogger;
+        private readonly FakeConditionalLoggerFactory _conditionLoggerFactory;
 
         public SimhubLoggerTest()
         {
             _log = Substitute.For<ILog>();
 
             _conditionLogger = new FakeConditionalLogger();
+
+            _conditionLoggerFactory = new FakeConditionalLoggerFactory();
         }
 
         private SimhubLogger GetTarget()
         {
-            return new SimhubLogger(_log);
+            return new SimhubLogger(_log, _conditionLoggerFactory);
         }
         
         // ===========================================================
@@ -94,14 +97,6 @@ namespace PitWallAcquisitionPlugin.RunTime48.Tests.Logging
 
             // Assert
             _log.Received(1).Error("PitWallAcquisitionPlugin: error message", ex);
-        }
-
-        public class FakeConditionalLogger : IConditionalLogger
-        {
-            public void Log(string originalMessage, Action<string> logger)
-            {
-                logger(originalMessage);
-            }
         }
     }
 }
