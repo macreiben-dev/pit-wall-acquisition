@@ -24,7 +24,8 @@ namespace PitWallAcquisitionPlugin
         public WebApiForwarder()
             : this(
                 new SimhubLogger(),
-                new PluginRecordRepositoryFactory(), SimHub.Logging.Current)
+                new PluginRecordRepositoryFactory(), 
+                SimHub.Logging.Current)
         {
 
         }
