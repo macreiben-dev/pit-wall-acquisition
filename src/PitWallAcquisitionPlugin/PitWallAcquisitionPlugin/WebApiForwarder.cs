@@ -22,18 +22,12 @@ namespace PitWallAcquisitionPlugin
         private readonly IAcquisitionService _acquisitionService;
 
         public WebApiForwarder()
-            : this(
-                new SimhubLogger(),
-                new PluginRecordRepositoryFactory(), 
-                SimHub.Logging.Current)
+            : this(SimHub.Logging.Current)
         {
 
         }
 
-        internal WebApiForwarder(
-            ILogger logger,
-            IPluginRecordRepositoryFactory pluginRecordFactory,
-            ILog current)
+        internal WebApiForwarder(ILog current)
         {
             IContainer builder = IocContainerInitialization.CreateBuilder(
                 current,
