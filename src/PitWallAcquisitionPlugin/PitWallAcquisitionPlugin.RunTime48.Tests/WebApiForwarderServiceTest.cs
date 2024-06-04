@@ -1,4 +1,5 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
+﻿using System;
+using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.Acquisition.Repositories;
@@ -156,19 +157,7 @@ namespace PitWallAcquisitionPlugin.Tests
 
             _logger.Received(1).Info($"Pitwall acquisition plugin - {remoteType} Gathering STOPPED");
         }
-
-        [Fact]
-        public void GIVEN_firstLaunch_AND_game_notRunning_AND_service_notStarted_THEN_stop()
-        {
-            _pluginRecordRepo.IsGameRunning.Returns(false);
-
-            var target = GetTarget(RemoteTypeEnum.Telemetry);
-
-            target.HandleDataUpdate(_pluginRecordRepo);
-
-            _logger.Received(1).Info($"Pitwall acquisition plugin - Telemetry Gathering STOPPED");
-        }
-
+        
         [Fact]
         public void GIVEN_firstLaunch_AND_game_isRunning_AND_service_notStarted_THEN_start_AND_updateAggregator()
         {
@@ -231,6 +220,43 @@ namespace PitWallAcquisitionPlugin.Tests
             _aggregator.Received(1).UpdateAggregator(
                 Arg.Is<IPluginRecordRepository>(arg => arg.AirTemperature == 15.6));
             _logger.Received(1).Info($"Pitwall acquisition plugin - Telemetry Gathering STARTED");
+        }
+
+        [Fact]
+        public void GIVEN_game_isRunning_AND_notifiedStop_WHEN_aggregatorFails_THEN_doNot_log_stop()
+        {
+            var isAggregatorCleared = 0;
+            
+            _pluginRecordRepo.IsGameRunning.Returns(true);
+            _aggregator.When(c => c.Clear()).Do(a =>
+            {
+                /**
+                 * One clear on the start
+                 * one clear on the stop
+                 * then we fail.
+                 */
+                if(isAggregatorCleared != 2)
+                {
+                    isAggregatorCleared++;
+                    return;
+                }
+
+                throw new Exception("Some exception");
+            });
+            
+            // ACT
+            var target = GetTarget(RemoteTypeEnum.Telemetry);
+
+            target.Start();
+
+            target.HandleDataUpdate(_pluginRecordRepo);
+            
+            target.Stop();
+            
+            target.Stop();
+            
+            // ASSERT
+            _logger.Received(1).Info($"Pitwall acquisition plugin - Telemetry Gathering STOPPED");
         }
     }
 }
