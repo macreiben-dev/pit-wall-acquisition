@@ -1,6 +1,5 @@
 ﻿
 using System;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 
 namespace PitWallAcquisitionPlugin.Logging
 {

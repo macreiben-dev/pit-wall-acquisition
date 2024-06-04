@@ -1,7 +1,7 @@
 ﻿using PitWallAcquisitionPlugin.UI.ViewModels;
 using System;
+using PitWallAcquisitionPlugin.Logging;
 using SimHub.Plugins;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 
 namespace PitWallAcquisitionPlugin.Repositories
 {

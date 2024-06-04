@@ -1,5 +1,4 @@
 ﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.Acquisition.Repositories;
@@ -9,6 +8,7 @@ using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
 using System.Threading;
+using PitWallAcquisitionPlugin.Logging;
 using Xunit;
 
 namespace PitWallAcquisitionPlugin.Tests

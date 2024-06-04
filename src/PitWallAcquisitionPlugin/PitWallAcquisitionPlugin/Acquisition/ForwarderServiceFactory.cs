@@ -1,7 +1,7 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
-using PitWallAcquisitionPlugin.Acquisition.Repositories;
+﻿using PitWallAcquisitionPlugin.Acquisition.Repositories;
 using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
 using PitWallAcquisitionPlugin.Aggregations.Telemetries;
+using PitWallAcquisitionPlugin.Logging;
 
 namespace PitWallAcquisitionPlugin.Acquisition
 {

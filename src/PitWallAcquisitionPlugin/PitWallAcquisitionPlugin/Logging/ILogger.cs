@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Logging
+namespace PitWallAcquisitionPlugin.Logging
 {
     internal interface ILogger
     {
