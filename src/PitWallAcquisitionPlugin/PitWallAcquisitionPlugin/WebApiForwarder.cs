@@ -1,12 +1,12 @@
 ﻿using Autofac;
 using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using GameReaderCommon;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
 using PitWallAcquisitionPlugin.UI.ViewModels;
 using PitWallAcquisitionPlugin.UI.Views;
 using SimHub.Plugins;
 using System.Windows.Controls;
+using log4net;
 using PitWallAcquisitionPlugin.Logging;
 
 namespace PitWallAcquisitionPlugin
@@ -24,17 +24,18 @@ namespace PitWallAcquisitionPlugin
         public WebApiForwarder()
             : this(
                 new SimhubLogger(),
-                new PluginRecordRepositoryFactory())
+                new PluginRecordRepositoryFactory(), SimHub.Logging.Current)
         {
 
         }
 
         internal WebApiForwarder(
             ILogger logger,
-            IPluginRecordRepositoryFactory pluginRecordFactory)
+            IPluginRecordRepositoryFactory pluginRecordFactory,
+            ILog current)
         {
             IContainer builder = IocContainerInitialization.CreateBuilder(
-                logger,
+                current,
                 this);
 
             _builder = builder;
