@@ -2,7 +2,7 @@ using System;
 
 namespace PitWallAcquisitionPlugin.Logging
 {
-    public sealed class ConditionalLogger
+    public sealed class ConditionalLogger : IConditionalLogger
     {
         private const string PreviousMessageWasTheSameAsTheCurrentOneSkipping = "Previous message was the same as the current one. Skipping.";
         private string _previousMessage;

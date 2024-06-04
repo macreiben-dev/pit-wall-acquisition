@@ -134,6 +134,7 @@
     <Compile Include="FakeTyreTemperature.cs" />
     <Compile Include="HealthChecks\HealthCheckServiceTest.cs" />
     <Compile Include="Logging\ConditionalLoggerTests.cs" />
+    <Compile Include="Logging\SimhubLoggerTest.cs" />
     <Compile Include="MappingConfigurationRepositoryTest.cs" />
     <Compile Include="PluginManagerWrappers\Leaderboards\LeadeboardCollectionTest.cs" />
     <Compile Include="PluginManagerWrappers\Leaderboards\LeaderboardEntryTest.cs" />

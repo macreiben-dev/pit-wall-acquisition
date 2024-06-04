@@ -1,35 +1,42 @@
 ﻿
 using System;
+using log4net;
 
 namespace PitWallAcquisitionPlugin.Logging
 {
     internal sealed class SimhubLogger : ILogger
     {
+        private readonly ILog _log;
         private const string LOG_PREFIX = "PitWallAcquisitionPlugin: ";
 
+        public SimhubLogger(ILog log)
+        {
+            _log = log;
+        }
+        
         public void Debug(string message)
         {
-            SimHub.Logging.Current.Debug(Format(message));
+            _log.Debug(Format(message));
         }
-
+        
         public void Error(string message)
         {
-            SimHub.Logging.Current.Error(Format(message));
+            _log.Error(Format(message));
         }
 
         public void Error(string message, Exception ex)
         {
-            SimHub.Logging.Current.Error(Format(message));
+            _log.Error(Format(message), ex);
         }
 
         public void Info(string message)
         {
-            SimHub.Logging.Current.Info(Format(message));
+            _log.Info(Format(message));
         }
 
         public void Warn(string message)
         {
-            SimHub.Logging.Current.Warn(Format(message));
+            _log.Warn(Format(message));
         }
 
         private string Format(string message)
