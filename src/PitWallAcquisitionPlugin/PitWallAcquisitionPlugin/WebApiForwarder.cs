@@ -24,7 +24,6 @@ namespace PitWallAcquisitionPlugin
         public WebApiForwarder()
             : this(SimHub.Logging.Current)
         {
-
         }
 
         internal WebApiForwarder(ILog current)
@@ -46,10 +45,19 @@ namespace PitWallAcquisitionPlugin
 
         private PluginManager _pluginManager;
 
-        public PluginManager PluginManager { set => _pluginManager = value; }
-
-        public void DataUpdate(PluginManager pluginManager, ref GameData data)
+        public PluginManager PluginManager
         {
+            set => _pluginManager = value;
+        }
+
+        public void DataUpdate(PluginManager pluginManager,
+            ref GameData data)
+        {
+            if (!data.GameRunning)
+            {
+                return;
+            }
+
             IPluginRecordRepository pluginRecordRepository
                 = _pluginRecordFactory.GetInstance(pluginManager);
 
@@ -68,10 +76,6 @@ namespace PitWallAcquisitionPlugin
         public void Init(PluginManager pluginManager)
         {
             _logger.Info("Starting Fam Data Gathering plugin ...");
-
-            /**
-             * Idea: use ioc framework to split classes when too big.
-             * */
 
             _acquisitionService.Start();
 
