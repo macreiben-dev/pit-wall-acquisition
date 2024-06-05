@@ -1,7 +1,7 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
-using NFluent;
+﻿using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.HealthChecks.Repositories;
+using PitWallAcquisitionPlugin.Logging;
 
 namespace PitWallAcquisitionPlugin.IntegrationTests.HealthChecks
 {

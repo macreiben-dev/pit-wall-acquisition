@@ -1,10 +1,11 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
+﻿using System;
+using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
 using PitWallAcquisitionPlugin.Acquisition.Repositories;
 using PitWallAcquisitionPlugin.Aggregations.Aggregators;
 using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
 using System.Timers;
+using PitWallAcquisitionPlugin.Logging;
 
 namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
 {
@@ -43,7 +44,8 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             /**
              * IDEA : use seconds instead of Hz, because it's not human friendly in the code and for admins
              * */
-            _postTimer = new Timer(1000 / postToApiTimerHz); // Interval in milliseconds for 10Hz (1000ms / 10Hz = 100ms)
+            _postTimer =
+                new Timer(1000 / postToApiTimerHz); // Interval in milliseconds for 10Hz (1000ms / 10Hz = 100ms)
             _postTimer.Elapsed += PostData;
 
             _autoReactivate = new Timer(autoReactivateTimer);
@@ -116,38 +118,44 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
                 _postTimer.Stop();
                 _internalErrorCount = 0;
                 _notifiedStop = true;
-            }
-            finally
-            {
                 _logger.Info($"Pitwall acquisition plugin - {_remoteType} Gathering STOPPED");
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"Error occured wil stopping {_remoteType} Gathering", e);
             }
         }
 
-        private async void PostData(object sender, ElapsedEventArgs e)
+        private async void PostData(object sender,
+            ElapsedEventArgs e)
         {
             /**
              * This part is tightly coupled to timer which makes it hard to test. Might need to rework this.
-             * 
+             *
              * Move this one to a static function at minimum to test it.
              * */
 
             // THOUGHT: check game status before doing anything. If it is not running. Then do nothing.
-            if (ShouldStopTimer())
+            if (ShouldStopTimerBecauseToManyErrors())
             {
                 try
                 {
                     Stop();
                 }
-                catch { }
+                catch
+                {
+                    _logger.Error($"Error while stopping the {_remoteType} acquisition service.");
+                }
 
-                _logger.Error($"Pitwall acquisition plugin - {_remoteType} - WebAPI post stoped.");
+                _logger.Error($"Pitwall acquisition plugin - {_remoteType} - encountered too many error and was STOPPED.");
 
                 return;
             }
 
             if (ShouldNotifyRetrying())
             {
-                _logger.Warn($"Pitwall acquisition plugin - {_remoteType} - Retrying to contact API - error count is [{_internalErrorCount}]");
+                _logger.Warn(
+                    $"Pitwall acquisition plugin - {_remoteType} - Retrying to contact API - error count is [{_internalErrorCount}]");
             }
 
             if (!_liveAggregator.IsDirty)
@@ -155,17 +163,14 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
                 return;
             }
 
-            /**
-             * IDEA : should not send data when in pitlane ?
-             * */
-
             var dataToSend = _liveAggregator.AsData();
 
             try
             {
                 if (EnsureSimerKeyAndPilotNameAreSet(dataToSend))
                 {
-                    _logger.Error($"Pitwall acquisition plugin - {_remoteType} - Mandatory configuration missing, PilotName is [{dataToSend.PilotName}] - SimerKey is [{dataToSend.SimerKey}]");
+                    _logger.Error(
+                        $"Pitwall acquisition plugin - {_remoteType} - Mandatory configuration missing, PilotName is [{dataToSend.PilotName}] - SimerKey is [{dataToSend.SimerKey}]");
 
                     return;
                 }
@@ -179,7 +184,8 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             {
                 _internalErrorCount++;
 
-                _logger.Error($"Pitwall acquisition plugin - {_remoteType} - Issue during posting [{ex.WebApiUrl}] - [{_internalErrorCount}] error count.");
+                _logger.Error(
+                    $"Pitwall acquisition plugin - {_remoteType} - Issue during posting [{ex.WebApiUrl}] - [{_internalErrorCount}] error count.");
                 _logger.Error($"Pitwall acquisition plugin - {_remoteType} - Posted data is:");
                 _logger.Error(ex.JsonData);
                 _logger.Error($"Pitwall acquisition plugin - {_remoteType} - Exception is:", ex);
@@ -188,18 +194,21 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             {
                 _internalErrorCount++;
 
-                _logger.Error($"Pitwall acquisition plugin - {_remoteType} - Issue during posting [{ex.WebApiUrl}] - [{_internalErrorCount}] error count.");
-                _logger.Error($"Pitwall acquisition plugin - {_remoteType} - API failed returned code is not OK - [{ex.StatusCode}]");
+                _logger.Error(
+                    $"Pitwall acquisition plugin - {_remoteType} - Issue during posting [{ex.WebApiUrl}] - [{_internalErrorCount}] error count.");
+                _logger.Error(
+                    $"Pitwall acquisition plugin - {_remoteType} - API failed returned code is not OK - [{ex.StatusCode}]");
             }
         }
 
         private static bool EnsureSimerKeyAndPilotNameAreSet(ISendableData dataToSend)
         {
             return string.IsNullOrEmpty(dataToSend.PilotName)
-                || string.IsNullOrEmpty(dataToSend.SimerKey);
+                   || string.IsNullOrEmpty(dataToSend.SimerKey);
         }
 
-        private void AutoReactivate(object sender, ElapsedEventArgs e)
+        private void AutoReactivate(object sender,
+            ElapsedEventArgs e)
         {
             if (HasBeenNotifiedToStop() && SufferedInternalError())
             {
@@ -219,7 +228,7 @@ namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
             return _notifiedStop;
         }
 
-        private bool ShouldStopTimer()
+        private bool ShouldStopTimerBecauseToManyErrors()
         {
             return _internalErrorCount >= MAX_ERROR_COUNT;
         }

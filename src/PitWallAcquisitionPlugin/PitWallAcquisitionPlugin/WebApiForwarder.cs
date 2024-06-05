@@ -1,12 +1,13 @@
 ﻿using Autofac;
 using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.Logging;
 using GameReaderCommon;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
 using PitWallAcquisitionPlugin.UI.ViewModels;
 using PitWallAcquisitionPlugin.UI.Views;
 using SimHub.Plugins;
 using System.Windows.Controls;
+using log4net;
+using PitWallAcquisitionPlugin.Logging;
 
 namespace PitWallAcquisitionPlugin
 {
@@ -21,19 +22,14 @@ namespace PitWallAcquisitionPlugin
         private readonly IAcquisitionService _acquisitionService;
 
         public WebApiForwarder()
-            : this(
-                new SimhubLogger(),
-                new PluginRecordRepositoryFactory())
+            : this(SimHub.Logging.Current)
         {
-
         }
 
-        internal WebApiForwarder(
-            ILogger logger,
-            IPluginRecordRepositoryFactory pluginRecordFactory)
+        internal WebApiForwarder(ILog current)
         {
             IContainer builder = IocContainerInitialization.CreateBuilder(
-                logger,
+                current,
                 this);
 
             _builder = builder;
@@ -49,10 +45,19 @@ namespace PitWallAcquisitionPlugin
 
         private PluginManager _pluginManager;
 
-        public PluginManager PluginManager { set => _pluginManager = value; }
-
-        public void DataUpdate(PluginManager pluginManager, ref GameData data)
+        public PluginManager PluginManager
         {
+            set => _pluginManager = value;
+        }
+
+        public void DataUpdate(PluginManager pluginManager,
+            ref GameData data)
+        {
+            if (!data.GameRunning)
+            {
+                return;
+            }
+
             IPluginRecordRepository pluginRecordRepository
                 = _pluginRecordFactory.GetInstance(pluginManager);
 
@@ -71,10 +76,6 @@ namespace PitWallAcquisitionPlugin
         public void Init(PluginManager pluginManager)
         {
             _logger.Info("Starting Fam Data Gathering plugin ...");
-
-            /**
-             * Idea: use ioc framework to split classes when too big.
-             * */
 
             _acquisitionService.Start();
 
