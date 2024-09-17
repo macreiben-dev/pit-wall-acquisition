@@ -35,10 +35,10 @@
       <HintPath>..\packages\Autofac.5.2.0\lib\net461\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="GameReaderCommon">
-      <HintPath>..\Thirdparties\Simhub.9.2.12\GameReaderCommon.dll</HintPath>
+      <HintPath>..\Thirdparties\Simhub.9.4.7\GameReaderCommon.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\Thirdparties\Simhub.9.2.12\log4net.dll</HintPath>
+      <HintPath>..\Thirdparties\Simhub.9.4.7\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -49,10 +49,10 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="SimHub.Logging">
-      <HintPath>..\Thirdparties\Simhub.9.2.12\SimHub.Logging.dll</HintPath>
+      <HintPath>..\Thirdparties\Simhub.9.4.7\SimHub.Logging.dll</HintPath>
     </Reference>
     <Reference Include="SimHub.Plugins">
-      <HintPath>..\Thirdparties\Simhub.9.2.12\SimHub.Plugins.dll</HintPath>
+      <HintPath>..\Thirdparties\Simhub.9.4.7\SimHub.Plugins.dll</HintPath>
     </Reference>
     <Reference Include="SimHub.Plugins, Version=1.0.8682.23503, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
