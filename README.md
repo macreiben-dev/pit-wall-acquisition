@@ -20,6 +20,28 @@ To be able to work with the data, please see [pit-wall-api](https://github.com/m
 
 To be able to have the pitting information you need download [Simhub Gary Swallow plugin](https://www.overtake.gg/downloads/simhub-tv-style-side-scrolling-leaderboards-timings-sidescreen.18746/)
 
+## What does it do ?
+
+Here is a glimpse of what the pitwall can do.
+
+### Fuel live analysis/consistency
+
+![Fuel live analysis](./docs/assets/overview_fr_2024-09-22_part01.png)
+
+### Tyre wear live analysis
+
+![Tyre wear live analysis](./docs/assets/overview_fr_2024-09-22_part04.png)
+
+The gauges present the current tyre wear. Next to it are the wear delta over the last 10 min.
+
+On the right, are the remaining time on each tyre based on the last 10 minutes of data.
+
+### Live piting information
+
+![Live pit data](./docs/assets/screenshot_pit_01_2024-09-22_focusOnCar.png)
+
+This dashboard allows you to see who is in pitlane and for how long. So you can see who's pitting, doing penalties etc ... .
+
 ## How does it work ?
 
 ![Global schematic](./docs/assets/pitwall_prez.png)
