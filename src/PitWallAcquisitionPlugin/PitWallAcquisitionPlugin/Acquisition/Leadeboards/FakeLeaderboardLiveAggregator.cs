@@ -1,7 +1,4 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using PitWallAcquisitionPlugin.Aggregations.Aggregators;
-
-namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
+﻿namespace PitWallAcquisitionPlugin.Acquisition.Leadeboards
 {
     internal sealed class FakeLeaderboardLiveAggregator : ILeaderboardLiveAggregator
     {

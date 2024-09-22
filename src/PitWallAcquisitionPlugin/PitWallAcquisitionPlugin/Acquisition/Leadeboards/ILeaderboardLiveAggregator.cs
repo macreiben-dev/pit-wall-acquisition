@@ -1,4 +1,4 @@
-﻿namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
+﻿namespace PitWallAcquisitionPlugin.Acquisition.Leadeboards
 {
     internal interface ILeaderboardLiveAggregator : IAggregator
     {

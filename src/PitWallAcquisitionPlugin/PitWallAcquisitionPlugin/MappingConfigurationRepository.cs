@@ -1,7 +1,7 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Telemetries.Mappers;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using PitWallAcquisitionPlugin.Acquisition.Telemetries.Mappers;
 
 namespace PitWallAcquisitionPlugin
 {

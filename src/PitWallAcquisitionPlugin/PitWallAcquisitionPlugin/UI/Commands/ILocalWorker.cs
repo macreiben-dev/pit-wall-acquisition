@@ -1,4 +1,4 @@
-﻿namespace PitWallAcquisitionPlugin.Tests.UI.Commands
+﻿namespace PitWallAcquisitionPlugin.UI.Commands
 {
     public interface ILocalWorker
     {

@@ -3,6 +3,8 @@ using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.HealthChecks;
 using System.Threading;
+using PitWallAcquisitionPlugin.UI.Commands;
+using PitWallAcquisitionPlugin.UI.ViewModels;
 using Xunit;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.Commands

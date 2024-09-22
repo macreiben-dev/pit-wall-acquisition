@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace PitWallAcquisitionPlugin.Tests.UI.Commands
+namespace PitWallAcquisitionPlugin.UI.Commands
 {
     internal interface ILocalWorkerFactory
     {

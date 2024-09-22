@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using GameReaderCommon;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
 using PitWallAcquisitionPlugin.UI.ViewModels;

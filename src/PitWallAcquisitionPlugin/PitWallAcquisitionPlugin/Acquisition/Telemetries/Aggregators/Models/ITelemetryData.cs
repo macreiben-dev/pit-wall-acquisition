@@ -1,6 +1,4 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
-
-namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models
+﻿namespace PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators.Models
 {
     internal interface ITelemetryData : ISendableData
     {

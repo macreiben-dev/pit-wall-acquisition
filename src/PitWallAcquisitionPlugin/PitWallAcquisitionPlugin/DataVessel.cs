@@ -1,4 +1,4 @@
-﻿namespace FuelAssistantMobile.DataGathering.SimhubPlugin
+﻿namespace PitWallAcquisitionPlugin
 {
     public class DataVessel
     {

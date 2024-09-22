@@ -1,6 +1,6 @@
-﻿using PitWallAcquisitionPlugin.Tests.UI.Commands;
-using System;
+﻿using System;
 using System.ComponentModel;
+using PitWallAcquisitionPlugin.UI.Commands;
 
 namespace PitWallAcquisitionPlugin.UI.ViewModels
 {

@@ -1,8 +1,7 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+﻿using System.Collections.Generic;
 using PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards;
-using System.Collections.Generic;
 
-namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
+namespace PitWallAcquisitionPlugin.Acquisition.Leadeboards
 {
     internal sealed class LeaderboardData : ISendableData
     {

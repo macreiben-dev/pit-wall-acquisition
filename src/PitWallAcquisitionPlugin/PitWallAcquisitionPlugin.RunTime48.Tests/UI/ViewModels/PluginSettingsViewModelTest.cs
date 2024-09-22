@@ -6,6 +6,7 @@ using Xunit;
 using NSubstitute;
 using PitWallAcquisitionPlugin.HealthChecks;
 using PitWallAcquisitionPlugin.Tests.UI.Commands;
+using PitWallAcquisitionPlugin.UI.Commands;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.ViewModels
 {

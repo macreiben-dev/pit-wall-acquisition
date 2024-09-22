@@ -1,4 +1,6 @@
-﻿namespace PitWallAcquisitionPlugin.Tests.UI.Commands
+﻿using PitWallAcquisitionPlugin.UI.ViewModels;
+
+namespace PitWallAcquisitionPlugin.Tests.UI.Commands
 {
     public class FakeDisplayAvailability : IDisplayAvailability
     {

@@ -1,7 +1,7 @@
 ﻿using PitWallAcquisitionPlugin.PluginManagerWrappers;
 using PitWallAcquisitionPlugin.PluginManagerWrappers.Telemetries;
 
-namespace FuelAssistantMobile.DataGathering.SimhubPlugin
+namespace PitWallAcquisitionPlugin
 {
     /// <summary>
     /// The wrapper around the plugin manager. This is the primary source of data.

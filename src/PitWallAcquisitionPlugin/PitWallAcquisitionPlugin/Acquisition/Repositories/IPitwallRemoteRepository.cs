@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories
+namespace PitWallAcquisitionPlugin.Acquisition.Repositories
 {
     internal interface IPitwallRemoteRepository
     {

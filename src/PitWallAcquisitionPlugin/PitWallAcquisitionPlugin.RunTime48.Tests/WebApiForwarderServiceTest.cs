@@ -1,14 +1,11 @@
 ﻿using System;
-using FuelAssistantMobile.DataGathering.SimhubPlugin;
 using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.Acquisition.Repositories;
-using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
 using System.Threading;
+using PitWallAcquisitionPlugin.Acquisition;
+using PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators;
+using PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators.Models;
 using PitWallAcquisitionPlugin.Logging;
 using Xunit;
 
