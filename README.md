@@ -2,7 +2,9 @@
 
 ![Pitwall Header](./docs/assets/pitwall-header.png)
 
-This plugin is to be used with simhub to forward data to a WebApi. This WebApi then exposes an endpoint to feed a prometheus database.
+This is a plugin that works with Simhub. It forward data to a web platform for you to plan strategy and analyze the car behaviour.
+
+Since it's a SimHub plugin, you can use it with various simulator.
 
 ## Versions
 - [Download latest Stable version](https://github.com/macreiben-dev/pit-wall-acquisition/releases/tag/Live-20240917.2-852)
@@ -13,6 +15,10 @@ This plugin is to be used with simhub to forward data to a WebApi. This WebApi t
 - Simhub 9.x installed
 
 To be able to work with the data, please see [pit-wall-api](https://github.com/macreiben-dev/pit-wall-api) documentation.
+
+- Gary Swallow plugin installed in SimHub
+
+To be able to have the pitting information you need download [Simhub Gary Swallow plugin](https://www.overtake.gg/downloads/simhub-tv-style-side-scrolling-leaderboards-timings-sidescreen.18746/)
 
 ## How does it work ?
 
