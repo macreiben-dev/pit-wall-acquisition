@@ -87,13 +87,13 @@ namespace PitWallAcquisitionPlugin.PluginManagerWrappers
                 _pluginManager);
         }
 
-        public ITyreTemperature TyreFrontLeftTemperature { get; private set; }
+        public ITyreTemperature TyreFrontLeftTemperature { get; }
 
-        public ITyreTemperature TyreFrontRightTemperature { get; private set; }
+        public ITyreTemperature TyreFrontRightTemperature { get; }
 
-        public ITyreTemperature TyreRearLeftTemperature { get; private set; }
+        public ITyreTemperature TyreRearLeftTemperature { get; }
 
-        public ITyreTemperature TyreRearRightTemperature { get; private set; }
+        public ITyreTemperature TyreRearRightTemperature { get; }
 
         public bool IsGameRunning =>
           PluginManagerFieldConverter.ToBoolean(
