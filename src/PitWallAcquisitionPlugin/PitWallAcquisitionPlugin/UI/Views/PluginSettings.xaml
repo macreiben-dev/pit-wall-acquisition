@@ -82,6 +82,8 @@
 
                 <!-- Pilot Name ___EOF___ -->
 
+                <!-- Car Name -->
+                
                 <TextBlock Style="{StaticResource TextBlock_Label}"
                      Grid.Column="0" 
                      Grid.Row="1"
@@ -94,6 +96,8 @@
                          UpdateSourceTrigger=LostFocus}"
                      Grid.Column="1"
                      Grid.Row="1"/>
+                
+                <!-- Car Name ___EOF___ -->
             </Grid>
         </styles:SHSection>
 
@@ -130,12 +134,12 @@
 
                 <!-- API Address ___EOF___ -->
 
-                <!-- Personal key -->
+                <!-- Pass key -->
 
                 <TextBlock Style="{StaticResource TextBlock_Label}"
                     Grid.Column="0"
                     Grid.Row="1"
-                    Text="Personal key"/>
+                    Text="Pass key"/>
                 <TextBox Style="{StaticResource TextBox_Form}"
                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                      Text="{Binding Path=PersonalKey, 
@@ -144,9 +148,8 @@
                     Grid.Column="1"
                     Grid.Row="1"/>
 
-                <!-- Personal key ___EOF___ -->
-
-
+                <!-- Pass key ___EOF___ -->
+                
                 <styles:SHButtonPrimary 
                     Grid.Column="0"
                     Grid.Row="2" 

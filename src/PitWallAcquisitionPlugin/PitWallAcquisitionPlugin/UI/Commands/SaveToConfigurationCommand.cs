@@ -1,6 +1,7 @@
 ﻿using System;
+using PitWallAcquisitionPlugin.UI.ViewModels;
 
-namespace PitWallAcquisitionPlugin.UI.ViewModels
+namespace PitWallAcquisitionPlugin.UI.Commands
 {
     internal sealed class SaveToConfigurationCommand : ISaveToConfigurationCommand
     {

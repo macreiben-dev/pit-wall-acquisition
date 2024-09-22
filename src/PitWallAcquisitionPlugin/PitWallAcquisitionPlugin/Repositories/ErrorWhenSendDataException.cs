@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories
+namespace PitWallAcquisitionPlugin.Repositories
 {
     public sealed class ErrorWhenSendDataException : Exception
     {

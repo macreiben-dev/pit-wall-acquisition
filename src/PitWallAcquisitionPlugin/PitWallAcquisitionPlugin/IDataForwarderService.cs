@@ -1,6 +1,4 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-
-namespace PitWallAcquisitionPlugin
+﻿namespace PitWallAcquisitionPlugin
 {
     internal interface IDataForwarderService
     {

@@ -1,6 +1,6 @@
 ﻿using NFluent;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
+using PitWallAcquisitionPlugin.Acquisition.Repositories;
+using PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators;
 
 namespace PitWallAcquisitionPlugin.IntegrationTests.Repositories
 {

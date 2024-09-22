@@ -1,6 +1,4 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories;
-
-namespace PitWallAcquisitionPlugin.Acquisition.Repositories
+﻿namespace PitWallAcquisitionPlugin.Acquisition.Repositories
 {
     internal interface IRemotesRepository
     {

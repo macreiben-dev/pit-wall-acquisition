@@ -1,11 +1,9 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using PitWallAcquisitionPlugin.Aggregations.Aggregators;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
-using PitWallAcquisitionPlugin.UI.ViewModels;
-using System;
+﻿using System;
 using System.Globalization;
+using PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators.Models;
+using PitWallAcquisitionPlugin.UI.ViewModels;
 
-namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
+namespace PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators
 {
     internal sealed class TelemetryLiveAggregator : ITelemetryLiveAggregator
     {

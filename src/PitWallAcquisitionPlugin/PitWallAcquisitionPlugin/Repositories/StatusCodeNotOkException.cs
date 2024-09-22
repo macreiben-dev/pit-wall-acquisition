@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories
+namespace PitWallAcquisitionPlugin.Repositories
 {
     public sealed class StatusCodeNotOkException : Exception
     {

@@ -1,10 +1,10 @@
-﻿using PitWallAcquisitionPlugin.HealthChecks;
-using PitWallAcquisitionPlugin.UI.ViewModels;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using PitWallAcquisitionPlugin.HealthChecks;
+using PitWallAcquisitionPlugin.UI.ViewModels;
 
-namespace PitWallAcquisitionPlugin.Tests.UI.Commands
+namespace PitWallAcquisitionPlugin.UI.Commands
 {
 
     internal sealed class IsApiAvailableCommand : IIsApiAvailableCommand

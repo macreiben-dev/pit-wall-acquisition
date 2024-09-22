@@ -1,6 +1,7 @@
 ﻿using NFluent;
 using NSubstitute;
 using PitWallAcquisitionPlugin.Tests.UI.ViewModels;
+using PitWallAcquisitionPlugin.UI.Commands;
 using PitWallAcquisitionPlugin.UI.ViewModels;
 using Xunit;
 

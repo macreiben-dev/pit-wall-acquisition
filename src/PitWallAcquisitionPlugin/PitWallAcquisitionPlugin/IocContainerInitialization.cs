@@ -1,15 +1,15 @@
 ﻿using Autofac;
 using log4net;
 using PitWallAcquisitionPlugin.Acquisition;
+using PitWallAcquisitionPlugin.Acquisition.Leadeboards;
 using PitWallAcquisitionPlugin.Acquisition.Repositories;
-using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
+using PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators;
 using PitWallAcquisitionPlugin.HealthChecks;
 using PitWallAcquisitionPlugin.HealthChecks.Repositories;
 using PitWallAcquisitionPlugin.Logging;
 using PitWallAcquisitionPlugin.PluginManagerWrappers;
 using PitWallAcquisitionPlugin.Repositories;
-using PitWallAcquisitionPlugin.Tests.UI.Commands;
+using PitWallAcquisitionPlugin.UI.Commands;
 using PitWallAcquisitionPlugin.UI.ViewModels;
 using SimHub.Plugins;
 

@@ -1,6 +1,4 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
-
-namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
+﻿namespace PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators
 {
     internal interface ITelemetryLiveAggregator : IAggregator
     {

@@ -1,7 +1,6 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
+﻿using PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators;
 
-namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Mappers
+namespace PitWallAcquisitionPlugin.Acquisition.Telemetries.Mappers
 {
     internal interface ILiveTelemetryMapper
     {

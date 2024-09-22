@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace PitWallAcquisitionPlugin.Tests.UI.Commands
+namespace PitWallAcquisitionPlugin.UI.Commands
 {
     internal interface IIsApiAvailableCommand : ICommand
     {

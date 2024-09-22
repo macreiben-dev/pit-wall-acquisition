@@ -1,8 +1,8 @@
 ﻿using NFluent;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
 using System;
 using System.Diagnostics;
+using PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators;
+using PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators.Models;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Aggregators
 {

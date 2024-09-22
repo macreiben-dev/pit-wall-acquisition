@@ -1,6 +1,6 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators.Models;
+﻿using PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators.Models;
 
-namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators
+namespace PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators
 {
     internal sealed class TelemetryData : ITelemetryData
     {
