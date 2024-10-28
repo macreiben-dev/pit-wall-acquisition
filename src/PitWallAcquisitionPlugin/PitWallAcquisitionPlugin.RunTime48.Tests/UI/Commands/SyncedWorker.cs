@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using PitWallAcquisitionPlugin.UI.Commands;
 
 namespace PitWallAcquisitionPlugin.Tests.UI.Commands
 {

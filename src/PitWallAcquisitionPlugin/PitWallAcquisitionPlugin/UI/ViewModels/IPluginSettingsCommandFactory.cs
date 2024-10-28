@@ -1,4 +1,4 @@
-﻿using PitWallAcquisitionPlugin.Tests.UI.Commands;
+﻿using PitWallAcquisitionPlugin.UI.Commands;
 
 namespace PitWallAcquisitionPlugin.UI.ViewModels
 {

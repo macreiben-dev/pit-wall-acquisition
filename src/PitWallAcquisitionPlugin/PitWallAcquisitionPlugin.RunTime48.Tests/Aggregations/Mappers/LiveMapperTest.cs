@@ -1,9 +1,8 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using NFluent;
+﻿using NFluent;
 using NSubstitute;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Mappers;
 using System;
+using PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators;
+using PitWallAcquisitionPlugin.Acquisition.Telemetries.Mappers;
 using Xunit;
 
 namespace PitWallAcquisitionPlugin.RunTime48.Tests.Aggregations.Mappers

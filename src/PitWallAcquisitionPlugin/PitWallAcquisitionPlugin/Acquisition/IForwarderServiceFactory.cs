@@ -1,5 +1,4 @@
 ﻿using PitWallAcquisitionPlugin.Acquisition.Repositories;
-using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
 
 namespace PitWallAcquisitionPlugin.Acquisition
 {

@@ -1,4 +1,4 @@
-﻿namespace PitWallAcquisitionPlugin.Aggregations.Aggregators
+﻿namespace PitWallAcquisitionPlugin.Acquisition
 {
     internal interface ISendableData
     {

@@ -1,13 +1,10 @@
 ﻿using System;
-using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
-using PitWallAcquisitionPlugin.Acquisition.Repositories;
-using PitWallAcquisitionPlugin.Aggregations.Aggregators;
-using PitWallAcquisitionPlugin.Aggregations.Leadeboards;
 using System.Timers;
+using PitWallAcquisitionPlugin.Acquisition.Repositories;
 using PitWallAcquisitionPlugin.Logging;
+using PitWallAcquisitionPlugin.Repositories;
 
-namespace PitWallAcquisitionPlugin.Aggregations.Telemetries
+namespace PitWallAcquisitionPlugin.Acquisition
 {
     internal sealed class WebApiForwarderService : IDataForwarderService
     {

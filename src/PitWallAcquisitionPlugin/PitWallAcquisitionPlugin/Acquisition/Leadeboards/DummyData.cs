@@ -1,6 +1,4 @@
-﻿using PitWallAcquisitionPlugin.Aggregations.Aggregators;
-
-namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
+﻿namespace PitWallAcquisitionPlugin.Acquisition.Leadeboards
 {
     internal class DummyData : ISendableData
     {

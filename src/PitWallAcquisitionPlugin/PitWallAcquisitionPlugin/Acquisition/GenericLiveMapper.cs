@@ -1,7 +1,6 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using System;
+﻿using System;
 
-namespace PitWallAcquisitionPlugin.Aggregations
+namespace PitWallAcquisitionPlugin.Acquisition
 {
 
     internal sealed class GenericLiveMapper<TCounter, ISourceAggregator>

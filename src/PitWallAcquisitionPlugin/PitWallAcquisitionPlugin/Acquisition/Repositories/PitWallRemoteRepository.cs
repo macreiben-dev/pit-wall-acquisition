@@ -1,12 +1,12 @@
-﻿using System.Net.Http;
+﻿using System;
 using System.Net;
+using System.Net.Http;
 using System.Text;
-using System;
 using System.Threading.Tasks;
-using FuelAssistantMobile.DataGathering.SimhubPlugin.Repositories;
+using PitWallAcquisitionPlugin.Repositories;
 using PitWallAcquisitionPlugin.UI.ViewModels;
 
-namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Repositories
+namespace PitWallAcquisitionPlugin.Acquisition.Repositories
 {
     internal sealed class PitwallRemoteRepository : IPitwallRemoteRepository
     {

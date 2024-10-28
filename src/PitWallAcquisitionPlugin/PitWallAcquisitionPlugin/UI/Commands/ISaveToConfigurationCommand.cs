@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace PitWallAcquisitionPlugin.UI.ViewModels
+namespace PitWallAcquisitionPlugin.UI.Commands
 {
     internal interface ISaveToConfigurationCommand : ICommand
     {

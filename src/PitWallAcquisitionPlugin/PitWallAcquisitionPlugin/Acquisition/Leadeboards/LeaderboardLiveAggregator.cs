@@ -1,11 +1,9 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using PitWallAcquisitionPlugin.Aggregations.Aggregators;
+﻿using System.Collections.Generic;
+using System.Linq;
 using PitWallAcquisitionPlugin.PluginManagerWrappers.Leaderboards;
 using PitWallAcquisitionPlugin.UI.ViewModels;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace PitWallAcquisitionPlugin.Aggregations.Leadeboards
+namespace PitWallAcquisitionPlugin.Acquisition.Leadeboards
 {
     internal sealed class LeaderboardLiveAggregator : ILeaderboardLiveAggregator
     {

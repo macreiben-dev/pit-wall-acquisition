@@ -1,8 +1,7 @@
-﻿using FuelAssistantMobile.DataGathering.SimhubPlugin;
-using PitWallAcquisitionPlugin.Aggregations.Telemetries.Aggregators;
-using System;
+﻿using System;
+using PitWallAcquisitionPlugin.Acquisition.Telemetries.Aggregators;
 
-namespace PitWallAcquisitionPlugin.Aggregations.Telemetries.Mappers
+namespace PitWallAcquisitionPlugin.Acquisition.Telemetries.Mappers
 {
 
     internal sealed class LiveTelemetryMapper<TCounter> : ILiveTelemetryMapper
