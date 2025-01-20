@@ -12,6 +12,12 @@ Since it's a SimHub plugin, you can use it with various simulator.
 
 ## Pre requisites
 
+The pitwall uses a **simhub plugin** to collect the data from simhub, and **docker/podman container** to store and expose data.
+
+The plugin in itself does not allow you to see the metrics.
+
+### Simhub plugin pre requisistes
+
 - Simhub 9.x installed
 
 To be able to work with the data, please see [pit-wall-api](https://github.com/macreiben-dev/pit-wall-api) documentation.
@@ -19,6 +25,16 @@ To be able to work with the data, please see [pit-wall-api](https://github.com/m
 - Gary Swallow plugin installed in SimHub
 
 To be able to have the pitting information you need download [Simhub Gary Swallow plugin](https://www.overtake.gg/downloads/simhub-tv-style-side-scrolling-leaderboards-timings-sidescreen.18746/)
+
+### Server component pre requisites
+
+To have it work you need to have: 
+
+- The [pitwall api](https://github.com/macreiben-dev/pit-wall-api) running
+
+This is a docker based container that hosts the data. You'll need either a local docker host, cloud component or dedicated server to run the server side.
+
+See the API documentation for the server side configuration.
 
 ## What does it do ?
 
